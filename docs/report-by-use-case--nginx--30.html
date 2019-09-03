@@ -80,7 +80,7 @@ tbody tr, tbody th {
 
     <small class="text-muted">
     
-        on 1 base </h1>
+        on 2 bases </h1>
     
     </small>
 
@@ -94,15 +94,21 @@ tbody tr, tbody th {
             
             <th>Nginx</th>
             
+            <th>Nginx</th>
+            
         </tr>
         <tr>
             
             <th>on Fedora Container Base</th>
             
+            <th>on Empty base</th>
+            
         </tr>
         <tr>
             
             <td>262.0 MB</td>
+            
+            <td>461.5 MB</td>
             
         </tr>
         <tr>
@@ -112,11 +118,16 @@ tbody tr, tbody th {
               <a href="./graph-simple--nginx--fedora-container-base--30.svg">simple graph</a>
             </td>
             
+            <td>
+              <a href="./graph--nginx--fedora-empty-base--30.svg">graph</a> |
+              <a href="./graph-simple--nginx--fedora-empty-base--30.svg">simple graph</a>
+            </td>
+            
         </tr>
     </thead>
     <tbody>
         <tr class="in-base">
-            <th colspan="3">--- Required packages ---</th>
+            <th colspan="4">--- Required packages ---</th>
         </tr>
         
         <tr class="in-base">
@@ -126,14 +137,22 @@ tbody tr, tbody th {
             <td>nginx</td>
             
             
+            
+            <td>nginx</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
-            <th colspan="3">--- All other packages (dependencies) ---</th>
+            <th colspan="4">--- All other packages (dependencies) ---</th>
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">acl</td>
+            
+            
+            <td>acl</td>
+            
             
             
             <td>acl</td>
@@ -148,10 +167,18 @@ tbody tr, tbody th {
             <td>alternatives</td>
             
             
+            
+            <td>alternatives</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">audit-libs</td>
+            
+            
+            <td>audit-libs</td>
+            
             
             
             <td>audit-libs</td>
@@ -166,10 +193,18 @@ tbody tr, tbody th {
             <td>basesystem</td>
             
             
+            
+            <td>basesystem</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">bash</td>
+            
+            
+            <td>bash</td>
+            
             
             
             <td>bash</td>
@@ -184,10 +219,18 @@ tbody tr, tbody th {
             <td>brotli</td>
             
             
+            
+            <td>brotli</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">bzip2-libs</td>
+            
+            
+            <td>bzip2-libs</td>
+            
             
             
             <td>bzip2-libs</td>
@@ -202,10 +245,18 @@ tbody tr, tbody th {
             <td>ca-certificates</td>
             
             
+            
+            <td>ca-certificates</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">coreutils</td>
+            
+            
+            <td>coreutils</td>
+            
             
             
             <td>coreutils</td>
@@ -220,6 +271,23 @@ tbody tr, tbody th {
             <td>coreutils-common</td>
             
             
+            
+            <td>coreutils-common</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">cpio</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>cpio</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -229,10 +297,31 @@ tbody tr, tbody th {
             <td>cracklib</td>
             
             
+            
+            <td>cracklib</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">cracklib-dicts</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>cracklib-dicts</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">crypto-policies</td>
+            
+            
+            <td>crypto-policies</td>
+            
             
             
             <td>crypto-policies</td>
@@ -247,10 +336,18 @@ tbody tr, tbody th {
             <td>cryptsetup-libs</td>
             
             
+            
+            <td>cryptsetup-libs</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">curl</td>
+            
+            
+            <td>curl</td>
+            
             
             
             <td>curl</td>
@@ -265,10 +362,18 @@ tbody tr, tbody th {
             <td>cyrus-sasl-lib</td>
             
             
+            
+            <td>cyrus-sasl-lib</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">dbus</td>
+            
+            
+            <td>dbus</td>
+            
             
             
             <td>dbus</td>
@@ -283,10 +388,18 @@ tbody tr, tbody th {
             <td>dbus-broker</td>
             
             
+            
+            <td>dbus-broker</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">dbus-common</td>
+            
+            
+            <td>dbus-common</td>
+            
             
             
             <td>dbus-common</td>
@@ -301,6 +414,10 @@ tbody tr, tbody th {
             <td>device-mapper</td>
             
             
+            
+            <td>device-mapper</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -308,6 +425,23 @@ tbody tr, tbody th {
             
             
             <td>device-mapper-libs</td>
+            
+            
+            
+            <td>device-mapper-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">diffutils</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>diffutils</td>
             
             
         </tr>
@@ -319,6 +453,10 @@ tbody tr, tbody th {
             <td>dnf</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -326,6 +464,10 @@ tbody tr, tbody th {
             
             
             <td>dnf-data</td>
+            
+            
+            
+            <td> - </td>
             
             
         </tr>
@@ -337,10 +479,31 @@ tbody tr, tbody th {
             <td>dnf-yum</td>
             
             
+            
+            <td> - </td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dracut</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>dracut</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">elfutils-default-yama-scope</td>
+            
+            
+            <td>elfutils-default-yama-scope</td>
+            
             
             
             <td>elfutils-default-yama-scope</td>
@@ -355,10 +518,18 @@ tbody tr, tbody th {
             <td>elfutils-libelf</td>
             
             
+            
+            <td>elfutils-libelf</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">elfutils-libs</td>
+            
+            
+            <td>elfutils-libs</td>
+            
             
             
             <td>elfutils-libs</td>
@@ -373,10 +544,18 @@ tbody tr, tbody th {
             <td>expat</td>
             
             
+            
+            <td>expat</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">fedora-gpg-keys</td>
+            
+            
+            <td>fedora-gpg-keys</td>
+            
             
             
             <td>fedora-gpg-keys</td>
@@ -391,10 +570,18 @@ tbody tr, tbody th {
             <td>fedora-logos-httpd</td>
             
             
+            
+            <td>fedora-logos-httpd</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">fedora-release</td>
+            
+            
+            <td>fedora-release</td>
+            
             
             
             <td>fedora-release</td>
@@ -409,6 +596,10 @@ tbody tr, tbody th {
             <td>fedora-release-common</td>
             
             
+            
+            <td>fedora-release-common</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -418,10 +609,31 @@ tbody tr, tbody th {
             <td>fedora-repos</td>
             
             
+            
+            <td>fedora-repos</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">file</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>file</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">file-libs</td>
+            
+            
+            <td>file-libs</td>
+            
             
             
             <td>file-libs</td>
@@ -436,10 +648,31 @@ tbody tr, tbody th {
             <td>filesystem</td>
             
             
+            
+            <td>filesystem</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">findutils</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>findutils</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">gawk</td>
+            
+            
+            <td>gawk</td>
+            
             
             
             <td>gawk</td>
@@ -454,10 +687,44 @@ tbody tr, tbody th {
             <td>gdbm-libs</td>
             
             
+            
+            <td> - </td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gettext</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>gettext</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gettext-libs</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>gettext-libs</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">glib2</td>
+            
+            
+            <td>glib2</td>
+            
             
             
             <td>glib2</td>
@@ -472,10 +739,31 @@ tbody tr, tbody th {
             <td>glibc</td>
             
             
+            
+            <td>glibc</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">glibc-all-langpacks</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>glibc-all-langpacks</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">glibc-common</td>
+            
+            
+            <td>glibc-common</td>
+            
             
             
             <td>glibc-common</td>
@@ -490,10 +778,18 @@ tbody tr, tbody th {
             <td>glibc-minimal-langpack</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">gmp</td>
+            
+            
+            <td>gmp</td>
+            
             
             
             <td>gmp</td>
@@ -508,10 +804,18 @@ tbody tr, tbody th {
             <td>gnupg2</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">gnutls</td>
+            
+            
+            <td>gnutls</td>
+            
             
             
             <td>gnutls</td>
@@ -526,6 +830,10 @@ tbody tr, tbody th {
             <td>gperftools-libs</td>
             
             
+            
+            <td>gperftools-libs</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -533,6 +841,10 @@ tbody tr, tbody th {
             
             
             <td>gpgme</td>
+            
+            
+            
+            <td> - </td>
             
             
         </tr>
@@ -544,6 +856,62 @@ tbody tr, tbody th {
             <td>grep</td>
             
             
+            
+            <td>grep</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grub2-common</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>grub2-common</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grub2-tools</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>grub2-tools</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grub2-tools-minimal</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>grub2-tools-minimal</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grubby</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>grubby</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -551,6 +919,23 @@ tbody tr, tbody th {
             
             
             <td>gzip</td>
+            
+            
+            
+            <td>gzip</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">hardlink</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>hardlink</td>
             
             
         </tr>
@@ -562,10 +947,18 @@ tbody tr, tbody th {
             <td>ima-evm-utils</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">iptables-libs</td>
+            
+            
+            <td>iptables-libs</td>
+            
             
             
             <td>iptables-libs</td>
@@ -580,6 +973,49 @@ tbody tr, tbody th {
             <td>json-c</td>
             
             
+            
+            <td>json-c</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kbd</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>kbd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kbd-legacy</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>kbd-legacy</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kbd-misc</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>kbd-misc</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -587,6 +1023,23 @@ tbody tr, tbody th {
             
             
             <td>keyutils-libs</td>
+            
+            
+            
+            <td>keyutils-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kmod</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>kmod</td>
             
             
         </tr>
@@ -598,10 +1051,31 @@ tbody tr, tbody th {
             <td>kmod-libs</td>
             
             
+            
+            <td>kmod-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kpartx</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>kpartx</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">krb5-libs</td>
+            
+            
+            <td>krb5-libs</td>
+            
             
             
             <td>krb5-libs</td>
@@ -616,10 +1090,18 @@ tbody tr, tbody th {
             <td>langpacks-en</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libacl</td>
+            
+            
+            <td>libacl</td>
+            
             
             
             <td>libacl</td>
@@ -634,10 +1116,18 @@ tbody tr, tbody th {
             <td>libarchive</td>
             
             
+            
+            <td>libarchive</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libargon2</td>
+            
+            
+            <td>libargon2</td>
+            
             
             
             <td>libargon2</td>
@@ -652,10 +1142,18 @@ tbody tr, tbody th {
             <td>libassuan</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libattr</td>
+            
+            
+            <td>libattr</td>
+            
             
             
             <td>libattr</td>
@@ -670,10 +1168,18 @@ tbody tr, tbody th {
             <td>libblkid</td>
             
             
+            
+            <td>libblkid</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libcap</td>
+            
+            
+            <td>libcap</td>
+            
             
             
             <td>libcap</td>
@@ -688,10 +1194,18 @@ tbody tr, tbody th {
             <td>libcap-ng</td>
             
             
+            
+            <td>libcap-ng</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libcom_err</td>
+            
+            
+            <td>libcom_err</td>
+            
             
             
             <td>libcom_err</td>
@@ -706,10 +1220,31 @@ tbody tr, tbody th {
             <td>libcomps</td>
             
             
+            
+            <td> - </td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libcroco</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>libcroco</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libcurl</td>
+            
+            
+            <td>libcurl</td>
+            
             
             
             <td>libcurl</td>
@@ -724,10 +1259,18 @@ tbody tr, tbody th {
             <td>libdb</td>
             
             
+            
+            <td>libdb</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libdb-utils</td>
+            
+            
+            <td>libdb-utils</td>
+            
             
             
             <td>libdb-utils</td>
@@ -742,10 +1285,18 @@ tbody tr, tbody th {
             <td>libdnf</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libfdisk</td>
+            
+            
+            <td>libfdisk</td>
+            
             
             
             <td>libfdisk</td>
@@ -760,10 +1311,18 @@ tbody tr, tbody th {
             <td>libffi</td>
             
             
+            
+            <td>libffi</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libgcc</td>
+            
+            
+            <td>libgcc</td>
+            
             
             
             <td>libgcc</td>
@@ -778,10 +1337,31 @@ tbody tr, tbody th {
             <td>libgcrypt</td>
             
             
+            
+            <td>libgcrypt</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libgomp</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>libgomp</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libgpg-error</td>
+            
+            
+            <td>libgpg-error</td>
+            
             
             
             <td>libgpg-error</td>
@@ -796,6 +1376,36 @@ tbody tr, tbody th {
             <td>libidn2</td>
             
             
+            
+            <td>libidn2</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libkcapi</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>libkcapi</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libkcapi-hmaccalc</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>libkcapi-hmaccalc</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -805,10 +1415,18 @@ tbody tr, tbody th {
             <td>libksba</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libmetalink</td>
+            
+            
+            <td>libmetalink</td>
+            
             
             
             <td>libmetalink</td>
@@ -823,10 +1441,18 @@ tbody tr, tbody th {
             <td>libmodulemd1</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libmount</td>
+            
+            
+            <td>libmount</td>
+            
             
             
             <td>libmount</td>
@@ -841,10 +1467,18 @@ tbody tr, tbody th {
             <td>libnghttp2</td>
             
             
+            
+            <td>libnghttp2</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libnsl2</td>
+            
+            
+            <td>libnsl2</td>
+            
             
             
             <td>libnsl2</td>
@@ -859,10 +1493,18 @@ tbody tr, tbody th {
             <td>libpcap</td>
             
             
+            
+            <td>libpcap</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libpsl</td>
+            
+            
+            <td>libpsl</td>
+            
             
             
             <td>libpsl</td>
@@ -877,6 +1519,10 @@ tbody tr, tbody th {
             <td>libpwquality</td>
             
             
+            
+            <td>libpwquality</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -884,6 +1530,10 @@ tbody tr, tbody th {
             
             
             <td>librepo</td>
+            
+            
+            
+            <td> - </td>
             
             
         </tr>
@@ -895,10 +1545,18 @@ tbody tr, tbody th {
             <td>libreport-filesystem</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libseccomp</td>
+            
+            
+            <td>libseccomp</td>
+            
             
             
             <td>libseccomp</td>
@@ -913,10 +1571,18 @@ tbody tr, tbody th {
             <td>libselinux</td>
             
             
+            
+            <td>libselinux</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libsemanage</td>
+            
+            
+            <td>libsemanage</td>
+            
             
             
             <td>libsemanage</td>
@@ -931,10 +1597,18 @@ tbody tr, tbody th {
             <td>libsepol</td>
             
             
+            
+            <td>libsepol</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libsigsegv</td>
+            
+            
+            <td>libsigsegv</td>
+            
             
             
             <td>libsigsegv</td>
@@ -949,6 +1623,10 @@ tbody tr, tbody th {
             <td>libsmartcols</td>
             
             
+            
+            <td>libsmartcols</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -958,10 +1636,18 @@ tbody tr, tbody th {
             <td>libsolv</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libssh</td>
+            
+            
+            <td>libssh</td>
+            
             
             
             <td>libssh</td>
@@ -976,6 +1662,10 @@ tbody tr, tbody th {
             <td>libssh-config</td>
             
             
+            
+            <td>libssh-config</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -983,6 +1673,10 @@ tbody tr, tbody th {
             
             
             <td>libsss_idmap</td>
+            
+            
+            
+            <td> - </td>
             
             
         </tr>
@@ -994,10 +1688,18 @@ tbody tr, tbody th {
             <td>libsss_nss_idmap</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libstdc++</td>
+            
+            
+            <td>libstdc++</td>
+            
             
             
             <td>libstdc++</td>
@@ -1012,10 +1714,18 @@ tbody tr, tbody th {
             <td>libtasn1</td>
             
             
+            
+            <td>libtasn1</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libtirpc</td>
+            
+            
+            <td>libtirpc</td>
+            
             
             
             <td>libtirpc</td>
@@ -1030,10 +1740,18 @@ tbody tr, tbody th {
             <td>libunistring</td>
             
             
+            
+            <td>libunistring</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libunwind</td>
+            
+            
+            <td>libunwind</td>
+            
             
             
             <td>libunwind</td>
@@ -1048,10 +1766,18 @@ tbody tr, tbody th {
             <td>libusbx</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libutempter</td>
+            
+            
+            <td>libutempter</td>
+            
             
             
             <td>libutempter</td>
@@ -1066,10 +1792,18 @@ tbody tr, tbody th {
             <td>libuuid</td>
             
             
+            
+            <td>libuuid</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libverto</td>
+            
+            
+            <td>libverto</td>
+            
             
             
             <td>libverto</td>
@@ -1084,10 +1818,31 @@ tbody tr, tbody th {
             <td>libxcrypt</td>
             
             
+            
+            <td>libxcrypt</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libxkbcommon</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>libxkbcommon</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libxml2</td>
+            
+            
+            <td>libxml2</td>
+            
             
             
             <td>libxml2</td>
@@ -1102,10 +1857,18 @@ tbody tr, tbody th {
             <td>libyaml</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libzstd</td>
+            
+            
+            <td>libzstd</td>
+            
             
             
             <td>libzstd</td>
@@ -1120,6 +1883,10 @@ tbody tr, tbody th {
             <td>lua-libs</td>
             
             
+            
+            <td>lua-libs</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1129,10 +1896,31 @@ tbody tr, tbody th {
             <td>lz4-libs</td>
             
             
+            
+            <td>lz4-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">mkpasswd</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>mkpasswd</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">mpfr</td>
+            
+            
+            <td>mpfr</td>
+            
             
             
             <td>mpfr</td>
@@ -1147,10 +1935,18 @@ tbody tr, tbody th {
             <td>ncurses</td>
             
             
+            
+            <td>ncurses</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">ncurses-base</td>
+            
+            
+            <td>ncurses-base</td>
+            
             
             
             <td>ncurses-base</td>
@@ -1165,10 +1961,18 @@ tbody tr, tbody th {
             <td>ncurses-libs</td>
             
             
+            
+            <td>ncurses-libs</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">nettle</td>
+            
+            
+            <td>nettle</td>
+            
             
             
             <td>nettle</td>
@@ -1183,10 +1987,18 @@ tbody tr, tbody th {
             <td>nginx-filesystem</td>
             
             
+            
+            <td>nginx-filesystem</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">nginx-mimetypes</td>
+            
+            
+            <td>nginx-mimetypes</td>
+            
             
             
             <td>nginx-mimetypes</td>
@@ -1201,10 +2013,18 @@ tbody tr, tbody th {
             <td>npth</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">openldap</td>
+            
+            
+            <td>openldap</td>
+            
             
             
             <td>openldap</td>
@@ -1219,6 +2039,10 @@ tbody tr, tbody th {
             <td>openssl</td>
             
             
+            
+            <td>openssl</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1228,10 +2052,44 @@ tbody tr, tbody th {
             <td>openssl-libs</td>
             
             
+            
+            <td>openssl-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">openssl-pkcs11</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>openssl-pkcs11</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">os-prober</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>os-prober</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">p11-kit</td>
+            
+            
+            <td>p11-kit</td>
+            
             
             
             <td>p11-kit</td>
@@ -1246,10 +2104,18 @@ tbody tr, tbody th {
             <td>p11-kit-trust</td>
             
             
+            
+            <td>p11-kit-trust</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">pam</td>
+            
+            
+            <td>pam</td>
+            
             
             
             <td>pam</td>
@@ -1264,6 +2130,10 @@ tbody tr, tbody th {
             <td>pcre</td>
             
             
+            
+            <td>pcre</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1271,6 +2141,23 @@ tbody tr, tbody th {
             
             
             <td>pcre2</td>
+            
+            
+            
+            <td>pcre2</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">pigz</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>pigz</td>
             
             
         </tr>
@@ -1282,10 +2169,31 @@ tbody tr, tbody th {
             <td>popt</td>
             
             
+            
+            <td>popt</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">procps-ng</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>procps-ng</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">publicsuffix-list-dafsa</td>
+            
+            
+            <td>publicsuffix-list-dafsa</td>
+            
             
             
             <td>publicsuffix-list-dafsa</td>
@@ -1300,6 +2208,10 @@ tbody tr, tbody th {
             <td>python-pip-wheel</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1307,6 +2219,10 @@ tbody tr, tbody th {
             
             
             <td>python-setuptools-wheel</td>
+            
+            
+            
+            <td> - </td>
             
             
         </tr>
@@ -1318,6 +2234,10 @@ tbody tr, tbody th {
             <td>python3</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1325,6 +2245,10 @@ tbody tr, tbody th {
             
             
             <td>python3-dnf</td>
+            
+            
+            
+            <td> - </td>
             
             
         </tr>
@@ -1336,6 +2260,10 @@ tbody tr, tbody th {
             <td>python3-gpg</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1343,6 +2271,10 @@ tbody tr, tbody th {
             
             
             <td>python3-hawkey</td>
+            
+            
+            
+            <td> - </td>
             
             
         </tr>
@@ -1354,6 +2286,10 @@ tbody tr, tbody th {
             <td>python3-libcomps</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1361,6 +2297,10 @@ tbody tr, tbody th {
             
             
             <td>python3-libdnf</td>
+            
+            
+            
+            <td> - </td>
             
             
         </tr>
@@ -1372,6 +2312,10 @@ tbody tr, tbody th {
             <td>python3-libs</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1381,10 +2325,18 @@ tbody tr, tbody th {
             <td>python3-rpm</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">qrencode-libs</td>
+            
+            
+            <td>qrencode-libs</td>
+            
             
             
             <td>qrencode-libs</td>
@@ -1399,6 +2351,10 @@ tbody tr, tbody th {
             <td>readline</td>
             
             
+            
+            <td>readline</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1408,10 +2364,18 @@ tbody tr, tbody th {
             <td>rootfiles</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">rpm</td>
+            
+            
+            <td>rpm</td>
+            
             
             
             <td>rpm</td>
@@ -1426,10 +2390,18 @@ tbody tr, tbody th {
             <td>rpm-build-libs</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">rpm-libs</td>
+            
+            
+            <td>rpm-libs</td>
+            
             
             
             <td>rpm-libs</td>
@@ -1444,10 +2416,18 @@ tbody tr, tbody th {
             <td>rpm-sign-libs</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">sed</td>
+            
+            
+            <td>sed</td>
+            
             
             
             <td>sed</td>
@@ -1462,6 +2442,10 @@ tbody tr, tbody th {
             <td>setup</td>
             
             
+            
+            <td>setup</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1469,6 +2453,23 @@ tbody tr, tbody th {
             
             
             <td>shadow-utils</td>
+            
+            
+            
+            <td>shadow-utils</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">shared-mime-info</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>shared-mime-info</td>
             
             
         </tr>
@@ -1480,6 +2481,10 @@ tbody tr, tbody th {
             <td>sqlite-libs</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1487,6 +2492,10 @@ tbody tr, tbody th {
             
             
             <td>sssd-client</td>
+            
+            
+            
+            <td> - </td>
             
             
         </tr>
@@ -1498,6 +2507,10 @@ tbody tr, tbody th {
             <td>sudo</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1507,10 +2520,31 @@ tbody tr, tbody th {
             <td>systemd</td>
             
             
+            
+            <td>systemd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">systemd-bootchart</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>systemd-bootchart</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">systemd-libs</td>
+            
+            
+            <td>systemd-libs</td>
+            
             
             
             <td>systemd-libs</td>
@@ -1525,6 +2559,10 @@ tbody tr, tbody th {
             <td>systemd-pam</td>
             
             
+            
+            <td>systemd-pam</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1532,6 +2570,23 @@ tbody tr, tbody th {
             
             
             <td>systemd-rpm-macros</td>
+            
+            
+            
+            <td>systemd-rpm-macros</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">systemd-udev</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>systemd-udev</td>
             
             
         </tr>
@@ -1543,10 +2598,44 @@ tbody tr, tbody th {
             <td>tar</td>
             
             
+            
+            <td> - </td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">trousers</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>trousers</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">trousers-lib</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>trousers-lib</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">tzdata</td>
+            
+            
+            <td>tzdata</td>
+            
             
             
             <td>tzdata</td>
@@ -1561,6 +2650,10 @@ tbody tr, tbody th {
             <td>util-linux</td>
             
             
+            
+            <td>util-linux</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1570,10 +2663,70 @@ tbody tr, tbody th {
             <td>vim-minimal</td>
             
             
+            
+            <td> - </td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">which</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>which</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">whois-nls</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>whois-nls</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">xkeyboard-config</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>xkeyboard-config</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">xz</td>
+            
+            
+            <td> - </td>
+            
+            
+            
+            <td>xz</td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">xz-libs</td>
+            
+            
+            <td>xz-libs</td>
+            
             
             
             <td>xz-libs</td>
@@ -1588,10 +2741,18 @@ tbody tr, tbody th {
             <td>zchunk-libs</td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">zlib</td>
+            
+            
+            <td>zlib</td>
+            
             
             
             <td>zlib</td>
