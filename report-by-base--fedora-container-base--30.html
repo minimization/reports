@@ -28,24 +28,37 @@ td, th {
     padding-left: 8px;
     padding-right: 8px;
 }
-.in-base td {
-    background-color: #e3ece1;
-}
 .in-base th {
     background-color: #b8cfb3;
     text-align: center;
 }
-.not-in-base td {
-    background-color: #fff;
+.in-base td {
+    background-color: #e3ece1;
+    font-family: monospace;
+}
+tr.in-base td.all-pkgs {
+    background-color: #b8cfb3!important;
 }
 .not-in-base th {
     background-color: #e9ecef;
     text-align: center;
 }
+.not-in-base td {
+    background-color: #fff;
+    font-family: monospace;
+}
+tr.not-in-base td.all-pkgs {
+    background-color: #e9ecef!important;
+}
 thead td, thead th {
     background-color: #e9ecef;
     text-align: center;
 }
+tbody tr, tbody th {
+    border-bottom: #6c757d 1px solid;
+    border-top: #6c757d 1px solid;
+}
+
 </style>
 
 <br>
@@ -77,11 +90,7 @@ thead td, thead th {
 <table>
     <thead>
         <tr>
-            <td rowspan="4">All packages in this report</td>
-            <td>Base installation</td>
-            <td colspan="5">Other installations</td>
-        </tr>
-        <tr>
+            <td rowspan="3" style="background-color:#cad1d8">All packages in this report</td>
             <th>Fedora Container Base</th>
             
             <th>MariaDB</th>
@@ -145,12 +154,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">acl</td>
             <td>acl</td>
-            <td>acl</td>
-            
-            
-            <td>acl</td>
-            
             
             
             <td>acl</td>
@@ -168,19 +173,15 @@ thead td, thead th {
             <td>acl</td>
             
             
+            
+            <td>acl</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">alternatives</td>
             <td>alternatives</td>
-            <td>alternatives</td>
-            
-            
-            <td>alternatives</td>
-            
-            
-            
-            <td>alternatives</td>
-            
             
             
             <td>alternatives</td>
@@ -194,23 +195,19 @@ thead td, thead th {
             <td>alternatives</td>
             
             
+            
+            <td>alternatives</td>
+            
+            
+            
+            <td>alternatives</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">audit-libs</td>
             <td>audit-libs</td>
-            <td>audit-libs</td>
-            
-            
-            <td>audit-libs</td>
-            
-            
-            
-            <td>audit-libs</td>
-            
-            
-            
-            <td>audit-libs</td>
-            
             
             
             <td>audit-libs</td>
@@ -220,63 +217,75 @@ thead td, thead th {
             <td>audit-libs</td>
             
             
+            
+            <td>audit-libs</td>
+            
+            
+            
+            <td>audit-libs</td>
+            
+            
+            
+            <td>audit-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">basesystem</td>
             <td>basesystem</td>
-            <td>basesystem</td>
-            
-            
-            <td>basesystem</td>
-            
-            
-            
-            <td>basesystem</td>
-            
-            
-            
-            <td>basesystem</td>
-            
-            
-            
-            <td>basesystem</td>
-            
             
             
             <td>basesystem</td>
             
             
+            
+            <td>basesystem</td>
+            
+            
+            
+            <td>basesystem</td>
+            
+            
+            
+            <td>basesystem</td>
+            
+            
+            
+            <td>basesystem</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>bash</td>
-            <td>bash</td>
-            
-            
-            <td>bash</td>
-            
-            
-            
-            <td>bash</td>
-            
-            
-            
-            <td>bash</td>
-            
-            
-            
-            <td>bash</td>
-            
-            
-            
+            <td class="all-pkgs">bash</td>
             <td>bash</td>
             
             
+            <td>bash</td>
+            
+            
+            
+            <td>bash</td>
+            
+            
+            
+            <td>bash</td>
+            
+            
+            
+            <td>bash</td>
+            
+            
+            
+            <td>bash</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">brotli</td>
             <td>brotli</td>
-            <td>brotli</td>
             
             
             <td>brotli</td>
@@ -301,12 +310,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">bzip2-libs</td>
             <td>bzip2-libs</td>
-            <td>bzip2-libs</td>
-            
-            
-            <td>bzip2-libs</td>
-            
             
             
             <td>bzip2-libs</td>
@@ -324,19 +329,15 @@ thead td, thead th {
             <td>bzip2-libs</td>
             
             
+            
+            <td>bzip2-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">ca-certificates</td>
             <td>ca-certificates</td>
-            <td>ca-certificates</td>
-            
-            
-            <td>ca-certificates</td>
-            
-            
-            
-            <td>ca-certificates</td>
-            
             
             
             <td>ca-certificates</td>
@@ -350,23 +351,19 @@ thead td, thead th {
             <td>ca-certificates</td>
             
             
+            
+            <td>ca-certificates</td>
+            
+            
+            
+            <td>ca-certificates</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">coreutils</td>
             <td>coreutils</td>
-            <td>coreutils</td>
-            
-            
-            <td>coreutils</td>
-            
-            
-            
-            <td>coreutils</td>
-            
-            
-            
-            <td>coreutils</td>
-            
             
             
             <td>coreutils</td>
@@ -376,63 +373,75 @@ thead td, thead th {
             <td>coreutils</td>
             
             
+            
+            <td>coreutils</td>
+            
+            
+            
+            <td>coreutils</td>
+            
+            
+            
+            <td>coreutils</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">coreutils-common</td>
             <td>coreutils-common</td>
-            <td>coreutils-common</td>
-            
-            
-            <td>coreutils-common</td>
-            
-            
-            
-            <td>coreutils-common</td>
-            
-            
-            
-            <td>coreutils-common</td>
-            
-            
-            
-            <td>coreutils-common</td>
-            
             
             
             <td>coreutils-common</td>
             
             
+            
+            <td>coreutils-common</td>
+            
+            
+            
+            <td>coreutils-common</td>
+            
+            
+            
+            <td>coreutils-common</td>
+            
+            
+            
+            <td>coreutils-common</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>cracklib</td>
-            <td>cracklib</td>
-            
-            
-            <td>cracklib</td>
-            
-            
-            
-            <td>cracklib</td>
-            
-            
-            
-            <td>cracklib</td>
-            
-            
-            
-            <td>cracklib</td>
-            
-            
-            
+            <td class="all-pkgs">cracklib</td>
             <td>cracklib</td>
             
             
+            <td>cracklib</td>
+            
+            
+            
+            <td>cracklib</td>
+            
+            
+            
+            <td>cracklib</td>
+            
+            
+            
+            <td>cracklib</td>
+            
+            
+            
+            <td>cracklib</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">crypto-policies</td>
             <td>crypto-policies</td>
-            <td>crypto-policies</td>
             
             
             <td>crypto-policies</td>
@@ -457,12 +466,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">cryptsetup-libs</td>
             <td>cryptsetup-libs</td>
-            <td>cryptsetup-libs</td>
-            
-            
-            <td>cryptsetup-libs</td>
-            
             
             
             <td>cryptsetup-libs</td>
@@ -480,19 +485,15 @@ thead td, thead th {
             <td>cryptsetup-libs</td>
             
             
+            
+            <td>cryptsetup-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">curl</td>
             <td>curl</td>
-            <td>curl</td>
-            
-            
-            <td>curl</td>
-            
-            
-            
-            <td>curl</td>
-            
             
             
             <td>curl</td>
@@ -506,23 +507,19 @@ thead td, thead th {
             <td>curl</td>
             
             
+            
+            <td>curl</td>
+            
+            
+            
+            <td>curl</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">cyrus-sasl-lib</td>
             <td>cyrus-sasl-lib</td>
-            <td>cyrus-sasl-lib</td>
-            
-            
-            <td>cyrus-sasl-lib</td>
-            
-            
-            
-            <td>cyrus-sasl-lib</td>
-            
-            
-            
-            <td>cyrus-sasl-lib</td>
-            
             
             
             <td>cyrus-sasl-lib</td>
@@ -532,63 +529,75 @@ thead td, thead th {
             <td>cyrus-sasl-lib</td>
             
             
+            
+            <td>cyrus-sasl-lib</td>
+            
+            
+            
+            <td>cyrus-sasl-lib</td>
+            
+            
+            
+            <td>cyrus-sasl-lib</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">dbus</td>
             <td>dbus</td>
-            <td>dbus</td>
-            
-            
-            <td>dbus</td>
-            
-            
-            
-            <td>dbus</td>
-            
-            
-            
-            <td>dbus</td>
-            
-            
-            
-            <td>dbus</td>
-            
             
             
             <td>dbus</td>
             
             
+            
+            <td>dbus</td>
+            
+            
+            
+            <td>dbus</td>
+            
+            
+            
+            <td>dbus</td>
+            
+            
+            
+            <td>dbus</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>dbus-broker</td>
-            <td>dbus-broker</td>
-            
-            
-            <td>dbus-broker</td>
-            
-            
-            
-            <td>dbus-broker</td>
-            
-            
-            
-            <td>dbus-broker</td>
-            
-            
-            
-            <td>dbus-broker</td>
-            
-            
-            
+            <td class="all-pkgs">dbus-broker</td>
             <td>dbus-broker</td>
             
             
+            <td>dbus-broker</td>
+            
+            
+            
+            <td>dbus-broker</td>
+            
+            
+            
+            <td>dbus-broker</td>
+            
+            
+            
+            <td>dbus-broker</td>
+            
+            
+            
+            <td>dbus-broker</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">dbus-common</td>
             <td>dbus-common</td>
-            <td>dbus-common</td>
             
             
             <td>dbus-common</td>
@@ -613,12 +622,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">device-mapper</td>
             <td>device-mapper</td>
-            <td>device-mapper</td>
-            
-            
-            <td>device-mapper</td>
-            
             
             
             <td>device-mapper</td>
@@ -636,19 +641,15 @@ thead td, thead th {
             <td>device-mapper</td>
             
             
+            
+            <td>device-mapper</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">device-mapper-libs</td>
             <td>device-mapper-libs</td>
-            <td>device-mapper-libs</td>
-            
-            
-            <td>device-mapper-libs</td>
-            
-            
-            
-            <td>device-mapper-libs</td>
-            
             
             
             <td>device-mapper-libs</td>
@@ -662,23 +663,19 @@ thead td, thead th {
             <td>device-mapper-libs</td>
             
             
+            
+            <td>device-mapper-libs</td>
+            
+            
+            
+            <td>device-mapper-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">dnf</td>
             <td>dnf</td>
-            <td>dnf</td>
-            
-            
-            <td>dnf</td>
-            
-            
-            
-            <td>dnf</td>
-            
-            
-            
-            <td>dnf</td>
-            
             
             
             <td>dnf</td>
@@ -688,63 +685,75 @@ thead td, thead th {
             <td>dnf</td>
             
             
+            
+            <td>dnf</td>
+            
+            
+            
+            <td>dnf</td>
+            
+            
+            
+            <td>dnf</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">dnf-data</td>
             <td>dnf-data</td>
-            <td>dnf-data</td>
-            
-            
-            <td>dnf-data</td>
-            
-            
-            
-            <td>dnf-data</td>
-            
-            
-            
-            <td>dnf-data</td>
-            
-            
-            
-            <td>dnf-data</td>
-            
             
             
             <td>dnf-data</td>
             
             
+            
+            <td>dnf-data</td>
+            
+            
+            
+            <td>dnf-data</td>
+            
+            
+            
+            <td>dnf-data</td>
+            
+            
+            
+            <td>dnf-data</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>dnf-yum</td>
-            <td>dnf-yum</td>
-            
-            
-            <td>dnf-yum</td>
-            
-            
-            
-            <td>dnf-yum</td>
-            
-            
-            
-            <td>dnf-yum</td>
-            
-            
-            
-            <td>dnf-yum</td>
-            
-            
-            
+            <td class="all-pkgs">dnf-yum</td>
             <td>dnf-yum</td>
             
             
+            <td>dnf-yum</td>
+            
+            
+            
+            <td>dnf-yum</td>
+            
+            
+            
+            <td>dnf-yum</td>
+            
+            
+            
+            <td>dnf-yum</td>
+            
+            
+            
+            <td>dnf-yum</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">elfutils-default-yama-scope</td>
             <td>elfutils-default-yama-scope</td>
-            <td>elfutils-default-yama-scope</td>
             
             
             <td>elfutils-default-yama-scope</td>
@@ -769,12 +778,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">elfutils-libelf</td>
             <td>elfutils-libelf</td>
-            <td>elfutils-libelf</td>
-            
-            
-            <td>elfutils-libelf</td>
-            
             
             
             <td>elfutils-libelf</td>
@@ -792,19 +797,15 @@ thead td, thead th {
             <td>elfutils-libelf</td>
             
             
+            
+            <td>elfutils-libelf</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">elfutils-libs</td>
             <td>elfutils-libs</td>
-            <td>elfutils-libs</td>
-            
-            
-            <td>elfutils-libs</td>
-            
-            
-            
-            <td>elfutils-libs</td>
-            
             
             
             <td>elfutils-libs</td>
@@ -818,23 +819,19 @@ thead td, thead th {
             <td>elfutils-libs</td>
             
             
+            
+            <td>elfutils-libs</td>
+            
+            
+            
+            <td>elfutils-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">expat</td>
             <td>expat</td>
-            <td>expat</td>
-            
-            
-            <td>expat</td>
-            
-            
-            
-            <td>expat</td>
-            
-            
-            
-            <td>expat</td>
-            
             
             
             <td>expat</td>
@@ -844,63 +841,75 @@ thead td, thead th {
             <td>expat</td>
             
             
+            
+            <td>expat</td>
+            
+            
+            
+            <td>expat</td>
+            
+            
+            
+            <td>expat</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">fedora-gpg-keys</td>
             <td>fedora-gpg-keys</td>
-            <td>fedora-gpg-keys</td>
-            
-            
-            <td>fedora-gpg-keys</td>
-            
-            
-            
-            <td>fedora-gpg-keys</td>
-            
-            
-            
-            <td>fedora-gpg-keys</td>
-            
-            
-            
-            <td>fedora-gpg-keys</td>
-            
             
             
             <td>fedora-gpg-keys</td>
             
             
+            
+            <td>fedora-gpg-keys</td>
+            
+            
+            
+            <td>fedora-gpg-keys</td>
+            
+            
+            
+            <td>fedora-gpg-keys</td>
+            
+            
+            
+            <td>fedora-gpg-keys</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>fedora-release</td>
-            <td>fedora-release</td>
-            
-            
-            <td>fedora-release</td>
-            
-            
-            
-            <td>fedora-release</td>
-            
-            
-            
-            <td>fedora-release</td>
-            
-            
-            
-            <td>fedora-release</td>
-            
-            
-            
+            <td class="all-pkgs">fedora-release</td>
             <td>fedora-release</td>
             
             
+            <td>fedora-release</td>
+            
+            
+            
+            <td>fedora-release</td>
+            
+            
+            
+            <td>fedora-release</td>
+            
+            
+            
+            <td>fedora-release</td>
+            
+            
+            
+            <td>fedora-release</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">fedora-release-common</td>
             <td>fedora-release-common</td>
-            <td>fedora-release-common</td>
             
             
             <td>fedora-release-common</td>
@@ -925,12 +934,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">fedora-repos</td>
             <td>fedora-repos</td>
-            <td>fedora-repos</td>
-            
-            
-            <td>fedora-repos</td>
-            
             
             
             <td>fedora-repos</td>
@@ -948,19 +953,15 @@ thead td, thead th {
             <td>fedora-repos</td>
             
             
+            
+            <td>fedora-repos</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">file-libs</td>
             <td>file-libs</td>
-            <td>file-libs</td>
-            
-            
-            <td>file-libs</td>
-            
-            
-            
-            <td>file-libs</td>
-            
             
             
             <td>file-libs</td>
@@ -974,23 +975,19 @@ thead td, thead th {
             <td>file-libs</td>
             
             
+            
+            <td>file-libs</td>
+            
+            
+            
+            <td>file-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">filesystem</td>
             <td>filesystem</td>
-            <td>filesystem</td>
-            
-            
-            <td>filesystem</td>
-            
-            
-            
-            <td>filesystem</td>
-            
-            
-            
-            <td>filesystem</td>
-            
             
             
             <td>filesystem</td>
@@ -1000,63 +997,75 @@ thead td, thead th {
             <td>filesystem</td>
             
             
+            
+            <td>filesystem</td>
+            
+            
+            
+            <td>filesystem</td>
+            
+            
+            
+            <td>filesystem</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">gawk</td>
             <td>gawk</td>
-            <td>gawk</td>
-            
-            
-            <td>gawk</td>
-            
-            
-            
-            <td>gawk</td>
-            
-            
-            
-            <td>gawk</td>
-            
-            
-            
-            <td>gawk</td>
-            
             
             
             <td>gawk</td>
             
             
+            
+            <td>gawk</td>
+            
+            
+            
+            <td>gawk</td>
+            
+            
+            
+            <td>gawk</td>
+            
+            
+            
+            <td>gawk</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>gdbm-libs</td>
-            <td>gdbm-libs</td>
-            
-            
-            <td>gdbm-libs</td>
-            
-            
-            
-            <td>gdbm-libs</td>
-            
-            
-            
-            <td>gdbm-libs</td>
-            
-            
-            
-            <td>gdbm-libs</td>
-            
-            
-            
+            <td class="all-pkgs">gdbm-libs</td>
             <td>gdbm-libs</td>
             
             
+            <td>gdbm-libs</td>
+            
+            
+            
+            <td>gdbm-libs</td>
+            
+            
+            
+            <td>gdbm-libs</td>
+            
+            
+            
+            <td>gdbm-libs</td>
+            
+            
+            
+            <td>gdbm-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">glib2</td>
             <td>glib2</td>
-            <td>glib2</td>
             
             
             <td>glib2</td>
@@ -1081,12 +1090,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">glibc</td>
             <td>glibc</td>
-            <td>glibc</td>
-            
-            
-            <td>glibc</td>
-            
             
             
             <td>glibc</td>
@@ -1104,19 +1109,15 @@ thead td, thead th {
             <td>glibc</td>
             
             
+            
+            <td>glibc</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">glibc-common</td>
             <td>glibc-common</td>
-            <td>glibc-common</td>
-            
-            
-            <td>glibc-common</td>
-            
-            
-            
-            <td>glibc-common</td>
-            
             
             
             <td>glibc-common</td>
@@ -1130,23 +1131,19 @@ thead td, thead th {
             <td>glibc-common</td>
             
             
+            
+            <td>glibc-common</td>
+            
+            
+            
+            <td>glibc-common</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">glibc-minimal-langpack</td>
             <td>glibc-minimal-langpack</td>
-            <td>glibc-minimal-langpack</td>
-            
-            
-            <td>glibc-minimal-langpack</td>
-            
-            
-            
-            <td>glibc-minimal-langpack</td>
-            
-            
-            
-            <td>glibc-minimal-langpack</td>
-            
             
             
             <td>glibc-minimal-langpack</td>
@@ -1156,63 +1153,75 @@ thead td, thead th {
             <td>glibc-minimal-langpack</td>
             
             
+            
+            <td>glibc-minimal-langpack</td>
+            
+            
+            
+            <td>glibc-minimal-langpack</td>
+            
+            
+            
+            <td>glibc-minimal-langpack</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">gmp</td>
             <td>gmp</td>
-            <td>gmp</td>
-            
-            
-            <td>gmp</td>
-            
-            
-            
-            <td>gmp</td>
-            
-            
-            
-            <td>gmp</td>
-            
-            
-            
-            <td>gmp</td>
-            
             
             
             <td>gmp</td>
             
             
+            
+            <td>gmp</td>
+            
+            
+            
+            <td>gmp</td>
+            
+            
+            
+            <td>gmp</td>
+            
+            
+            
+            <td>gmp</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>gnupg2</td>
-            <td>gnupg2</td>
-            
-            
-            <td>gnupg2</td>
-            
-            
-            
-            <td>gnupg2</td>
-            
-            
-            
-            <td>gnupg2</td>
-            
-            
-            
-            <td>gnupg2</td>
-            
-            
-            
+            <td class="all-pkgs">gnupg2</td>
             <td>gnupg2</td>
             
             
+            <td>gnupg2</td>
+            
+            
+            
+            <td>gnupg2</td>
+            
+            
+            
+            <td>gnupg2</td>
+            
+            
+            
+            <td>gnupg2</td>
+            
+            
+            
+            <td>gnupg2</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">gnutls</td>
             <td>gnutls</td>
-            <td>gnutls</td>
             
             
             <td>gnutls</td>
@@ -1237,12 +1246,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">gpgme</td>
             <td>gpgme</td>
-            <td>gpgme</td>
-            
-            
-            <td>gpgme</td>
-            
             
             
             <td>gpgme</td>
@@ -1260,19 +1265,15 @@ thead td, thead th {
             <td>gpgme</td>
             
             
+            
+            <td>gpgme</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">grep</td>
             <td>grep</td>
-            <td>grep</td>
-            
-            
-            <td>grep</td>
-            
-            
-            
-            <td>grep</td>
-            
             
             
             <td>grep</td>
@@ -1286,23 +1287,19 @@ thead td, thead th {
             <td>grep</td>
             
             
+            
+            <td>grep</td>
+            
+            
+            
+            <td>grep</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">gzip</td>
             <td>gzip</td>
-            <td>gzip</td>
-            
-            
-            <td>gzip</td>
-            
-            
-            
-            <td>gzip</td>
-            
-            
-            
-            <td>gzip</td>
-            
             
             
             <td>gzip</td>
@@ -1312,63 +1309,75 @@ thead td, thead th {
             <td>gzip</td>
             
             
+            
+            <td>gzip</td>
+            
+            
+            
+            <td>gzip</td>
+            
+            
+            
+            <td>gzip</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">ima-evm-utils</td>
             <td>ima-evm-utils</td>
-            <td>ima-evm-utils</td>
-            
-            
-            <td>ima-evm-utils</td>
-            
-            
-            
-            <td>ima-evm-utils</td>
-            
-            
-            
-            <td>ima-evm-utils</td>
-            
-            
-            
-            <td>ima-evm-utils</td>
-            
             
             
             <td>ima-evm-utils</td>
             
             
+            
+            <td>ima-evm-utils</td>
+            
+            
+            
+            <td>ima-evm-utils</td>
+            
+            
+            
+            <td>ima-evm-utils</td>
+            
+            
+            
+            <td>ima-evm-utils</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>iptables-libs</td>
-            <td>iptables-libs</td>
-            
-            
-            <td>iptables-libs</td>
-            
-            
-            
-            <td>iptables-libs</td>
-            
-            
-            
-            <td>iptables-libs</td>
-            
-            
-            
-            <td>iptables-libs</td>
-            
-            
-            
+            <td class="all-pkgs">iptables-libs</td>
             <td>iptables-libs</td>
             
             
+            <td>iptables-libs</td>
+            
+            
+            
+            <td>iptables-libs</td>
+            
+            
+            
+            <td>iptables-libs</td>
+            
+            
+            
+            <td>iptables-libs</td>
+            
+            
+            
+            <td>iptables-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">json-c</td>
             <td>json-c</td>
-            <td>json-c</td>
             
             
             <td>json-c</td>
@@ -1393,12 +1402,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">keyutils-libs</td>
             <td>keyutils-libs</td>
-            <td>keyutils-libs</td>
-            
-            
-            <td>keyutils-libs</td>
-            
             
             
             <td>keyutils-libs</td>
@@ -1416,19 +1421,15 @@ thead td, thead th {
             <td>keyutils-libs</td>
             
             
+            
+            <td>keyutils-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">kmod-libs</td>
             <td>kmod-libs</td>
-            <td>kmod-libs</td>
-            
-            
-            <td>kmod-libs</td>
-            
-            
-            
-            <td>kmod-libs</td>
-            
             
             
             <td>kmod-libs</td>
@@ -1442,23 +1443,19 @@ thead td, thead th {
             <td>kmod-libs</td>
             
             
+            
+            <td>kmod-libs</td>
+            
+            
+            
+            <td>kmod-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">krb5-libs</td>
             <td>krb5-libs</td>
-            <td>krb5-libs</td>
-            
-            
-            <td>krb5-libs</td>
-            
-            
-            
-            <td>krb5-libs</td>
-            
-            
-            
-            <td>krb5-libs</td>
-            
             
             
             <td>krb5-libs</td>
@@ -1468,63 +1465,75 @@ thead td, thead th {
             <td>krb5-libs</td>
             
             
+            
+            <td>krb5-libs</td>
+            
+            
+            
+            <td>krb5-libs</td>
+            
+            
+            
+            <td>krb5-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">langpacks-en</td>
             <td>langpacks-en</td>
-            <td>langpacks-en</td>
-            
-            
-            <td>langpacks-en</td>
-            
-            
-            
-            <td>langpacks-en</td>
-            
-            
-            
-            <td>langpacks-en</td>
-            
-            
-            
-            <td>langpacks-en</td>
-            
             
             
             <td>langpacks-en</td>
             
             
+            
+            <td>langpacks-en</td>
+            
+            
+            
+            <td>langpacks-en</td>
+            
+            
+            
+            <td>langpacks-en</td>
+            
+            
+            
+            <td>langpacks-en</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>libacl</td>
-            <td>libacl</td>
-            
-            
-            <td>libacl</td>
-            
-            
-            
-            <td>libacl</td>
-            
-            
-            
-            <td>libacl</td>
-            
-            
-            
-            <td>libacl</td>
-            
-            
-            
+            <td class="all-pkgs">libacl</td>
             <td>libacl</td>
             
             
+            <td>libacl</td>
+            
+            
+            
+            <td>libacl</td>
+            
+            
+            
+            <td>libacl</td>
+            
+            
+            
+            <td>libacl</td>
+            
+            
+            
+            <td>libacl</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libarchive</td>
             <td>libarchive</td>
-            <td>libarchive</td>
             
             
             <td>libarchive</td>
@@ -1549,12 +1558,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libargon2</td>
             <td>libargon2</td>
-            <td>libargon2</td>
-            
-            
-            <td>libargon2</td>
-            
             
             
             <td>libargon2</td>
@@ -1572,19 +1577,15 @@ thead td, thead th {
             <td>libargon2</td>
             
             
+            
+            <td>libargon2</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libassuan</td>
             <td>libassuan</td>
-            <td>libassuan</td>
-            
-            
-            <td>libassuan</td>
-            
-            
-            
-            <td>libassuan</td>
-            
             
             
             <td>libassuan</td>
@@ -1598,23 +1599,19 @@ thead td, thead th {
             <td>libassuan</td>
             
             
+            
+            <td>libassuan</td>
+            
+            
+            
+            <td>libassuan</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libattr</td>
             <td>libattr</td>
-            <td>libattr</td>
-            
-            
-            <td>libattr</td>
-            
-            
-            
-            <td>libattr</td>
-            
-            
-            
-            <td>libattr</td>
-            
             
             
             <td>libattr</td>
@@ -1624,63 +1621,75 @@ thead td, thead th {
             <td>libattr</td>
             
             
+            
+            <td>libattr</td>
+            
+            
+            
+            <td>libattr</td>
+            
+            
+            
+            <td>libattr</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libblkid</td>
             <td>libblkid</td>
-            <td>libblkid</td>
-            
-            
-            <td>libblkid</td>
-            
-            
-            
-            <td>libblkid</td>
-            
-            
-            
-            <td>libblkid</td>
-            
-            
-            
-            <td>libblkid</td>
-            
             
             
             <td>libblkid</td>
             
             
+            
+            <td>libblkid</td>
+            
+            
+            
+            <td>libblkid</td>
+            
+            
+            
+            <td>libblkid</td>
+            
+            
+            
+            <td>libblkid</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>libcap</td>
-            <td>libcap</td>
-            
-            
-            <td>libcap</td>
-            
-            
-            
-            <td>libcap</td>
-            
-            
-            
-            <td>libcap</td>
-            
-            
-            
-            <td>libcap</td>
-            
-            
-            
+            <td class="all-pkgs">libcap</td>
             <td>libcap</td>
             
             
+            <td>libcap</td>
+            
+            
+            
+            <td>libcap</td>
+            
+            
+            
+            <td>libcap</td>
+            
+            
+            
+            <td>libcap</td>
+            
+            
+            
+            <td>libcap</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libcap-ng</td>
             <td>libcap-ng</td>
-            <td>libcap-ng</td>
             
             
             <td>libcap-ng</td>
@@ -1705,12 +1714,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libcom_err</td>
             <td>libcom_err</td>
-            <td>libcom_err</td>
-            
-            
-            <td>libcom_err</td>
-            
             
             
             <td>libcom_err</td>
@@ -1728,19 +1733,15 @@ thead td, thead th {
             <td>libcom_err</td>
             
             
+            
+            <td>libcom_err</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libcomps</td>
             <td>libcomps</td>
-            <td>libcomps</td>
-            
-            
-            <td>libcomps</td>
-            
-            
-            
-            <td>libcomps</td>
-            
             
             
             <td>libcomps</td>
@@ -1754,23 +1755,19 @@ thead td, thead th {
             <td>libcomps</td>
             
             
+            
+            <td>libcomps</td>
+            
+            
+            
+            <td>libcomps</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libcurl</td>
             <td>libcurl</td>
-            <td>libcurl</td>
-            
-            
-            <td>libcurl</td>
-            
-            
-            
-            <td>libcurl</td>
-            
-            
-            
-            <td>libcurl</td>
-            
             
             
             <td>libcurl</td>
@@ -1780,63 +1777,75 @@ thead td, thead th {
             <td>libcurl</td>
             
             
+            
+            <td>libcurl</td>
+            
+            
+            
+            <td>libcurl</td>
+            
+            
+            
+            <td>libcurl</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libdb</td>
             <td>libdb</td>
-            <td>libdb</td>
-            
-            
-            <td>libdb</td>
-            
-            
-            
-            <td>libdb</td>
-            
-            
-            
-            <td>libdb</td>
-            
-            
-            
-            <td>libdb</td>
-            
             
             
             <td>libdb</td>
             
             
+            
+            <td>libdb</td>
+            
+            
+            
+            <td>libdb</td>
+            
+            
+            
+            <td>libdb</td>
+            
+            
+            
+            <td>libdb</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>libdb-utils</td>
-            <td>libdb-utils</td>
-            
-            
-            <td>libdb-utils</td>
-            
-            
-            
-            <td>libdb-utils</td>
-            
-            
-            
-            <td>libdb-utils</td>
-            
-            
-            
-            <td>libdb-utils</td>
-            
-            
-            
+            <td class="all-pkgs">libdb-utils</td>
             <td>libdb-utils</td>
             
             
+            <td>libdb-utils</td>
+            
+            
+            
+            <td>libdb-utils</td>
+            
+            
+            
+            <td>libdb-utils</td>
+            
+            
+            
+            <td>libdb-utils</td>
+            
+            
+            
+            <td>libdb-utils</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libdnf</td>
             <td>libdnf</td>
-            <td>libdnf</td>
             
             
             <td>libdnf</td>
@@ -1861,12 +1870,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libfdisk</td>
             <td>libfdisk</td>
-            <td>libfdisk</td>
-            
-            
-            <td>libfdisk</td>
-            
             
             
             <td>libfdisk</td>
@@ -1884,19 +1889,15 @@ thead td, thead th {
             <td>libfdisk</td>
             
             
+            
+            <td>libfdisk</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libffi</td>
             <td>libffi</td>
-            <td>libffi</td>
-            
-            
-            <td>libffi</td>
-            
-            
-            
-            <td>libffi</td>
-            
             
             
             <td>libffi</td>
@@ -1910,23 +1911,19 @@ thead td, thead th {
             <td>libffi</td>
             
             
+            
+            <td>libffi</td>
+            
+            
+            
+            <td>libffi</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libgcc</td>
             <td>libgcc</td>
-            <td>libgcc</td>
-            
-            
-            <td>libgcc</td>
-            
-            
-            
-            <td>libgcc</td>
-            
-            
-            
-            <td>libgcc</td>
-            
             
             
             <td>libgcc</td>
@@ -1936,63 +1933,75 @@ thead td, thead th {
             <td>libgcc</td>
             
             
+            
+            <td>libgcc</td>
+            
+            
+            
+            <td>libgcc</td>
+            
+            
+            
+            <td>libgcc</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libgcrypt</td>
             <td>libgcrypt</td>
-            <td>libgcrypt</td>
-            
-            
-            <td>libgcrypt</td>
-            
-            
-            
-            <td>libgcrypt</td>
-            
-            
-            
-            <td>libgcrypt</td>
-            
-            
-            
-            <td>libgcrypt</td>
-            
             
             
             <td>libgcrypt</td>
             
             
+            
+            <td>libgcrypt</td>
+            
+            
+            
+            <td>libgcrypt</td>
+            
+            
+            
+            <td>libgcrypt</td>
+            
+            
+            
+            <td>libgcrypt</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>libgpg-error</td>
-            <td>libgpg-error</td>
-            
-            
-            <td>libgpg-error</td>
-            
-            
-            
-            <td>libgpg-error</td>
-            
-            
-            
-            <td>libgpg-error</td>
-            
-            
-            
-            <td>libgpg-error</td>
-            
-            
-            
+            <td class="all-pkgs">libgpg-error</td>
             <td>libgpg-error</td>
             
             
+            <td>libgpg-error</td>
+            
+            
+            
+            <td>libgpg-error</td>
+            
+            
+            
+            <td>libgpg-error</td>
+            
+            
+            
+            <td>libgpg-error</td>
+            
+            
+            
+            <td>libgpg-error</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libidn2</td>
             <td>libidn2</td>
-            <td>libidn2</td>
             
             
             <td>libidn2</td>
@@ -2017,12 +2026,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libksba</td>
             <td>libksba</td>
-            <td>libksba</td>
-            
-            
-            <td>libksba</td>
-            
             
             
             <td>libksba</td>
@@ -2040,19 +2045,15 @@ thead td, thead th {
             <td>libksba</td>
             
             
+            
+            <td>libksba</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libmetalink</td>
             <td>libmetalink</td>
-            <td>libmetalink</td>
-            
-            
-            <td>libmetalink</td>
-            
-            
-            
-            <td>libmetalink</td>
-            
             
             
             <td>libmetalink</td>
@@ -2066,23 +2067,19 @@ thead td, thead th {
             <td>libmetalink</td>
             
             
+            
+            <td>libmetalink</td>
+            
+            
+            
+            <td>libmetalink</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libmodulemd1</td>
             <td>libmodulemd1</td>
-            <td>libmodulemd1</td>
-            
-            
-            <td>libmodulemd1</td>
-            
-            
-            
-            <td>libmodulemd1</td>
-            
-            
-            
-            <td>libmodulemd1</td>
-            
             
             
             <td>libmodulemd1</td>
@@ -2092,63 +2089,75 @@ thead td, thead th {
             <td>libmodulemd1</td>
             
             
+            
+            <td>libmodulemd1</td>
+            
+            
+            
+            <td>libmodulemd1</td>
+            
+            
+            
+            <td>libmodulemd1</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libmount</td>
             <td>libmount</td>
-            <td>libmount</td>
-            
-            
-            <td>libmount</td>
-            
-            
-            
-            <td>libmount</td>
-            
-            
-            
-            <td>libmount</td>
-            
-            
-            
-            <td>libmount</td>
-            
             
             
             <td>libmount</td>
             
             
+            
+            <td>libmount</td>
+            
+            
+            
+            <td>libmount</td>
+            
+            
+            
+            <td>libmount</td>
+            
+            
+            
+            <td>libmount</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>libnghttp2</td>
-            <td>libnghttp2</td>
-            
-            
-            <td>libnghttp2</td>
-            
-            
-            
-            <td>libnghttp2</td>
-            
-            
-            
-            <td>libnghttp2</td>
-            
-            
-            
-            <td>libnghttp2</td>
-            
-            
-            
+            <td class="all-pkgs">libnghttp2</td>
             <td>libnghttp2</td>
             
             
+            <td>libnghttp2</td>
+            
+            
+            
+            <td>libnghttp2</td>
+            
+            
+            
+            <td>libnghttp2</td>
+            
+            
+            
+            <td>libnghttp2</td>
+            
+            
+            
+            <td>libnghttp2</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libnsl2</td>
             <td>libnsl2</td>
-            <td>libnsl2</td>
             
             
             <td>libnsl2</td>
@@ -2173,12 +2182,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libpcap</td>
             <td>libpcap</td>
-            <td>libpcap</td>
-            
-            
-            <td>libpcap</td>
-            
             
             
             <td>libpcap</td>
@@ -2196,19 +2201,15 @@ thead td, thead th {
             <td>libpcap</td>
             
             
+            
+            <td>libpcap</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libpsl</td>
             <td>libpsl</td>
-            <td>libpsl</td>
-            
-            
-            <td>libpsl</td>
-            
-            
-            
-            <td>libpsl</td>
-            
             
             
             <td>libpsl</td>
@@ -2222,23 +2223,19 @@ thead td, thead th {
             <td>libpsl</td>
             
             
+            
+            <td>libpsl</td>
+            
+            
+            
+            <td>libpsl</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libpwquality</td>
             <td>libpwquality</td>
-            <td>libpwquality</td>
-            
-            
-            <td>libpwquality</td>
-            
-            
-            
-            <td>libpwquality</td>
-            
-            
-            
-            <td>libpwquality</td>
-            
             
             
             <td>libpwquality</td>
@@ -2248,63 +2245,75 @@ thead td, thead th {
             <td>libpwquality</td>
             
             
+            
+            <td>libpwquality</td>
+            
+            
+            
+            <td>libpwquality</td>
+            
+            
+            
+            <td>libpwquality</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">librepo</td>
             <td>librepo</td>
-            <td>librepo</td>
-            
-            
-            <td>librepo</td>
-            
-            
-            
-            <td>librepo</td>
-            
-            
-            
-            <td>librepo</td>
-            
-            
-            
-            <td>librepo</td>
-            
             
             
             <td>librepo</td>
             
             
+            
+            <td>librepo</td>
+            
+            
+            
+            <td>librepo</td>
+            
+            
+            
+            <td>librepo</td>
+            
+            
+            
+            <td>librepo</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>libreport-filesystem</td>
-            <td>libreport-filesystem</td>
-            
-            
-            <td>libreport-filesystem</td>
-            
-            
-            
-            <td>libreport-filesystem</td>
-            
-            
-            
-            <td>libreport-filesystem</td>
-            
-            
-            
-            <td>libreport-filesystem</td>
-            
-            
-            
+            <td class="all-pkgs">libreport-filesystem</td>
             <td>libreport-filesystem</td>
             
             
+            <td>libreport-filesystem</td>
+            
+            
+            
+            <td>libreport-filesystem</td>
+            
+            
+            
+            <td>libreport-filesystem</td>
+            
+            
+            
+            <td>libreport-filesystem</td>
+            
+            
+            
+            <td>libreport-filesystem</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libseccomp</td>
             <td>libseccomp</td>
-            <td>libseccomp</td>
             
             
             <td>libseccomp</td>
@@ -2329,12 +2338,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libselinux</td>
             <td>libselinux</td>
-            <td>libselinux</td>
-            
-            
-            <td>libselinux</td>
-            
             
             
             <td>libselinux</td>
@@ -2352,19 +2357,15 @@ thead td, thead th {
             <td>libselinux</td>
             
             
+            
+            <td>libselinux</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libsemanage</td>
             <td>libsemanage</td>
-            <td>libsemanage</td>
-            
-            
-            <td>libsemanage</td>
-            
-            
-            
-            <td>libsemanage</td>
-            
             
             
             <td>libsemanage</td>
@@ -2378,23 +2379,19 @@ thead td, thead th {
             <td>libsemanage</td>
             
             
+            
+            <td>libsemanage</td>
+            
+            
+            
+            <td>libsemanage</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libsepol</td>
             <td>libsepol</td>
-            <td>libsepol</td>
-            
-            
-            <td>libsepol</td>
-            
-            
-            
-            <td>libsepol</td>
-            
-            
-            
-            <td>libsepol</td>
-            
             
             
             <td>libsepol</td>
@@ -2404,63 +2401,75 @@ thead td, thead th {
             <td>libsepol</td>
             
             
+            
+            <td>libsepol</td>
+            
+            
+            
+            <td>libsepol</td>
+            
+            
+            
+            <td>libsepol</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libsigsegv</td>
             <td>libsigsegv</td>
-            <td>libsigsegv</td>
-            
-            
-            <td>libsigsegv</td>
-            
-            
-            
-            <td>libsigsegv</td>
-            
-            
-            
-            <td>libsigsegv</td>
-            
-            
-            
-            <td>libsigsegv</td>
-            
             
             
             <td>libsigsegv</td>
             
             
+            
+            <td>libsigsegv</td>
+            
+            
+            
+            <td>libsigsegv</td>
+            
+            
+            
+            <td>libsigsegv</td>
+            
+            
+            
+            <td>libsigsegv</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>libsmartcols</td>
-            <td>libsmartcols</td>
-            
-            
-            <td>libsmartcols</td>
-            
-            
-            
-            <td>libsmartcols</td>
-            
-            
-            
-            <td>libsmartcols</td>
-            
-            
-            
-            <td>libsmartcols</td>
-            
-            
-            
+            <td class="all-pkgs">libsmartcols</td>
             <td>libsmartcols</td>
             
             
+            <td>libsmartcols</td>
+            
+            
+            
+            <td>libsmartcols</td>
+            
+            
+            
+            <td>libsmartcols</td>
+            
+            
+            
+            <td>libsmartcols</td>
+            
+            
+            
+            <td>libsmartcols</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libsolv</td>
             <td>libsolv</td>
-            <td>libsolv</td>
             
             
             <td>libsolv</td>
@@ -2485,12 +2494,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libssh</td>
             <td>libssh</td>
-            <td>libssh</td>
-            
-            
-            <td>libssh</td>
-            
             
             
             <td>libssh</td>
@@ -2508,19 +2513,15 @@ thead td, thead th {
             <td>libssh</td>
             
             
+            
+            <td>libssh</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libssh-config</td>
             <td>libssh-config</td>
-            <td>libssh-config</td>
-            
-            
-            <td>libssh-config</td>
-            
-            
-            
-            <td>libssh-config</td>
-            
             
             
             <td>libssh-config</td>
@@ -2534,23 +2535,19 @@ thead td, thead th {
             <td>libssh-config</td>
             
             
+            
+            <td>libssh-config</td>
+            
+            
+            
+            <td>libssh-config</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libsss_idmap</td>
             <td>libsss_idmap</td>
-            <td>libsss_idmap</td>
-            
-            
-            <td>libsss_idmap</td>
-            
-            
-            
-            <td>libsss_idmap</td>
-            
-            
-            
-            <td>libsss_idmap</td>
-            
             
             
             <td>libsss_idmap</td>
@@ -2560,63 +2557,75 @@ thead td, thead th {
             <td>libsss_idmap</td>
             
             
+            
+            <td>libsss_idmap</td>
+            
+            
+            
+            <td>libsss_idmap</td>
+            
+            
+            
+            <td>libsss_idmap</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libsss_nss_idmap</td>
             <td>libsss_nss_idmap</td>
-            <td>libsss_nss_idmap</td>
-            
-            
-            <td>libsss_nss_idmap</td>
-            
-            
-            
-            <td>libsss_nss_idmap</td>
-            
-            
-            
-            <td>libsss_nss_idmap</td>
-            
-            
-            
-            <td>libsss_nss_idmap</td>
-            
             
             
             <td>libsss_nss_idmap</td>
             
             
+            
+            <td>libsss_nss_idmap</td>
+            
+            
+            
+            <td>libsss_nss_idmap</td>
+            
+            
+            
+            <td>libsss_nss_idmap</td>
+            
+            
+            
+            <td>libsss_nss_idmap</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>libstdc++</td>
-            <td>libstdc++</td>
-            
-            
-            <td>libstdc++</td>
-            
-            
-            
-            <td>libstdc++</td>
-            
-            
-            
-            <td>libstdc++</td>
-            
-            
-            
-            <td>libstdc++</td>
-            
-            
-            
+            <td class="all-pkgs">libstdc++</td>
             <td>libstdc++</td>
             
             
+            <td>libstdc++</td>
+            
+            
+            
+            <td>libstdc++</td>
+            
+            
+            
+            <td>libstdc++</td>
+            
+            
+            
+            <td>libstdc++</td>
+            
+            
+            
+            <td>libstdc++</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libtasn1</td>
             <td>libtasn1</td>
-            <td>libtasn1</td>
             
             
             <td>libtasn1</td>
@@ -2641,12 +2650,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libtirpc</td>
             <td>libtirpc</td>
-            <td>libtirpc</td>
-            
-            
-            <td>libtirpc</td>
-            
             
             
             <td>libtirpc</td>
@@ -2664,19 +2669,15 @@ thead td, thead th {
             <td>libtirpc</td>
             
             
+            
+            <td>libtirpc</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libunistring</td>
             <td>libunistring</td>
-            <td>libunistring</td>
-            
-            
-            <td>libunistring</td>
-            
-            
-            
-            <td>libunistring</td>
-            
             
             
             <td>libunistring</td>
@@ -2690,23 +2691,19 @@ thead td, thead th {
             <td>libunistring</td>
             
             
+            
+            <td>libunistring</td>
+            
+            
+            
+            <td>libunistring</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libusbx</td>
             <td>libusbx</td>
-            <td>libusbx</td>
-            
-            
-            <td>libusbx</td>
-            
-            
-            
-            <td>libusbx</td>
-            
-            
-            
-            <td>libusbx</td>
-            
             
             
             <td>libusbx</td>
@@ -2716,63 +2713,75 @@ thead td, thead th {
             <td>libusbx</td>
             
             
+            
+            <td>libusbx</td>
+            
+            
+            
+            <td>libusbx</td>
+            
+            
+            
+            <td>libusbx</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libutempter</td>
             <td>libutempter</td>
-            <td>libutempter</td>
-            
-            
-            <td>libutempter</td>
-            
-            
-            
-            <td>libutempter</td>
-            
-            
-            
-            <td>libutempter</td>
-            
-            
-            
-            <td>libutempter</td>
-            
             
             
             <td>libutempter</td>
             
             
+            
+            <td>libutempter</td>
+            
+            
+            
+            <td>libutempter</td>
+            
+            
+            
+            <td>libutempter</td>
+            
+            
+            
+            <td>libutempter</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>libuuid</td>
-            <td>libuuid</td>
-            
-            
-            <td>libuuid</td>
-            
-            
-            
-            <td>libuuid</td>
-            
-            
-            
-            <td>libuuid</td>
-            
-            
-            
-            <td>libuuid</td>
-            
-            
-            
+            <td class="all-pkgs">libuuid</td>
             <td>libuuid</td>
             
             
+            <td>libuuid</td>
+            
+            
+            
+            <td>libuuid</td>
+            
+            
+            
+            <td>libuuid</td>
+            
+            
+            
+            <td>libuuid</td>
+            
+            
+            
+            <td>libuuid</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libverto</td>
             <td>libverto</td>
-            <td>libverto</td>
             
             
             <td>libverto</td>
@@ -2797,12 +2806,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libxcrypt</td>
             <td>libxcrypt</td>
-            <td>libxcrypt</td>
-            
-            
-            <td>libxcrypt</td>
-            
             
             
             <td>libxcrypt</td>
@@ -2820,19 +2825,15 @@ thead td, thead th {
             <td>libxcrypt</td>
             
             
+            
+            <td>libxcrypt</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libxml2</td>
             <td>libxml2</td>
-            <td>libxml2</td>
-            
-            
-            <td>libxml2</td>
-            
-            
-            
-            <td>libxml2</td>
-            
             
             
             <td>libxml2</td>
@@ -2846,23 +2847,19 @@ thead td, thead th {
             <td>libxml2</td>
             
             
+            
+            <td>libxml2</td>
+            
+            
+            
+            <td>libxml2</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libyaml</td>
             <td>libyaml</td>
-            <td>libyaml</td>
-            
-            
-            <td>libyaml</td>
-            
-            
-            
-            <td>libyaml</td>
-            
-            
-            
-            <td>libyaml</td>
-            
             
             
             <td>libyaml</td>
@@ -2872,63 +2869,75 @@ thead td, thead th {
             <td>libyaml</td>
             
             
+            
+            <td>libyaml</td>
+            
+            
+            
+            <td>libyaml</td>
+            
+            
+            
+            <td>libyaml</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">libzstd</td>
             <td>libzstd</td>
-            <td>libzstd</td>
-            
-            
-            <td>libzstd</td>
-            
-            
-            
-            <td>libzstd</td>
-            
-            
-            
-            <td>libzstd</td>
-            
-            
-            
-            <td>libzstd</td>
-            
             
             
             <td>libzstd</td>
             
             
+            
+            <td>libzstd</td>
+            
+            
+            
+            <td>libzstd</td>
+            
+            
+            
+            <td>libzstd</td>
+            
+            
+            
+            <td>libzstd</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>lua-libs</td>
-            <td>lua-libs</td>
-            
-            
-            <td>lua-libs</td>
-            
-            
-            
-            <td>lua-libs</td>
-            
-            
-            
-            <td>lua-libs</td>
-            
-            
-            
-            <td>lua-libs</td>
-            
-            
-            
+            <td class="all-pkgs">lua-libs</td>
             <td>lua-libs</td>
             
             
+            <td>lua-libs</td>
+            
+            
+            
+            <td>lua-libs</td>
+            
+            
+            
+            <td>lua-libs</td>
+            
+            
+            
+            <td>lua-libs</td>
+            
+            
+            
+            <td>lua-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">lz4-libs</td>
             <td>lz4-libs</td>
-            <td>lz4-libs</td>
             
             
             <td>lz4-libs</td>
@@ -2953,12 +2962,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">mpfr</td>
             <td>mpfr</td>
-            <td>mpfr</td>
-            
-            
-            <td>mpfr</td>
-            
             
             
             <td>mpfr</td>
@@ -2976,19 +2981,15 @@ thead td, thead th {
             <td>mpfr</td>
             
             
+            
+            <td>mpfr</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">ncurses</td>
             <td>ncurses</td>
-            <td>ncurses</td>
-            
-            
-            <td>ncurses</td>
-            
-            
-            
-            <td>ncurses</td>
-            
             
             
             <td>ncurses</td>
@@ -3002,23 +3003,19 @@ thead td, thead th {
             <td>ncurses</td>
             
             
+            
+            <td>ncurses</td>
+            
+            
+            
+            <td>ncurses</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">ncurses-base</td>
             <td>ncurses-base</td>
-            <td>ncurses-base</td>
-            
-            
-            <td>ncurses-base</td>
-            
-            
-            
-            <td>ncurses-base</td>
-            
-            
-            
-            <td>ncurses-base</td>
-            
             
             
             <td>ncurses-base</td>
@@ -3028,63 +3025,75 @@ thead td, thead th {
             <td>ncurses-base</td>
             
             
+            
+            <td>ncurses-base</td>
+            
+            
+            
+            <td>ncurses-base</td>
+            
+            
+            
+            <td>ncurses-base</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">ncurses-libs</td>
             <td>ncurses-libs</td>
-            <td>ncurses-libs</td>
-            
-            
-            <td>ncurses-libs</td>
-            
-            
-            
-            <td>ncurses-libs</td>
-            
-            
-            
-            <td>ncurses-libs</td>
-            
-            
-            
-            <td>ncurses-libs</td>
-            
             
             
             <td>ncurses-libs</td>
             
             
+            
+            <td>ncurses-libs</td>
+            
+            
+            
+            <td>ncurses-libs</td>
+            
+            
+            
+            <td>ncurses-libs</td>
+            
+            
+            
+            <td>ncurses-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>nettle</td>
-            <td>nettle</td>
-            
-            
-            <td>nettle</td>
-            
-            
-            
-            <td>nettle</td>
-            
-            
-            
-            <td>nettle</td>
-            
-            
-            
-            <td>nettle</td>
-            
-            
-            
+            <td class="all-pkgs">nettle</td>
             <td>nettle</td>
             
             
+            <td>nettle</td>
+            
+            
+            
+            <td>nettle</td>
+            
+            
+            
+            <td>nettle</td>
+            
+            
+            
+            <td>nettle</td>
+            
+            
+            
+            <td>nettle</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">npth</td>
             <td>npth</td>
-            <td>npth</td>
             
             
             <td>npth</td>
@@ -3109,12 +3118,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">openldap</td>
             <td>openldap</td>
-            <td>openldap</td>
-            
-            
-            <td>openldap</td>
-            
             
             
             <td>openldap</td>
@@ -3132,19 +3137,15 @@ thead td, thead th {
             <td>openldap</td>
             
             
+            
+            <td>openldap</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">openssl-libs</td>
             <td>openssl-libs</td>
-            <td>openssl-libs</td>
-            
-            
-            <td>openssl-libs</td>
-            
-            
-            
-            <td>openssl-libs</td>
-            
             
             
             <td>openssl-libs</td>
@@ -3158,23 +3159,19 @@ thead td, thead th {
             <td>openssl-libs</td>
             
             
+            
+            <td>openssl-libs</td>
+            
+            
+            
+            <td>openssl-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">p11-kit</td>
             <td>p11-kit</td>
-            <td>p11-kit</td>
-            
-            
-            <td>p11-kit</td>
-            
-            
-            
-            <td>p11-kit</td>
-            
-            
-            
-            <td>p11-kit</td>
-            
             
             
             <td>p11-kit</td>
@@ -3184,63 +3181,75 @@ thead td, thead th {
             <td>p11-kit</td>
             
             
+            
+            <td>p11-kit</td>
+            
+            
+            
+            <td>p11-kit</td>
+            
+            
+            
+            <td>p11-kit</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">p11-kit-trust</td>
             <td>p11-kit-trust</td>
-            <td>p11-kit-trust</td>
-            
-            
-            <td>p11-kit-trust</td>
-            
-            
-            
-            <td>p11-kit-trust</td>
-            
-            
-            
-            <td>p11-kit-trust</td>
-            
-            
-            
-            <td>p11-kit-trust</td>
-            
             
             
             <td>p11-kit-trust</td>
             
             
+            
+            <td>p11-kit-trust</td>
+            
+            
+            
+            <td>p11-kit-trust</td>
+            
+            
+            
+            <td>p11-kit-trust</td>
+            
+            
+            
+            <td>p11-kit-trust</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>pam</td>
-            <td>pam</td>
-            
-            
-            <td>pam</td>
-            
-            
-            
-            <td>pam</td>
-            
-            
-            
-            <td>pam</td>
-            
-            
-            
-            <td>pam</td>
-            
-            
-            
+            <td class="all-pkgs">pam</td>
             <td>pam</td>
             
             
+            <td>pam</td>
+            
+            
+            
+            <td>pam</td>
+            
+            
+            
+            <td>pam</td>
+            
+            
+            
+            <td>pam</td>
+            
+            
+            
+            <td>pam</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">pcre</td>
             <td>pcre</td>
-            <td>pcre</td>
             
             
             <td>pcre</td>
@@ -3265,12 +3274,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">pcre2</td>
             <td>pcre2</td>
-            <td>pcre2</td>
-            
-            
-            <td>pcre2</td>
-            
             
             
             <td>pcre2</td>
@@ -3288,19 +3293,15 @@ thead td, thead th {
             <td>pcre2</td>
             
             
+            
+            <td>pcre2</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">popt</td>
             <td>popt</td>
-            <td>popt</td>
-            
-            
-            <td>popt</td>
-            
-            
-            
-            <td>popt</td>
-            
             
             
             <td>popt</td>
@@ -3314,23 +3315,19 @@ thead td, thead th {
             <td>popt</td>
             
             
+            
+            <td>popt</td>
+            
+            
+            
+            <td>popt</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">publicsuffix-list-dafsa</td>
             <td>publicsuffix-list-dafsa</td>
-            <td>publicsuffix-list-dafsa</td>
-            
-            
-            <td>publicsuffix-list-dafsa</td>
-            
-            
-            
-            <td>publicsuffix-list-dafsa</td>
-            
-            
-            
-            <td>publicsuffix-list-dafsa</td>
-            
             
             
             <td>publicsuffix-list-dafsa</td>
@@ -3340,63 +3337,75 @@ thead td, thead th {
             <td>publicsuffix-list-dafsa</td>
             
             
+            
+            <td>publicsuffix-list-dafsa</td>
+            
+            
+            
+            <td>publicsuffix-list-dafsa</td>
+            
+            
+            
+            <td>publicsuffix-list-dafsa</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">python-pip-wheel</td>
             <td>python-pip-wheel</td>
-            <td>python-pip-wheel</td>
-            
-            
-            <td>python-pip-wheel</td>
-            
-            
-            
-            <td>python-pip-wheel</td>
-            
-            
-            
-            <td>python-pip-wheel</td>
-            
-            
-            
-            <td>python-pip-wheel</td>
-            
             
             
             <td>python-pip-wheel</td>
             
             
+            
+            <td>python-pip-wheel</td>
+            
+            
+            
+            <td>python-pip-wheel</td>
+            
+            
+            
+            <td>python-pip-wheel</td>
+            
+            
+            
+            <td>python-pip-wheel</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>python-setuptools-wheel</td>
-            <td>python-setuptools-wheel</td>
-            
-            
-            <td>python-setuptools-wheel</td>
-            
-            
-            
-            <td>python-setuptools-wheel</td>
-            
-            
-            
-            <td>python-setuptools-wheel</td>
-            
-            
-            
-            <td>python-setuptools-wheel</td>
-            
-            
-            
+            <td class="all-pkgs">python-setuptools-wheel</td>
             <td>python-setuptools-wheel</td>
             
             
+            <td>python-setuptools-wheel</td>
+            
+            
+            
+            <td>python-setuptools-wheel</td>
+            
+            
+            
+            <td>python-setuptools-wheel</td>
+            
+            
+            
+            <td>python-setuptools-wheel</td>
+            
+            
+            
+            <td>python-setuptools-wheel</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">python3</td>
             <td>python3</td>
-            <td>python3</td>
             
             
             <td>python3</td>
@@ -3421,12 +3430,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">python3-dnf</td>
             <td>python3-dnf</td>
-            <td>python3-dnf</td>
-            
-            
-            <td>python3-dnf</td>
-            
             
             
             <td>python3-dnf</td>
@@ -3444,19 +3449,15 @@ thead td, thead th {
             <td>python3-dnf</td>
             
             
+            
+            <td>python3-dnf</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">python3-gpg</td>
             <td>python3-gpg</td>
-            <td>python3-gpg</td>
-            
-            
-            <td>python3-gpg</td>
-            
-            
-            
-            <td>python3-gpg</td>
-            
             
             
             <td>python3-gpg</td>
@@ -3470,23 +3471,19 @@ thead td, thead th {
             <td>python3-gpg</td>
             
             
+            
+            <td>python3-gpg</td>
+            
+            
+            
+            <td>python3-gpg</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">python3-hawkey</td>
             <td>python3-hawkey</td>
-            <td>python3-hawkey</td>
-            
-            
-            <td>python3-hawkey</td>
-            
-            
-            
-            <td>python3-hawkey</td>
-            
-            
-            
-            <td>python3-hawkey</td>
-            
             
             
             <td>python3-hawkey</td>
@@ -3496,63 +3493,75 @@ thead td, thead th {
             <td>python3-hawkey</td>
             
             
+            
+            <td>python3-hawkey</td>
+            
+            
+            
+            <td>python3-hawkey</td>
+            
+            
+            
+            <td>python3-hawkey</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">python3-libcomps</td>
             <td>python3-libcomps</td>
-            <td>python3-libcomps</td>
-            
-            
-            <td>python3-libcomps</td>
-            
-            
-            
-            <td>python3-libcomps</td>
-            
-            
-            
-            <td>python3-libcomps</td>
-            
-            
-            
-            <td>python3-libcomps</td>
-            
             
             
             <td>python3-libcomps</td>
             
             
+            
+            <td>python3-libcomps</td>
+            
+            
+            
+            <td>python3-libcomps</td>
+            
+            
+            
+            <td>python3-libcomps</td>
+            
+            
+            
+            <td>python3-libcomps</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>python3-libdnf</td>
-            <td>python3-libdnf</td>
-            
-            
-            <td>python3-libdnf</td>
-            
-            
-            
-            <td>python3-libdnf</td>
-            
-            
-            
-            <td>python3-libdnf</td>
-            
-            
-            
-            <td>python3-libdnf</td>
-            
-            
-            
+            <td class="all-pkgs">python3-libdnf</td>
             <td>python3-libdnf</td>
             
             
+            <td>python3-libdnf</td>
+            
+            
+            
+            <td>python3-libdnf</td>
+            
+            
+            
+            <td>python3-libdnf</td>
+            
+            
+            
+            <td>python3-libdnf</td>
+            
+            
+            
+            <td>python3-libdnf</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">python3-libs</td>
             <td>python3-libs</td>
-            <td>python3-libs</td>
             
             
             <td>python3-libs</td>
@@ -3577,12 +3586,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">python3-rpm</td>
             <td>python3-rpm</td>
-            <td>python3-rpm</td>
-            
-            
-            <td>python3-rpm</td>
-            
             
             
             <td>python3-rpm</td>
@@ -3600,19 +3605,15 @@ thead td, thead th {
             <td>python3-rpm</td>
             
             
+            
+            <td>python3-rpm</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">qrencode-libs</td>
             <td>qrencode-libs</td>
-            <td>qrencode-libs</td>
-            
-            
-            <td>qrencode-libs</td>
-            
-            
-            
-            <td>qrencode-libs</td>
-            
             
             
             <td>qrencode-libs</td>
@@ -3626,23 +3627,19 @@ thead td, thead th {
             <td>qrencode-libs</td>
             
             
+            
+            <td>qrencode-libs</td>
+            
+            
+            
+            <td>qrencode-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">readline</td>
             <td>readline</td>
-            <td>readline</td>
-            
-            
-            <td>readline</td>
-            
-            
-            
-            <td>readline</td>
-            
-            
-            
-            <td>readline</td>
-            
             
             
             <td>readline</td>
@@ -3652,63 +3649,75 @@ thead td, thead th {
             <td>readline</td>
             
             
+            
+            <td>readline</td>
+            
+            
+            
+            <td>readline</td>
+            
+            
+            
+            <td>readline</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">rootfiles</td>
             <td>rootfiles</td>
-            <td>rootfiles</td>
-            
-            
-            <td>rootfiles</td>
-            
-            
-            
-            <td>rootfiles</td>
-            
-            
-            
-            <td>rootfiles</td>
-            
-            
-            
-            <td>rootfiles</td>
-            
             
             
             <td>rootfiles</td>
             
             
+            
+            <td>rootfiles</td>
+            
+            
+            
+            <td>rootfiles</td>
+            
+            
+            
+            <td>rootfiles</td>
+            
+            
+            
+            <td>rootfiles</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>rpm</td>
-            <td>rpm</td>
-            
-            
-            <td>rpm</td>
-            
-            
-            
-            <td>rpm</td>
-            
-            
-            
-            <td>rpm</td>
-            
-            
-            
-            <td>rpm</td>
-            
-            
-            
+            <td class="all-pkgs">rpm</td>
             <td>rpm</td>
             
             
+            <td>rpm</td>
+            
+            
+            
+            <td>rpm</td>
+            
+            
+            
+            <td>rpm</td>
+            
+            
+            
+            <td>rpm</td>
+            
+            
+            
+            <td>rpm</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">rpm-build-libs</td>
             <td>rpm-build-libs</td>
-            <td>rpm-build-libs</td>
             
             
             <td>rpm-build-libs</td>
@@ -3733,12 +3742,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">rpm-libs</td>
             <td>rpm-libs</td>
-            <td>rpm-libs</td>
-            
-            
-            <td>rpm-libs</td>
-            
             
             
             <td>rpm-libs</td>
@@ -3756,19 +3761,15 @@ thead td, thead th {
             <td>rpm-libs</td>
             
             
+            
+            <td>rpm-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">rpm-sign-libs</td>
             <td>rpm-sign-libs</td>
-            <td>rpm-sign-libs</td>
-            
-            
-            <td>rpm-sign-libs</td>
-            
-            
-            
-            <td>rpm-sign-libs</td>
-            
             
             
             <td>rpm-sign-libs</td>
@@ -3782,23 +3783,19 @@ thead td, thead th {
             <td>rpm-sign-libs</td>
             
             
+            
+            <td>rpm-sign-libs</td>
+            
+            
+            
+            <td>rpm-sign-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">sed</td>
             <td>sed</td>
-            <td>sed</td>
-            
-            
-            <td>sed</td>
-            
-            
-            
-            <td>sed</td>
-            
-            
-            
-            <td>sed</td>
-            
             
             
             <td>sed</td>
@@ -3808,63 +3805,75 @@ thead td, thead th {
             <td>sed</td>
             
             
+            
+            <td>sed</td>
+            
+            
+            
+            <td>sed</td>
+            
+            
+            
+            <td>sed</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">setup</td>
             <td>setup</td>
-            <td>setup</td>
-            
-            
-            <td>setup</td>
-            
-            
-            
-            <td>setup</td>
-            
-            
-            
-            <td>setup</td>
-            
-            
-            
-            <td>setup</td>
-            
             
             
             <td>setup</td>
             
             
+            
+            <td>setup</td>
+            
+            
+            
+            <td>setup</td>
+            
+            
+            
+            <td>setup</td>
+            
+            
+            
+            <td>setup</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>shadow-utils</td>
-            <td>shadow-utils</td>
-            
-            
-            <td>shadow-utils</td>
-            
-            
-            
-            <td>shadow-utils</td>
-            
-            
-            
-            <td>shadow-utils</td>
-            
-            
-            
-            <td>shadow-utils</td>
-            
-            
-            
+            <td class="all-pkgs">shadow-utils</td>
             <td>shadow-utils</td>
             
             
+            <td>shadow-utils</td>
+            
+            
+            
+            <td>shadow-utils</td>
+            
+            
+            
+            <td>shadow-utils</td>
+            
+            
+            
+            <td>shadow-utils</td>
+            
+            
+            
+            <td>shadow-utils</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">sqlite-libs</td>
             <td>sqlite-libs</td>
-            <td>sqlite-libs</td>
             
             
             <td>sqlite-libs</td>
@@ -3889,12 +3898,8 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">sssd-client</td>
             <td>sssd-client</td>
-            <td>sssd-client</td>
-            
-            
-            <td>sssd-client</td>
-            
             
             
             <td>sssd-client</td>
@@ -3912,19 +3917,15 @@ thead td, thead th {
             <td>sssd-client</td>
             
             
+            
+            <td>sssd-client</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">sudo</td>
             <td>sudo</td>
-            <td>sudo</td>
-            
-            
-            <td>sudo</td>
-            
-            
-            
-            <td>sudo</td>
-            
             
             
             <td>sudo</td>
@@ -3938,23 +3939,19 @@ thead td, thead th {
             <td>sudo</td>
             
             
+            
+            <td>sudo</td>
+            
+            
+            
+            <td>sudo</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">systemd</td>
             <td>systemd</td>
-            <td>systemd</td>
-            
-            
-            <td>systemd</td>
-            
-            
-            
-            <td>systemd</td>
-            
-            
-            
-            <td>systemd</td>
-            
             
             
             <td>systemd</td>
@@ -3964,63 +3961,75 @@ thead td, thead th {
             <td>systemd</td>
             
             
+            
+            <td>systemd</td>
+            
+            
+            
+            <td>systemd</td>
+            
+            
+            
+            <td>systemd</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">systemd-libs</td>
             <td>systemd-libs</td>
-            <td>systemd-libs</td>
-            
-            
-            <td>systemd-libs</td>
-            
-            
-            
-            <td>systemd-libs</td>
-            
-            
-            
-            <td>systemd-libs</td>
-            
-            
-            
-            <td>systemd-libs</td>
-            
             
             
             <td>systemd-libs</td>
             
             
+            
+            <td>systemd-libs</td>
+            
+            
+            
+            <td>systemd-libs</td>
+            
+            
+            
+            <td>systemd-libs</td>
+            
+            
+            
+            <td>systemd-libs</td>
+            
+            
         </tr>
         
         <tr class="in-base">
-            <td>systemd-pam</td>
-            <td>systemd-pam</td>
-            
-            
-            <td>systemd-pam</td>
-            
-            
-            
-            <td>systemd-pam</td>
-            
-            
-            
-            <td>systemd-pam</td>
-            
-            
-            
-            <td>systemd-pam</td>
-            
-            
-            
+            <td class="all-pkgs">systemd-pam</td>
             <td>systemd-pam</td>
             
             
+            <td>systemd-pam</td>
+            
+            
+            
+            <td>systemd-pam</td>
+            
+            
+            
+            <td>systemd-pam</td>
+            
+            
+            
+            <td>systemd-pam</td>
+            
+            
+            
+            <td>systemd-pam</td>
+            
+            
         </tr>
         
         <tr class="in-base">
+            <td class="all-pkgs">systemd-rpm-macros</td>
             <td>systemd-rpm-macros</td>
-            <td>systemd-rpm-macros</td>
             
             
             <td>systemd-rpm-macros</td>
@@ -4045,7 +4054,7 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
-            <td>tar</td>
+            <td class="all-pkgs">tar</td>
             <td>tar</td>
             
             
@@ -4071,7 +4080,7 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
-            <td>tzdata</td>
+            <td class="all-pkgs">tzdata</td>
             <td>tzdata</td>
             
             
@@ -4097,7 +4106,7 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
-            <td>util-linux</td>
+            <td class="all-pkgs">util-linux</td>
             <td>util-linux</td>
             
             
@@ -4123,7 +4132,7 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
-            <td>vim-minimal</td>
+            <td class="all-pkgs">vim-minimal</td>
             <td>vim-minimal</td>
             
             
@@ -4149,7 +4158,7 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
-            <td>xz-libs</td>
+            <td class="all-pkgs">xz-libs</td>
             <td>xz-libs</td>
             
             
@@ -4175,7 +4184,7 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
-            <td>zchunk-libs</td>
+            <td class="all-pkgs">zchunk-libs</td>
             <td>zchunk-libs</td>
             
             
@@ -4201,7 +4210,7 @@ thead td, thead th {
         </tr>
         
         <tr class="in-base">
-            <td>zlib</td>
+            <td class="all-pkgs">zlib</td>
             <td>zlib</td>
             
             
@@ -4231,7 +4240,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>apr</td>
+            <td class="all-pkgs">apr</td>
             <td> - </td>
             
             
@@ -4261,7 +4270,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>apr-util</td>
+            <td class="all-pkgs">apr-util</td>
             <td> - </td>
             
             
@@ -4291,7 +4300,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>apr-util-bdb</td>
+            <td class="all-pkgs">apr-util-bdb</td>
             <td> - </td>
             
             
@@ -4319,7 +4328,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>apr-util-openssl</td>
+            <td class="all-pkgs">apr-util-openssl</td>
             <td> - </td>
             
             
@@ -4347,7 +4356,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>cracklib-dicts</td>
+            <td class="all-pkgs">cracklib-dicts</td>
             <td> - </td>
             
             
@@ -4375,7 +4384,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>fedora-logos-httpd</td>
+            <td class="all-pkgs">fedora-logos-httpd</td>
             <td> - </td>
             
             
@@ -4407,7 +4416,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>gperftools-libs</td>
+            <td class="all-pkgs">gperftools-libs</td>
             <td> - </td>
             
             
@@ -4435,7 +4444,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>groff-base</td>
+            <td class="all-pkgs">groff-base</td>
             <td> - </td>
             
             
@@ -4463,7 +4472,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>httpd</td>
+            <td class="all-pkgs">httpd</td>
             <td> - </td>
             
             
@@ -4493,7 +4502,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>httpd-filesystem</td>
+            <td class="all-pkgs">httpd-filesystem</td>
             <td> - </td>
             
             
@@ -4523,7 +4532,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>httpd-tools</td>
+            <td class="all-pkgs">httpd-tools</td>
             <td> - </td>
             
             
@@ -4553,7 +4562,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>iproute</td>
+            <td class="all-pkgs">iproute</td>
             <td> - </td>
             
             
@@ -4581,7 +4590,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>iproute-tc</td>
+            <td class="all-pkgs">iproute-tc</td>
             <td> - </td>
             
             
@@ -4609,7 +4618,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>libaio</td>
+            <td class="all-pkgs">libaio</td>
             <td> - </td>
             
             
@@ -4637,7 +4646,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>libicu</td>
+            <td class="all-pkgs">libicu</td>
             <td> - </td>
             
             
@@ -4665,7 +4674,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>libmnl</td>
+            <td class="all-pkgs">libmnl</td>
             <td> - </td>
             
             
@@ -4693,7 +4702,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>libpq</td>
+            <td class="all-pkgs">libpq</td>
             <td> - </td>
             
             
@@ -4721,7 +4730,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>libunwind</td>
+            <td class="all-pkgs">libunwind</td>
             <td> - </td>
             
             
@@ -4749,7 +4758,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>linux-atm-libs</td>
+            <td class="all-pkgs">linux-atm-libs</td>
             <td> - </td>
             
             
@@ -4777,7 +4786,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mailcap</td>
+            <td class="all-pkgs">mailcap</td>
             <td> - </td>
             
             
@@ -4807,7 +4816,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mariadb</td>
+            <td class="all-pkgs">mariadb</td>
             <td> - </td>
             
             
@@ -4835,7 +4844,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mariadb-backup</td>
+            <td class="all-pkgs">mariadb-backup</td>
             <td> - </td>
             
             
@@ -4863,7 +4872,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mariadb-common</td>
+            <td class="all-pkgs">mariadb-common</td>
             <td> - </td>
             
             
@@ -4891,7 +4900,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mariadb-connector-c</td>
+            <td class="all-pkgs">mariadb-connector-c</td>
             <td> - </td>
             
             
@@ -4919,7 +4928,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mariadb-connector-c-config</td>
+            <td class="all-pkgs">mariadb-connector-c-config</td>
             <td> - </td>
             
             
@@ -4947,7 +4956,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mariadb-cracklib-password-check</td>
+            <td class="all-pkgs">mariadb-cracklib-password-check</td>
             <td> - </td>
             
             
@@ -4975,7 +4984,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mariadb-errmsg</td>
+            <td class="all-pkgs">mariadb-errmsg</td>
             <td> - </td>
             
             
@@ -5003,7 +5012,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mariadb-gssapi-server</td>
+            <td class="all-pkgs">mariadb-gssapi-server</td>
             <td> - </td>
             
             
@@ -5031,7 +5040,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mariadb-server</td>
+            <td class="all-pkgs">mariadb-server</td>
             <td> - </td>
             
             
@@ -5059,7 +5068,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mariadb-server-utils</td>
+            <td class="all-pkgs">mariadb-server-utils</td>
             <td> - </td>
             
             
@@ -5087,7 +5096,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>mod_http2</td>
+            <td class="all-pkgs">mod_http2</td>
             <td> - </td>
             
             
@@ -5117,7 +5126,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>nginx</td>
+            <td class="all-pkgs">nginx</td>
             <td> - </td>
             
             
@@ -5145,7 +5154,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>nginx-filesystem</td>
+            <td class="all-pkgs">nginx-filesystem</td>
             <td> - </td>
             
             
@@ -5173,7 +5182,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>nginx-mimetypes</td>
+            <td class="all-pkgs">nginx-mimetypes</td>
             <td> - </td>
             
             
@@ -5201,7 +5210,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>openssl</td>
+            <td class="all-pkgs">openssl</td>
             <td> - </td>
             
             
@@ -5231,7 +5240,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Carp</td>
+            <td class="all-pkgs">perl-Carp</td>
             <td> - </td>
             
             
@@ -5259,7 +5268,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-DBD-MySQL</td>
+            <td class="all-pkgs">perl-DBD-MySQL</td>
             <td> - </td>
             
             
@@ -5287,7 +5296,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-DBI</td>
+            <td class="all-pkgs">perl-DBI</td>
             <td> - </td>
             
             
@@ -5315,7 +5324,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Data-Dumper</td>
+            <td class="all-pkgs">perl-Data-Dumper</td>
             <td> - </td>
             
             
@@ -5343,7 +5352,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Digest</td>
+            <td class="all-pkgs">perl-Digest</td>
             <td> - </td>
             
             
@@ -5371,7 +5380,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Digest-MD5</td>
+            <td class="all-pkgs">perl-Digest-MD5</td>
             <td> - </td>
             
             
@@ -5399,7 +5408,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Encode</td>
+            <td class="all-pkgs">perl-Encode</td>
             <td> - </td>
             
             
@@ -5427,7 +5436,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Errno</td>
+            <td class="all-pkgs">perl-Errno</td>
             <td> - </td>
             
             
@@ -5455,7 +5464,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Exporter</td>
+            <td class="all-pkgs">perl-Exporter</td>
             <td> - </td>
             
             
@@ -5483,7 +5492,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-File-Path</td>
+            <td class="all-pkgs">perl-File-Path</td>
             <td> - </td>
             
             
@@ -5511,7 +5520,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-File-Temp</td>
+            <td class="all-pkgs">perl-File-Temp</td>
             <td> - </td>
             
             
@@ -5539,7 +5548,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Getopt-Long</td>
+            <td class="all-pkgs">perl-Getopt-Long</td>
             <td> - </td>
             
             
@@ -5567,7 +5576,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-HTTP-Tiny</td>
+            <td class="all-pkgs">perl-HTTP-Tiny</td>
             <td> - </td>
             
             
@@ -5595,7 +5604,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-IO</td>
+            <td class="all-pkgs">perl-IO</td>
             <td> - </td>
             
             
@@ -5623,7 +5632,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-IO-Socket-IP</td>
+            <td class="all-pkgs">perl-IO-Socket-IP</td>
             <td> - </td>
             
             
@@ -5651,7 +5660,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-IO-Socket-SSL</td>
+            <td class="all-pkgs">perl-IO-Socket-SSL</td>
             <td> - </td>
             
             
@@ -5679,7 +5688,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-MIME-Base64</td>
+            <td class="all-pkgs">perl-MIME-Base64</td>
             <td> - </td>
             
             
@@ -5707,7 +5716,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Math-BigInt</td>
+            <td class="all-pkgs">perl-Math-BigInt</td>
             <td> - </td>
             
             
@@ -5735,7 +5744,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Math-Complex</td>
+            <td class="all-pkgs">perl-Math-Complex</td>
             <td> - </td>
             
             
@@ -5763,7 +5772,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Mozilla-CA</td>
+            <td class="all-pkgs">perl-Mozilla-CA</td>
             <td> - </td>
             
             
@@ -5791,7 +5800,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Net-SSLeay</td>
+            <td class="all-pkgs">perl-Net-SSLeay</td>
             <td> - </td>
             
             
@@ -5819,7 +5828,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-PathTools</td>
+            <td class="all-pkgs">perl-PathTools</td>
             <td> - </td>
             
             
@@ -5847,7 +5856,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Pod-Escapes</td>
+            <td class="all-pkgs">perl-Pod-Escapes</td>
             <td> - </td>
             
             
@@ -5875,7 +5884,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Pod-Perldoc</td>
+            <td class="all-pkgs">perl-Pod-Perldoc</td>
             <td> - </td>
             
             
@@ -5903,7 +5912,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Pod-Simple</td>
+            <td class="all-pkgs">perl-Pod-Simple</td>
             <td> - </td>
             
             
@@ -5931,7 +5940,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Pod-Usage</td>
+            <td class="all-pkgs">perl-Pod-Usage</td>
             <td> - </td>
             
             
@@ -5959,7 +5968,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Scalar-List-Utils</td>
+            <td class="all-pkgs">perl-Scalar-List-Utils</td>
             <td> - </td>
             
             
@@ -5987,7 +5996,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Socket</td>
+            <td class="all-pkgs">perl-Socket</td>
             <td> - </td>
             
             
@@ -6015,7 +6024,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Storable</td>
+            <td class="all-pkgs">perl-Storable</td>
             <td> - </td>
             
             
@@ -6043,7 +6052,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Term-ANSIColor</td>
+            <td class="all-pkgs">perl-Term-ANSIColor</td>
             <td> - </td>
             
             
@@ -6071,7 +6080,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Term-Cap</td>
+            <td class="all-pkgs">perl-Term-Cap</td>
             <td> - </td>
             
             
@@ -6099,7 +6108,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Text-ParseWords</td>
+            <td class="all-pkgs">perl-Text-ParseWords</td>
             <td> - </td>
             
             
@@ -6127,7 +6136,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Text-Tabs+Wrap</td>
+            <td class="all-pkgs">perl-Text-Tabs+Wrap</td>
             <td> - </td>
             
             
@@ -6155,7 +6164,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Time-Local</td>
+            <td class="all-pkgs">perl-Time-Local</td>
             <td> - </td>
             
             
@@ -6183,7 +6192,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-URI</td>
+            <td class="all-pkgs">perl-URI</td>
             <td> - </td>
             
             
@@ -6211,7 +6220,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-Unicode-Normalize</td>
+            <td class="all-pkgs">perl-Unicode-Normalize</td>
             <td> - </td>
             
             
@@ -6239,7 +6248,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-constant</td>
+            <td class="all-pkgs">perl-constant</td>
             <td> - </td>
             
             
@@ -6267,7 +6276,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-interpreter</td>
+            <td class="all-pkgs">perl-interpreter</td>
             <td> - </td>
             
             
@@ -6295,7 +6304,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-libnet</td>
+            <td class="all-pkgs">perl-libnet</td>
             <td> - </td>
             
             
@@ -6323,7 +6332,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-libs</td>
+            <td class="all-pkgs">perl-libs</td>
             <td> - </td>
             
             
@@ -6351,7 +6360,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-macros</td>
+            <td class="all-pkgs">perl-macros</td>
             <td> - </td>
             
             
@@ -6379,7 +6388,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-parent</td>
+            <td class="all-pkgs">perl-parent</td>
             <td> - </td>
             
             
@@ -6407,7 +6416,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-podlators</td>
+            <td class="all-pkgs">perl-podlators</td>
             <td> - </td>
             
             
@@ -6435,7 +6444,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-threads</td>
+            <td class="all-pkgs">perl-threads</td>
             <td> - </td>
             
             
@@ -6463,7 +6472,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>perl-threads-shared</td>
+            <td class="all-pkgs">perl-threads-shared</td>
             <td> - </td>
             
             
@@ -6491,7 +6500,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>postgresql</td>
+            <td class="all-pkgs">postgresql</td>
             <td> - </td>
             
             
@@ -6519,7 +6528,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>postgresql-server</td>
+            <td class="all-pkgs">postgresql-server</td>
             <td> - </td>
             
             
@@ -6547,7 +6556,7 @@ thead td, thead th {
         </tr>
         
         <tr class="not-in-base">
-            <td>psmisc</td>
+            <td class="all-pkgs">psmisc</td>
             <td> - </td>
             
             
