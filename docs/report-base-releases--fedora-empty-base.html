@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Feedback Pipeline <span class="text-muted">prototype</span></span>
+  </nav>
+  
+
+<style>
+td, th {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.in-base th {
+    background-color: #accad6;
+    text-align: center;
+}
+.in-base td {
+    background-color: #d4e3ea;
+    color: #CC0066;
+    font-family: monospace;
+}
+tr.in-base td.all-pkgs {
+    background-color: #accad6!important;
+}
+.not-in-base th {
+    background-color: #e9ecef;
+    text-align: center;
+}
+.not-in-base td {
+    background-color: #fff;
+    font-family: monospace;
+}
+tr.not-in-base td.all-pkgs {
+    background-color: #e9ecef!important;
+}
+thead td, thead th {
+    background-color: #e9ecef;
+    text-align: center;
+}
+tbody tr, tbody th {
+    border-bottom: #6c757d 1px solid;
+    border-top: #6c757d 1px solid;
+}
+</style>
+
+<br>
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="./">Home</a></li>
+        <li class="breadcrumb-item"><a href="./views.html">Views</a></li>
+        <li class="breadcrumb-item"><a href="./view--bases-by-releases.html">Bases by releases</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Empty base</li>
+      </ol>
+    </nav>
+
+
+<h1> Empty base <small class="text-muted">by releases</small> </h1>
+
+<hr>
+
+<table>
+    <thead>
+        <tr>
+            <td rowspan="3" style="background-color:#cad1d8">All packages in this report</td>
+            
+            <th>Fedora rawhide</th>
+            
+            <th>Fedora 31</th>
+            
+            <th>Fedora 30</th>
+            
+        </tr>
+        <tr>
+            
+            <td>0.0 B</td>
+            
+            <td>0.0 B</td>
+            
+            <td>0.0 B</td>
+            
+        </tr>
+        <tr>
+            
+            <td>
+              <a href="./graph--fedora-empty-base--rawhide.svg">graph</a> 
+            </td>
+            
+            <td>
+              <a href="./graph--fedora-empty-base--31.svg">graph</a> 
+            </td>
+            
+            <td>
+              <a href="./graph--fedora-empty-base--30.svg">graph</a> 
+            </td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+
+</div>
+
+
+<br><br>
+</body>
+
+</html>
