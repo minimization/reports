@@ -1,0 +1,4761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Feedback Pipeline <span class="text-muted">prototype</span></span>
+  </nav>
+  
+
+<style>
+td, th {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.in-base th {
+    background-color: #accad6;
+    text-align: center;
+}
+.in-base td {
+    background-color: #d4e3ea;
+    color: #CC0066;
+    font-family: monospace;
+}
+tr.in-base td.all-pkgs {
+    background-color: #accad6!important;
+}
+.not-in-base th {
+    background-color: #e9ecef;
+    text-align: center;
+}
+.not-in-base td {
+    background-color: #fff;
+    font-family: monospace;
+}
+tr.not-in-base td.all-pkgs {
+    background-color: #e9ecef!important;
+}
+thead td, thead th {
+    background-color: #e9ecef;
+    text-align: center;
+}
+tbody tr, tbody th {
+    border-bottom: #6c757d 1px solid;
+    border-top: #6c757d 1px solid;
+}
+</style>
+
+<br>
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="./">Home</a></li>
+        <li class="breadcrumb-item"><a href="./views.html">Views</a></li>
+        <li class="breadcrumb-item"><a href="./view--use-cases-on-bases.html">Use cases on bases</a></li>
+        <li class="breadcrumb-item active" aria-current="page">IoT x86_64 server</li>
+        <li class="breadcrumb-item active" aria-current="page">Fedora rawhide</li>
+      </ol>
+    </nav>
+
+
+<h1> IoT x86_64 server (Fedora rawhide)
+
+    <small class="text-muted">
+    
+        on 1 base </h1>
+    
+    </small>
+
+
+<hr>
+
+<table>
+    <thead>
+        <tr>
+            <td rowspan="4" style="background-color:#cad1d8">All packages in this report</td>
+            
+            <th>IoT x86_64 server</th>
+            
+        </tr>
+        <tr>
+            
+            <th>on Empty base</th>
+            
+        </tr>
+        <tr>
+            
+            <td>1.2 GB</td>
+            
+        </tr>
+        <tr>
+            
+            <td>
+              <a href="./graph--iot--fedora-empty-base--rawhide.svg">graph</a> |
+              <a href="./graph-simple--iot--fedora-empty-base--rawhide.svg">simple graph</a>
+            </td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="in-base">
+            <th colspan="3">--- Required packages ---</th>
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">attr</td>
+            
+            
+            <td>attr</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">audit</td>
+            
+            
+            <td>audit</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">authconfig</td>
+            
+            
+            <td>authconfig</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">basesystem</td>
+            
+            
+            <td>basesystem</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">bash</td>
+            
+            
+            <td>bash</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">bash-completion</td>
+            
+            
+            <td>bash-completion</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">bluez</td>
+            
+            
+            <td>bluez</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">bluez-libs</td>
+            
+            
+            <td>bluez-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">chrony</td>
+            
+            
+            <td>chrony</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">clevis</td>
+            
+            
+            <td>clevis</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">clevis-dracut</td>
+            
+            
+            <td>clevis-dracut</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">clevis-luks</td>
+            
+            
+            <td>clevis-luks</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">cloud-utils-growpart</td>
+            
+            
+            <td>cloud-utils-growpart</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">container-selinux</td>
+            
+            
+            <td>container-selinux</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">coreutils</td>
+            
+            
+            <td>coreutils</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">criu</td>
+            
+            
+            <td>criu</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">cryptsetup</td>
+            
+            
+            <td>cryptsetup</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">curl</td>
+            
+            
+            <td>curl</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">dnsmasq</td>
+            
+            
+            <td>dnsmasq</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">dracut-config-generic</td>
+            
+            
+            <td>dracut-config-generic</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">dracut-network</td>
+            
+            
+            <td>dracut-network</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">e2fsprogs</td>
+            
+            
+            <td>e2fsprogs</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">efibootmgr</td>
+            
+            
+            <td>efibootmgr</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">fedora-release-iot</td>
+            
+            
+            <td>fedora-release-iot</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">firewalld</td>
+            
+            
+            <td>firewalld</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">fwupd</td>
+            
+            
+            <td>fwupd</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">glibc</td>
+            
+            
+            <td>glibc</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">gnupg2</td>
+            
+            
+            <td>gnupg2</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">greenboot</td>
+            
+            
+            <td>greenboot</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">greenboot-grub2</td>
+            
+            
+            <td>greenboot-grub2</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">greenboot-reboot</td>
+            
+            
+            <td>greenboot-reboot</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">greenboot-rpm-ostree-grub2</td>
+            
+            
+            <td>greenboot-rpm-ostree-grub2</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">greenboot-status</td>
+            
+            
+            <td>greenboot-status</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">grub2</td>
+            
+            
+            <td>grub2</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">grub2-efi-x64</td>
+            
+            
+            <td>grub2-efi-x64</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">gzip</td>
+            
+            
+            <td>gzip</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">hostname</td>
+            
+            
+            <td>hostname</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">initial-setup</td>
+            
+            
+            <td>initial-setup</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iproute</td>
+            
+            
+            <td>iproute</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iptables</td>
+            
+            
+            <td>iptables</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iputils</td>
+            
+            
+            <td>iputils</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwd</td>
+            
+            
+            <td>iwd</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl1000-firmware</td>
+            
+            
+            <td>iwl1000-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl100-firmware</td>
+            
+            
+            <td>iwl100-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl105-firmware</td>
+            
+            
+            <td>iwl105-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl135-firmware</td>
+            
+            
+            <td>iwl135-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl2000-firmware</td>
+            
+            
+            <td>iwl2000-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl2030-firmware</td>
+            
+            
+            <td>iwl2030-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl3160-firmware</td>
+            
+            
+            <td>iwl3160-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl5000-firmware</td>
+            
+            
+            <td>iwl5000-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl5150-firmware</td>
+            
+            
+            <td>iwl5150-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl6000-firmware</td>
+            
+            
+            <td>iwl6000-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl6050-firmware</td>
+            
+            
+            <td>iwl6050-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">iwl7260-firmware</td>
+            
+            
+            <td>iwl7260-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">kernel</td>
+            
+            
+            <td>kernel</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">kernel-tools</td>
+            
+            
+            <td>kernel-tools</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">keyutils</td>
+            
+            
+            <td>keyutils</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">less</td>
+            
+            
+            <td>less</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">libgpiod-utils</td>
+            
+            
+            <td>libgpiod-utils</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">libsss_sudo</td>
+            
+            
+            <td>libsss_sudo</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">lvm2</td>
+            
+            
+            <td>lvm2</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">microcode_ctl</td>
+            
+            
+            <td>microcode_ctl</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">NetworkManager</td>
+            
+            
+            <td>NetworkManager</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">NetworkManager-wifi</td>
+            
+            
+            <td>NetworkManager-wifi</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">NetworkManager-wwan</td>
+            
+            
+            <td>NetworkManager-wwan</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">nss-altfiles</td>
+            
+            
+            <td>nss-altfiles</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">openssh-clients</td>
+            
+            
+            <td>openssh-clients</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">openssh-server</td>
+            
+            
+            <td>openssh-server</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">passwd</td>
+            
+            
+            <td>passwd</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">pinentry</td>
+            
+            
+            <td>pinentry</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">podman</td>
+            
+            
+            <td>podman</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">policycoreutils</td>
+            
+            
+            <td>policycoreutils</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">policycoreutils-python-utils</td>
+            
+            
+            <td>policycoreutils-python-utils</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">polkit</td>
+            
+            
+            <td>polkit</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">procps-ng</td>
+            
+            
+            <td>procps-ng</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">python3</td>
+            
+            
+            <td>python3</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">rng-tools</td>
+            
+            
+            <td>rng-tools</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">rootfiles</td>
+            
+            
+            <td>rootfiles</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">rpm</td>
+            
+            
+            <td>rpm</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">rpm-ostree</td>
+            
+            
+            <td>rpm-ostree</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">rsync</td>
+            
+            
+            <td>rsync</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">screen</td>
+            
+            
+            <td>screen</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">selinux-policy-targeted</td>
+            
+            
+            <td>selinux-policy-targeted</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">setools-console</td>
+            
+            
+            <td>setools-console</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">setup</td>
+            
+            
+            <td>setup</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">shadow-utils</td>
+            
+            
+            <td>shadow-utils</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">shim-x64</td>
+            
+            
+            <td>shim-x64</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">skopeo</td>
+            
+            
+            <td>skopeo</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">slirp4netns</td>
+            
+            
+            <td>slirp4netns</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">sssd-client</td>
+            
+            
+            <td>sssd-client</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">sudo</td>
+            
+            
+            <td>sudo</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">systemd</td>
+            
+            
+            <td>systemd</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">tar</td>
+            
+            
+            <td>tar</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">tmux</td>
+            
+            
+            <td>tmux</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">traceroute</td>
+            
+            
+            <td>traceroute</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">usbguard</td>
+            
+            
+            <td>usbguard</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">util-linux</td>
+            
+            
+            <td>util-linux</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">vim-minimal</td>
+            
+            
+            <td>vim-minimal</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">which</td>
+            
+            
+            <td>which</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">wpan-tools</td>
+            
+            
+            <td>wpan-tools</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">wpa_supplicant</td>
+            
+            
+            <td>wpa_supplicant</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">xz</td>
+            
+            
+            <td>xz</td>
+            
+            
+        </tr>
+        
+        <tr class="in-base">
+            <td class="all-pkgs">zram</td>
+            
+            
+            <td>zram</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <th colspan="3">--- All other packages (dependencies) ---</th>
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ModemManager</td>
+            
+            
+            <td>ModemManager</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ModemManager-glib</td>
+            
+            
+            <td>ModemManager-glib</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">NetworkManager-libnm</td>
+            
+            
+            <td>NetworkManager-libnm</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">NetworkManager-team</td>
+            
+            
+            <td>NetworkManager-team</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">abattis-cantarell-fonts</td>
+            
+            
+            <td>abattis-cantarell-fonts</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">acl</td>
+            
+            
+            <td>acl</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">adobe-source-code-pro-fonts</td>
+            
+            
+            <td>adobe-source-code-pro-fonts</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">alternatives</td>
+            
+            
+            <td>alternatives</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">anaconda-core</td>
+            
+            
+            <td>anaconda-core</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">anaconda-tui</td>
+            
+            
+            <td>anaconda-tui</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">audit-libs</td>
+            
+            
+            <td>audit-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">augeas-libs</td>
+            
+            
+            <td>augeas-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">authselect</td>
+            
+            
+            <td>authselect</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">authselect-compat</td>
+            
+            
+            <td>authselect-compat</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">authselect-libs</td>
+            
+            
+            <td>authselect-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">bcache-tools</td>
+            
+            
+            <td>bcache-tools</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">blivet-data</td>
+            
+            
+            <td>blivet-data</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">brotli</td>
+            
+            
+            <td>brotli</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">btrfs-progs</td>
+            
+            
+            <td>btrfs-progs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">bubblewrap</td>
+            
+            
+            <td>bubblewrap</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">bzip2-libs</td>
+            
+            
+            <td>bzip2-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ca-certificates</td>
+            
+            
+            <td>ca-certificates</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">checkpolicy</td>
+            
+            
+            <td>checkpolicy</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">clevis-systemd</td>
+            
+            
+            <td>clevis-systemd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">compat-readline5</td>
+            
+            
+            <td>compat-readline5</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">containernetworking-plugins</td>
+            
+            
+            <td>containernetworking-plugins</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">containers-common</td>
+            
+            
+            <td>containers-common</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">coreutils-common</td>
+            
+            
+            <td>coreutils-common</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">cpio</td>
+            
+            
+            <td>cpio</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">cracklib</td>
+            
+            
+            <td>cracklib</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">cracklib-dicts</td>
+            
+            
+            <td>cracklib-dicts</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">crun</td>
+            
+            
+            <td>crun</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">crypto-policies</td>
+            
+            
+            <td>crypto-policies</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">cryptsetup-libs</td>
+            
+            
+            <td>cryptsetup-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">cyrus-sasl-lib</td>
+            
+            
+            <td>cyrus-sasl-lib</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">daxctl-libs</td>
+            
+            
+            <td>daxctl-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dbus</td>
+            
+            
+            <td>dbus</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dbus-broker</td>
+            
+            
+            <td>dbus-broker</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dbus-common</td>
+            
+            
+            <td>dbus-common</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dbus-daemon</td>
+            
+            
+            <td>dbus-daemon</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dbus-libs</td>
+            
+            
+            <td>dbus-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dbus-tools</td>
+            
+            
+            <td>dbus-tools</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dbxtool</td>
+            
+            
+            <td>dbxtool</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dconf</td>
+            
+            
+            <td>dconf</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">deltarpm</td>
+            
+            
+            <td>deltarpm</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">device-mapper</td>
+            
+            
+            <td>device-mapper</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">device-mapper-event</td>
+            
+            
+            <td>device-mapper-event</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">device-mapper-event-libs</td>
+            
+            
+            <td>device-mapper-event-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">device-mapper-libs</td>
+            
+            
+            <td>device-mapper-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">device-mapper-multipath</td>
+            
+            
+            <td>device-mapper-multipath</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">device-mapper-multipath-libs</td>
+            
+            
+            <td>device-mapper-multipath-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">device-mapper-persistent-data</td>
+            
+            
+            <td>device-mapper-persistent-data</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dhcp-client</td>
+            
+            
+            <td>dhcp-client</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dhcp-common</td>
+            
+            
+            <td>dhcp-common</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">diffutils</td>
+            
+            
+            <td>diffutils</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dmraid</td>
+            
+            
+            <td>dmraid</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dmraid-events</td>
+            
+            
+            <td>dmraid-events</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dnf-data</td>
+            
+            
+            <td>dnf-data</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">dracut</td>
+            
+            
+            <td>dracut</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">e2fsprogs-libs</td>
+            
+            
+            <td>e2fsprogs-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ebtables-legacy</td>
+            
+            
+            <td>ebtables-legacy</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">efi-filesystem</td>
+            
+            
+            <td>efi-filesystem</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">efivar-libs</td>
+            
+            
+            <td>efivar-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">elfutils-default-yama-scope</td>
+            
+            
+            <td>elfutils-default-yama-scope</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">elfutils-libelf</td>
+            
+            
+            <td>elfutils-libelf</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">elfutils-libs</td>
+            
+            
+            <td>elfutils-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">emacs-filesystem</td>
+            
+            
+            <td>emacs-filesystem</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">expat</td>
+            
+            
+            <td>expat</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fedora-gpg-keys</td>
+            
+            
+            <td>fedora-gpg-keys</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fedora-release-common</td>
+            
+            
+            <td>fedora-release-common</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fedora-repos</td>
+            
+            
+            <td>fedora-repos</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fedora-repos-rawhide</td>
+            
+            
+            <td>fedora-repos-rawhide</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">file</td>
+            
+            
+            <td>file</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">file-libs</td>
+            
+            
+            <td>file-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">filesystem</td>
+            
+            
+            <td>filesystem</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">findutils</td>
+            
+            
+            <td>findutils</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fipscheck</td>
+            
+            
+            <td>fipscheck</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fipscheck-lib</td>
+            
+            
+            <td>fipscheck-lib</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">firewalld-filesystem</td>
+            
+            
+            <td>firewalld-filesystem</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">flatpak-libs</td>
+            
+            
+            <td>flatpak-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fontpackages-filesystem</td>
+            
+            
+            <td>fontpackages-filesystem</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">freetype</td>
+            
+            
+            <td>freetype</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fuse</td>
+            
+            
+            <td>fuse</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fuse-common</td>
+            
+            
+            <td>fuse-common</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fuse-libs</td>
+            
+            
+            <td>fuse-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fuse-overlayfs</td>
+            
+            
+            <td>fuse-overlayfs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">fuse3-libs</td>
+            
+            
+            <td>fuse3-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gawk</td>
+            
+            
+            <td>gawk</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gdbm-libs</td>
+            
+            
+            <td>gdbm-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gdisk</td>
+            
+            
+            <td>gdisk</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">geolite2-city</td>
+            
+            
+            <td>geolite2-city</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">geolite2-country</td>
+            
+            
+            <td>geolite2-country</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gettext</td>
+            
+            
+            <td>gettext</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gettext-libs</td>
+            
+            
+            <td>gettext-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">glib-networking</td>
+            
+            
+            <td>glib-networking</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">glib2</td>
+            
+            
+            <td>glib2</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">glibc-common</td>
+            
+            
+            <td>glibc-common</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">glibc-langpack-en</td>
+            
+            
+            <td>glibc-langpack-en</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gmp</td>
+            
+            
+            <td>gmp</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gnupg2-smime</td>
+            
+            
+            <td>gnupg2-smime</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gnutls</td>
+            
+            
+            <td>gnutls</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gobject-introspection</td>
+            
+            
+            <td>gobject-introspection</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gpgme</td>
+            
+            
+            <td>gpgme</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grep</td>
+            
+            
+            <td>grep</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grub2-common</td>
+            
+            
+            <td>grub2-common</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grub2-pc</td>
+            
+            
+            <td>grub2-pc</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grub2-pc-modules</td>
+            
+            
+            <td>grub2-pc-modules</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grub2-tools</td>
+            
+            
+            <td>grub2-tools</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grub2-tools-extra</td>
+            
+            
+            <td>grub2-tools-extra</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">grub2-tools-minimal</td>
+            
+            
+            <td>grub2-tools-minimal</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">gsettings-desktop-schemas</td>
+            
+            
+            <td>gsettings-desktop-schemas</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ima-evm-utils</td>
+            
+            
+            <td>ima-evm-utils</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">initscripts</td>
+            
+            
+            <td>initscripts</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ipcalc</td>
+            
+            
+            <td>ipcalc</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">iproute-tc</td>
+            
+            
+            <td>iproute-tc</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ipset</td>
+            
+            
+            <td>ipset</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ipset-libs</td>
+            
+            
+            <td>ipset-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">iptables-libs</td>
+            
+            
+            <td>iptables-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">jansson</td>
+            
+            
+            <td>jansson</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">jitterentropy</td>
+            
+            
+            <td>jitterentropy</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">jose</td>
+            
+            
+            <td>jose</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">js-jquery</td>
+            
+            
+            <td>js-jquery</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">json-c</td>
+            
+            
+            <td>json-c</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">json-glib</td>
+            
+            
+            <td>json-glib</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kbd</td>
+            
+            
+            <td>kbd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kbd-legacy</td>
+            
+            
+            <td>kbd-legacy</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kbd-misc</td>
+            
+            
+            <td>kbd-misc</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kernel-core</td>
+            
+            
+            <td>kernel-core</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kernel-modules</td>
+            
+            
+            <td>kernel-modules</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kernel-tools-libs</td>
+            
+            
+            <td>kernel-tools-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">keyutils-libs</td>
+            
+            
+            <td>keyutils-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kmod</td>
+            
+            
+            <td>kmod</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kmod-libs</td>
+            
+            
+            <td>kmod-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">kpartx</td>
+            
+            
+            <td>kpartx</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">krb5-libs</td>
+            
+            
+            <td>krb5-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">langtable</td>
+            
+            
+            <td>langtable</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libXau</td>
+            
+            
+            <td>libXau</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libacl</td>
+            
+            
+            <td>libacl</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libaio</td>
+            
+            
+            <td>libaio</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libarchive</td>
+            
+            
+            <td>libarchive</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libargon2</td>
+            
+            
+            <td>libargon2</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libassuan</td>
+            
+            
+            <td>libassuan</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libattr</td>
+            
+            
+            <td>libattr</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblkid</td>
+            
+            
+            <td>libblkid</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev</td>
+            
+            
+            <td>libblockdev</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-btrfs</td>
+            
+            
+            <td>libblockdev-btrfs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-crypto</td>
+            
+            
+            <td>libblockdev-crypto</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-dm</td>
+            
+            
+            <td>libblockdev-dm</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-fs</td>
+            
+            
+            <td>libblockdev-fs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-kbd</td>
+            
+            
+            <td>libblockdev-kbd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-loop</td>
+            
+            
+            <td>libblockdev-loop</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-lvm</td>
+            
+            
+            <td>libblockdev-lvm</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-mdraid</td>
+            
+            
+            <td>libblockdev-mdraid</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-mpath</td>
+            
+            
+            <td>libblockdev-mpath</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-nvdimm</td>
+            
+            
+            <td>libblockdev-nvdimm</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-part</td>
+            
+            
+            <td>libblockdev-part</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-swap</td>
+            
+            
+            <td>libblockdev-swap</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libblockdev-utils</td>
+            
+            
+            <td>libblockdev-utils</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libbsd</td>
+            
+            
+            <td>libbsd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libbytesize</td>
+            
+            
+            <td>libbytesize</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libcap</td>
+            
+            
+            <td>libcap</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libcap-ng</td>
+            
+            
+            <td>libcap-ng</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libcom_err</td>
+            
+            
+            <td>libcom_err</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libcomps</td>
+            
+            
+            <td>libcomps</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libcroco</td>
+            
+            
+            <td>libcroco</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libcurl</td>
+            
+            
+            <td>libcurl</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libdaemon</td>
+            
+            
+            <td>libdaemon</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libdb</td>
+            
+            
+            <td>libdb</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libdb-utils</td>
+            
+            
+            <td>libdb-utils</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libdnf</td>
+            
+            
+            <td>libdnf</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libedit</td>
+            
+            
+            <td>libedit</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libell</td>
+            
+            
+            <td>libell</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libevent</td>
+            
+            
+            <td>libevent</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libfdisk</td>
+            
+            
+            <td>libfdisk</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libffi</td>
+            
+            
+            <td>libffi</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libgcab1</td>
+            
+            
+            <td>libgcab1</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libgcc</td>
+            
+            
+            <td>libgcc</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libgcrypt</td>
+            
+            
+            <td>libgcrypt</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libgomp</td>
+            
+            
+            <td>libgomp</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libgpg-error</td>
+            
+            
+            <td>libgpg-error</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libgpiod</td>
+            
+            
+            <td>libgpiod</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libgudev</td>
+            
+            
+            <td>libgudev</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libgusb</td>
+            
+            
+            <td>libgusb</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libidn2</td>
+            
+            
+            <td>libidn2</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libjose</td>
+            
+            
+            <td>libjose</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libkcapi</td>
+            
+            
+            <td>libkcapi</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libkcapi-hmaccalc</td>
+            
+            
+            <td>libkcapi-hmaccalc</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libksba</td>
+            
+            
+            <td>libksba</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libluksmeta</td>
+            
+            
+            <td>libluksmeta</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libmaxminddb</td>
+            
+            
+            <td>libmaxminddb</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libmbim</td>
+            
+            
+            <td>libmbim</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libmbim-utils</td>
+            
+            
+            <td>libmbim-utils</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libmetalink</td>
+            
+            
+            <td>libmetalink</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libmnl</td>
+            
+            
+            <td>libmnl</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libmodman</td>
+            
+            
+            <td>libmodman</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libmodulemd1</td>
+            
+            
+            <td>libmodulemd1</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libmount</td>
+            
+            
+            <td>libmount</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libndp</td>
+            
+            
+            <td>libndp</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libnet</td>
+            
+            
+            <td>libnet</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libnetfilter_conntrack</td>
+            
+            
+            <td>libnetfilter_conntrack</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libnfnetlink</td>
+            
+            
+            <td>libnfnetlink</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libnftnl</td>
+            
+            
+            <td>libnftnl</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libnghttp2</td>
+            
+            
+            <td>libnghttp2</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libnl3</td>
+            
+            
+            <td>libnl3</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libnl3-cli</td>
+            
+            
+            <td>libnl3-cli</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libnsl2</td>
+            
+            
+            <td>libnsl2</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libpcap</td>
+            
+            
+            <td>libpcap</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libpkgconf</td>
+            
+            
+            <td>libpkgconf</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libpng</td>
+            
+            
+            <td>libpng</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libproxy</td>
+            
+            
+            <td>libproxy</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libpsl</td>
+            
+            
+            <td>libpsl</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libpwquality</td>
+            
+            
+            <td>libpwquality</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libqb</td>
+            
+            
+            <td>libqb</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libqmi</td>
+            
+            
+            <td>libqmi</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libqmi-utils</td>
+            
+            
+            <td>libqmi-utils</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">librepo</td>
+            
+            
+            <td>librepo</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libreport</td>
+            
+            
+            <td>libreport</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libreport-anaconda</td>
+            
+            
+            <td>libreport-anaconda</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libreport-cli</td>
+            
+            
+            <td>libreport-cli</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libreport-filesystem</td>
+            
+            
+            <td>libreport-filesystem</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libreport-plugin-bugzilla</td>
+            
+            
+            <td>libreport-plugin-bugzilla</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libreport-plugin-reportuploader</td>
+            
+            
+            <td>libreport-plugin-reportuploader</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libreport-web</td>
+            
+            
+            <td>libreport-web</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libseccomp</td>
+            
+            
+            <td>libseccomp</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsecret</td>
+            
+            
+            <td>libsecret</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libselinux</td>
+            
+            
+            <td>libselinux</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libselinux-utils</td>
+            
+            
+            <td>libselinux-utils</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsemanage</td>
+            
+            
+            <td>libsemanage</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsepol</td>
+            
+            
+            <td>libsepol</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsigsegv</td>
+            
+            
+            <td>libsigsegv</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsmartcols</td>
+            
+            
+            <td>libsmartcols</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsmbios</td>
+            
+            
+            <td>libsmbios</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsolv</td>
+            
+            
+            <td>libsolv</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsoup</td>
+            
+            
+            <td>libsoup</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libss</td>
+            
+            
+            <td>libss</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libssh</td>
+            
+            
+            <td>libssh</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libssh-config</td>
+            
+            
+            <td>libssh-config</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsss_idmap</td>
+            
+            
+            <td>libsss_idmap</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsss_nss_idmap</td>
+            
+            
+            <td>libsss_nss_idmap</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libstdc++</td>
+            
+            
+            <td>libstdc++</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libsysfs</td>
+            
+            
+            <td>libsysfs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libtar</td>
+            
+            
+            <td>libtar</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libtasn1</td>
+            
+            
+            <td>libtasn1</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libteam</td>
+            
+            
+            <td>libteam</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libtextstyle</td>
+            
+            
+            <td>libtextstyle</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libtirpc</td>
+            
+            
+            <td>libtirpc</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libunistring</td>
+            
+            
+            <td>libunistring</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libusbx</td>
+            
+            
+            <td>libusbx</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libuser</td>
+            
+            
+            <td>libuser</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libutempter</td>
+            
+            
+            <td>libutempter</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libuuid</td>
+            
+            
+            <td>libuuid</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libvarlink-util</td>
+            
+            
+            <td>libvarlink-util</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libverto</td>
+            
+            
+            <td>libverto</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libxcrypt</td>
+            
+            
+            <td>libxcrypt</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libxcrypt-compat</td>
+            
+            
+            <td>libxcrypt-compat</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libxkbcommon</td>
+            
+            
+            <td>libxkbcommon</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libxml2</td>
+            
+            
+            <td>libxml2</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libxmlb</td>
+            
+            
+            <td>libxmlb</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libyaml</td>
+            
+            
+            <td>libyaml</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">libzstd</td>
+            
+            
+            <td>libzstd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">linux-atm-libs</td>
+            
+            
+            <td>linux-atm-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">linux-firmware</td>
+            
+            
+            <td>linux-firmware</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">linux-firmware-whence</td>
+            
+            
+            <td>linux-firmware-whence</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">lsof</td>
+            
+            
+            <td>lsof</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">lua-libs</td>
+            
+            
+            <td>lua-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">luksmeta</td>
+            
+            
+            <td>luksmeta</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">lvm2-libs</td>
+            
+            
+            <td>lvm2-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">lz4</td>
+            
+            
+            <td>lz4</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">lz4-libs</td>
+            
+            
+            <td>lz4-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">lzo</td>
+            
+            
+            <td>lzo</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">mdadm</td>
+            
+            
+            <td>mdadm</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">mkpasswd</td>
+            
+            
+            <td>mkpasswd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">mokutil</td>
+            
+            
+            <td>mokutil</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">mozjs60</td>
+            
+            
+            <td>mozjs60</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">mpfr</td>
+            
+            
+            <td>mpfr</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ncurses</td>
+            
+            
+            <td>ncurses</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ncurses-base</td>
+            
+            
+            <td>ncurses-base</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ncurses-libs</td>
+            
+            
+            <td>ncurses-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ndctl</td>
+            
+            
+            <td>ndctl</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ndctl-libs</td>
+            
+            
+            <td>ndctl-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">nettle</td>
+            
+            
+            <td>nettle</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">nftables</td>
+            
+            
+            <td>nftables</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">nmap-ncat</td>
+            
+            
+            <td>nmap-ncat</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">npth</td>
+            
+            
+            <td>npth</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">nspr</td>
+            
+            
+            <td>nspr</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">nss</td>
+            
+            
+            <td>nss</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">nss-softokn</td>
+            
+            
+            <td>nss-softokn</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">nss-softokn-freebl</td>
+            
+            
+            <td>nss-softokn-freebl</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">nss-sysinit</td>
+            
+            
+            <td>nss-sysinit</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">nss-util</td>
+            
+            
+            <td>nss-util</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">oddjob</td>
+            
+            
+            <td>oddjob</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">oddjob-mkhomedir</td>
+            
+            
+            <td>oddjob-mkhomedir</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">openldap</td>
+            
+            
+            <td>openldap</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">openssh</td>
+            
+            
+            <td>openssh</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">openssl</td>
+            
+            
+            <td>openssl</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">openssl-libs</td>
+            
+            
+            <td>openssl-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">openssl-pkcs11</td>
+            
+            
+            <td>openssl-pkcs11</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">os-prober</td>
+            
+            
+            <td>os-prober</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ostree</td>
+            
+            
+            <td>ostree</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">ostree-libs</td>
+            
+            
+            <td>ostree-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">p11-kit</td>
+            
+            
+            <td>p11-kit</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">p11-kit-trust</td>
+            
+            
+            <td>p11-kit-trust</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">pam</td>
+            
+            
+            <td>pam</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">parted</td>
+            
+            
+            <td>parted</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">pciutils-libs</td>
+            
+            
+            <td>pciutils-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">pcre</td>
+            
+            
+            <td>pcre</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">pcre2</td>
+            
+            
+            <td>pcre2</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">pigz</td>
+            
+            
+            <td>pigz</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">pkgconf</td>
+            
+            
+            <td>pkgconf</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">pkgconf-m4</td>
+            
+            
+            <td>pkgconf-m4</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">pkgconf-pkg-config</td>
+            
+            
+            <td>pkgconf-pkg-config</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">podman-manpages</td>
+            
+            
+            <td>podman-manpages</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">polkit-libs</td>
+            
+            
+            <td>polkit-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">polkit-pkla-compat</td>
+            
+            
+            <td>polkit-pkla-compat</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">popt</td>
+            
+            
+            <td>popt</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">protobuf</td>
+            
+            
+            <td>protobuf</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">protobuf-c</td>
+            
+            
+            <td>protobuf-c</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">psmisc</td>
+            
+            
+            <td>psmisc</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">publicsuffix-list-dafsa</td>
+            
+            
+            <td>publicsuffix-list-dafsa</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python-pip-wheel</td>
+            
+            
+            <td>python-pip-wheel</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python-setuptools-wheel</td>
+            
+            
+            <td>python-setuptools-wheel</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python-systemd-doc</td>
+            
+            
+            <td>python-systemd-doc</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python-unversioned-command</td>
+            
+            
+            <td>python-unversioned-command</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-audit</td>
+            
+            
+            <td>python3-audit</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-blivet</td>
+            
+            
+            <td>python3-blivet</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-blockdev</td>
+            
+            
+            <td>python3-blockdev</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-bytesize</td>
+            
+            
+            <td>python3-bytesize</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-chardet</td>
+            
+            
+            <td>python3-chardet</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-dbus</td>
+            
+            
+            <td>python3-dbus</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-decorator</td>
+            
+            
+            <td>python3-decorator</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-dnf</td>
+            
+            
+            <td>python3-dnf</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-firewall</td>
+            
+            
+            <td>python3-firewall</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-gobject-base</td>
+            
+            
+            <td>python3-gobject-base</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-gpg</td>
+            
+            
+            <td>python3-gpg</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-hawkey</td>
+            
+            
+            <td>python3-hawkey</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-idna</td>
+            
+            
+            <td>python3-idna</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-kickstart</td>
+            
+            
+            <td>python3-kickstart</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-langtable</td>
+            
+            
+            <td>python3-langtable</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-libcomps</td>
+            
+            
+            <td>python3-libcomps</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-libdnf</td>
+            
+            
+            <td>python3-libdnf</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-libreport</td>
+            
+            
+            <td>python3-libreport</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-libs</td>
+            
+            
+            <td>python3-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-libselinux</td>
+            
+            
+            <td>python3-libselinux</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-libsemanage</td>
+            
+            
+            <td>python3-libsemanage</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-meh</td>
+            
+            
+            <td>python3-meh</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-ntplib</td>
+            
+            
+            <td>python3-ntplib</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-ordered-set</td>
+            
+            
+            <td>python3-ordered-set</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-pid</td>
+            
+            
+            <td>python3-pid</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-pip</td>
+            
+            
+            <td>python3-pip</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-policycoreutils</td>
+            
+            
+            <td>python3-policycoreutils</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-productmd</td>
+            
+            
+            <td>python3-productmd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-pwquality</td>
+            
+            
+            <td>python3-pwquality</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-pydbus</td>
+            
+            
+            <td>python3-pydbus</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-pyparted</td>
+            
+            
+            <td>python3-pyparted</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-pysocks</td>
+            
+            
+            <td>python3-pysocks</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-pytz</td>
+            
+            
+            <td>python3-pytz</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-pyudev</td>
+            
+            
+            <td>python3-pyudev</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-requests</td>
+            
+            
+            <td>python3-requests</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-requests-file</td>
+            
+            
+            <td>python3-requests-file</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-requests-ftp</td>
+            
+            
+            <td>python3-requests-ftp</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-rpm</td>
+            
+            
+            <td>python3-rpm</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-setools</td>
+            
+            
+            <td>python3-setools</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-setuptools</td>
+            
+            
+            <td>python3-setuptools</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-simpleline</td>
+            
+            
+            <td>python3-simpleline</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-six</td>
+            
+            
+            <td>python3-six</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-slip</td>
+            
+            
+            <td>python3-slip</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-slip-dbus</td>
+            
+            
+            <td>python3-slip-dbus</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-systemd</td>
+            
+            
+            <td>python3-systemd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-unbound</td>
+            
+            
+            <td>python3-unbound</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">python3-urllib3</td>
+            
+            
+            <td>python3-urllib3</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">qrencode-libs</td>
+            
+            
+            <td>qrencode-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">readline</td>
+            
+            
+            <td>readline</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">rpm-build-libs</td>
+            
+            
+            <td>rpm-build-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">rpm-libs</td>
+            
+            
+            <td>rpm-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">rpm-ostree-libs</td>
+            
+            
+            <td>rpm-ostree-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">rpm-plugin-selinux</td>
+            
+            
+            <td>rpm-plugin-selinux</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">rpm-plugin-systemd-inhibit</td>
+            
+            
+            <td>rpm-plugin-systemd-inhibit</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">rpm-sign-libs</td>
+            
+            
+            <td>rpm-sign-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">satyr</td>
+            
+            
+            <td>satyr</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">sed</td>
+            
+            
+            <td>sed</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">selinux-policy</td>
+            
+            
+            <td>selinux-policy</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">sgpio</td>
+            
+            
+            <td>sgpio</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">shared-mime-info</td>
+            
+            
+            <td>shared-mime-info</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">sqlite-libs</td>
+            
+            
+            <td>sqlite-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">systemd-bootchart</td>
+            
+            
+            <td>systemd-bootchart</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">systemd-libs</td>
+            
+            
+            <td>systemd-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">systemd-pam</td>
+            
+            
+            <td>systemd-pam</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">systemd-rpm-macros</td>
+            
+            
+            <td>systemd-rpm-macros</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">systemd-udev</td>
+            
+            
+            <td>systemd-udev</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">teamd</td>
+            
+            
+            <td>teamd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">timedatex</td>
+            
+            
+            <td>timedatex</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">tpm2-abrmd</td>
+            
+            
+            <td>tpm2-abrmd</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">tpm2-abrmd-selinux</td>
+            
+            
+            <td>tpm2-abrmd-selinux</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">tpm2-tools</td>
+            
+            
+            <td>tpm2-tools</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">tpm2-tss</td>
+            
+            
+            <td>tpm2-tss</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">trousers</td>
+            
+            
+            <td>trousers</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">trousers-lib</td>
+            
+            
+            <td>trousers-lib</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">tss2</td>
+            
+            
+            <td>tss2</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">tzdata</td>
+            
+            
+            <td>tzdata</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">unbound-libs</td>
+            
+            
+            <td>unbound-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">userspace-rcu</td>
+            
+            
+            <td>userspace-rcu</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">volume_key-libs</td>
+            
+            
+            <td>volume_key-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">web-assets-filesystem</td>
+            
+            
+            <td>web-assets-filesystem</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">whois-nls</td>
+            
+            
+            <td>whois-nls</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">xkeyboard-config</td>
+            
+            
+            <td>xkeyboard-config</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">xmlrpc-c</td>
+            
+            
+            <td>xmlrpc-c</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">xmlrpc-c-client</td>
+            
+            
+            <td>xmlrpc-c-client</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">xz-libs</td>
+            
+            
+            <td>xz-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">yajl</td>
+            
+            
+            <td>yajl</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">zchunk-libs</td>
+            
+            
+            <td>zchunk-libs</td>
+            
+            
+        </tr>
+        
+        <tr class="not-in-base">
+            <td class="all-pkgs">zlib</td>
+            
+            
+            <td>zlib</td>
+            
+            
+        </tr>
+        
+    </tbody>
+</table>
+
+</div>
+
+
+<br><br>
+</body>
+
+</html>
