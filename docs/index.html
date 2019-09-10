@@ -15,6 +15,41 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+  <style>
+      .jumbotron {
+          margin-bottom: 0 !important;
+      }
+  
+      .jumbotron-minimization {
+          background-color: #631a38!important;
+          color: white;
+          padding: 30px 0;
+      }
+  
+      .jumbotron-home {
+          background-color: #072b61;
+          color: white;
+      }
+  
+  
+  
+      .jumbotron-about {
+  
+          padding: 30px 0;
+      }
+  
+      a.btn-minimization {
+          background-color: #942653;
+          border-color: #942653;
+          color: white;
+      }
+  
+      a.btn-minimization:hover {
+          background-color: #7b1f45;
+          border-color: #7b1f45;
+          color: white;
+      }
+  </style>
 </head>
 
 <body>
@@ -22,28 +57,95 @@
     <span class="navbar-brand mb-0 h1">Feedback Pipeline <span class="text-muted">prototype</span></span>
   </nav>
   
-  <div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid jumbotron-home">
     <div class="container">
-      <h1 class="display-4">Feedback Pipeline</h1>
-      <p class="lead">Reporting and notifications regarding dependencies and sizes of defined
-        RPM installations.
-      </p>
-      <a class="btn btn-primary btn-lg" href="./views.html" role="button">Explore results</a>
+        <h1 class="display-4">Feedback Pipeline</h1>
+        <p class="lead">Reporting and notifications regarding dependencies and sizes of defined
+            RPM installations.
+        </p>
+        <a class="btn btn-primary btn-lg" href="./views.html" role="button">Explore results</a>
     </div>
-  </div>
-  <div class="container">
-    <div class="row ">
-      <div class="col-sm-12">
-        <h3>Fedora Minimization Objective</h3>
-        <p class="lead">Minimising the installation footprint of Fedora ecosystem to make it more suitable for modern
-          deployments such as IoT and cloud.</p>
-        <a class="btn btn-light" href="https://docs.fedoraproject.org/en-US/minimization/">Learn more about
-          Minimization</a>
-      </div>
+</div>
+<div class="jumbotron jumbotron-fluid jumbotron-minimization">
+    <div class="container">
+        <div class="row ">
+            <div class="col-sm-12">
+                <h3>Fedora Minimization Objective</h3>
+                <p class="lead">Minimising the installation footprint of Fedora ecosystem to make it more suitable
+                    for
+                    modern
+                    deployments such as IoT and cloud.</p>
+                <a class="btn btn-minimization" href="https://docs.fedoraproject.org/en-US/minimization/">Learn more
+                    about
+                    Minimization</a>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+<div class="jumbotron jumbotron-fluid jumbotron-about">
+    <div class="container">
+        <div class="row ">
+            <div class="col-sm-12">
+                <h3>About Feedback Pipeline</h3>
+                <p class="lead">Feedback Pipeline gives a quick overview of the use cases we're targeting to
+                    minimise. Showing the
+                    <b>required packages</b>, their <b>dependencies</b>, the <b>overall size</b>, and allowing a
+                    deeper
+                    inspection with <b>interactive dependency graphs</b>.</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>Focused on use cases</h4>
+                <p>Feedback Pipeline focuses on specific use cases rather than the whole Fedora
+                    repositories.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Size</h5>
+                        <p class="card-text">Repositories with tens of thousands of packages are too big to digest
+                            at
+                            once. Use cases are smaller and easier to work with.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Choices</h5>
+                        <p class="card-text">Repositories represent choices that might be overwhelming and hard to
+                            see
+                            all at once. Use cases are specific, with choices already made.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Clarity</h5>
+                        <p class="card-text">Repositories are generic, providing packages to multiple (often
+                            conflicting) use cases. So choosing specific use cases makes it clear what is required
+                            and
+                            what is not.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Focusing on specific use cases, with choices already made, and with a clear distinction of what
+                    packages are required and which are just dependencies, Feedback Pipeline makes it easier to spot
+                    opportunities for minimisation.</p>
+            </div>
+        </div>
+    </div>
 
-
+</div>
 
 <br><br>
 </body>
