@@ -15,6 +15,41 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+  <style>
+      .jumbotron {
+          margin-bottom: 0 !important;
+      }
+  
+      .jumbotron-minimization {
+          background-color: #631a38!important;
+          color: white;
+          padding: 30px 0;
+      }
+  
+      .jumbotron-home {
+          background-color: #072b61;
+          color: white;
+      }
+  
+  
+  
+      .jumbotron-about {
+  
+          padding: 30px 0;
+      }
+  
+      a.btn-minimization {
+          background-color: #942653;
+          border-color: #942653;
+          color: white;
+      }
+  
+      a.btn-minimization:hover {
+          background-color: #7b1f45;
+          border-color: #7b1f45;
+          color: white;
+      }
+  </style>
 </head>
 
 <body>
@@ -80,7 +115,7 @@ tbody tr, tbody th {
 
     <small class="text-muted">
     
-        with 6 use cases </h1>
+        with 7 use cases </h1>
     
     </small>
 
@@ -97,9 +132,11 @@ tbody tr, tbody th {
             
             <th>Nginx</th>
             
+            <th>IoT x86_64 server</th>
+            
             <th>Apache HTTP Server</th>
             
-            <th>IoT x86_64 server</th>
+            <th>IoT</th>
             
             <th>PostgreSQL</th>
             
@@ -109,17 +146,19 @@ tbody tr, tbody th {
         <tr>
             <td>0.0 B</td>
             
-            <td>681.5 MB</td>
+            <td>681.6 MB</td>
             
-            <td>465.2 MB</td>
-            
-            <td>467.2 MB</td>
+            <td>465.3 MB</td>
             
             <td>1.3 GB</td>
             
-            <td>525.6 MB</td>
+            <td>467.3 MB</td>
             
-            <td>367.2 MB</td>
+            <td>1.1 GB</td>
+            
+            <td>525.7 MB</td>
+            
+            <td>367.3 MB</td>
             
         </tr>
         <tr>
@@ -133,6 +172,11 @@ tbody tr, tbody th {
             <td>
               <a href="./graph--nginx--fedora-empty-base--30.svg">graph</a> |
               <a href="./graph-simple--nginx--fedora-empty-base--30.svg">simple graph</a>
+            </td>
+            
+            <td>
+              <a href="./graph--iot-x86_64--fedora-empty-base--30.svg">graph</a> |
+              <a href="./graph-simple--iot-x86_64--fedora-empty-base--30.svg">simple graph</a>
             </td>
             
             <td>
@@ -159,11 +203,11 @@ tbody tr, tbody th {
     </thead>
     <tbody>
         <tr class="in-base">
-            <th colspan="8">--- Packages in base ---</th>
+            <th colspan="9">--- Packages in base ---</th>
         </tr>
         
         <tr class="not-in-base">
-            <th colspan="8">--- Packages not in base ---</th>
+            <th colspan="9">--- Packages not in base ---</th>
         </tr>
         
         <tr class="not-in-base">
@@ -176,6 +220,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>ModemManager</td>
+                
             
             
             
@@ -211,6 +261,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>ModemManager-glib</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -240,6 +296,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">NetworkManager</td>
+                
             
             
             
@@ -275,6 +337,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>NetworkManager-libnm</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -304,6 +372,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>NetworkManager-team</td>
+                
             
             
             
@@ -339,6 +413,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">NetworkManager-wifi</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -371,6 +451,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">NetworkManager-wwan</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -400,6 +486,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>abattis-cantarell-fonts</td>
+                
             
             
             
@@ -462,6 +554,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>acl</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -474,6 +572,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>adobe-source-code-pro-fonts</td>
+                
             
             
             
@@ -536,6 +640,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>alternatives</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -548,6 +658,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>anaconda-core</td>
+                
             
             
             
@@ -583,6 +699,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>anaconda-tui</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -605,6 +727,10 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">apr</td>
             <td> - </td>
+            
+            
+            <td> - </td>
+            
             
             
             <td> - </td>
@@ -649,6 +775,10 @@ tbody tr, tbody th {
             
             
             
+            <td> - </td>
+            
+            
+            
                 
                     <td>apr-util</td>
                 
@@ -673,6 +803,10 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">apr-util-bdb</td>
             <td> - </td>
+            
+            
+            <td> - </td>
+            
             
             
             <td> - </td>
@@ -715,6 +849,10 @@ tbody tr, tbody th {
             
             
             
+            <td> - </td>
+            
+            
+            
                 
                     <td>apr-util-openssl</td>
                 
@@ -747,6 +885,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">attr</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -776,6 +920,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">audit</td>
+                
             
             
             
@@ -838,6 +988,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>audit-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -850,6 +1006,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>augeas-libs</td>
+                
             
             
             
@@ -885,6 +1047,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">authconfig</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -917,6 +1085,12 @@ tbody tr, tbody th {
             
                 
                     <td>basesystem</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">basesystem</td>
                 
             
             
@@ -964,6 +1138,12 @@ tbody tr, tbody th {
             
             
                 
+                    <td style="color:#CC0066">bash</td>
+                
+            
+            
+            
+                
                     <td>bash</td>
                 
             
@@ -1001,6 +1181,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">bash-completion</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -1030,6 +1216,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>bcache-tools</td>
+                
             
             
             
@@ -1065,6 +1257,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>bind-export-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -1094,6 +1292,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>blivet-data</td>
+                
             
             
             
@@ -1129,6 +1333,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">bluez</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -1158,6 +1368,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">bluez-libs</td>
+                
             
             
             
@@ -1220,6 +1436,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>brotli</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1232,6 +1454,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>btrfs-progs</td>
+                
             
             
             
@@ -1267,6 +1495,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>bubblewrap</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -1289,6 +1523,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">bzip2-libs</td>
             <td> - </td>
+            
+            
+                
+                    <td>bzip2-libs</td>
+                
+            
             
             
                 
@@ -1368,6 +1608,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>ca-certificates</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1380,6 +1626,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>checkpolicy</td>
+                
             
             
             
@@ -1415,6 +1667,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">chrony</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -1444,6 +1702,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">clevis</td>
+                
             
             
             
@@ -1479,6 +1743,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">clevis-dracut</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -1508,6 +1778,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">clevis-luks</td>
+                
             
             
             
@@ -1543,6 +1819,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>clevis-systemd</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -1572,6 +1854,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">cloud-utils-growpart</td>
+                
             
             
             
@@ -1607,6 +1895,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">container-selinux</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -1636,6 +1930,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>containernetworking-plugins</td>
+                
             
             
             
@@ -1671,6 +1971,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>containers-common</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -1703,6 +2009,12 @@ tbody tr, tbody th {
             
                 
                     <td>coreutils</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">coreutils</td>
                 
             
             
@@ -1772,11 +2084,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>coreutils-common</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">cpio</td>
             <td> - </td>
+            
+            
+                
+                    <td>cpio</td>
+                
+            
             
             
                 
@@ -1854,11 +2178,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>cracklib</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">cracklib-dicts</td>
             <td> - </td>
+            
+            
+                
+                    <td>cracklib-dicts</td>
+                
+            
             
             
                 
@@ -1906,6 +2242,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">criu</td>
+                
             
             
             
@@ -1968,6 +2310,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>crypto-policies</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -1980,6 +2328,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">cryptsetup</td>
+                
             
             
             
@@ -2042,6 +2396,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>cryptsetup-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -2057,6 +2417,12 @@ tbody tr, tbody th {
             
                 
                     <td>curl</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">curl</td>
                 
             
             
@@ -2119,6 +2485,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>cyrus-sasl-lib</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -2134,6 +2506,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>daxctl-libs</td>
+                
             
             
             
@@ -2159,6 +2537,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">dbus</td>
             <td> - </td>
+            
+            
+                
+                    <td>dbus</td>
+                
+            
             
             
                 
@@ -2238,11 +2622,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>dbus-broker</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">dbus-common</td>
             <td> - </td>
+            
+            
+                
+                    <td>dbus-common</td>
+                
+            
             
             
                 
@@ -2295,6 +2691,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>dbus-daemon</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -2324,6 +2726,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>dbus-libs</td>
+                
             
             
             
@@ -2359,6 +2767,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>dbus-tools</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -2391,13 +2805,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>dbxtool</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td>dbxtool</td>
-                
+            <td> - </td>
             
             
             
@@ -2420,6 +2838,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>deltarpm</td>
+                
             
             
             
@@ -2482,6 +2906,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>device-mapper</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -2494,6 +2924,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>device-mapper-event</td>
+                
             
             
             
@@ -2526,6 +2962,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>device-mapper-event-libs</td>
+                
             
             
             
@@ -2588,6 +3030,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>device-mapper-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -2600,6 +3048,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>device-mapper-multipath</td>
+                
             
             
             
@@ -2635,6 +3089,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>device-mapper-multipath-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -2664,6 +3124,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>device-mapper-persistent-data</td>
+                
             
             
             
@@ -2699,6 +3165,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>dhcp-client</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -2731,6 +3203,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>dhcp-common</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -2760,6 +3238,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>dhcp-libs</td>
+                
             
             
             
@@ -2817,6 +3301,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>diffutils</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -2832,6 +3322,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>dmraid</td>
+                
             
             
             
@@ -2867,6 +3363,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>dmraid-events</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -2899,6 +3401,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>dnf-data</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -2928,6 +3436,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">dnsmasq</td>
+                
             
             
             
@@ -2985,6 +3499,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>dracut</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -3000,6 +3520,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">dracut-config-generic</td>
+                
             
             
             
@@ -3035,6 +3561,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">dracut-network</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -3064,6 +3596,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">e2fsprogs</td>
+                
             
             
             
@@ -3099,6 +3637,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>e2fsprogs-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -3128,6 +3672,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>ebtables</td>
+                
             
             
             
@@ -3163,13 +3713,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>efi-filesystem</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td>efi-filesystem</td>
-                
+            <td> - </td>
             
             
             
@@ -3195,13 +3749,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">efibootmgr</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">efibootmgr</td>
-                
+            <td> - </td>
             
             
             
@@ -3227,6 +3785,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>efivar-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -3249,6 +3813,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">elfutils-default-yama-scope</td>
             <td> - </td>
+            
+            
+                
+                    <td>elfutils-default-yama-scope</td>
+                
+            
             
             
                 
@@ -3328,11 +3898,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>elfutils-libelf</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">elfutils-libs</td>
             <td> - </td>
+            
+            
+                
+                    <td>elfutils-libs</td>
+                
+            
             
             
                 
@@ -3412,11 +3994,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>expat</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">fedora-gpg-keys</td>
             <td> - </td>
+            
+            
+                
+                    <td>fedora-gpg-keys</td>
+                
+            
             
             
                 
@@ -3471,6 +4065,10 @@ tbody tr, tbody th {
             
             
             
+            <td> - </td>
+            
+            
+            
                 
                     <td>fedora-logos-httpd</td>
                 
@@ -3506,6 +4104,10 @@ tbody tr, tbody th {
                 
                     <td>fedora-release</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -3572,6 +4174,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>fedora-release-common</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -3584,6 +4192,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">fedora-release-iot</td>
+                
             
             
             
@@ -3609,6 +4223,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">fedora-repos</td>
             <td> - </td>
+            
+            
+                
+                    <td>fedora-repos</td>
+                
+            
             
             
                 
@@ -3683,6 +4303,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>file</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -3691,6 +4317,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">file-libs</td>
             <td> - </td>
+            
+            
+                
+                    <td>file-libs</td>
+                
+            
             
             
                 
@@ -3768,11 +4400,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>filesystem</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">findutils</td>
             <td> - </td>
+            
+            
+                
+                    <td>findutils</td>
+                
+            
             
             
                 
@@ -3823,6 +4467,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>fipscheck</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -3852,6 +4502,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>fipscheck-lib</td>
+                
             
             
             
@@ -3887,6 +4543,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">firewalld</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -3916,6 +4578,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>firewalld-filesystem</td>
+                
             
             
             
@@ -3951,6 +4619,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>fontpackages-filesystem</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -3983,13 +4657,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>freetype</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td>freetype</td>
-                
+            <td> - </td>
             
             
             
@@ -4012,6 +4690,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>fuse</td>
+                
             
             
             
@@ -4047,6 +4731,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>fuse-common</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -4076,6 +4766,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>fuse-libs</td>
+                
             
             
             
@@ -4111,6 +4807,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>fuse-overlayfs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -4143,6 +4845,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>fuse3-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -4172,6 +4880,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">fwupd</td>
+                
             
             
             
@@ -4234,6 +4948,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>gawk</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -4248,6 +4968,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>gdbm-libs</td>
+                
             
             
             
@@ -4283,6 +5009,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>gdisk</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -4312,6 +5044,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>geolite2-city</td>
+                
             
             
             
@@ -4347,6 +5085,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>geolite2-country</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -4369,6 +5113,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">gettext</td>
             <td> - </td>
+            
+            
+                
+                    <td>gettext</td>
+                
+            
             
             
                 
@@ -4441,6 +5191,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>gettext-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -4456,6 +5212,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>glib-networking</td>
+                
             
             
             
@@ -4513,6 +5275,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>glib2</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -4531,6 +5299,12 @@ tbody tr, tbody th {
             
                 
                     <td>glibc</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">glibc</td>
                 
             
             
@@ -4574,6 +5348,10 @@ tbody tr, tbody th {
                 
                     <td>glibc-all-langpacks</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -4640,6 +5418,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>glibc-common</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -4652,6 +5436,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>glibc-langpack-en</td>
+                
             
             
             
@@ -4714,6 +5504,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>gmp</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -4726,6 +5522,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">gnupg2</td>
+                
             
             
             
@@ -4758,6 +5560,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>gnupg2-smime</td>
+                
             
             
             
@@ -4820,6 +5628,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>gnutls</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -4832,6 +5646,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>gobject-introspection</td>
+                
             
             
             
@@ -4884,6 +5704,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -4896,6 +5720,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>gpgme</td>
+                
             
             
             
@@ -4931,6 +5761,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">greenboot</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -4960,6 +5796,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">greenboot-grub2</td>
+                
             
             
             
@@ -4995,6 +5837,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">greenboot-reboot</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -5024,6 +5872,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">greenboot-rpm-ostree-grub2</td>
+                
             
             
             
@@ -5059,6 +5913,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">greenboot-status</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -5081,6 +5941,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">grep</td>
             <td> - </td>
+            
+            
+                
+                    <td>grep</td>
+                
+            
             
             
                 
@@ -5150,11 +6016,21 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">grub2-common</td>
             <td> - </td>
+            
+            
+                
+                    <td>grub2-common</td>
+                
+            
             
             
                 
@@ -5205,13 +6081,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">grub2-efi-x64</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">grub2-efi-x64</td>
-                
+            <td> - </td>
             
             
             
@@ -5237,13 +6117,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>grub2-pc</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td>grub2-pc</td>
-                
+            <td> - </td>
             
             
             
@@ -5269,13 +6153,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>grub2-pc-modules</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td>grub2-pc-modules</td>
-                
+            <td> - </td>
             
             
             
@@ -5291,6 +6179,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">grub2-tools</td>
             <td> - </td>
+            
+            
+                
+                    <td>grub2-tools</td>
+                
+            
             
             
                 
@@ -5341,13 +6235,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>grub2-tools-extra</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td>grub2-tools-extra</td>
-                
+            <td> - </td>
             
             
             
@@ -5363,6 +6261,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">grub2-tools-minimal</td>
             <td> - </td>
+            
+            
+                
+                    <td>grub2-tools-minimal</td>
+                
+            
             
             
                 
@@ -5435,6 +6339,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>grubby</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -5450,6 +6360,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>gsettings-desktop-schemas</td>
+                
             
             
             
@@ -5485,6 +6401,12 @@ tbody tr, tbody th {
             
                 
                     <td>gzip</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">gzip</td>
                 
             
             
@@ -5549,6 +6471,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>hardlink</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -5564,6 +6492,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">hostname</td>
+                
             
             
             
@@ -5589,6 +6523,10 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">httpd</td>
             <td> - </td>
+            
+            
+            <td> - </td>
+            
             
             
             <td> - </td>
@@ -5633,6 +6571,10 @@ tbody tr, tbody th {
             
             
             
+            <td> - </td>
+            
+            
+            
                 
                     <td>httpd-filesystem</td>
                 
@@ -5657,6 +6599,10 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">httpd-tools</td>
             <td> - </td>
+            
+            
+            <td> - </td>
+            
             
             
             <td> - </td>
@@ -5701,6 +6647,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>ima-evm-utils</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -5733,6 +6685,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">initial-setup</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -5762,6 +6720,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>ipcalc</td>
+                
             
             
             
@@ -5799,6 +6763,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iproute</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -5830,6 +6800,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>iproute-tc</td>
+                
             
             
             
@@ -5865,6 +6841,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>ipset</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -5897,6 +6879,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>ipset-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -5926,6 +6914,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">iptables</td>
+                
             
             
             
@@ -5988,6 +6982,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>iptables-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -6000,6 +7000,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">iputils</td>
+                
             
             
             
@@ -6035,6 +7041,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwd</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -6067,13 +7079,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl100-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl100-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6099,13 +7115,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl1000-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl1000-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6131,13 +7151,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl105-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl105-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6163,13 +7187,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl135-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl135-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6195,13 +7223,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl2000-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl2000-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6227,13 +7259,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl2030-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl2030-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6259,13 +7295,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl3160-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl3160-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6291,13 +7331,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl5000-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl5000-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6323,13 +7367,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl5150-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl5150-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6355,13 +7403,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl6000-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl6000-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6387,13 +7439,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl6050-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl6050-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6419,13 +7475,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">iwl7260-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">iwl7260-firmware</td>
-                
+            <td> - </td>
             
             
             
@@ -6448,6 +7508,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>jansson</td>
+                
             
             
             
@@ -6483,6 +7549,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>jitterentropy</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -6515,6 +7587,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>jose</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -6544,6 +7622,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>js-jquery</td>
+                
             
             
             
@@ -6606,6 +7690,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>json-c</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -6618,6 +7708,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>json-glib</td>
+                
             
             
             
@@ -6643,6 +7739,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">kbd</td>
             <td> - </td>
+            
+            
+                
+                    <td>kbd</td>
+                
+            
             
             
                 
@@ -6715,6 +7817,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>kbd-legacy</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -6723,6 +7831,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">kbd-misc</td>
             <td> - </td>
+            
+            
+                
+                    <td>kbd-misc</td>
+                
+            
             
             
                 
@@ -6773,6 +7887,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">kernel</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -6802,6 +7922,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>kernel-core</td>
+                
             
             
             
@@ -6837,6 +7963,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>kernel-modules</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -6866,6 +7998,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">kernel-tools</td>
+                
             
             
             
@@ -6901,6 +8039,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>kernel-tools-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -6930,6 +8074,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">keyutils</td>
+                
             
             
             
@@ -6992,11 +8142,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>keyutils-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">kmod</td>
             <td> - </td>
+            
+            
+                
+                    <td>kmod</td>
+                
+            
             
             
                 
@@ -7074,11 +8236,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>kmod-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">kpartx</td>
             <td> - </td>
+            
+            
+                
+                    <td>kpartx</td>
+                
+            
             
             
                 
@@ -7156,6 +8330,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>krb5-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -7168,6 +8348,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>langtable</td>
+                
             
             
             
@@ -7203,6 +8389,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>langtable-data</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -7232,6 +8424,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">less</td>
+                
             
             
             
@@ -7294,6 +8492,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libacl</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -7308,6 +8512,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libaio</td>
+                
             
             
             
@@ -7333,6 +8543,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libarchive</td>
             <td> - </td>
+            
+            
+                
+                    <td>libarchive</td>
+                
+            
             
             
                 
@@ -7410,6 +8626,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libargon2</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -7422,6 +8644,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libassuan</td>
+                
             
             
             
@@ -7447,6 +8675,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libattr</td>
             <td> - </td>
+            
+            
+                
+                    <td>libattr</td>
+                
+            
             
             
                 
@@ -7526,6 +8760,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libblkid</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -7538,6 +8778,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libblockdev</td>
+                
             
             
             
@@ -7573,6 +8819,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libblockdev-btrfs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -7602,6 +8854,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libblockdev-crypto</td>
+                
             
             
             
@@ -7637,6 +8895,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libblockdev-dm</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -7666,6 +8930,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libblockdev-fs</td>
+                
             
             
             
@@ -7701,6 +8971,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libblockdev-kbd</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -7730,6 +9006,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libblockdev-loop</td>
+                
             
             
             
@@ -7765,6 +9047,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libblockdev-lvm</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -7794,6 +9082,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libblockdev-mdraid</td>
+                
             
             
             
@@ -7829,6 +9123,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libblockdev-mpath</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -7858,6 +9158,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libblockdev-nvdimm</td>
+                
             
             
             
@@ -7893,6 +9199,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libblockdev-part</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -7922,6 +9234,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libblockdev-swap</td>
+                
             
             
             
@@ -7957,6 +9275,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libblockdev-utils</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -7986,6 +9310,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libbsd</td>
+                
             
             
             
@@ -8021,6 +9351,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libbytesize</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -8043,6 +9379,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libcap</td>
             <td> - </td>
+            
+            
+                
+                    <td>libcap</td>
+                
+            
             
             
                 
@@ -8122,11 +9464,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libcap-ng</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libcom_err</td>
             <td> - </td>
+            
+            
+                
+                    <td>libcom_err</td>
+                
+            
             
             
                 
@@ -8179,6 +9533,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libcomps</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -8201,6 +9561,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libcroco</td>
             <td> - </td>
+            
+            
+                
+                    <td>libcroco</td>
+                
+            
             
             
                 
@@ -8273,6 +9639,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libcurl</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -8288,6 +9660,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libdaemon</td>
+                
             
             
             
@@ -8313,6 +9691,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libdb</td>
             <td> - </td>
+            
+            
+                
+                    <td>libdb</td>
+                
+            
             
             
                 
@@ -8387,6 +9771,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libdb-utils</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -8402,6 +9792,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libdnf</td>
+                
             
             
             
@@ -8437,6 +9833,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libedit</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -8466,6 +9868,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libell</td>
+                
             
             
             
@@ -8501,6 +9909,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libevent</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -8523,6 +9937,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libfdisk</td>
             <td> - </td>
+            
+            
+                
+                    <td>libfdisk</td>
+                
+            
             
             
                 
@@ -8602,6 +10022,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libffi</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -8614,6 +10040,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libgcab1</td>
+                
             
             
             
@@ -8639,6 +10071,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libgcc</td>
             <td> - </td>
+            
+            
+                
+                    <td>libgcc</td>
+                
+            
             
             
                 
@@ -8718,11 +10156,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libgcrypt</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libgomp</td>
             <td> - </td>
+            
+            
+                
+                    <td>libgomp</td>
+                
+            
             
             
                 
@@ -8800,6 +10250,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libgpg-error</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -8812,6 +10268,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libgpiod</td>
+                
             
             
             
@@ -8847,6 +10309,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">libgpiod-utils</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -8876,6 +10344,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libgudev</td>
+                
             
             
             
@@ -8911,6 +10385,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libgusb</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -8933,6 +10413,10 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libicu</td>
             <td> - </td>
+            
+            
+            <td> - </td>
+            
             
             
             <td> - </td>
@@ -9002,6 +10486,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libidn2</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -9014,6 +10504,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libjose</td>
+                
             
             
             
@@ -9039,6 +10535,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libkcapi</td>
             <td> - </td>
+            
+            
+                
+                    <td>libkcapi</td>
+                
+            
             
             
                 
@@ -9111,6 +10613,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libkcapi-hmaccalc</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -9126,6 +10634,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libksba</td>
+                
             
             
             
@@ -9161,6 +10675,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libluksmeta</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -9190,6 +10710,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libmaxminddb</td>
+                
             
             
             
@@ -9225,6 +10751,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libmbim</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -9254,6 +10786,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libmbim-utils</td>
+                
             
             
             
@@ -9311,6 +10849,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libmetalink</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -9328,6 +10872,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libmnl</td>
+                
             
             
             
@@ -9363,6 +10913,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libmodman</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -9392,6 +10948,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libmodulemd1</td>
+                
             
             
             
@@ -9454,6 +11016,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libmount</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -9466,6 +11034,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libndp</td>
+                
             
             
             
@@ -9501,6 +11075,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libnet</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -9530,6 +11110,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libnetfilter_conntrack</td>
+                
             
             
             
@@ -9565,6 +11151,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libnfnetlink</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -9594,6 +11186,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libnftnl</td>
+                
             
             
             
@@ -9656,6 +11254,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libnghttp2</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -9668,6 +11272,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libnl3</td>
+                
             
             
             
@@ -9703,6 +11313,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libnl3-cli</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -9725,6 +11341,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libnsl2</td>
             <td> - </td>
+            
+            
+                
+                    <td>libnsl2</td>
+                
+            
             
             
                 
@@ -9804,6 +11426,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libpcap</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -9816,6 +11444,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libpkgconf</td>
+                
             
             
             
@@ -9851,13 +11485,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libpng</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td>libpng</td>
-                
+            <td> - </td>
             
             
             
@@ -9873,6 +11511,10 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libpq</td>
             <td> - </td>
+            
+            
+            <td> - </td>
+            
             
             
             <td> - </td>
@@ -9915,6 +11557,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libproxy</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -9937,6 +11585,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libpsl</td>
             <td> - </td>
+            
+            
+                
+                    <td>libpsl</td>
+                
+            
             
             
                 
@@ -10014,6 +11668,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libpwquality</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -10026,6 +11686,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libqb</td>
+                
             
             
             
@@ -10061,6 +11727,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libqmi</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -10090,6 +11762,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libqmi-utils</td>
+                
             
             
             
@@ -10125,6 +11803,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>librepo</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -10154,6 +11838,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libreport</td>
+                
             
             
             
@@ -10189,6 +11879,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libreport-anaconda</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -10218,6 +11914,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libreport-cli</td>
+                
             
             
             
@@ -10253,6 +11955,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libreport-filesystem</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -10282,6 +11990,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libreport-plugin-bugzilla</td>
+                
             
             
             
@@ -10317,6 +12031,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libreport-plugin-reportuploader</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -10346,6 +12066,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libreport-web</td>
+                
             
             
             
@@ -10408,6 +12134,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libseccomp</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -10420,6 +12152,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libsecret</td>
+                
             
             
             
@@ -10482,6 +12220,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libselinux</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -10494,6 +12238,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libselinux-utils</td>
+                
             
             
             
@@ -10519,6 +12269,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libsemanage</td>
             <td> - </td>
+            
+            
+                
+                    <td>libsemanage</td>
+                
+            
             
             
                 
@@ -10598,11 +12354,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libsepol</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">libsigsegv</td>
             <td> - </td>
+            
+            
+                
+                    <td>libsigsegv</td>
+                
+            
             
             
                 
@@ -10682,6 +12450,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libsmartcols</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -10694,6 +12468,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libsmbios</td>
+                
             
             
             
@@ -10729,6 +12509,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libsolv</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -10758,6 +12544,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libsoup</td>
+                
             
             
             
@@ -10793,6 +12585,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libss</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -10815,6 +12613,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libssh</td>
             <td> - </td>
+            
+            
+                
+                    <td>libssh</td>
+                
+            
             
             
                 
@@ -10887,6 +12691,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libssh-config</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -10902,6 +12712,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libsss_idmap</td>
+                
             
             
             
@@ -10937,6 +12753,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libsss_nss_idmap</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -10966,6 +12788,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">libsss_sudo</td>
+                
             
             
             
@@ -11023,6 +12851,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libstdc++</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -11038,6 +12872,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libsysfs</td>
+                
             
             
             
@@ -11070,6 +12910,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libtar</td>
+                
             
             
             
@@ -11132,6 +12978,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libtasn1</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -11144,6 +12996,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libteam</td>
+                
             
             
             
@@ -11169,6 +13027,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libtirpc</td>
             <td> - </td>
+            
+            
+                
+                    <td>libtirpc</td>
+                
+            
             
             
                 
@@ -11248,6 +13112,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libunistring</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -11280,6 +13150,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -11292,6 +13166,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libusbx</td>
+                
             
             
             
@@ -11327,6 +13207,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libuser</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -11349,6 +13235,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libutempter</td>
             <td> - </td>
+            
+            
+                
+                    <td>libutempter</td>
+                
+            
             
             
                 
@@ -11428,6 +13320,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libuuid</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -11440,6 +13338,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libvarlink-util</td>
+                
             
             
             
@@ -11465,6 +13369,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libverto</td>
             <td> - </td>
+            
+            
+                
+                    <td>libverto</td>
+                
+            
             
             
                 
@@ -11544,6 +13454,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>libxcrypt</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -11556,6 +13472,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libxcrypt-compat</td>
+                
             
             
             
@@ -11581,6 +13503,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">libxkbcommon</td>
             <td> - </td>
+            
+            
+                
+                    <td>libxkbcommon</td>
+                
+            
             
             
                 
@@ -11653,6 +13581,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libxml2</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -11668,6 +13602,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libxmlb</td>
+                
             
             
             
@@ -11700,6 +13640,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>libyaml</td>
+                
             
             
             
@@ -11757,6 +13703,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>libzstd</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -11774,6 +13726,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>linux-atm-libs</td>
+                
             
             
             
@@ -11809,6 +13767,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>linux-firmware</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -11841,6 +13805,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>linux-firmware-whence</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -11870,6 +13840,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>lsof</td>
+                
             
             
             
@@ -11932,6 +13908,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>lua-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -11944,6 +13926,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>luksmeta</td>
+                
             
             
             
@@ -11979,6 +13967,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">lvm2</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -12011,6 +14005,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>lvm2-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -12040,6 +14040,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>lz4</td>
+                
             
             
             
@@ -12102,6 +14108,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>lz4-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -12114,6 +14126,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>lzo</td>
+                
             
             
             
@@ -12139,6 +14157,10 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">mailcap</td>
             <td> - </td>
+            
+            
+            <td> - </td>
+            
             
             
             <td> - </td>
@@ -12200,6 +14222,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -12210,6 +14236,10 @@ tbody tr, tbody th {
                 
                     <td>mariadb-backup</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -12264,6 +14294,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -12274,6 +14308,10 @@ tbody tr, tbody th {
                 
                     <td>mariadb-connector-c</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -12328,6 +14366,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -12338,6 +14380,10 @@ tbody tr, tbody th {
                 
                     <td>mariadb-cracklib-password-check</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -12392,6 +14438,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -12402,6 +14452,10 @@ tbody tr, tbody th {
                 
                     <td>mariadb-gssapi-server</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -12456,6 +14510,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -12466,6 +14524,10 @@ tbody tr, tbody th {
                 
                     <td>mariadb-server-utils</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -12503,6 +14565,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>mdadm</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -12535,13 +14603,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">microcode_ctl</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td style="color:#CC0066">microcode_ctl</td>
-                
+            <td> - </td>
             
             
             
@@ -12557,6 +14629,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">mkpasswd</td>
             <td> - </td>
+            
+            
+                
+                    <td>mkpasswd</td>
+                
+            
             
             
                 
@@ -12607,6 +14685,10 @@ tbody tr, tbody th {
             
             
             
+            <td> - </td>
+            
+            
+            
                 
                     <td>mod_http2</td>
                 
@@ -12641,13 +14723,17 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>mokutil</td>
+                
+            
+            
+            
             <td> - </td>
             
             
             
-                
-                    <td>mokutil</td>
-                
+            <td> - </td>
             
             
             
@@ -12673,6 +14759,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>mozjs60</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -12695,6 +14787,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">mpfr</td>
             <td> - </td>
+            
+            
+                
+                    <td>mpfr</td>
+                
+            
             
             
                 
@@ -12774,11 +14872,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>ncurses</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">ncurses-base</td>
             <td> - </td>
+            
+            
+                
+                    <td>ncurses-base</td>
+                
+            
             
             
                 
@@ -12858,6 +14968,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>ncurses-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -12870,6 +14986,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>ndctl</td>
+                
             
             
             
@@ -12902,6 +15024,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>ndctl-libs</td>
+                
             
             
             
@@ -12964,6 +15092,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>nettle</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -12976,6 +15110,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>nftables</td>
+                
             
             
             
@@ -13028,6 +15168,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -13042,6 +15186,10 @@ tbody tr, tbody th {
                 
                     <td>nginx-filesystem</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -13092,6 +15240,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -13104,6 +15256,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>nmap-ncat</td>
+                
             
             
             
@@ -13139,6 +15297,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>npth</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13168,6 +15332,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>nspr</td>
+                
             
             
             
@@ -13203,6 +15373,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>nss</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13232,6 +15408,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">nss-altfiles</td>
+                
             
             
             
@@ -13267,6 +15449,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>nss-softokn</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13296,6 +15484,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>nss-softokn-freebl</td>
+                
             
             
             
@@ -13331,6 +15525,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>nss-sysinit</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13360,6 +15560,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>nss-util</td>
+                
             
             
             
@@ -13417,6 +15623,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>openldap</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13432,6 +15644,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>openssh</td>
+                
             
             
             
@@ -13467,6 +15685,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">openssh-clients</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13499,6 +15723,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">openssh-server</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13521,6 +15751,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">openssl</td>
             <td> - </td>
+            
+            
+                
+                    <td>openssl</td>
+                
+            
             
             
                 
@@ -13598,11 +15834,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>openssl-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">openssl-pkcs11</td>
             <td> - </td>
+            
+            
+                
+                    <td>openssl-pkcs11</td>
+                
+            
             
             
                 
@@ -13675,6 +15923,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>os-prober</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13690,6 +15944,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>ostree</td>
+                
             
             
             
@@ -13725,6 +15985,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>ostree-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13747,6 +16013,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">p11-kit</td>
             <td> - </td>
+            
+            
+                
+                    <td>p11-kit</td>
+                
+            
             
             
                 
@@ -13826,11 +16098,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>p11-kit-trust</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">pam</td>
             <td> - </td>
+            
+            
+                
+                    <td>pam</td>
+                
+            
             
             
                 
@@ -13883,6 +16167,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>parted</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13912,6 +16202,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">passwd</td>
+                
             
             
             
@@ -13947,6 +16243,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>pciutils-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -13969,6 +16271,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">pcre</td>
             <td> - </td>
+            
+            
+                
+                    <td>pcre</td>
+                
+            
             
             
                 
@@ -14048,6 +16356,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>pcre2</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14058,6 +16372,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Carp</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14112,6 +16430,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14122,6 +16444,10 @@ tbody tr, tbody th {
                 
                     <td>perl-DBI</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14176,6 +16502,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14186,6 +16516,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Digest</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14240,6 +16574,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14250,6 +16588,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Encode</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14304,6 +16646,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14314,6 +16660,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Exporter</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14368,6 +16718,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14378,6 +16732,10 @@ tbody tr, tbody th {
                 
                     <td>perl-File-Temp</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14432,6 +16790,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14442,6 +16804,10 @@ tbody tr, tbody th {
                 
                     <td>perl-HTTP-Tiny</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14496,6 +16862,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14506,6 +16876,10 @@ tbody tr, tbody th {
                 
                     <td>perl-IO-Socket-IP</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14560,6 +16934,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14570,6 +16948,10 @@ tbody tr, tbody th {
                 
                     <td>perl-MIME-Base64</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14624,6 +17006,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14634,6 +17020,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Math-Complex</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14688,6 +17078,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14698,6 +17092,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Net-SSLeay</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14752,6 +17150,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14762,6 +17164,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Pod-Escapes</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14816,6 +17222,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14826,6 +17236,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Pod-Simple</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14880,6 +17294,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14890,6 +17308,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Scalar-List-Utils</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -14944,6 +17366,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -14954,6 +17380,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Storable</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -15008,6 +17438,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -15018,6 +17452,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Term-Cap</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -15072,6 +17510,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -15082,6 +17524,10 @@ tbody tr, tbody th {
                 
                     <td>perl-Text-Tabs+Wrap</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -15136,6 +17582,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -15146,6 +17596,10 @@ tbody tr, tbody th {
                 
                     <td>perl-URI</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -15200,6 +17654,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -15210,6 +17668,10 @@ tbody tr, tbody th {
                 
                     <td>perl-constant</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -15264,6 +17726,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -15274,6 +17740,10 @@ tbody tr, tbody th {
                 
                     <td>perl-libnet</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -15328,6 +17798,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -15338,6 +17812,10 @@ tbody tr, tbody th {
                 
                     <td>perl-macros</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -15392,6 +17870,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -15402,6 +17884,10 @@ tbody tr, tbody th {
                 
                     <td>perl-podlators</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -15456,6 +17942,10 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -15466,6 +17956,10 @@ tbody tr, tbody th {
                 
                     <td>perl-threads-shared</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -15525,6 +18019,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>pigz</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -15540,6 +18040,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">pinentry</td>
+                
             
             
             
@@ -15575,6 +18081,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>pkgconf</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -15604,6 +18116,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>pkgconf-m4</td>
+                
             
             
             
@@ -15639,6 +18157,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>pkgconf-pkg-config</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -15668,6 +18192,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">podman</td>
+                
             
             
             
@@ -15703,6 +18233,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>podman-manpages</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -15732,6 +18268,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">policycoreutils</td>
+                
             
             
             
@@ -15767,6 +18309,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">policycoreutils-python-utils</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -15796,6 +18344,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">polkit</td>
+                
             
             
             
@@ -15831,6 +18385,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>polkit-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -15863,6 +18423,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>polkit-pkla-compat</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -15885,6 +18451,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">popt</td>
             <td> - </td>
+            
+            
+                
+                    <td>popt</td>
+                
+            
             
             
                 
@@ -15943,6 +18515,10 @@ tbody tr, tbody th {
             
             
             
+            <td> - </td>
+            
+            
+            
                 
                     <td style="color:#CC0066">postgresql</td>
                 
@@ -15957,6 +18533,10 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">postgresql-server</td>
             <td> - </td>
+            
+            
+            <td> - </td>
+            
             
             
             <td> - </td>
@@ -16004,6 +18584,12 @@ tbody tr, tbody th {
             
             
                 
+                    <td style="color:#CC0066">procps-ng</td>
+                
+            
+            
+            
+                
                     <td>procps-ng</td>
                 
             
@@ -16039,6 +18625,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>protobuf</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16071,6 +18663,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>protobuf-c</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16098,6 +18696,10 @@ tbody tr, tbody th {
                 
                     <td>psmisc</td>
                 
+            
+            
+            
+            <td> - </td>
             
             
             
@@ -16157,6 +18759,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>publicsuffix-list-dafsa</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16172,6 +18780,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python-pip-wheel</td>
+                
             
             
             
@@ -16207,6 +18821,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python-setuptools-wheel</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16236,6 +18856,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python-systemd-doc</td>
+                
             
             
             
@@ -16271,6 +18897,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">python3</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16300,6 +18932,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-audit</td>
+                
             
             
             
@@ -16335,6 +18973,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-blivet</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16364,6 +19008,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-blockdev</td>
+                
             
             
             
@@ -16399,6 +19049,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-bytesize</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16428,6 +19084,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-chardet</td>
+                
             
             
             
@@ -16463,6 +19125,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-coverage</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16492,6 +19160,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-dbus</td>
+                
             
             
             
@@ -16527,6 +19201,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-decorator</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16556,6 +19236,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-dnf</td>
+                
             
             
             
@@ -16591,6 +19277,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-firewall</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16620,6 +19312,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-gobject-base</td>
+                
             
             
             
@@ -16655,6 +19353,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-gpg</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16684,6 +19388,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-hawkey</td>
+                
             
             
             
@@ -16719,6 +19429,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-idna</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16748,6 +19464,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-kickstart</td>
+                
             
             
             
@@ -16783,6 +19505,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-langtable</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16812,6 +19540,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-libcomps</td>
+                
             
             
             
@@ -16847,6 +19581,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-libdnf</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16876,6 +19616,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-libreport</td>
+                
             
             
             
@@ -16911,6 +19657,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -16940,6 +19692,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-libselinux</td>
+                
             
             
             
@@ -16975,6 +19733,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-libsemanage</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17004,6 +19768,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-meh</td>
+                
             
             
             
@@ -17039,6 +19809,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-ntplib</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17068,6 +19844,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-ordered-set</td>
+                
             
             
             
@@ -17103,6 +19885,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-pid</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17132,6 +19920,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-pip</td>
+                
             
             
             
@@ -17167,6 +19961,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-policycoreutils</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17196,6 +19996,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-productmd</td>
+                
             
             
             
@@ -17231,6 +20037,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-pwquality</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17260,6 +20072,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-pydbus</td>
+                
             
             
             
@@ -17295,6 +20113,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-pyparted</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17324,6 +20148,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-pysocks</td>
+                
             
             
             
@@ -17359,6 +20189,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-pytz</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17388,6 +20224,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-pyudev</td>
+                
             
             
             
@@ -17423,6 +20265,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-requests</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17452,6 +20300,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-requests-file</td>
+                
             
             
             
@@ -17487,6 +20341,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-requests-ftp</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17516,6 +20376,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-rpm</td>
+                
             
             
             
@@ -17551,6 +20417,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-setools</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17580,6 +20452,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-setuptools</td>
+                
             
             
             
@@ -17615,6 +20493,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-simpleline</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17644,6 +20528,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-six</td>
+                
             
             
             
@@ -17679,6 +20569,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-slip</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17708,6 +20604,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-slip-dbus</td>
+                
             
             
             
@@ -17743,6 +20645,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-sssdconfig</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17772,6 +20680,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>python3-systemd</td>
+                
             
             
             
@@ -17807,6 +20721,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-unbound</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17839,6 +20759,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>python3-urllib3</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -17861,6 +20787,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">qrencode-libs</td>
             <td> - </td>
+            
+            
+                
+                    <td>qrencode-libs</td>
+                
+            
             
             
                 
@@ -17940,6 +20872,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>readline</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -17952,6 +20890,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">rng-tools</td>
+                
             
             
             
@@ -17984,6 +20928,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">rootfiles</td>
+                
             
             
             
@@ -18024,6 +20974,12 @@ tbody tr, tbody th {
             
             
                 
+                    <td style="color:#CC0066">rpm</td>
+                
+            
+            
+            
+                
                     <td>rpm</td>
                 
             
@@ -18056,6 +21012,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>rpm-build-libs</td>
+                
             
             
             
@@ -18113,6 +21075,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>rpm-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18128,6 +21096,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">rpm-ostree</td>
+                
             
             
             
@@ -18163,6 +21137,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>rpm-ostree-libs</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18192,6 +21172,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>rpm-plugin-selinux</td>
+                
             
             
             
@@ -18227,6 +21213,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>rpm-plugin-systemd-inhibit</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18256,6 +21248,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>rpm-sign-libs</td>
+                
             
             
             
@@ -18291,6 +21289,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">rsync</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18320,6 +21324,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>runc</td>
+                
             
             
             
@@ -18355,6 +21365,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>satyr</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18384,6 +21400,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">screen</td>
+                
             
             
             
@@ -18446,6 +21468,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>sed</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -18458,6 +21486,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>selinux-policy</td>
+                
             
             
             
@@ -18493,6 +21527,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">selinux-policy-targeted</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18522,6 +21562,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">setools-console</td>
+                
             
             
             
@@ -18557,6 +21603,12 @@ tbody tr, tbody th {
             
                 
                     <td>setup</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">setup</td>
                 
             
             
@@ -18599,6 +21651,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>sgpio</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18631,6 +21689,12 @@ tbody tr, tbody th {
             
                 
                     <td>shadow-utils</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">shadow-utils</td>
                 
             
             
@@ -18695,6 +21759,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>shared-mime-info</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18703,10 +21773,6 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">shim-x64</td>
             <td> - </td>
-            
-            
-            <td> - </td>
-            
             
             
             <td> - </td>
@@ -18730,6 +21796,14 @@ tbody tr, tbody th {
             <td> - </td>
             
             
+            
+            <td> - </td>
+            
+            
+            
+            <td> - </td>
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -18742,6 +21816,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">skopeo</td>
+                
             
             
             
@@ -18777,6 +21857,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">slirp4netns</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18806,6 +21892,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>sqlite-libs</td>
+                
             
             
             
@@ -18841,6 +21933,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">sssd-client</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18870,6 +21968,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">sudo</td>
+                
             
             
             
@@ -18905,6 +22009,12 @@ tbody tr, tbody th {
             
                 
                     <td>systemd</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">systemd</td>
                 
             
             
@@ -18969,6 +22079,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>systemd-bootchart</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -18977,6 +22093,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">systemd-libs</td>
             <td> - </td>
+            
+            
+                
+                    <td>systemd-libs</td>
+                
+            
             
             
                 
@@ -19056,11 +22178,23 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>systemd-pam</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
             <td class="all-pkgs">systemd-rpm-macros</td>
             <td> - </td>
+            
+            
+                
+                    <td>systemd-rpm-macros</td>
+                
+            
             
             
                 
@@ -19135,6 +22269,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>systemd-udev</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19150,6 +22290,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">tar</td>
+                
             
             
             
@@ -19185,6 +22331,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>teamd</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19214,6 +22366,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>timedatex</td>
+                
             
             
             
@@ -19249,6 +22407,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">tmux</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19278,6 +22442,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>tpm2-abrmd</td>
+                
             
             
             
@@ -19313,6 +22483,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>tpm2-abrmd-selinux</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19342,6 +22518,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>tpm2-tools</td>
+                
             
             
             
@@ -19377,6 +22559,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>tpm2-tss</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19406,6 +22594,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">traceroute</td>
+                
             
             
             
@@ -19463,6 +22657,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>trousers</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19471,6 +22671,12 @@ tbody tr, tbody th {
         <tr class="not-in-base">
             <td class="all-pkgs">trousers-lib</td>
             <td> - </td>
+            
+            
+                
+                    <td>trousers-lib</td>
+                
+            
             
             
                 
@@ -19548,6 +22754,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>tzdata</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -19560,6 +22772,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>unbound-libs</td>
+                
             
             
             
@@ -19595,6 +22813,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">usbguard</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19624,6 +22848,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>userspace-rcu</td>
+                
             
             
             
@@ -19659,6 +22889,12 @@ tbody tr, tbody th {
             
                 
                     <td>util-linux</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">util-linux</td>
                 
             
             
@@ -19701,6 +22937,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td style="color:#CC0066">vim-minimal</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19730,6 +22972,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>volume_key-libs</td>
+                
             
             
             
@@ -19765,6 +23013,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>web-assets-filesystem</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19797,6 +23051,12 @@ tbody tr, tbody th {
             
                 
                     <td>which</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">which</td>
                 
             
             
@@ -19859,6 +23119,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>whois-nls</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19874,6 +23140,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">wpa_supplicant</td>
+                
             
             
             
@@ -19906,6 +23178,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">wpan-tools</td>
+                
             
             
             
@@ -19963,6 +23241,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>xkeyboard-config</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -19978,6 +23262,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>xmlrpc-c</td>
+                
             
             
             
@@ -20013,6 +23303,12 @@ tbody tr, tbody th {
             
             
             
+                
+                    <td>xmlrpc-c-client</td>
+                
+            
+            
+            
             <td> - </td>
             
             
@@ -20045,6 +23341,12 @@ tbody tr, tbody th {
             
                 
                     <td>xz</td>
+                
+            
+            
+            
+                
+                    <td style="color:#CC0066">xz</td>
                 
             
             
@@ -20112,6 +23414,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>xz-libs</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -20124,6 +23432,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td>zchunk-libs</td>
+                
             
             
             
@@ -20186,6 +23500,12 @@ tbody tr, tbody th {
                 
             
             
+            
+                
+                    <td>zlib</td>
+                
+            
+            
         </tr>
         
         <tr class="not-in-base">
@@ -20198,6 +23518,12 @@ tbody tr, tbody th {
             
             
             <td> - </td>
+            
+            
+            
+                
+                    <td style="color:#CC0066">zram</td>
+                
             
             
             
