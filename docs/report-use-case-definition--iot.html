@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <style>
+      .jumbotron {
+          margin-bottom: 0 !important;
+      }
+  
+      .jumbotron-minimization {
+          background-color: #631a38!important;
+          color: white;
+          padding: 30px 0;
+      }
+  
+      .jumbotron-home {
+          background-color: #072b61;
+          color: white;
+      }
+  
+  
+  
+      .jumbotron-about {
+  
+          padding: 30px 0;
+      }
+  
+      a.btn-minimization {
+          background-color: #942653;
+          border-color: #942653;
+          color: white;
+      }
+  
+      a.btn-minimization:hover {
+          background-color: #7b1f45;
+          border-color: #7b1f45;
+          color: white;
+      }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Feedback Pipeline <span class="text-muted">prototype</span></span>
+  </nav>
+  
+
+<style>
+
+</style>
+
+<br>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Home</a></li>
+            <li class="breadcrumb-item"><a href="./views.html">Views</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-case-definitions.html">Use Cases</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-case-definitions.html">Definitions</a></li>
+            <li class="breadcrumb-item active" aria-current="page">IoT
+            </li>
+        </ol>
+    </nav>
+
+    <a class="btn btn-primary float-right" href="https://github.com/minimization/feedback-pipeline-config/blob/master/iot.yaml">Edit</a>
+
+
+    <h1> IoT <small class="text-muted">definition</small> </h1>
+    <p> Generated at 07/10/2019 20:05. </p>
+
+    <hr>
+
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <h5 class="card-header">Required Packages</h5>
+                <ul class="list-group list-group-flush">
+                    
+                    <li class="list-group-item">attr</li>
+                    
+                    <li class="list-group-item">audit</li>
+                    
+                    <li class="list-group-item">authconfig</li>
+                    
+                    <li class="list-group-item">basesystem</li>
+                    
+                    <li class="list-group-item">bash</li>
+                    
+                    <li class="list-group-item">bash-completion</li>
+                    
+                    <li class="list-group-item">bluez</li>
+                    
+                    <li class="list-group-item">bluez-libs</li>
+                    
+                    <li class="list-group-item">chrony</li>
+                    
+                    <li class="list-group-item">clevis</li>
+                    
+                    <li class="list-group-item">clevis-dracut</li>
+                    
+                    <li class="list-group-item">clevis-luks</li>
+                    
+                    <li class="list-group-item">cloud-utils-growpart</li>
+                    
+                    <li class="list-group-item">container-selinux</li>
+                    
+                    <li class="list-group-item">coreutils</li>
+                    
+                    <li class="list-group-item">criu</li>
+                    
+                    <li class="list-group-item">cryptsetup</li>
+                    
+                    <li class="list-group-item">curl</li>
+                    
+                    <li class="list-group-item">dnsmasq</li>
+                    
+                    <li class="list-group-item">dracut-config-generic</li>
+                    
+                    <li class="list-group-item">dracut-network</li>
+                    
+                    <li class="list-group-item">e2fsprogs</li>
+                    
+                    <li class="list-group-item">fedora-release-iot</li>
+                    
+                    <li class="list-group-item">firewalld</li>
+                    
+                    <li class="list-group-item">fwupd</li>
+                    
+                    <li class="list-group-item">glibc</li>
+                    
+                    <li class="list-group-item">gnupg2</li>
+                    
+                    <li class="list-group-item">greenboot</li>
+                    
+                    <li class="list-group-item">greenboot-grub2</li>
+                    
+                    <li class="list-group-item">greenboot-reboot</li>
+                    
+                    <li class="list-group-item">greenboot-rpm-ostree-grub2</li>
+                    
+                    <li class="list-group-item">greenboot-status</li>
+                    
+                    <li class="list-group-item">gzip</li>
+                    
+                    <li class="list-group-item">hostname</li>
+                    
+                    <li class="list-group-item">initial-setup</li>
+                    
+                    <li class="list-group-item">iproute</li>
+                    
+                    <li class="list-group-item">iptables</li>
+                    
+                    <li class="list-group-item">iputils</li>
+                    
+                    <li class="list-group-item">iwd</li>
+                    
+                    <li class="list-group-item">kernel</li>
+                    
+                    <li class="list-group-item">kernel-tools</li>
+                    
+                    <li class="list-group-item">keyutils</li>
+                    
+                    <li class="list-group-item">less</li>
+                    
+                    <li class="list-group-item">libgpiod-utils</li>
+                    
+                    <li class="list-group-item">libsss_sudo</li>
+                    
+                    <li class="list-group-item">lvm2</li>
+                    
+                    <li class="list-group-item">NetworkManager</li>
+                    
+                    <li class="list-group-item">NetworkManager-wifi</li>
+                    
+                    <li class="list-group-item">NetworkManager-wwan</li>
+                    
+                    <li class="list-group-item">nss-altfiles</li>
+                    
+                    <li class="list-group-item">openssh-clients</li>
+                    
+                    <li class="list-group-item">openssh-server</li>
+                    
+                    <li class="list-group-item">passwd</li>
+                    
+                    <li class="list-group-item">pinentry</li>
+                    
+                    <li class="list-group-item">podman</li>
+                    
+                    <li class="list-group-item">policycoreutils</li>
+                    
+                    <li class="list-group-item">policycoreutils-python-utils</li>
+                    
+                    <li class="list-group-item">polkit</li>
+                    
+                    <li class="list-group-item">procps-ng</li>
+                    
+                    <li class="list-group-item">python3</li>
+                    
+                    <li class="list-group-item">rng-tools</li>
+                    
+                    <li class="list-group-item">rootfiles</li>
+                    
+                    <li class="list-group-item">rpm</li>
+                    
+                    <li class="list-group-item">rpm-ostree</li>
+                    
+                    <li class="list-group-item">rsync</li>
+                    
+                    <li class="list-group-item">screen</li>
+                    
+                    <li class="list-group-item">selinux-policy-targeted</li>
+                    
+                    <li class="list-group-item">setools-console</li>
+                    
+                    <li class="list-group-item">setup</li>
+                    
+                    <li class="list-group-item">shadow-utils</li>
+                    
+                    <li class="list-group-item">skopeo</li>
+                    
+                    <li class="list-group-item">slirp4netns</li>
+                    
+                    <li class="list-group-item">sssd-client</li>
+                    
+                    <li class="list-group-item">sudo</li>
+                    
+                    <li class="list-group-item">systemd</li>
+                    
+                    <li class="list-group-item">tar</li>
+                    
+                    <li class="list-group-item">tmux</li>
+                    
+                    <li class="list-group-item">traceroute</li>
+                    
+                    <li class="list-group-item">usbguard</li>
+                    
+                    <li class="list-group-item">util-linux</li>
+                    
+                    <li class="list-group-item">vim-minimal</li>
+                    
+                    <li class="list-group-item">which</li>
+                    
+                    <li class="list-group-item">wpan-tools</li>
+                    
+                    <li class="list-group-item">wpa_supplicant</li>
+                    
+                    <li class="list-group-item">xz</li>
+                    
+                    <li class="list-group-item">zram</li>
+                    
+                </ul>
+            </div><br>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <h5 class="card-header">Install Options</h5>
+                <ul class="list-group list-group-flush">
+                    
+                    <li class="list-group-item">no-docs</li>
+                    
+                </ul>
+            </div><br>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <h5 class="card-header">Installed on</h5>
+                <ul class="list-group list-group-flush">
+                    
+                    <li class="list-group-item">fedora-empty-base:30</li>
+                    
+                    <li class="list-group-item">fedora-empty-base:31</li>
+                    
+                    <li class="list-group-item">fedora-empty-base:rawhide</li>
+                    
+                </ul>
+            </div><br>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<br><br>
+</body>
+
+</html>
