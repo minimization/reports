@@ -59,7 +59,16 @@
   
 
 <style>
+    div.package-name {
+        font-family: monospace;
+        color: #CC0066;
+        border-bottom: #6c757d 1px solid;
 
+    }
+
+    div.package-name:first-child {
+        border-top: #6c757d 1px solid;
+    }
 </style>
 
 <br>
@@ -69,18 +78,19 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="./">Home</a></li>
             <li class="breadcrumb-item"><a href="./views.html">Views</a></li>
-            <li class="breadcrumb-item"><a href="./view--use-case-definitions.html">Use Cases</a></li>
-            <li class="breadcrumb-item"><a href="./view--use-case-definitions.html">Definitions</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-cases-definitions.html">Use Cases</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-cases-definitions.html">Definitions</a></li>
             <li class="breadcrumb-item active" aria-current="page">Apache HTTP Container
             </li>
         </ol>
     </nav>
 
-    <a class="btn btn-primary float-right" href="https://github.com/minimization/feedback-pipeline-config/blob/master/httpd-container.yaml">Edit</a>
+    <a class="btn btn-primary float-right"
+        href="https://github.com/minimization/feedback-pipeline-config/blob/master/httpd-container.yaml">Edit</a>
 
 
-    <h1> Apache HTTP Container <small class="text-muted">definition</small> </h1>
-    <p> Generated at 07/10/2019 20:05. </p>
+    <h1> Apache HTTP Container <small class="text-muted">use case definition</small> </h1>
+    <p> Generated at 13/11/2019 18:40. </p>
 
     <hr>
 
@@ -88,29 +98,39 @@
     <div class="row">
         <div class="col-lg-4">
             <div class="card">
-                <h5 class="card-header">Required Packages</h5>
-                <ul class="list-group list-group-flush">
+                <h5 class="card-header">
+                    Required Packages
+                    <span class="badge badge-pill float-right badge-dark">
+                        7
+                    </span>
+                </h5>
+                <div class="card-body">
                     
-                    <li class="list-group-item">httpd</li>
+                    <div class="package-name">bind-utils</div>
                     
-                    <li class="list-group-item">mod_ssl</li>
+                    <div class="package-name">gettext</div>
                     
-                    <li class="list-group-item">yum-utils</li>
+                    <div class="package-name">hostname</div>
                     
-                    <li class="list-group-item">gettext</li>
+                    <div class="package-name">httpd</div>
                     
-                    <li class="list-group-item">hostname</li>
+                    <div class="package-name">mod_ssl</div>
                     
-                    <li class="list-group-item">nss_wrapper</li>
+                    <div class="package-name">nss_wrapper</div>
                     
-                    <li class="list-group-item">bind-utils</li>
+                    <div class="package-name">yum-utils</div>
                     
-                </ul>
+                </div>
             </div><br>
         </div>
         <div class="col-lg-4">
             <div class="card">
-                <h5 class="card-header">Install Options</h5>
+                <h5 class="card-header">
+                    Install Options
+                    <span class="badge badge-pill float-right badge-dark">
+                        1
+                    </span>
+                </h5>
                 <ul class="list-group list-group-flush">
                     
                     <li class="list-group-item">no-docs</li>
@@ -120,7 +140,12 @@
         </div>
         <div class="col-lg-4">
             <div class="card">
-                <h5 class="card-header">Installed on</h5>
+                <h5 class="card-header">
+                        Installed on
+                        <span class="badge badge-pill float-right badge-dark">
+                            3
+                        </span>
+                    </h5>
                 <ul class="list-group list-group-flush">
                     
                     <li class="list-group-item">fedora-container-base:30</li>
