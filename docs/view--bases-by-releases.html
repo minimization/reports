@@ -95,6 +95,12 @@
     table.dataTable thead .sorting_desc_disabled {
       background-image: url("_static/images/sort_desc_disabled.png");
     }
+
+    table.dataTable thead .sort_control_row {
+      border-top: 2px solid black!important;
+      font-weight: bold!important;
+    }
+
   </style>
 </head>
 
@@ -112,7 +118,7 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="./">Home</a></li>
     <li class="breadcrumb-item"><a href="./views.html">Views</a></li>
-    <li class="breadcrumb-item"><a href="./view--bases-definitions.html">Bases</a></li>
+    <li class="breadcrumb-item"><a href="./view--bases-definitions.html">Base Images (Eivironments)</a></li>
     <li class="breadcrumb-item active" aria-current="page">Compare Releases</li>
   </ol>
 </nav>
@@ -130,7 +136,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link active"
-        href="./view--bases-definitions.html"><b>Bases</b></a>
+        href="./view--bases-definitions.html"><b>Base Images (Eivironments)</b></a>
     </li>
 
   </ul>
@@ -156,37 +162,47 @@
 
   
 
-<div class="row">
-  
-  <div class="col-lg-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Empty base</h5>
-        <h6 class="card-subtitle mb-2 text-muted">
-          compared on multiple Fedora releases
-        </h6>
-      </div>
-      <div class="card-footer">
-        <a class="card-link" href="report-base-releases--fedora-empty-base.html">All releases</a>
-      </div>
-    </div><br>
-  </div>
-  
-  <div class="col-lg-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Fedora Container Base</h5>
-        <h6 class="card-subtitle mb-2 text-muted">
-          compared on multiple Fedora releases
-        </h6>
-      </div>
-      <div class="card-footer">
-        <a class="card-link" href="report-base-releases--fedora-container-base.html">All releases</a>
-      </div>
-    </div><br>
-  </div>
-  
-</div>
+
+<table class="table table-striped" id="table_packages">
+  <thead>
+    <tr class="sort_control_row">
+      <th>Name</th>
+      <th>Fedora Releases</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>Empty base</td>
+      <td>
+        <a class="card-link" href="report-base-releases--fedora-empty-base.html">All Fedora Releases</a>
+      </td>
+
+    </tr>
+    
+    <tr>
+      <td>Fedora Container Base</td>
+      <td>
+        <a class="card-link" href="report-base-releases--fedora-container-base.html">All Fedora Releases</a>
+      </td>
+
+    </tr>
+    
+  </tbody>
+</table>
+
+
+<script>
+  $(document).ready(function () {
+    $('#table_packages').DataTable({
+      paging: false,
+      filter: false,
+      info: false
+    });
+  });
+</script>
+
+
 
 
 

@@ -95,6 +95,12 @@
     table.dataTable thead .sorting_desc_disabled {
       background-image: url("_static/images/sort_desc_disabled.png");
     }
+
+    table.dataTable thead .sort_control_row {
+      border-top: 2px solid black!important;
+      font-weight: bold!important;
+    }
+
   </style>
 </head>
 
@@ -130,7 +136,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link "
-        href="./view--bases-definitions.html"><b>Bases</b></a>
+        href="./view--bases-definitions.html"><b>Base Images (Eivironments)</b></a>
     </li>
 
   </ul>
@@ -146,7 +152,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link "
-      href="./view--use-cases-on-bases.html">Compare Bases</a>
+      href="./view--use-cases-on-bases.html">Compare Base Images</a>
   </li>
   <li class="nav-item">
     <a class="nav-link "
@@ -154,7 +160,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link active"
-      href="./view--bases-with-use-cases.html">Compare Use Cases by Base</a>
+      href="./view--bases-with-use-cases.html">Compare Use Cases (by Base)</a>
   </li>
 
 </ul>
@@ -165,49 +171,59 @@
 
   
 
-  <div class="row">
-  
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Empty base</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            multiple use cases on this base
-          </h6>
-        </div>
-        <div class="card-footer">
+
+
+<table class="table table-striped" id="table_packages">
+  <thead>
+    <tr class="sort_control_row">
+      <th>Name</th>
+      <th>Fedora Releases</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>All use cases on the Empty base</td>
+      <td>
           
-          <a class="card-link" href="report-by-base--fedora-empty-base--30.html">Fedora 30</a>
+        <a class="card-link" href="report-by-base--fedora-empty-base--30.html">Fedora 30</a>
+        
+        <a class="card-link" href="report-by-base--fedora-empty-base--31.html">Fedora 31</a>
+        
+        <a class="card-link" href="report-by-base--fedora-empty-base--rawhide.html">Fedora rawhide</a>
+        
+      </td>
+
+    </tr>
+    
+    <tr>
+      <td>All use cases on the Fedora Container Base</td>
+      <td>
           
-          <a class="card-link" href="report-by-base--fedora-empty-base--31.html">Fedora 31</a>
-          
-          <a class="card-link" href="report-by-base--fedora-empty-base--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-  
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Fedora Container Base</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            multiple use cases on this base
-          </h6>
-        </div>
-        <div class="card-footer">
-          
-          <a class="card-link" href="report-by-base--fedora-container-base--30.html">Fedora 30</a>
-          
-          <a class="card-link" href="report-by-base--fedora-container-base--31.html">Fedora 31</a>
-          
-          <a class="card-link" href="report-by-base--fedora-container-base--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-  
-  </div>
+        <a class="card-link" href="report-by-base--fedora-container-base--30.html">Fedora 30</a>
+        
+        <a class="card-link" href="report-by-base--fedora-container-base--31.html">Fedora 31</a>
+        
+        <a class="card-link" href="report-by-base--fedora-container-base--rawhide.html">Fedora rawhide</a>
+        
+      </td>
+
+    </tr>
+    
+  </tbody>
+</table>
+
+
+<script>
+  $(document).ready(function () {
+    $('#table_packages').DataTable({
+      paging: false,
+      filter: false,
+      info: false
+    });
+  });
+</script>
+
 
 
 

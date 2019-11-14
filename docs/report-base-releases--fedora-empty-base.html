@@ -95,6 +95,12 @@
     table.dataTable thead .sorting_desc_disabled {
       background-image: url("_static/images/sort_desc_disabled.png");
     }
+
+    table.dataTable thead .sort_control_row {
+      border-top: 2px solid black!important;
+      font-weight: bold!important;
+    }
+
   </style>
 </head>
 
@@ -172,11 +178,11 @@
 
 
     <h1> Empty base <small class="text-muted">by releases</small> </h1>
-    <p> Generated at 14/11/2019 10:52. </p>
+    <p> Generated at 14/11/2019 15:17. </p>
 
     <hr>
 
-    <table>
+    <table id="table_packages">
         <thead>
             <tr>
                 <td rowspan="3" style="background-color:#cad1d8">All packages in this report</td>
@@ -212,6 +218,19 @@
                 </td>
                 
             </tr>
+            <tr class="sort_control_row">
+                <td style="background-color:#cad1d8">Name</td>
+                
+                <th>Name</th>
+                <th>Size</th>
+                
+                <th>Name</th>
+                <th>Size</th>
+                
+                <th>Name</th>
+                <th>Size</th>
+                
+            </tr>
         </thead>
         <tbody>
             
@@ -219,6 +238,14 @@
     </table>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false
+        });
+    });
+</script>
 
 
   <br><br>

@@ -95,6 +95,12 @@
     table.dataTable thead .sorting_desc_disabled {
       background-image: url("_static/images/sort_desc_disabled.png");
     }
+
+    table.dataTable thead .sort_control_row {
+      border-top: 2px solid black!important;
+      font-weight: bold!important;
+    }
+
   </style>
 </head>
 
@@ -174,7 +180,7 @@
             <li class="breadcrumb-item"><a href="./">Home</a></li>
             <li class="breadcrumb-item"><a href="./views.html">Views</a></li>
             <li class="breadcrumb-item"><a href="./view--use-cases-definitions.html">Use Cases</a></li>
-            <li class="breadcrumb-item"><a href="./view--use-cases-on-bases.html">Compare Bases</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-cases-on-bases.html">Compare Base Images</a></li>
             <li class="breadcrumb-item active" aria-current="page">MariaDB Container (no weak deps) (Fedora 31)</li>
         </ol>
     </nav>
@@ -188,7 +194,7 @@
     
     </small>
     
-    <p> Generated at 14/11/2019 10:52. </p>
+    <p> Generated at 14/11/2019 15:17. </p>
 
     <hr>
 
@@ -222,7 +228,7 @@
                 </td>
                 
             </tr>
-            <tr>
+            <tr class="sort_control_row">
 
                 <td style="background-color:#cad1d8">Why</td>
                 <td style="background-color:#cad1d8">Name</td>

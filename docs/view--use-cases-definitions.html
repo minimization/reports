@@ -95,6 +95,12 @@
     table.dataTable thead .sorting_desc_disabled {
       background-image: url("_static/images/sort_desc_disabled.png");
     }
+
+    table.dataTable thead .sort_control_row {
+      border-top: 2px solid black!important;
+      font-weight: bold!important;
+    }
+
   </style>
 </head>
 
@@ -130,7 +136,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link "
-        href="./view--bases-definitions.html"><b>Bases</b></a>
+        href="./view--bases-definitions.html"><b>Base Images (Eivironments)</b></a>
     </li>
 
   </ul>
@@ -146,7 +152,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link "
-      href="./view--use-cases-on-bases.html">Compare Bases</a>
+      href="./view--use-cases-on-bases.html">Compare Base Images</a>
   </li>
   <li class="nav-item">
     <a class="nav-link "
@@ -154,7 +160,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link "
-      href="./view--bases-with-use-cases.html">Compare Use Cases by Base</a>
+      href="./view--bases-with-use-cases.html">Compare Use Cases (by Base)</a>
   </li>
 
 </ul>
@@ -166,249 +172,105 @@
   
 
 
-<div class="row">
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Apache HTTP Container</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--httpd-container.html">Definition</a>
 
-            </div>
-        </div><br>
-    </div>
+<table class="table table-striped" id="table_packages">
+    <thead>
+        <tr class="sort_control_row">
+            <th>Name</th>
+            <th>Fedora Releases</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>Apache HTTP Container</td>
+            <td><a href="./report-use-case-definition--httpd-container.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>Apache HTTP Container (no weak deps)</td>
+            <td><a href="./report-use-case-definition--httpd-container-noweak.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>Apache HTTP Server</td>
+            <td><a href="./report-use-case-definition--httpd.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>Apache HTTP Server (no weak deps)</td>
+            <td><a href="./report-use-case-definition--httpd-no-weak-deps.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>IoT</td>
+            <td><a href="./report-use-case-definition--iot.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>IoT x86_64 server</td>
+            <td><a href="./report-use-case-definition--iot-x86_64.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>MariaDB</td>
+            <td><a href="./report-use-case-definition--mariadb.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>MariaDB Container</td>
+            <td><a href="./report-use-case-definition--mariadb-container.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>MariaDB Container (no weak deps)</td>
+            <td><a href="./report-use-case-definition--mariadb-container-noweak.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>Nginx</td>
+            <td><a href="./report-use-case-definition--nginx.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>Nginx Container</td>
+            <td><a href="./report-use-case-definition--nginx-container.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>Nginx Container (no weak deps)</td>
+            <td><a href="./report-use-case-definition--nginx-container-noweak.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>PostgreSQL</td>
+            <td><a href="./report-use-case-definition--postgresql.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>PostgreSQL Container</td>
+            <td><a href="./report-use-case-definition--postgresql-container.html">All Fedora Releases</a></td>
+        </tr>
+        
+        <tr>
+            <td>PostgreSQL Container (no weak deps)</td>
+            <td><a href="./report-use-case-definition--postgresql-container-noweak.html">All Fedora Releases</a></td>
+        </tr>
+        
+    </tbody>
+</table>
 
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Apache HTTP Container (no weak deps)</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--httpd-container-noweak.html">Definition</a>
 
-            </div>
-        </div><br>
-    </div>
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            filter: false,
+            info: false
+        });
+    });
+</script>
 
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Apache HTTP Server</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--httpd.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Apache HTTP Server (no weak deps)</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--httpd-no-weak-deps.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">IoT</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--iot.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">IoT x86_64 server</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--iot-x86_64.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">MariaDB</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--mariadb.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">MariaDB Container</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--mariadb-container.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">MariaDB Container (no weak deps)</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--mariadb-container-noweak.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Nginx</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--nginx.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Nginx Container</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--nginx-container.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Nginx Container (no weak deps)</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--nginx-container-noweak.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">PostgreSQL</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--postgresql.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">PostgreSQL Container</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--postgresql-container.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">PostgreSQL Container (no weak deps)</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    use case definition
-                </h6>
-            </div>
-            <div class="card-footer">
-                <a class="card-link" href="./report-use-case-definition--postgresql-container-noweak.html">Definition</a>
-
-            </div>
-        </div><br>
-    </div>
-
-    
-</div>
 
 
 </div>

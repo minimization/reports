@@ -95,6 +95,12 @@
     table.dataTable thead .sorting_desc_disabled {
       background-image: url("_static/images/sort_desc_disabled.png");
     }
+
+    table.dataTable thead .sort_control_row {
+      border-top: 2px solid black!important;
+      font-weight: bold!important;
+    }
+
   </style>
 </head>
 
@@ -130,7 +136,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link "
-        href="./view--bases-definitions.html"><b>Bases</b></a>
+        href="./view--bases-definitions.html"><b>Base Images (Eivironments)</b></a>
     </li>
 
   </ul>
@@ -146,7 +152,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link active"
-      href="./view--use-cases-on-bases.html">Compare Bases</a>
+      href="./view--use-cases-on-bases.html">Compare Base Images</a>
   </li>
   <li class="nav-item">
     <a class="nav-link "
@@ -154,7 +160,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link "
-      href="./view--bases-with-use-cases.html">Compare Use Cases by Base</a>
+      href="./view--bases-with-use-cases.html">Compare Use Cases (by Base)</a>
   </li>
 
 </ul>
@@ -165,324 +171,238 @@
 
   
 
-<div class="row">
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Apache HTTP Container</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+<table class="table table-striped" id="table_packages">
+  <thead>
+    <tr class="sort_control_row">
+      <th>Name</th>
+      <th>Fedora Releases</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>Apache HTTP Container</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--httpd-container--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--httpd-container--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--httpd-container--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Apache HTTP Container (no weak deps)</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>Apache HTTP Container (no weak deps)</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--httpd-container-noweak--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--httpd-container-noweak--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--httpd-container-noweak--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Apache HTTP Server</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>Apache HTTP Server</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--httpd--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--httpd--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--httpd--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Apache HTTP Server (no weak deps)</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>Apache HTTP Server (no weak deps)</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--httpd-no-weak-deps--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--httpd-no-weak-deps--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--httpd-no-weak-deps--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">IoT</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>IoT</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--iot--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--iot--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--iot--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">IoT x86_64 server</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>IoT x86_64 server</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--iot-x86_64--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--iot-x86_64--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--iot-x86_64--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">MariaDB</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>MariaDB</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--mariadb--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--mariadb--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--mariadb--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">MariaDB Container</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>MariaDB Container</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--mariadb-container--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--mariadb-container--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--mariadb-container--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">MariaDB Container (no weak deps)</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>MariaDB Container (no weak deps)</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--mariadb-container-noweak--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--mariadb-container-noweak--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--mariadb-container-noweak--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Nginx</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>Nginx</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--nginx--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--nginx--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--nginx--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Nginx Container</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>Nginx Container</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--nginx-container--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--nginx-container--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--nginx-container--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Nginx Container (no weak deps)</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>Nginx Container (no weak deps)</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--nginx-container-noweak--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--nginx-container-noweak--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--nginx-container-noweak--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">PostgreSQL</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>PostgreSQL</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--postgresql--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--postgresql--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--postgresql--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">PostgreSQL Container</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>PostgreSQL Container</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--postgresql-container--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--postgresql-container--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--postgresql-container--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
-
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">PostgreSQL Container (no weak deps)</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-             use case on relevant bases
-          </h6>
-        </div>
-        <div class="card-footer">
-          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td>PostgreSQL Container (no weak deps)</td>
+      <td>
+        
           <a class="card-link" href="report-by-use-case--postgresql-container-noweak--30.html">Fedora 30</a>
-          
+        
           <a class="card-link" href="report-by-use-case--postgresql-container-noweak--31.html">Fedora 31</a>
-          
+        
           <a class="card-link" href="report-by-use-case--postgresql-container-noweak--rawhide.html">Fedora rawhide</a>
-          
-        </div>
-      </div><br>
-    </div>
+        
+      </td>
+      
+    </tr>
+    
+  </tbody>
+</table>
 
 
-</div>
+<script>
+  $(document).ready(function () {
+    $('#table_packages').DataTable({
+      paging: false,
+      filter: false,
+      info: false
+    });
+  });
+</script>
 
 
 
