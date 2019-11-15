@@ -111,14 +111,82 @@
 
 <style>
     div.package-name {
-        font-family: monospace;
         color: #CC0066;
+    }
+
+    div.install-option {
+        color: rgb(68, 68, 68);
+    }
+
+    div.package-name,
+    div.install-option {
+        font-family: monospace;
+
         border-bottom: #6c757d 1px solid;
 
     }
 
-    div.package-name:first-child {
+    div.package-name:first-child,
+    div.install-option:first-child {
         border-top: #6c757d 1px solid;
+    }
+</style>
+
+<style>
+    td,
+    th {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    td {
+        white-space: nowrap !important;
+    }
+
+    .in-base th {
+        background-color: #accad6;
+        text-align: center;
+    }
+
+    .in-base td {
+        background-color: #d4e3ea;
+        color: #CC0066;
+        font-family: monospace;
+    }
+
+    tr.in-base td.all-pkgs {
+        background-color: #accad6 !important;
+    }
+
+    .not-in-base th {
+        background-color: #e9ecef;
+        text-align: center;
+    }
+
+    .not-in-base td {
+        background-color: #fff;
+        font-family: monospace;
+    }
+
+    tr.not-in-base td.all-pkgs {
+        background-color: #e9ecef !important;
+    }
+
+    thead td,
+    thead th {
+        background-color: #e9ecef;
+        text-align: center;
+    }
+
+    tbody tr,
+    tbody th {
+        border-bottom: #6c757d 1px solid;
+        border-top: #6c757d 1px solid;
+    }
+
+    #table_packages_filter {
+        padding: 12px 12px 0;
+        background-color: #e9ecef;	
     }
 </style>
 
@@ -132,17 +200,16 @@
             <li class="breadcrumb-item"><a href="./views.html">Results</a></li>
             <li class="breadcrumb-item"><a href="./view--use-cases-definitions.html">Dependency Reports</a></li>
             <li class="breadcrumb-item"><a href="./view--bases-definitions.html">Base Images (Eivironments)</a></li>
-            <li class="breadcrumb-item"><a href="./view--bases-definitions.html">Definitions</a></li>
+            <li class="breadcrumb-item"><a href="./view--bases-definitions.html">Details</a></li>
             <li class="breadcrumb-item active" aria-current="page">Fedora Container Base (Fedora rawhide)
             </li>
         </ol>
     </nav>
 
-    <a class="btn btn-primary float-right"
-        href="https://github.com/minimization/feedback-pipeline-config/blob/master/fedora-container-base.yaml">Edit</a>
 
-    <h1> Fedora Container Base (Fedora rawhide) <small class="text-muted">base definition</small> </h1>
-    <p> Generated at 15/11/2019 06:35. </p>
+
+    <h1> Fedora Container Base (Fedora rawhide) <small class="text-muted">details</small> </h1>
+    <p> Generated at 15/11/2019 13:48. </p>
 
     <hr>
 
@@ -168,12 +235,1257 @@
     <br>
 
     <div class="card">
+        <h5 class="card-header">
+            Size History
+        </h5>
         <div class="card-body">
             <canvas id="chLine"></canvas>
         </div>
     </div>
 
     <br>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <h5 class="card-header">
+                    Current State
+                </h5>
+                <div class="card-body">
+                    <a class="float-right" href="./graph--fedora-container-base--rawhide.svg">Dependency Graph</a>
+                    <h5 class="card-title">All Packages (203.7 MB)</h5>
+                    <table id="table_packages" style="width:100%">
+                        <thead>
+                            <tr class="sort_control_row">
+                                <th>Why</th>
+                                <th>Name</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>alternatives-1.11-5.fc31.x86_64</td>
+                                <td data-order="64350">62.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>audit-libs-3.0-0.15.20191104git1c2f876.fc32.x86_64</td>
+                                <td data-order="291892">285.1 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>basesystem-11-8.fc31.noarch</td>
+                                <td data-order="0">0.0 B</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>bash-5.0.7-3.fc31.x86_64</td>
+                                <td data-order="7602760">7.3 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>brotli-1.0.7-8.fc32.x86_64</td>
+                                <td data-order="1538932">1.5 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>bzip2-libs-1.0.8-1.fc31.x86_64</td>
+                                <td data-order="83480">81.5 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>ca-certificates-2019.2.32-3.fc31.noarch</td>
+                                <td data-order="993770">970.5 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>coreutils-8.31-6.fc32.x86_64</td>
+                                <td data-order="7839760">7.5 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>coreutils-common-8.31-6.fc32.x86_64</td>
+                                <td data-order="10348911">9.9 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>cracklib-2.9.6-21.fc31.x86_64</td>
+                                <td data-order="255359">249.4 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>crypto-policies-20191002-1.gitc93dc99.fc32.noarch</td>
+                                <td data-order="188003">183.6 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>curl-7.67.0-1.fc32.x86_64</td>
+                                <td data-order="661556">646.1 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>cyrus-sasl-lib-2.1.27-2.fc31.x86_64</td>
+                                <td data-order="740346">723.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>dejavu-fonts-common-2.37-2.fc31.noarch</td>
+                                <td data-order="153379">149.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>dejavu-sans-fonts-2.37-2.fc31.noarch</td>
+                                <td data-order="5835846">5.6 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td style="color:#CC0066" data-order="0">(required)</td>
+                                <td style="color:#CC0066">dnf-4.2.11-2.fc32.noarch</td>
+                                <td style="color:#CC0066" data-order="1798545">
+                                    1.7 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>dnf-data-4.2.11-2.fc32.noarch</td>
+                                <td data-order="35168">34.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>elfutils-default-yama-scope-0.177-1.fc32.noarch</td>
+                                <td data-order="1810">1.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>elfutils-libelf-0.177-1.fc32.x86_64</td>
+                                <td data-order="940455">918.4 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>elfutils-libs-0.177-1.fc32.x86_64</td>
+                                <td data-order="992199">968.9 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>expat-2.2.8-1.fc32.x86_64</td>
+                                <td data-order="268035">261.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>fedora-gpg-keys-32-0.2.noarch</td>
+                                <td data-order="103813">101.4 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>fedora-release-32-0.4.noarch</td>
+                                <td data-order="699">699.0 B</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>fedora-release-common-32-0.4.noarch</td>
+                                <td data-order="14378">14.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>fedora-repos-32-0.2.noarch</td>
+                                <td data-order="8786">8.6 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>fedora-repos-rawhide-32-0.2.noarch</td>
+                                <td data-order="4132">4.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>file-libs-5.37-8.fc32.x86_64</td>
+                                <td data-order="6919874">6.6 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>filesystem-3.12-2.fc31.x86_64</td>
+                                <td data-order="0">0.0 B</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>fontpackages-filesystem-1.44-25.fc31.noarch</td>
+                                <td data-order="0">0.0 B</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>gawk-5.0.1-6.fc32.x86_64</td>
+                                <td data-order="3006764">2.9 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>gdbm-libs-1:1.18.1-1.fc32.x86_64</td>
+                                <td data-order="127088">124.1 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>glib2-2.63.0-1.fc32.x86_64</td>
+                                <td data-order="12887499">12.3 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>glibc-2.30.9000-17.fc32.x86_64</td>
+                                <td data-order="17301303">16.5 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>glibc-common-2.30.9000-17.fc32.x86_64</td>
+                                <td data-order="8185525">7.8 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td style="color:#CC0066" data-order="0">(required)</td>
+                                <td style="color:#CC0066">glibc-minimal-langpack-2.30.9000-17.fc32.x86_64</td>
+                                <td style="color:#CC0066" data-order="0">
+                                    0.0 B</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>gmp-1:6.1.2-10.fc31.x86_64</td>
+                                <td data-order="1502516">1.4 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>gnupg2-2.2.17-3.fc32.x86_64</td>
+                                <td data-order="9973714">9.5 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>gnutls-3.6.10-1.fc32.x86_64</td>
+                                <td data-order="2919075">2.8 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>gpgme-1.13.1-5.fc32.x86_64</td>
+                                <td data-order="569119">555.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>grep-3.3-3.fc31.x86_64</td>
+                                <td data-order="805874">787.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>gzip-1.10-1.fc31.x86_64</td>
+                                <td data-order="369282">360.6 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>ima-evm-utils-1.2.1-2.fc31.x86_64</td>
+                                <td data-order="129263">126.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>json-c-0.13.1-7.fc32.x86_64</td>
+                                <td data-order="73122">71.4 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>keyutils-libs-1.6-3.fc31.x86_64</td>
+                                <td data-order="55631">54.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>krb5-libs-1.17-47.fc32.x86_64</td>
+                                <td data-order="2262246">2.2 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>langpacks-core-en-2.0-7.fc32.noarch</td>
+                                <td data-order="0">0.0 B</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td style="color:#CC0066" data-order="0">(required)</td>
+                                <td style="color:#CC0066">langpacks-en-2.0-7.fc32.noarch</td>
+                                <td style="color:#CC0066" data-order="400">
+                                    400.0 B</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libacl-2.2.53-4.fc31.x86_64</td>
+                                <td data-order="48624">47.5 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libarchive-3.4.0-1.fc32.x86_64</td>
+                                <td data-order="912653">891.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libassuan-2.5.3-2.fc32.x86_64</td>
+                                <td data-order="174160">170.1 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libattr-2.4.48-7.fc31.x86_64</td>
+                                <td data-order="30186">29.5 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libblkid-2.34-6.fc32.x86_64</td>
+                                <td data-order="377457">368.6 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libcap-2.26-6.fc31.x86_64</td>
+                                <td data-order="150562">147.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libcap-ng-0.7.10-1.fc32.x86_64</td>
+                                <td data-order="55902">54.6 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libcom_err-1.45.4-1.fc32.x86_64</td>
+                                <td data-order="71345">69.7 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libcomps-0.1.11-5.fc32.x86_64</td>
+                                <td data-order="222259">217.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libcurl-7.67.0-1.fc32.x86_64</td>
+                                <td data-order="601448">587.4 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libdb-5.3.28-39.fc32.x86_64</td>
+                                <td data-order="1962032">1.9 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libdb-utils-5.3.28-39.fc32.x86_64</td>
+                                <td data-order="410439">400.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libdnf-0.35.5-5.fc32.x86_64</td>
+                                <td data-order="2282997">2.2 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libffi-3.1-23.fc31.x86_64</td>
+                                <td data-order="58548">57.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libgcc-9.2.1-1.fc32.3.x86_64</td>
+                                <td data-order="194880">190.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libgcrypt-1.8.5-1.fc32.x86_64</td>
+                                <td data-order="1285398">1.2 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libgomp-9.2.1-1.fc32.3.x86_64</td>
+                                <td data-order="343949">335.9 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libgpg-error-1.36-2.fc32.x86_64</td>
+                                <td data-order="774893">756.7 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libidn2-2.2.0-2.fc31.x86_64</td>
+                                <td data-order="251882">246.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libksba-1.3.5-10.fc31.x86_64</td>
+                                <td data-order="340807">332.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libmetalink-0.1.3-9.fc31.x86_64</td>
+                                <td data-order="81760">79.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libmodulemd1-1.8.16-1.fc32.x86_64</td>
+                                <td data-order="562623">549.4 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libmount-2.34-6.fc32.x86_64</td>
+                                <td data-order="442829">432.5 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libnghttp2-1.39.2-1.fc32.x86_64</td>
+                                <td data-order="171164">167.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libnsl2-1.2.0-5.20180605git4a062cf.fc31.x86_64</td>
+                                <td data-order="137730">134.5 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libpsl-0.21.0-2.fc31.x86_64</td>
+                                <td data-order="74788">73.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libpwquality-1.4.2-1.fc32.x86_64</td>
+                                <td data-order="407629">398.1 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>librepo-1.10.6-1.fc32.x86_64</td>
+                                <td data-order="236136">230.6 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libreport-filesystem-2.11.2-1.fc32.noarch</td>
+                                <td data-order="0">0.0 B</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libselinux-2.9-7.fc32.x86_64</td>
+                                <td data-order="195376">190.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libsepol-2.9-2.fc31.x86_64</td>
+                                <td data-order="774144">756.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libsigsegv-2.11-8.fc31.x86_64</td>
+                                <td data-order="50042">48.9 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libsmartcols-2.34-6.fc32.x86_64</td>
+                                <td data-order="296531">289.6 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libsolv-0.7.7-1.fc32.x86_64</td>
+                                <td data-order="887656">866.9 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libssh-0.9.2-1.fc32.x86_64</td>
+                                <td data-order="515820">503.7 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libssh-config-0.9.2-1.fc32.noarch</td>
+                                <td data-order="357">357.0 B</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libsss_idmap-2.2.2-3.fc32.x86_64</td>
+                                <td data-order="80038">78.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libsss_nss_idmap-2.2.2-3.fc32.x86_64</td>
+                                <td data-order="92430">90.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libstdc++-9.2.1-1.fc32.3.x86_64</td>
+                                <td data-order="2272733">2.2 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libtasn1-4.14-2.fc31.x86_64</td>
+                                <td data-order="175983">171.9 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libtirpc-1.1.4-3.rc3.fc32.x86_64</td>
+                                <td data-order="228396">223.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libunistring-0.9.10-6.fc31.x86_64</td>
+                                <td data-order="1713307">1.6 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libusbx-1.0.22-4.fc31.x86_64</td>
+                                <td data-order="154073">150.5 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libuuid-2.34-6.fc32.x86_64</td>
+                                <td data-order="40543">39.6 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libverto-0.3.0-8.fc31.x86_64</td>
+                                <td data-order="32076">31.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libxcrypt-4.4.10-1.fc32.x86_64</td>
+                                <td data-order="275021">268.6 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libxml2-2.9.10-1.fc32.x86_64</td>
+                                <td data-order="1785484">1.7 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libyaml-0.2.2-2.fc31.x86_64</td>
+                                <td data-order="134867">131.7 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>libzstd-1.4.2-1.fc31.x86_64</td>
+                                <td data-order="716821">700.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>lua-libs-5.3.5-6.fc31.x86_64</td>
+                                <td data-order="260320">254.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>lz4-libs-1.9.1-1.fc32.x86_64</td>
+                                <td data-order="133631">130.5 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>mpfr-4.0.2-2.fc32.x86_64</td>
+                                <td data-order="721035">704.1 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>ncurses-6.1-13.20191026.fc32.x86_64</td>
+                                <td data-order="661780">646.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>ncurses-base-6.1-13.20191026.fc32.noarch</td>
+                                <td data-order="283902">277.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>ncurses-libs-6.1-13.20191026.fc32.x86_64</td>
+                                <td data-order="1003872">980.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>nettle-3.5.1-4.fc32.x86_64</td>
+                                <td data-order="591247">577.4 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>npth-1.6-3.fc31.x86_64</td>
+                                <td data-order="51357">50.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>openldap-2.4.47-3.fc31.x86_64</td>
+                                <td data-order="1031518">1007.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>openssl-1:1.1.1d-2.fc32.x86_64</td>
+                                <td data-order="1176039">1.1 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>openssl-libs-1:1.1.1d-2.fc32.x86_64</td>
+                                <td data-order="3921890">3.7 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>p11-kit-0.23.18.1-1.fc32.x86_64</td>
+                                <td data-order="1402910">1.3 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>p11-kit-trust-0.23.18.1-1.fc32.x86_64</td>
+                                <td data-order="511033">499.1 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>pam-1.3.1-20.fc32.x86_64</td>
+                                <td data-order="2854993">2.7 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>pcre-8.43-2.fc31.1.x86_64</td>
+                                <td data-order="524726">512.4 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>pcre2-10.33-15.fc32.x86_64</td>
+                                <td data-order="706786">690.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>popt-1.16-18.fc31.x86_64</td>
+                                <td data-order="131342">128.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>publicsuffix-list-dafsa-20190417-2.fc31.noarch</td>
+                                <td data-order="64992">63.5 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>python-pip-wheel-19.2.3-2.fc32.noarch</td>
+                                <td data-order="1264410">1.2 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>python-setuptools-wheel-41.2.0-1.fc32.noarch</td>
+                                <td data-order="354016">345.7 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>python3-3.8.0-1.fc32.x86_64</td>
+                                <td data-order="31553">30.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>python3-dnf-4.2.11-2.fc32.noarch</td>
+                                <td data-order="1787126">1.7 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>python3-gpg-1.13.1-5.fc32.x86_64</td>
+                                <td data-order="1320952">1.3 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>python3-hawkey-0.35.5-5.fc32.x86_64</td>
+                                <td data-order="301020">294.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>python3-libcomps-0.1.11-5.fc32.x86_64</td>
+                                <td data-order="156579">152.9 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>python3-libdnf-0.35.5-5.fc32.x86_64</td>
+                                <td data-order="4101282">3.9 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>python3-libs-3.8.0-1.fc32.x86_64</td>
+                                <td data-order="34224235">32.6 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>python3-rpm-4.15.0-6.fc32.x86_64</td>
+                                <td data-order="367957">359.3 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>readline-8.0-3.fc31.x86_64</td>
+                                <td data-order="485139">473.8 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td style="color:#CC0066" data-order="0">(required)</td>
+                                <td style="color:#CC0066">rootfiles-8.1-25.fc31.noarch</td>
+                                <td style="color:#CC0066" data-order="599">
+                                    599.0 B</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>rpm-4.15.0-6.fc32.x86_64</td>
+                                <td data-order="2974095">2.8 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>rpm-build-libs-4.15.0-6.fc32.x86_64</td>
+                                <td data-order="204200">199.4 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>rpm-libs-4.15.0-6.fc32.x86_64</td>
+                                <td data-order="758952">741.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>rpm-sign-libs-4.15.0-6.fc32.x86_64</td>
+                                <td data-order="28624">28.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>sed-4.5-4.fc31.x86_64</td>
+                                <td data-order="774118">756.0 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>setup-2.13.6-1.fc32.noarch</td>
+                                <td data-order="726694">709.7 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>sqlite-libs-3.30.1-1.fc32.x86_64</td>
+                                <td data-order="1187772">1.1 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td style="color:#CC0066" data-order="0">(required)</td>
+                                <td style="color:#CC0066">sssd-client-2.2.2-3.fc32.x86_64</td>
+                                <td style="color:#CC0066" data-order="267486">
+                                    261.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td style="color:#CC0066" data-order="0">(required)</td>
+                                <td style="color:#CC0066">sudo-1.8.28p1-1.fc32.x86_64</td>
+                                <td style="color:#CC0066" data-order="3629420">
+                                    3.5 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>systemd-libs-243-4.gitef67743.fc32.x86_64</td>
+                                <td data-order="1731222">1.7 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td style="color:#CC0066" data-order="0">(required)</td>
+                                <td style="color:#CC0066">tar-2:1.32-2.fc31.x86_64</td>
+                                <td style="color:#CC0066" data-order="3134685">
+                                    3.0 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>tss2-1331-2.fc31.x86_64</td>
+                                <td data-order="3090481">2.9 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>tzdata-2019c-1.fc32.noarch</td>
+                                <td data-order="1892615">1.8 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td style="color:#CC0066" data-order="0">(required)</td>
+                                <td style="color:#CC0066">vim-minimal-2:8.1.2267-1.fc32.x86_64</td>
+                                <td style="color:#CC0066" data-order="1381451">
+                                    1.3 MB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>xz-libs-5.2.4-7.fc32.x86_64</td>
+                                <td data-order="179959">175.7 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>yum-4.2.11-2.fc32.noarch</td>
+                                <td data-order="18641">18.2 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>zchunk-libs-1.1.2-3.fc31.x86_64</td>
+                                <td data-order="92066">89.9 kB</td>
+                                
+                            </tr>
+                            
+                            <tr class="not-in-base">
+                                
+                                <td data-order="1"></td>
+                                <td>zlib-1.2.11-20.fc32.x86_64</td>
+                                <td data-order="203919">199.1 kB</td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div><br>
+
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <h5 class="card-header">
+                    Definition
+                    <a class="btn btn-primary btn-sm float-right"
+                        href="https://github.com/minimization/feedback-pipeline-config/blob/master/fedora-container-base.yaml">Edit</a>
+
+                </h5>
+                <div class="card-body">
+                    <h5 class="card-title">Required Packages</h5>
+                    <div>
+                        
+                        
+                        <div class="package-name">dnf</div>
+                        
+                        <div class="package-name">dnf-yum</div>
+                        
+                        <div class="package-name">fedora-repos-modular</div>
+                        
+                        <div class="package-name">glibc-minimal-langpack</div>
+                        
+                        <div class="package-name">langpacks-en</div>
+                        
+                        <div class="package-name">rootfiles</div>
+                        
+                        <div class="package-name">sssd-client</div>
+                        
+                        <div class="package-name">sudo</div>
+                        
+                        <div class="package-name">tar</div>
+                        
+                        <div class="package-name">vim-minimal</div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Install Options</h5>
+                    <div>
+                        
+                        
+                        <div class="install-option">no-docs</div>
+                        
+                        <div class="install-option">no-weak-deps</div>
+                        
+                        
+                    </div>
+                </div>
+            </div><br>
+
+        </div>
+    </div>
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     <div class="row">
         <div class="col-lg-4">
@@ -279,7 +1591,16 @@
         }
     }
 
-    plot_graph(['2019-09-25-0619', '2019-09-25-1557', '2019-09-26-1249', '2019-09-27-1249', '2019-09-30-1149', '2019-10-01-0946', '2019-10-03-0955', '2019-10-04-1120', '2019-10-07-0720', '2019-10-07-2005', '2019-11-13-1840', '2019-11-14-1052', '2019-11-14-1517', '2019-11-15-0635'], [204.81, 204.81, 204.81, 204.81, 205.22, 205.29, 205.36, 205.36, 205.49, 205.49, 203.75, 203.75, 203.75, 203.75])
+    plot_graph(['2019-09-25-0619', '2019-09-25-1557', '2019-09-26-1249', '2019-09-27-1249', '2019-09-30-1149', '2019-10-01-0946', '2019-10-03-0955', '2019-10-04-1120', '2019-10-07-0720', '2019-10-07-2005', '2019-11-13-1840', '2019-11-14-1052', '2019-11-14-1517', '2019-11-15-0635', '2019-11-15-1348'], [204.81, 204.81, 204.81, 204.81, 205.22, 205.29, 205.36, 205.36, 205.49, 205.49, 203.75, 203.75, 203.75, 203.75, 203.75])
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+    });
 </script>
 
 

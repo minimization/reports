@@ -111,14 +111,82 @@
 
 <style>
     div.package-name {
-        font-family: monospace;
         color: #CC0066;
+    }
+
+    div.install-option {
+        color: rgb(68, 68, 68);
+    }
+
+    div.package-name,
+    div.install-option {
+        font-family: monospace;
+
         border-bottom: #6c757d 1px solid;
 
     }
 
-    div.package-name:first-child {
+    div.package-name:first-child,
+    div.install-option:first-child {
         border-top: #6c757d 1px solid;
+    }
+</style>
+
+<style>
+    td,
+    th {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    td {
+        white-space: nowrap !important;
+    }
+
+    .in-base th {
+        background-color: #accad6;
+        text-align: center;
+    }
+
+    .in-base td {
+        background-color: #d4e3ea;
+        color: #CC0066;
+        font-family: monospace;
+    }
+
+    tr.in-base td.all-pkgs {
+        background-color: #accad6 !important;
+    }
+
+    .not-in-base th {
+        background-color: #e9ecef;
+        text-align: center;
+    }
+
+    .not-in-base td {
+        background-color: #fff;
+        font-family: monospace;
+    }
+
+    tr.not-in-base td.all-pkgs {
+        background-color: #e9ecef !important;
+    }
+
+    thead td,
+    thead th {
+        background-color: #e9ecef;
+        text-align: center;
+    }
+
+    tbody tr,
+    tbody th {
+        border-bottom: #6c757d 1px solid;
+        border-top: #6c757d 1px solid;
+    }
+
+    #table_packages_filter {
+        padding: 12px 12px 0;
+        background-color: #e9ecef;	
     }
 </style>
 
@@ -132,17 +200,16 @@
             <li class="breadcrumb-item"><a href="./views.html">Results</a></li>
             <li class="breadcrumb-item"><a href="./view--use-cases-definitions.html">Dependency Reports</a></li>
             <li class="breadcrumb-item"><a href="./view--bases-definitions.html">Base Images (Eivironments)</a></li>
-            <li class="breadcrumb-item"><a href="./view--bases-definitions.html">Definitions</a></li>
+            <li class="breadcrumb-item"><a href="./view--bases-definitions.html">Details</a></li>
             <li class="breadcrumb-item active" aria-current="page">Empty base (Fedora 30)
             </li>
         </ol>
     </nav>
 
-    <a class="btn btn-primary float-right"
-        href="https://github.com/minimization/feedback-pipeline-config/blob/master/fedora-empty-base.yaml">Edit</a>
 
-    <h1> Empty base (Fedora 30) <small class="text-muted">base definition</small> </h1>
-    <p> Generated at 15/11/2019 06:35. </p>
+
+    <h1> Empty base (Fedora 30) <small class="text-muted">details</small> </h1>
+    <p> Generated at 15/11/2019 13:48. </p>
 
     <hr>
 
@@ -168,12 +235,73 @@
     <br>
 
     <div class="card">
+        <h5 class="card-header">
+            Size History
+        </h5>
         <div class="card-body">
             <canvas id="chLine"></canvas>
         </div>
     </div>
 
     <br>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <h5 class="card-header">
+                    Current State
+                </h5>
+                <div class="card-body">
+                    <a class="float-right" href="./graph--fedora-empty-base--30.svg">Dependency Graph</a>
+                    <h5 class="card-title">All Packages (0.0 B)</h5>
+                    <table id="table_packages" style="width:100%">
+                        <thead>
+                            <tr class="sort_control_row">
+                                <th>Why</th>
+                                <th>Name</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div><br>
+
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <h5 class="card-header">
+                    Definition
+                    <a class="btn btn-primary btn-sm float-right"
+                        href="https://github.com/minimization/feedback-pipeline-config/blob/master/fedora-empty-base.yaml">Edit</a>
+
+                </h5>
+                <div class="card-body">
+                    <h5 class="card-title">Required Packages</h5>
+                    <div>
+                        
+                        <div class="package-name"> - </div>
+                        
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Install Options</h5>
+                    <div>
+                        
+                        <div class="install-option"> - </div>
+                        
+                    </div>
+                </div>
+            </div><br>
+
+        </div>
+    </div>
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     <div class="row">
         <div class="col-lg-4">
@@ -255,7 +383,16 @@
         }
     }
 
-    plot_graph(['2019-09-25-0619', '2019-09-25-1557', '2019-09-26-1249', '2019-09-27-1249', '2019-09-30-1149', '2019-10-01-0946', '2019-10-03-0955', '2019-10-04-1120', '2019-10-07-0720', '2019-10-07-2005', '2019-11-13-1840', '2019-11-14-1052', '2019-11-14-1517', '2019-11-15-0635'], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+    plot_graph(['2019-09-25-0619', '2019-09-25-1557', '2019-09-26-1249', '2019-09-27-1249', '2019-09-30-1149', '2019-10-01-0946', '2019-10-03-0955', '2019-10-04-1120', '2019-10-07-0720', '2019-10-07-2005', '2019-11-13-1840', '2019-11-14-1052', '2019-11-14-1517', '2019-11-15-0635', '2019-11-15-1348'], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+    });
 </script>
 
 
