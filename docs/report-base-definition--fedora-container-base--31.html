@@ -186,7 +186,7 @@
 
     #table_packages_filter {
         padding: 12px 12px 0;
-        background-color: #e9ecef;	
+        background-color: #e9ecef;
     }
 </style>
 
@@ -209,7 +209,7 @@
 
 
     <h1> Fedora Container Base (Fedora 31) <small class="text-muted">details</small> </h1>
-    <p> Generated at 30/11/2019 09:31. </p>
+    <p> Generated at 01/12/2019 09:46. </p>
 
     <hr>
 
@@ -1470,132 +1470,59 @@
                         
                     </div>
                 </div>
-            </div><br>
+            </div>
 
         </div>
     </div>
 
 
+    <script type="text/javascript">
+        function plot_graph(data_x, data_y) {
+            var chartData = {
+                labels: data_x,
+                datasets: [{
+                    data: data_y,
+                    label: "Fedora 31"
+                }]
+            };
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="card">
-                <h5 class="card-header">
-                    Required Packages
-                    <span class="badge badge-pill float-right badge-dark">
-                        10
-                    </span>
-                </h5>
-                <div class="card-body">
-                    
-                    <div class="package-name">dnf</div>
-                    
-                    <div class="package-name">dnf-yum</div>
-                    
-                    <div class="package-name">fedora-repos-modular</div>
-                    
-                    <div class="package-name">glibc-minimal-langpack</div>
-                    
-                    <div class="package-name">langpacks-en</div>
-                    
-                    <div class="package-name">rootfiles</div>
-                    
-                    <div class="package-name">sssd-client</div>
-                    
-                    <div class="package-name">sudo</div>
-                    
-                    <div class="package-name">tar</div>
-                    
-                    <div class="package-name">vim-minimal</div>
-                    
-                </div>
-            </div><br>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <h5 class="card-header">
-                    Install Options
-                    <span class="badge badge-pill float-right badge-dark">
-                        2
-                    </span>
-                </h5>
-                <ul class="list-group list-group-flush">
-                    
-                    <li class="list-group-item">no-docs</li>
-                    
-                    <li class="list-group-item">no-weak-deps</li>
-                    
-                </ul>
-            </div><br>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <h5 class="card-header">
-                    Associated Use Cases
-                    <span class="badge badge-pill float-right badge-dark">
-                        ?
-                    </span>
-                </h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">TBD</li>
-                </ul>
-            </div><br>
-        </div>
-    </div>
-
-
-
-</div>
-
-<script type="text/javascript">
-    function plot_graph(data_x, data_y) {
-        var chartData = {
-            labels: data_x,
-            datasets: [{
-                data: data_y,
-                label: "Fedora 31"
-            }]
-        };
-
-        var chLine = document.getElementById("chLine");
-        if (chLine) {
-            new Chart(chLine, {
-                type: 'line',
-                data: chartData,
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: false,
-                                callback: function (value, index, values) {
-                                    return value + " MB";
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
                                 }
-                            }
-                        }]
-                    },
-                    legend: {
-                        display: false
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        }
                     }
-                }
-            });
+                });
+            }
         }
-    }
 
-    plot_graph(['2019-09-25-0619', '2019-09-25-1557', '2019-09-26-1249', '2019-09-27-1249', '2019-09-30-1149', '2019-10-01-0946', '2019-10-03-0955', '2019-10-04-1120', '2019-10-07-0720', '2019-10-07-2005', '2019-11-13-1840', '2019-11-14-1052', '2019-11-14-1517', '2019-11-15-0635', '2019-11-15-1348', '2019-11-21-0930', '2019-11-25-1312', '2019-11-30-0931'], [199.19, 199.19, 199.19, 199.19, 199.36, 199.36, 199.36, 199.42, 199.43, 199.43, 199.81, 199.81, 199.81, 199.83, 199.83, 199.01, 199.01, 198.15])
-</script>
+        plot_graph(['2019-09-25-0619', '2019-09-25-1557', '2019-09-26-1249', '2019-09-27-1249', '2019-09-30-1149', '2019-10-01-0946', '2019-10-03-0955', '2019-10-04-1120', '2019-10-07-0720', '2019-10-07-2005', '2019-11-13-1840', '2019-11-14-1052', '2019-11-14-1517', '2019-11-15-0635', '2019-11-15-1348', '2019-11-21-0930', '2019-11-25-1312', '2019-11-30-0931', '2019-12-01-0946'], [199.19, 199.19, 199.19, 199.19, 199.36, 199.36, 199.36, 199.42, 199.43, 199.43, 199.81, 199.81, 199.81, 199.83, 199.83, 199.01, 199.01, 198.15, 198.15])
+    </script>
 
-<script>
-    $(document).ready(function () {
-        $('#table_packages').DataTable({
-            paging: false,
-            info: false
+    <script>
+        $(document).ready(function () {
+            $('#table_packages').DataTable({
+                paging: false,
+                info: false
+            });
         });
-    });
-</script>
+    </script>
 
-
+    
   <br><br>
 </body>
 
