@@ -190,11 +190,11 @@
         
         <small class="text-muted">
             
-    on 1 base </h1>
+            on 2 bases </h1>
     
     </small>
     
-    <p> Generated at 04/12/2019 12:47. </p>
+    <p> Generated at 09/12/2019 13:30. </p>
 
     <hr>
 
@@ -207,6 +207,8 @@
                 
                 <th colspan="2">PostgreSQL Container</th>
                 
+                <th colspan="2">PostgreSQL Container</th>
+                
             </tr>
             <tr>
                 
@@ -214,10 +216,16 @@
                         href="./report-base-definition--fedora-container-base--31.html">Fedora Container Base</a>
                 </th>
                 
+                <th colspan="2">on <a
+                        href="./report-base-definition--fedora-empty-base--31.html">Empty base</a>
+                </th>
+                
             </tr>
             <tr>
                 
-                <td colspan="2">435.3 MB</td>
+                <td colspan="2">436.4 MB</td>
+                
+                <td colspan="2">621.7 MB</td>
                 
             </tr>
             <tr>
@@ -225,6 +233,11 @@
                 <td colspan="2">
                     <a href="./graph--postgresql-container--fedora-container-base--31.svg">graph</a> |
                     <a href="./graph-simple--postgresql-container--fedora-container-base--31.svg">simple graph</a>
+                </td>
+                
+                <td colspan="2">
+                    <a href="./graph--postgresql-container--fedora-empty-base--31.svg">graph</a> |
+                    <a href="./graph-simple--postgresql-container--fedora-empty-base--31.svg">simple graph</a>
                 </td>
                 
             </tr>
@@ -237,17 +250,27 @@
                 <th>Name</th>
                 <th>Flag</th>
                 
+                <th>Name</th>
+                <th>Flag</th>
+                
             </tr>
         </thead>
         <tbody>
             <!--tr class="required">
-                <th colspan="4">--- Required packages ---</th>
+                <th colspan="5">--- Required packages ---</th>
             </tr-->
             
             <tr class="required">
                 <td class="all-pkgs text-muted" data-order="0">(required)</td>
                 <td class="all-pkgs">postgresql-server</td>
                 <td class="all-pkgs" data-order="24961076">23.8 MB</td>
+                
+                
+                
+                <td>postgresql-server</td>
+                <td></td>
+                
+                
                 
                 
                 
@@ -270,12 +293,26 @@
                 
                 
                 
+                
+                
+                <td>postgresql-contrib</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="required">
                 <td class="all-pkgs text-muted" data-order="0">(required)</td>
                 <td class="all-pkgs">rsync</td>
                 <td class="all-pkgs" data-order="870457">850.1 kB</td>
+                
+                
+                
+                <td>rsync</td>
+                <td></td>
+                
+                
                 
                 
                 
@@ -298,6 +335,13 @@
                 
                 
                 
+                
+                
+                <td>tar</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="required">
@@ -312,12 +356,26 @@
                 
                 
                 
+                
+                
+                <td>gettext</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="required">
                 <td class="all-pkgs text-muted" data-order="0">(required)</td>
                 <td class="all-pkgs">bind-utils</td>
-                <td class="all-pkgs" data-order="885039">864.3 kB</td>
+                <td class="all-pkgs" data-order="885031">864.3 kB</td>
+                
+                
+                
+                <td>bind-utils</td>
+                <td></td>
+                
+                
                 
                 
                 
@@ -340,12 +398,26 @@
                 
                 
                 
+                
+                
+                <td>nss_wrapper</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="required">
                 <td class="all-pkgs text-muted" data-order="0">(required)</td>
                 <td class="all-pkgs">findutils</td>
                 <td class="all-pkgs" data-order="1795521">1.7 MB</td>
+                
+                
+                
+                <td>findutils</td>
+                <td></td>
+                
+                
                 
                 
                 
@@ -368,16 +440,30 @@
                 
                 
                 
+                
+                
+                <td>python2</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <!--tr class="not-required">
-                <th colspan="4">--- All other packages (dependencies) ---</th>
+                <th colspan="5">--- All other packages (dependencies) ---</th>
             </tr-->
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">acl</td>
                 <td class="all-pkgs" data-order="217116">212.0 kB</td>
+                
+                
+                
+                
+                <td>acl</td>
+                <td></td>
+                
                 
                 
                 
@@ -402,6 +488,13 @@
                 
                 
                 
+                
+                
+                <td>alternatives</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -414,6 +507,13 @@
                 
                 <td class="in-base">audit-libs</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>audit-libs</td>
+                <td></td>
                 
                 
                 
@@ -432,18 +532,32 @@
                 
                 
                 
+                
+                
+                <td>basesystem</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">bash</td>
-                <td class="all-pkgs" data-order="7602760">7.3 MB</td>
+                <td class="all-pkgs" data-order="7569377">7.2 MB</td>
                 
                 
                 
                 
                 <td class="in-base">bash</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>bash</td>
+                <td></td>
                 
                 
                 
@@ -462,12 +576,26 @@
                 
                 
                 
+                
+                
+                <td>bind-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">bind-libs-lite</td>
-                <td class="all-pkgs" data-order="3875208">3.7 MB</td>
+                <td class="all-pkgs" data-order="3879216">3.7 MB</td>
+                
+                
+                
+                
+                <td>bind-libs-lite</td>
+                <td></td>
+                
                 
                 
                 
@@ -492,6 +620,13 @@
                 
                 
                 
+                
+                
+                <td>bind-license</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -504,6 +639,13 @@
                 
                 <td class="in-base">brotli</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>brotli</td>
+                <td></td>
                 
                 
                 
@@ -522,6 +664,13 @@
                 
                 
                 
+                
+                
+                <td>bzip2-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -537,12 +686,26 @@
                 
                 
                 
+                
+                
+                <td>ca-certificates</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">cmake</td>
                 <td class="all-pkgs" data-order="28456123">27.1 MB</td>
+                
+                
+                
+                
+                <td>cmake</td>
+                <td></td>
+                
                 
                 
                 
@@ -567,12 +730,26 @@
                 
                 
                 
+                
+                
+                <td>cmake-data</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">cmake-filesystem</td>
                 <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td>cmake-filesystem</td>
+                <td></td>
+                
                 
                 
                 
@@ -597,6 +774,13 @@
                 
                 
                 
+                
+                
+                <td>cmake-rpm-macros</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -609,6 +793,13 @@
                 
                 <td class="in-base">coreutils</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>coreutils</td>
+                <td></td>
                 
                 
                 
@@ -627,6 +818,13 @@
                 
                 
                 
+                
+                
+                <td>coreutils-common</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -639,6 +837,33 @@
                 
                 <td class="in-base">cracklib</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>cracklib</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">cracklib-dicts</td>
+                <td class="all-pkgs" data-order="9815016">9.4 MB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>cracklib-dicts</td>
+                <td></td>
                 
                 
                 
@@ -657,12 +882,26 @@
                 
                 
                 
+                
+                
+                <td>crypto-policies</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">cryptsetup-libs</td>
                 <td class="all-pkgs" data-order="1865498">1.8 MB</td>
+                
+                
+                
+                
+                <td>cryptsetup-libs</td>
+                <td></td>
+                
                 
                 
                 
@@ -687,6 +926,13 @@
                 
                 
                 
+                
+                
+                <td>curl</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -702,12 +948,26 @@
                 
                 
                 
+                
+                
+                <td>cyrus-sasl-lib</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">dbus</td>
                 <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td>dbus</td>
+                <td></td>
+                
                 
                 
                 
@@ -732,12 +992,26 @@
                 
                 
                 
+                
+                
+                <td>dbus-broker</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">dbus-common</td>
                 <td class="all-pkgs" data-order="11481">11.2 kB</td>
+                
+                
+                
+                
+                <td>dbus-common</td>
+                <td></td>
+                
                 
                 
                 
@@ -762,6 +1036,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -777,12 +1056,24 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">device-mapper</td>
                 <td class="all-pkgs" data-order="358679">350.3 kB</td>
+                
+                
+                
+                
+                <td>device-mapper</td>
+                <td></td>
+                
                 
                 
                 
@@ -807,6 +1098,13 @@
                 
                 
                 
+                
+                
+                <td>device-mapper-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -822,12 +1120,19 @@
                 
                 
                 
+                
+                
+                <td>diffutils</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">dnf</td>
-                <td class="all-pkgs" data-order="1775516">1.7 MB</td>
+                <td class="all-pkgs" data-order="1776487">1.7 MB</td>
                 
                 
                 
@@ -837,12 +1142,17 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">dnf-data</td>
-                <td class="all-pkgs" data-order="36367">35.5 kB</td>
+                <td class="all-pkgs" data-order="36368">35.5 kB</td>
                 
                 
                 
@@ -850,6 +1160,11 @@
                 <td class="in-base">dnf-data</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
                 
+                
+                
+                
+                <td> - </td>
+                <td></td>
                 
                 
             </tr>
@@ -864,6 +1179,13 @@
                 
                 <td class="in-base">elfutils-default-yama-scope</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>elfutils-default-yama-scope</td>
+                <td></td>
                 
                 
                 
@@ -882,6 +1204,13 @@
                 
                 
                 
+                
+                
+                <td>elfutils-libelf</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -897,12 +1226,26 @@
                 
                 
                 
+                
+                
+                <td>elfutils-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">emacs-filesystem</td>
                 <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td>emacs-filesystem</td>
+                <td></td>
+                
                 
                 
                 
@@ -927,6 +1270,13 @@
                 
                 
                 
+                
+                
+                <td>expat</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -939,6 +1289,13 @@
                 
                 <td class="in-base">fedora-gpg-keys</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>fedora-gpg-keys</td>
+                <td></td>
                 
                 
                 
@@ -957,6 +1314,13 @@
                 
                 
                 
+                
+                
+                <td>fedora-release</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -969,6 +1333,13 @@
                 
                 <td class="in-base">fedora-release-common</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>fedora-release-common</td>
+                <td></td>
                 
                 
                 
@@ -987,6 +1358,13 @@
                 
                 
                 
+                
+                
+                <td>fedora-repos</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1002,6 +1380,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1014,6 +1397,13 @@
                 
                 <td class="in-base">filesystem</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>filesystem</td>
+                <td></td>
                 
                 
                 
@@ -1032,12 +1422,24 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">fstrm</td>
                 <td class="all-pkgs" data-order="57156">55.8 kB</td>
+                
+                
+                
+                
+                <td>fstrm</td>
+                <td></td>
+                
                 
                 
                 
@@ -1062,12 +1464,26 @@
                 
                 
                 
+                
+                
+                <td>gawk</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">gdbm</td>
                 <td class="all-pkgs" data-order="416041">406.3 kB</td>
+                
+                
+                
+                
+                <td>gdbm</td>
+                <td></td>
+                
                 
                 
                 
@@ -1092,12 +1508,26 @@
                 
                 
                 
+                
+                
+                <td>gdbm-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">gettext-libs</td>
                 <td class="all-pkgs" data-order="1007112">983.5 kB</td>
+                
+                
+                
+                
+                <td>gettext-libs</td>
+                <td></td>
+                
                 
                 
                 
@@ -1122,6 +1552,13 @@
                 
                 
                 
+                
+                
+                <td>glib2</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1134,6 +1571,33 @@
                 
                 <td class="in-base">glibc</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>glibc</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">glibc-all-langpacks</td>
+                <td class="all-pkgs" data-order="217990208">207.9 MB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>glibc-all-langpacks</td>
+                <td></td>
                 
                 
                 
@@ -1152,6 +1616,13 @@
                 
                 
                 
+                
+                
+                <td>glibc-common</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1165,6 +1636,11 @@
                 <td class="in-base">glibc-minimal-langpack</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
                 
+                
+                
+                
+                <td> - </td>
+                <td></td>
                 
                 
             </tr>
@@ -1182,12 +1658,19 @@
                 
                 
                 
+                
+                
+                <td>gmp</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">gnupg2</td>
-                <td class="all-pkgs" data-order="10093110">9.6 MB</td>
+                <td class="all-pkgs" data-order="9971826">9.5 MB</td>
                 
                 
                 
@@ -1197,18 +1680,30 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">gnutls</td>
-                <td class="all-pkgs" data-order="2895651">2.8 MB</td>
+                <td class="all-pkgs" data-order="3565887">3.4 MB</td>
                 
                 
                 
                 
                 <td class="in-base">gnutls</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>gnutls</td>
+                <td></td>
                 
                 
                 
@@ -1227,6 +1722,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1242,12 +1742,26 @@
                 
                 
                 
+                
+                
+                <td>grep</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">groff-base</td>
                 <td class="all-pkgs" data-order="4226187">4.0 MB</td>
+                
+                
+                
+                
+                <td>groff-base</td>
+                <td></td>
+                
                 
                 
                 
@@ -1272,6 +1786,13 @@
                 
                 
                 
+                
+                
+                <td>gzip</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1287,12 +1808,24 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">iptables-libs</td>
                 <td class="all-pkgs" data-order="160168">156.4 kB</td>
+                
+                
+                
+                
+                <td>iptables-libs</td>
+                <td></td>
+                
                 
                 
                 
@@ -1317,12 +1850,26 @@
                 
                 
                 
+                
+                
+                <td>json-c</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">jsoncpp</td>
                 <td class="all-pkgs" data-order="285184">278.5 kB</td>
+                
+                
+                
+                
+                <td>jsoncpp</td>
+                <td></td>
+                
                 
                 
                 
@@ -1347,12 +1894,26 @@
                 
                 
                 
+                
+                
+                <td>keyutils-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">kmod-libs</td>
                 <td class="all-pkgs" data-order="202160">197.4 kB</td>
+                
+                
+                
+                
+                <td>kmod-libs</td>
+                <td></td>
+                
                 
                 
                 
@@ -1377,6 +1938,13 @@
                 
                 
                 
+                
+                
+                <td>krb5-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1390,6 +1958,11 @@
                 <td class="in-base">langpacks-core-en</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
                 
+                
+                
+                
+                <td> - </td>
+                <td></td>
                 
                 
             </tr>
@@ -1407,6 +1980,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1419,6 +1997,13 @@
                 
                 <td class="in-base">libacl</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libacl</td>
+                <td></td>
                 
                 
                 
@@ -1437,12 +2022,26 @@
                 
                 
                 
+                
+                
+                <td>libarchive</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libargon2</td>
                 <td class="all-pkgs" data-order="56175">54.9 kB</td>
+                
+                
+                
+                
+                <td>libargon2</td>
+                <td></td>
+                
                 
                 
                 
@@ -1467,6 +2066,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1479,6 +2083,13 @@
                 
                 <td class="in-base">libattr</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libattr</td>
+                <td></td>
                 
                 
                 
@@ -1497,6 +2108,13 @@
                 
                 
                 
+                
+                
+                <td>libblkid</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1509,6 +2127,13 @@
                 
                 <td class="in-base">libcap</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libcap</td>
+                <td></td>
                 
                 
                 
@@ -1527,6 +2152,13 @@
                 
                 
                 
+                
+                
+                <td>libcap-ng</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1542,12 +2174,19 @@
                 
                 
                 
+                
+                
+                <td>libcom_err</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libcomps</td>
-                <td class="all-pkgs" data-order="220123">215.0 kB</td>
+                <td class="all-pkgs" data-order="300397">293.4 kB</td>
                 
                 
                 
@@ -1557,12 +2196,24 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libcroco</td>
                 <td class="all-pkgs" data-order="346684">338.6 kB</td>
+                
+                
+                
+                
+                <td>libcroco</td>
+                <td></td>
+                
                 
                 
                 
@@ -1587,6 +2238,13 @@
                 
                 
                 
+                
+                
+                <td>libcurl</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1599,6 +2257,13 @@
                 
                 <td class="in-base">libdb</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libdb</td>
+                <td></td>
                 
                 
                 
@@ -1617,12 +2282,19 @@
                 
                 
                 
+                
+                
+                <td>libdb-utils</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libdnf</td>
-                <td class="all-pkgs" data-order="2322227">2.2 MB</td>
+                <td class="all-pkgs" data-order="2539275">2.4 MB</td>
                 
                 
                 
@@ -1632,12 +2304,24 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libfdisk</td>
                 <td class="all-pkgs" data-order="507779">495.9 kB</td>
+                
+                
+                
+                
+                <td>libfdisk</td>
+                <td></td>
+                
                 
                 
                 
@@ -1662,6 +2346,13 @@
                 
                 
                 
+                
+                
+                <td>libffi</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1674,6 +2365,13 @@
                 
                 <td class="in-base">libgcc</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libgcc</td>
+                <td></td>
                 
                 
                 
@@ -1692,6 +2390,13 @@
                 
                 
                 
+                
+                
+                <td>libgcrypt</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1704,6 +2409,13 @@
                 
                 <td class="in-base">libgomp</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libgomp</td>
+                <td></td>
                 
                 
                 
@@ -1722,12 +2434,26 @@
                 
                 
                 
+                
+                
+                <td>libgpg-error</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libicu</td>
                 <td class="all-pkgs" data-order="33065733">31.5 MB</td>
+                
+                
+                
+                
+                <td>libicu</td>
+                <td></td>
+                
                 
                 
                 
@@ -1752,6 +2478,13 @@
                 
                 
                 
+                
+                
+                <td>libidn2</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1767,12 +2500,24 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libmaxminddb</td>
                 <td class="all-pkgs" data-order="35766">34.9 kB</td>
+                
+                
+                
+                
+                <td>libmaxminddb</td>
+                <td></td>
+                
                 
                 
                 
@@ -1797,6 +2542,13 @@
                 
                 
                 
+                
+                
+                <td>libmetalink</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1812,6 +2564,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1824,6 +2581,13 @@
                 
                 <td class="in-base">libmount</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libmount</td>
+                <td></td>
                 
                 
                 
@@ -1842,6 +2606,13 @@
                 
                 
                 
+                
+                
+                <td>libnghttp2</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1857,12 +2628,26 @@
                 
                 
                 
+                
+                
+                <td>libnsl2</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libpcap</td>
                 <td class="all-pkgs" data-order="387914">378.8 kB</td>
+                
+                
+                
+                
+                <td>libpcap</td>
+                <td></td>
+                
                 
                 
                 
@@ -1887,12 +2672,26 @@
                 
                 
                 
+                
+                
+                <td>libpkgconf</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libpq</td>
                 <td class="all-pkgs" data-order="797146">778.5 kB</td>
+                
+                
+                
+                
+                <td>libpq</td>
+                <td></td>
+                
                 
                 
                 
@@ -1917,6 +2716,13 @@
                 
                 
                 
+                
+                
+                <td>libpsl</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1929,6 +2735,13 @@
                 
                 <td class="in-base">libpwquality</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libpwquality</td>
+                <td></td>
                 
                 
                 
@@ -1947,6 +2760,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -1962,12 +2780,24 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libseccomp</td>
                 <td class="all-pkgs" data-order="355363">347.0 kB</td>
+                
+                
+                
+                
+                <td>libseccomp</td>
+                <td></td>
+                
                 
                 
                 
@@ -1992,12 +2822,26 @@
                 
                 
                 
+                
+                
+                <td>libselinux</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libsemanage</td>
                 <td class="all-pkgs" data-order="320642">313.1 kB</td>
+                
+                
+                
+                
+                <td>libsemanage</td>
+                <td></td>
+                
                 
                 
                 
@@ -2022,6 +2866,13 @@
                 
                 
                 
+                
+                
+                <td>libsepol</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2034,6 +2885,13 @@
                 
                 <td class="in-base">libsigsegv</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libsigsegv</td>
+                <td></td>
                 
                 
                 
@@ -2052,6 +2910,13 @@
                 
                 
                 
+                
+                
+                <td>libsmartcols</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2067,6 +2932,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2079,6 +2949,13 @@
                 
                 <td class="in-base">libssh</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libssh</td>
+                <td></td>
                 
                 
                 
@@ -2097,6 +2974,13 @@
                 
                 
                 
+                
+                
+                <td>libssh-config</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2110,6 +2994,11 @@
                 <td class="in-base">libsss_idmap</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
                 
+                
+                
+                
+                <td> - </td>
+                <td></td>
                 
                 
             </tr>
@@ -2127,6 +3016,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2139,6 +3033,13 @@
                 
                 <td class="in-base">libstdc++</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libstdc++</td>
+                <td></td>
                 
                 
                 
@@ -2157,12 +3058,26 @@
                 
                 
                 
+                
+                
+                <td>libtasn1</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libtextstyle</td>
                 <td class="all-pkgs" data-order="126520">123.6 kB</td>
+                
+                
+                
+                
+                <td>libtextstyle</td>
+                <td></td>
+                
                 
                 
                 
@@ -2187,6 +3102,13 @@
                 
                 
                 
+                
+                
+                <td>libtirpc</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2199,6 +3121,13 @@
                 
                 <td class="in-base">libunistring</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libunistring</td>
+                <td></td>
                 
                 
                 
@@ -2217,12 +3146,24 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libutempter</td>
                 <td class="all-pkgs" data-order="59645">58.2 kB</td>
+                
+                
+                
+                
+                <td>libutempter</td>
+                <td></td>
+                
                 
                 
                 
@@ -2247,12 +3188,26 @@
                 
                 
                 
+                
+                
+                <td>libuuid</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libuv</td>
-                <td class="all-pkgs" data-order="393298">384.1 kB</td>
+                <td class="all-pkgs" data-order="482184">470.9 kB</td>
+                
+                
+                
+                
+                <td>libuv</td>
+                <td></td>
+                
                 
                 
                 
@@ -2277,6 +3232,13 @@
                 
                 
                 
+                
+                
+                <td>libverto</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2292,12 +3254,26 @@
                 
                 
                 
+                
+                
+                <td>libxcrypt</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libxcrypt-compat</td>
                 <td class="all-pkgs" data-order="210802">205.9 kB</td>
+                
+                
+                
+                
+                <td>libxcrypt-compat</td>
+                <td></td>
+                
                 
                 
                 
@@ -2322,6 +3298,13 @@
                 
                 
                 
+                
+                
+                <td>libxkbcommon</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2337,12 +3320,26 @@
                 
                 
                 
+                
+                
+                <td>libxml2</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">libxslt</td>
                 <td class="all-pkgs" data-order="767407">749.4 kB</td>
+                
+                
+                
+                
+                <td>libxslt</td>
+                <td></td>
+                
                 
                 
                 
@@ -2367,6 +3364,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2382,12 +3384,26 @@
                 
                 
                 
+                
+                
+                <td>libzstd</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">lmdb-libs</td>
                 <td class="all-pkgs" data-order="120139">117.3 kB</td>
+                
+                
+                
+                
+                <td>lmdb-libs</td>
+                <td></td>
+                
                 
                 
                 
@@ -2412,6 +3428,13 @@
                 
                 
                 
+                
+                
+                <td>lua-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2424,6 +3447,33 @@
                 
                 <td class="in-base">lz4-libs</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>lz4-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">mkpasswd</td>
+                <td class="all-pkgs" data-order="105865">103.4 kB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>mkpasswd</td>
+                <td></td>
                 
                 
                 
@@ -2442,6 +3492,13 @@
                 
                 
                 
+                
+                
+                <td>mpfr</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2454,6 +3511,13 @@
                 
                 <td class="in-base">ncurses</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>ncurses</td>
+                <td></td>
                 
                 
                 
@@ -2472,6 +3536,13 @@
                 
                 
                 
+                
+                
+                <td>ncurses-base</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2484,6 +3555,13 @@
                 
                 <td class="in-base">ncurses-libs</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>ncurses-libs</td>
+                <td></td>
                 
                 
                 
@@ -2502,6 +3580,13 @@
                 
                 
                 
+                
+                
+                <td>nettle</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2517,6 +3602,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2529,6 +3619,13 @@
                 
                 <td class="in-base">openldap</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>openldap</td>
+                <td></td>
                 
                 
                 
@@ -2547,6 +3644,13 @@
                 
                 
                 
+                
+                
+                <td>openssl</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2559,6 +3663,33 @@
                 
                 <td class="in-base">openssl-libs</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>openssl-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">openssl-pkcs11</td>
+                <td class="all-pkgs" data-order="216426">211.4 kB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>openssl-pkcs11</td>
+                <td></td>
                 
                 
                 
@@ -2577,6 +3708,13 @@
                 
                 
                 
+                
+                
+                <td>p11-kit</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2589,6 +3727,13 @@
                 
                 <td class="in-base">p11-kit-trust</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>p11-kit-trust</td>
+                <td></td>
                 
                 
                 
@@ -2607,6 +3752,13 @@
                 
                 
                 
+                
+                
+                <td>pam</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2619,6 +3771,13 @@
                 
                 <td class="in-base">pcre</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>pcre</td>
+                <td></td>
                 
                 
                 
@@ -2637,12 +3796,26 @@
                 
                 
                 
+                
+                
+                <td>pcre2</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-Carp</td>
                 <td class="all-pkgs" data-order="47890">46.8 kB</td>
+                
+                
+                
+                
+                <td>perl-Carp</td>
+                <td></td>
+                
                 
                 
                 
@@ -2667,12 +3840,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Data-Dumper</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-Digest</td>
                 <td class="all-pkgs" data-order="26684">26.1 kB</td>
+                
+                
+                
+                
+                <td>perl-Digest</td>
+                <td></td>
+                
                 
                 
                 
@@ -2697,12 +3884,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Digest-MD5</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-Encode</td>
                 <td class="all-pkgs" data-order="10236115">9.8 MB</td>
+                
+                
+                
+                
+                <td>perl-Encode</td>
+                <td></td>
+                
                 
                 
                 
@@ -2727,12 +3928,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Errno</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-Exporter</td>
                 <td class="all-pkgs" data-order="55790">54.5 kB</td>
+                
+                
+                
+                
+                <td>perl-Exporter</td>
+                <td></td>
+                
                 
                 
                 
@@ -2757,12 +3972,26 @@
                 
                 
                 
+                
+                
+                <td>perl-File-Path</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-File-Temp</td>
                 <td class="all-pkgs" data-order="164979">161.1 kB</td>
+                
+                
+                
+                
+                <td>perl-File-Temp</td>
+                <td></td>
+                
                 
                 
                 
@@ -2787,12 +4016,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Getopt-Long</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-HTTP-Tiny</td>
                 <td class="all-pkgs" data-order="150121">146.6 kB</td>
+                
+                
+                
+                
+                <td>perl-HTTP-Tiny</td>
+                <td></td>
+                
                 
                 
                 
@@ -2817,6 +4060,13 @@
                 
                 
                 
+                
+                
+                <td>perl-IO</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2832,12 +4082,26 @@
                 
                 
                 
+                
+                
+                <td>perl-IO-Socket-IP</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-IO-Socket-SSL</td>
-                <td class="all-pkgs" data-order="618687">604.2 kB</td>
+                <td class="all-pkgs" data-order="618704">604.2 kB</td>
+                
+                
+                
+                
+                <td>perl-IO-Socket-SSL</td>
+                <td></td>
+                
                 
                 
                 
@@ -2862,12 +4126,26 @@
                 
                 
                 
+                
+                
+                <td>perl-MIME-Base64</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-Mozilla-CA</td>
                 <td class="all-pkgs" data-order="5870">5.7 kB</td>
+                
+                
+                
+                
+                <td>perl-Mozilla-CA</td>
+                <td></td>
+                
                 
                 
                 
@@ -2892,12 +4170,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Net-SSLeay</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-PathTools</td>
                 <td class="all-pkgs" data-order="182529">178.3 kB</td>
+                
+                
+                
+                
+                <td>perl-PathTools</td>
+                <td></td>
+                
                 
                 
                 
@@ -2922,12 +4214,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Pod-Escapes</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-Pod-Perldoc</td>
                 <td class="all-pkgs" data-order="170963">167.0 kB</td>
+                
+                
+                
+                
+                <td>perl-Pod-Perldoc</td>
+                <td></td>
+                
                 
                 
                 
@@ -2952,12 +4258,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Pod-Simple</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-Pod-Usage</td>
                 <td class="all-pkgs" data-order="49723">48.6 kB</td>
+                
+                
+                
+                
+                <td>perl-Pod-Usage</td>
+                <td></td>
+                
                 
                 
                 
@@ -2982,6 +4302,13 @@
                 
                 
                 
+                
+                
+                <td>perl-Scalar-List-Utils</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -2997,12 +4324,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Socket</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-Storable</td>
-                <td class="all-pkgs" data-order="230729">225.3 kB</td>
+                <td class="all-pkgs" data-order="237051">231.5 kB</td>
+                
+                
+                
+                
+                <td>perl-Storable</td>
+                <td></td>
+                
                 
                 
                 
@@ -3027,12 +4368,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Term-ANSIColor</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-Term-Cap</td>
                 <td class="all-pkgs" data-order="29853">29.2 kB</td>
+                
+                
+                
+                
+                <td>perl-Term-Cap</td>
+                <td></td>
+                
                 
                 
                 
@@ -3057,12 +4412,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Text-ParseWords</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-Text-Tabs+Wrap</td>
                 <td class="all-pkgs" data-order="24828">24.2 kB</td>
+                
+                
+                
+                
+                <td>perl-Text-Tabs+Wrap</td>
+                <td></td>
+                
                 
                 
                 
@@ -3087,12 +4456,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Time-Local</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-URI</td>
                 <td class="all-pkgs" data-order="215577">210.5 kB</td>
+                
+                
+                
+                
+                <td>perl-URI</td>
+                <td></td>
+                
                 
                 
                 
@@ -3117,12 +4500,26 @@
                 
                 
                 
+                
+                
+                <td>perl-Unicode-Normalize</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-constant</td>
                 <td class="all-pkgs" data-order="27106">26.5 kB</td>
+                
+                
+                
+                
+                <td>perl-constant</td>
+                <td></td>
+                
                 
                 
                 
@@ -3147,12 +4544,26 @@
                 
                 
                 
+                
+                
+                <td>perl-interpreter</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-libnet</td>
                 <td class="all-pkgs" data-order="277135">270.6 kB</td>
+                
+                
+                
+                
+                <td>perl-libnet</td>
+                <td></td>
+                
                 
                 
                 
@@ -3177,12 +4588,26 @@
                 
                 
                 
+                
+                
+                <td>perl-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-macros</td>
                 <td class="all-pkgs" data-order="5643">5.5 kB</td>
+                
+                
+                
+                
+                <td>perl-macros</td>
+                <td></td>
+                
                 
                 
                 
@@ -3207,12 +4632,26 @@
                 
                 
                 
+                
+                
+                <td>perl-parent</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-podlators</td>
                 <td class="all-pkgs" data-order="288018">281.3 kB</td>
+                
+                
+                
+                
+                <td>perl-podlators</td>
+                <td></td>
+                
                 
                 
                 
@@ -3237,12 +4676,26 @@
                 
                 
                 
+                
+                
+                <td>perl-threads</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">perl-threads-shared</td>
                 <td class="all-pkgs" data-order="82408">80.5 kB</td>
+                
+                
+                
+                
+                <td>perl-threads-shared</td>
+                <td></td>
+                
                 
                 
                 
@@ -3267,12 +4720,26 @@
                 
                 
                 
+                
+                
+                <td>pkgconf</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">pkgconf-m4</td>
                 <td class="all-pkgs" data-order="14186">13.9 kB</td>
+                
+                
+                
+                
+                <td>pkgconf-m4</td>
+                <td></td>
+                
                 
                 
                 
@@ -3297,6 +4764,13 @@
                 
                 
                 
+                
+                
+                <td>pkgconf-pkg-config</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3312,12 +4786,26 @@
                 
                 
                 
+                
+                
+                <td>popt</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">postgresql</td>
                 <td class="all-pkgs" data-order="6610220">6.3 MB</td>
+                
+                
+                
+                
+                <td>postgresql</td>
+                <td></td>
+                
                 
                 
                 
@@ -3342,6 +4830,13 @@
                 
                 
                 
+                
+                
+                <td>protobuf-c</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3354,6 +4849,13 @@
                 
                 <td class="in-base">publicsuffix-list-dafsa</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>publicsuffix-list-dafsa</td>
+                <td></td>
                 
                 
                 
@@ -3372,6 +4874,13 @@
                 
                 
                 
+                
+                
+                <td>python-pip-wheel</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3387,12 +4896,46 @@
                 
                 
                 
+                
+                
+                <td>python-setuptools-wheel</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python-unversioned-command</td>
+                <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>python-unversioned-command</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">python2-libs</td>
                 <td class="all-pkgs" data-order="27617132">26.3 MB</td>
+                
+                
+                
+                
+                <td>python2-libs</td>
+                <td></td>
+                
                 
                 
                 
@@ -3417,12 +4960,26 @@
                 
                 
                 
+                
+                
+                <td>python2-pip</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">python2-setuptools</td>
                 <td class="all-pkgs" data-order="3261497">3.1 MB</td>
+                
+                
+                
+                
+                <td>python2-setuptools</td>
+                <td></td>
+                
                 
                 
                 
@@ -3447,12 +5004,19 @@
                 
                 
                 
+                
+                
+                <td>python3</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">python3-dnf</td>
-                <td class="all-pkgs" data-order="1799518">1.7 MB</td>
+                <td class="all-pkgs" data-order="1817923">1.7 MB</td>
                 
                 
                 
@@ -3460,6 +5024,11 @@
                 <td class="in-base">python3-dnf</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
                 
+                
+                
+                
+                <td> - </td>
+                <td></td>
                 
                 
             </tr>
@@ -3477,12 +5046,17 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">python3-hawkey</td>
-                <td class="all-pkgs" data-order="303692">296.6 kB</td>
+                <td class="all-pkgs" data-order="348220">340.1 kB</td>
                 
                 
                 
@@ -3492,12 +5066,17 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">python3-libcomps</td>
-                <td class="all-pkgs" data-order="152303">148.7 kB</td>
+                <td class="all-pkgs" data-order="188427">184.0 kB</td>
                 
                 
                 
@@ -3507,12 +5086,17 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">python3-libdnf</td>
-                <td class="all-pkgs" data-order="4060556">3.9 MB</td>
+                <td class="all-pkgs" data-order="4201309">4.0 MB</td>
                 
                 
                 
@@ -3520,6 +5104,11 @@
                 <td class="in-base">python3-libdnf</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
                 
+                
+                
+                
+                <td> - </td>
+                <td></td>
                 
                 
             </tr>
@@ -3534,6 +5123,33 @@
                 
                 <td class="in-base">python3-libs</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>python3-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python3-pip</td>
+                <td class="all-pkgs" data-order="7855063">7.5 MB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>python3-pip</td>
+                <td></td>
                 
                 
                 
@@ -3552,12 +5168,44 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python3-setuptools</td>
+                <td class="all-pkgs" data-order="3001273">2.9 MB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>python3-setuptools</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">qrencode-libs</td>
                 <td class="all-pkgs" data-order="163153">159.3 kB</td>
+                
+                
+                
+                
+                <td>qrencode-libs</td>
+                <td></td>
+                
                 
                 
                 
@@ -3582,12 +5230,26 @@
                 
                 
                 
+                
+                
+                <td>readline</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">rhash</td>
                 <td class="all-pkgs" data-order="320926">313.4 kB</td>
+                
+                
+                
+                
+                <td>rhash</td>
+                <td></td>
+                
                 
                 
                 
@@ -3612,6 +5274,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3624,6 +5291,13 @@
                 
                 <td class="in-base">rpm</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>rpm</td>
+                <td></td>
                 
                 
                 
@@ -3642,6 +5316,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3654,6 +5333,13 @@
                 
                 <td class="in-base">rpm-libs</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>rpm-libs</td>
+                <td></td>
                 
                 
                 
@@ -3672,6 +5358,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3684,6 +5375,13 @@
                 
                 <td class="in-base">sed</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>sed</td>
+                <td></td>
                 
                 
                 
@@ -3702,6 +5400,13 @@
                 
                 
                 
+                
+                
+                <td>setup</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3713,6 +5418,33 @@
                 
                 
                 <td>shadow-utils</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>shadow-utils</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">shared-mime-info</td>
+                <td class="all-pkgs" data-order="2506728">2.4 MB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>shared-mime-info</td>
                 <td></td>
                 
                 
@@ -3732,6 +5464,13 @@
                 
                 
                 
+                
+                
+                <td>sqlite-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3745,6 +5484,11 @@
                 <td class="in-base">sssd-client</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
                 
+                
+                
+                
+                <td> - </td>
+                <td></td>
                 
                 
             </tr>
@@ -3762,12 +5506,24 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">systemd</td>
                 <td class="all-pkgs" data-order="12878310">12.3 MB</td>
+                
+                
+                
+                
+                <td>systemd</td>
+                <td></td>
+                
                 
                 
                 
@@ -3792,12 +5548,26 @@
                 
                 
                 
+                
+                
+                <td>systemd-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">systemd-pam</td>
                 <td class="all-pkgs" data-order="343712">335.7 kB</td>
+                
+                
+                
+                
+                <td>systemd-pam</td>
+                <td></td>
+                
                 
                 
                 
@@ -3822,6 +5592,53 @@
                 
                 
                 
+                
+                
+                <td>systemd-rpm-macros</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">trousers</td>
+                <td class="all-pkgs" data-order="401182">391.8 kB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>trousers</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">trousers-lib</td>
+                <td class="all-pkgs" data-order="516181">504.1 kB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>trousers-lib</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3835,6 +5652,11 @@
                 <td class="in-base">tss2</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
                 
+                
+                
+                
+                <td> - </td>
+                <td></td>
                 
                 
             </tr>
@@ -3852,12 +5674,26 @@
                 
                 
                 
+                
+                
+                <td>tzdata</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">util-linux</td>
                 <td class="all-pkgs" data-order="13416747">12.8 MB</td>
+                
+                
+                
+                
+                <td>util-linux</td>
+                <td></td>
+                
                 
                 
                 
@@ -3882,6 +5718,13 @@
                 
                 
                 
+                
+                
+                <td>uuid</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3897,12 +5740,44 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">whois-nls</td>
+                <td class="all-pkgs" data-order="106208">103.7 kB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>whois-nls</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">xkeyboard-config</td>
                 <td class="all-pkgs" data-order="5683972">5.4 MB</td>
+                
+                
+                
+                
+                <td>xkeyboard-config</td>
+                <td></td>
+                
                 
                 
                 
@@ -3927,12 +5802,19 @@
                 
                 
                 
+                
+                
+                <td>xz-libs</td>
+                <td></td>
+                
+                
+                
             </tr>
             
             <tr class="not-required">
                 <td class="all-pkgs" data-order="1"></td>
                 <td class="all-pkgs">yum</td>
-                <td class="all-pkgs" data-order="19350">18.9 kB</td>
+                <td class="all-pkgs" data-order="20137">19.7 kB</td>
                 
                 
                 
@@ -3940,6 +5822,11 @@
                 <td class="in-base">yum</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
                 
+                
+                
+                
+                <td> - </td>
+                <td></td>
                 
                 
             </tr>
@@ -3957,6 +5844,11 @@
                 
                 
                 
+                
+                <td> - </td>
+                <td></td>
+                
+                
             </tr>
             
             <tr class="not-required">
@@ -3969,6 +5861,13 @@
                 
                 <td class="in-base">zlib</td>
                 <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>zlib</td>
+                <td></td>
                 
                 
                 
