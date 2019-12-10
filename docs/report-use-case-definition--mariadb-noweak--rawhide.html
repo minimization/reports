@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+  <style>
+    .jumbotron {
+      margin-bottom: 0 !important;
+    }
+
+    .jumbotron-minimization {
+      background-color: #631a38 !important;
+      color: white;
+      padding: 30px 0;
+    }
+
+    .jumbotron-home {
+      background-color: #072b61;
+      color: white;
+    }
+
+
+
+    .jumbotron-about {
+
+      padding: 30px 0;
+    }
+
+    a.btn-minimization {
+      background-color: #942653;
+      border-color: #942653;
+      color: white;
+    }
+
+    a.btn-minimization:hover {
+      background-color: #7b1f45;
+      border-color: #7b1f45;
+      color: white;
+    }
+
+    #table_packages_filter {
+      float: none;
+    }
+
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: center right;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      border-top: 2px solid black !important;
+      font-weight: bold !important;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Feedback Pipeline <span class="text-muted">prototype</span></span>
+  </nav>
+  
+
+<style>
+    div.package-name {
+        color: #CC0066;
+    }
+
+    div.install-option {
+        color: rgb(68, 68, 68);
+    }
+
+    div.package-name,
+    div.install-option {
+        font-family: monospace;
+
+        border-bottom: #6c757d 1px solid;
+
+    }
+
+    div.package-name:first-child,
+    div.install-option:first-child {
+        border-top: #6c757d 1px solid;
+    }
+</style>
+
+<br>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Home</a></li>
+            <li class="breadcrumb-item"><a href="./views.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-cases-definitions.html">Dependency Reports</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-cases-definitions.html">Use Cases</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-cases-definitions.html">Details</a></li>
+            <li class="breadcrumb-item active" aria-current="page">MariaDB (no weak deps)
+            </li>
+        </ol>
+    </nav>
+
+    <h1> MariaDB (no weak deps) <small class="text-muted">details</small> </h1>
+    <p> Generated at 10/12/2019 14:23. </p>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        
+        <li class="nav-item"><a class="nav-link "
+                href="report-use-case-definition--mariadb-noweak--31.html">
+                Fedora 31
+            </a></li>
+        
+        <li class="nav-item"><a class="nav-link active"
+                href="report-use-case-definition--mariadb-noweak--rawhide.html">
+                Fedora rawhide
+            </a></li>
+        
+    </ul>
+
+    <br>
+
+    <div class="card">
+        <h5 class="card-header">
+            Size History
+        </h5>
+        <div class="card-body">
+            <canvas id="chLine"></canvas>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <h5 class="card-header">
+                    Definition
+                    <a class="btn btn-primary btn-sm float-right"
+                        href="https://github.com/minimization/feedback-pipeline-config/blob/master/mariadb-noweak.yaml">Edit</a>
+
+                </h5>
+                <div class="card-body">
+                    <h5 class="card-title">Required Packages</h5>
+                    <div>
+                        
+                        <div class="package-name">mariadb-server</div>
+                        
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Install Options</h5>
+                    <div>
+                        
+                        <div class="install-option">no-docs</div>
+                        
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Installed on</h5>
+                    <div>
+                        
+                        <div class="install-option">Fedora Container Base</div>
+                        
+                        <div class="install-option">Empty base</div>
+                        
+                        <div class="install-option">Minimal Langpack Base</div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<script type="text/javascript">
+        var chartData = {
+            labels: [
+                
+                    "2019-12-10-1423",
+                
+            ],
+            datasets: [
+            
+            {
+                data: [
+                    
+                    460.45,
+                    
+                ],
+                label: "fedora-container-base"
+            },
+            
+            {
+                data: [
+                    
+                    616.17,
+                    
+                ],
+                label: "fedora-empty-base"
+            },
+            
+            {
+                data: [
+                    
+                    404.35,
+                    
+                ],
+                label: "minimal-langpack-base"
+            },
+                
+            ]
+        };
+
+        var chLine = document.getElementById("chLine");
+        if (chLine) {
+            new Chart(chLine, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value, index, values) {
+                                    return value + " MB";
+                                }
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: true
+                    }
+                }
+            });
+        }
+</script>
+
+
+  <br><br>
+</body>
+
+</html>

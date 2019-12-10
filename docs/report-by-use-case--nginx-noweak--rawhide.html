@@ -1,0 +1,5037 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+  <style>
+    .jumbotron {
+      margin-bottom: 0 !important;
+    }
+
+    .jumbotron-minimization {
+      background-color: #631a38 !important;
+      color: white;
+      padding: 30px 0;
+    }
+
+    .jumbotron-home {
+      background-color: #072b61;
+      color: white;
+    }
+
+
+
+    .jumbotron-about {
+
+      padding: 30px 0;
+    }
+
+    a.btn-minimization {
+      background-color: #942653;
+      border-color: #942653;
+      color: white;
+    }
+
+    a.btn-minimization:hover {
+      background-color: #7b1f45;
+      border-color: #7b1f45;
+      color: white;
+    }
+
+    #table_packages_filter {
+      float: none;
+    }
+
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: center right;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      border-top: 2px solid black !important;
+      font-weight: bold !important;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Feedback Pipeline <span class="text-muted">prototype</span></span>
+  </nav>
+  
+
+<style>
+    td,
+    th {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    td {
+        white-space: nowrap !important;
+    }
+
+    .required th {
+        background-color: #accad6;
+        text-align: center;
+    }
+
+    .required td {
+        background-color: #d4e3ea;
+        color: #CC0066;
+        font-family: monospace;
+    }
+
+    tr.required td.all-pkgs {
+        background-color: #accad6 !important;
+    }
+
+    .not-required th {
+        background-color: #e9ecef;
+        text-align: center;
+    }
+
+    .not-required td {
+        background-color: #fff;
+        font-family: monospace;
+    }
+
+    tr.not-required td.all-pkgs {
+        background-color: #e9ecef !important;
+    }
+
+    th.in-base  {
+        background-color: #e3ece1!important;
+    }
+
+    td.in-base  {
+        background-color: #e3ece1!important;
+    }
+
+
+    thead td,
+    thead th {
+        background-color: #e9ecef;
+        text-align: center;
+    }
+
+    tbody tr,
+    tbody th {
+        border-bottom: #6c757d 1px solid;
+        border-top: #6c757d 1px solid;
+    }
+</style>
+
+<br>
+
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Home</a></li>
+            <li class="breadcrumb-item"><a href="./views.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-cases-definitions.html">Dependency Reports</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-cases-definitions.html">Use Cases</a></li>
+            <li class="breadcrumb-item"><a href="./view--use-cases-on-bases.html">Compare Base Images</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nginx (no weak deps) (Fedora rawhide)</li>
+        </ol>
+    </nav>
+
+
+    <h1> Nginx (no weak deps) (Fedora rawhide)
+        
+        <small class="text-muted">
+            
+            on 3 bases </h1>
+    
+    </small>
+    
+    <p> Generated at 10/12/2019 14:23. </p>
+
+    <hr>
+
+    <table id="table_packages">
+        <thead>
+            <tr>
+                <td rowspan="4" style="background-color:#cad1d8"></td>
+                <td rowspan="4" style="background-color:#cad1d8">All packages in this report</td>
+                <td rowspan="4" style="background-color:#cad1d8"></td>
+                
+                <th colspan="2">Nginx (no weak deps)</th>
+                
+                <th colspan="2">Nginx (no weak deps)</th>
+                
+                <th colspan="2">Nginx (no weak deps)</th>
+                
+            </tr>
+            <tr>
+                
+                <th colspan="2">on <a
+                        href="./report-base-definition--fedora-container-base--rawhide.html">Fedora Container Base</a>
+                </th>
+                
+                <th colspan="2">on <a
+                        href="./report-base-definition--fedora-empty-base--rawhide.html">Empty base</a>
+                </th>
+                
+                <th colspan="2">on <a
+                        href="./report-base-definition--minimal-langpack-base--rawhide.html">Minimal Langpack Base</a>
+                </th>
+                
+            </tr>
+            <tr>
+                
+                <td colspan="2">240.3 MB</td>
+                
+                <td colspan="2">379.3 MB</td>
+                
+                <td colspan="2">167.5 MB</td>
+                
+            </tr>
+            <tr>
+                
+                <td colspan="2">
+                    <a href="./graph--nginx-noweak--fedora-container-base--rawhide.svg">graph</a> |
+                    <a href="./graph-simple--nginx-noweak--fedora-container-base--rawhide.svg">simple graph</a>
+                </td>
+                
+                <td colspan="2">
+                    <a href="./graph--nginx-noweak--fedora-empty-base--rawhide.svg">graph</a> |
+                    <a href="./graph-simple--nginx-noweak--fedora-empty-base--rawhide.svg">simple graph</a>
+                </td>
+                
+                <td colspan="2">
+                    <a href="./graph--nginx-noweak--minimal-langpack-base--rawhide.svg">graph</a> |
+                    <a href="./graph-simple--nginx-noweak--minimal-langpack-base--rawhide.svg">simple graph</a>
+                </td>
+                
+            </tr>
+            <tr class="sort_control_row">
+
+                <td style="background-color:#cad1d8">Why</td>
+                <td style="background-color:#cad1d8">Name</td>
+                <td style="background-color:#cad1d8">Size</td>
+                
+                <th>Name</th>
+                <th>Flag</th>
+                
+                <th>Name</th>
+                <th>Flag</th>
+                
+                <th>Name</th>
+                <th>Flag</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <!--tr class="required">
+                <th colspan="6">--- Required packages ---</th>
+            </tr-->
+            
+            <tr class="required">
+                <td class="all-pkgs text-muted" data-order="0">(required)</td>
+                <td class="all-pkgs">nginx</td>
+                <td class="all-pkgs" data-order="1732523">1.7 MB</td>
+                
+                
+                
+                <td>nginx</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>nginx</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>nginx</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <!--tr class="not-required">
+                <th colspan="6">--- All other packages (dependencies) ---</th>
+            </tr-->
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">acl</td>
+                <td class="all-pkgs" data-order="217116">212.0 kB</td>
+                
+                
+                
+                
+                <td>acl</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>acl</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>acl</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">alternatives</td>
+                <td class="all-pkgs" data-order="64350">62.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">alternatives</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>alternatives</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>alternatives</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">audit-libs</td>
+                <td class="all-pkgs" data-order="291892">285.1 kB</td>
+                
+                
+                
+                
+                <td class="in-base">audit-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>audit-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>audit-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">basesystem</td>
+                <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td class="in-base">basesystem</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>basesystem</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">basesystem</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">bash</td>
+                <td class="all-pkgs" data-order="7569822">7.2 MB</td>
+                
+                
+                
+                
+                <td class="in-base">bash</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>bash</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">bash</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">brotli</td>
+                <td class="all-pkgs" data-order="1538932">1.5 MB</td>
+                
+                
+                
+                
+                <td class="in-base">brotli</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">bzip2-libs</td>
+                <td class="all-pkgs" data-order="83480">81.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">bzip2-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>bzip2-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>bzip2-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">ca-certificates</td>
+                <td class="all-pkgs" data-order="993770">970.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">ca-certificates</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>ca-certificates</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>ca-certificates</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">coreutils</td>
+                <td class="all-pkgs" data-order="7839760">7.5 MB</td>
+                
+                
+                
+                
+                <td class="in-base">coreutils</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>coreutils</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>coreutils</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">coreutils-common</td>
+                <td class="all-pkgs" data-order="10348911">9.9 MB</td>
+                
+                
+                
+                
+                <td class="in-base">coreutils-common</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>coreutils-common</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>coreutils-common</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">cracklib</td>
+                <td class="all-pkgs" data-order="255359">249.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">cracklib</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>cracklib</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>cracklib</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">crypto-policies</td>
+                <td class="all-pkgs" data-order="195658">191.1 kB</td>
+                
+                
+                
+                
+                <td class="in-base">crypto-policies</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>crypto-policies</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>crypto-policies</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">cryptsetup-libs</td>
+                <td class="all-pkgs" data-order="1854666">1.8 MB</td>
+                
+                
+                
+                
+                <td>cryptsetup-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>cryptsetup-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>cryptsetup-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">curl</td>
+                <td class="all-pkgs" data-order="661540">646.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">curl</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">cyrus-sasl-lib</td>
+                <td class="all-pkgs" data-order="740346">723.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">cyrus-sasl-lib</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">dbus</td>
+                <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td>dbus</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>dbus</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>dbus</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">dbus-broker</td>
+                <td class="all-pkgs" data-order="433360">423.2 kB</td>
+                
+                
+                
+                
+                <td>dbus-broker</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>dbus-broker</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>dbus-broker</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">dbus-common</td>
+                <td class="all-pkgs" data-order="11481">11.2 kB</td>
+                
+                
+                
+                
+                <td>dbus-common</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>dbus-common</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>dbus-common</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">dejavu-fonts-common</td>
+                <td class="all-pkgs" data-order="153379">149.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">dejavu-fonts-common</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">dejavu-sans-fonts</td>
+                <td class="all-pkgs" data-order="5835846">5.6 MB</td>
+                
+                
+                
+                
+                <td class="in-base">dejavu-sans-fonts</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">device-mapper</td>
+                <td class="all-pkgs" data-order="358356">350.0 kB</td>
+                
+                
+                
+                
+                <td>device-mapper</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>device-mapper</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>device-mapper</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">device-mapper-libs</td>
+                <td class="all-pkgs" data-order="424159">414.2 kB</td>
+                
+                
+                
+                
+                <td>device-mapper-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>device-mapper-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>device-mapper-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">dnf</td>
+                <td class="all-pkgs" data-order="1776487">1.7 MB</td>
+                
+                
+                
+                
+                <td class="in-base">dnf</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">dnf-data</td>
+                <td class="all-pkgs" data-order="36368">35.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">dnf-data</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">elfutils-default-yama-scope</td>
+                <td class="all-pkgs" data-order="1810">1.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">elfutils-default-yama-scope</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>elfutils-default-yama-scope</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>elfutils-default-yama-scope</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">elfutils-libelf</td>
+                <td class="all-pkgs" data-order="924787">903.1 kB</td>
+                
+                
+                
+                
+                <td class="in-base">elfutils-libelf</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>elfutils-libelf</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>elfutils-libelf</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">elfutils-libs</td>
+                <td class="all-pkgs" data-order="721743">704.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">elfutils-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>elfutils-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>elfutils-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">expat</td>
+                <td class="all-pkgs" data-order="268035">261.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">expat</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>expat</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>expat</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">fedora-gpg-keys</td>
+                <td class="all-pkgs" data-order="103813">101.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">fedora-gpg-keys</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>fedora-gpg-keys</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">fedora-gpg-keys</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">fedora-logos-httpd</td>
+                <td class="all-pkgs" data-order="10118">9.9 kB</td>
+                
+                
+                
+                
+                <td>fedora-logos-httpd</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>fedora-logos-httpd</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>fedora-logos-httpd</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">fedora-release</td>
+                <td class="all-pkgs" data-order="699">699.0 B</td>
+                
+                
+                
+                
+                <td class="in-base">fedora-release</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>fedora-release</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">fedora-release</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">fedora-release-common</td>
+                <td class="all-pkgs" data-order="14378">14.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">fedora-release-common</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>fedora-release-common</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">fedora-release-common</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">fedora-repos</td>
+                <td class="all-pkgs" data-order="8786">8.6 kB</td>
+                
+                
+                
+                
+                <td class="in-base">fedora-repos</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>fedora-repos</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">fedora-repos</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">fedora-repos-rawhide</td>
+                <td class="all-pkgs" data-order="4132">4.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">fedora-repos-rawhide</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>fedora-repos-rawhide</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">fedora-repos-rawhide</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">file-libs</td>
+                <td class="all-pkgs" data-order="6915528">6.6 MB</td>
+                
+                
+                
+                
+                <td class="in-base">file-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">filesystem</td>
+                <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td class="in-base">filesystem</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>filesystem</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">filesystem</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">fontpackages-filesystem</td>
+                <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td class="in-base">fontpackages-filesystem</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">gawk</td>
+                <td class="all-pkgs" data-order="3006764">2.9 MB</td>
+                
+                
+                
+                
+                <td class="in-base">gawk</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>gawk</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>gawk</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">gdbm-libs</td>
+                <td class="all-pkgs" data-order="127088">124.1 kB</td>
+                
+                
+                
+                
+                <td class="in-base">gdbm-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>gdbm-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>gdbm-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">glib2</td>
+                <td class="all-pkgs" data-order="12805270">12.2 MB</td>
+                
+                
+                
+                
+                <td class="in-base">glib2</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">glibc</td>
+                <td class="all-pkgs" data-order="17313326">16.5 MB</td>
+                
+                
+                
+                
+                <td class="in-base">glibc</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>glibc</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">glibc</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">glibc-all-langpacks</td>
+                <td class="all-pkgs" data-order="222110386">211.8 MB</td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td>glibc-all-langpacks</td>
+                <td></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">glibc-common</td>
+                <td class="all-pkgs" data-order="8185525">7.8 MB</td>
+                
+                
+                
+                
+                <td class="in-base">glibc-common</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>glibc-common</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">glibc-common</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">glibc-minimal-langpack</td>
+                <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td class="in-base">glibc-minimal-langpack</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                
+                <td class="in-base">glibc-minimal-langpack</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">gmp</td>
+                <td class="all-pkgs" data-order="757940">740.2 kB</td>
+                
+                
+                
+                
+                <td class="in-base">gmp</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>gmp</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>gmp</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">gnupg2</td>
+                <td class="all-pkgs" data-order="9979490">9.5 MB</td>
+                
+                
+                
+                
+                <td class="in-base">gnupg2</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">gnutls</td>
+                <td class="all-pkgs" data-order="2866039">2.7 MB</td>
+                
+                
+                
+                
+                <td class="in-base">gnutls</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>gnutls</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>gnutls</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">gperftools-libs</td>
+                <td class="all-pkgs" data-order="1880288">1.8 MB</td>
+                
+                
+                
+                
+                <td>gperftools-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>gperftools-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>gperftools-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">gpgme</td>
+                <td class="all-pkgs" data-order="569119">555.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">gpgme</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">grep</td>
+                <td class="all-pkgs" data-order="805874">787.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">grep</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>grep</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>grep</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">gzip</td>
+                <td class="all-pkgs" data-order="369282">360.6 kB</td>
+                
+                
+                
+                
+                <td class="in-base">gzip</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>gzip</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>gzip</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">ima-evm-utils</td>
+                <td class="all-pkgs" data-order="129263">126.2 kB</td>
+                
+                
+                
+                
+                <td class="in-base">ima-evm-utils</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">iptables-libs</td>
+                <td class="all-pkgs" data-order="144904">141.5 kB</td>
+                
+                
+                
+                
+                <td>iptables-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>iptables-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>iptables-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">json-c</td>
+                <td class="all-pkgs" data-order="73130">71.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">json-c</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>json-c</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>json-c</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">keyutils-libs</td>
+                <td class="all-pkgs" data-order="55631">54.3 kB</td>
+                
+                
+                
+                
+                <td class="in-base">keyutils-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>keyutils-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>keyutils-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">kmod-libs</td>
+                <td class="all-pkgs" data-order="202160">197.4 kB</td>
+                
+                
+                
+                
+                <td>kmod-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>kmod-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>kmod-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">krb5-libs</td>
+                <td class="all-pkgs" data-order="2262371">2.2 MB</td>
+                
+                
+                
+                
+                <td class="in-base">krb5-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>krb5-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>krb5-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">langpacks-core-en</td>
+                <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td class="in-base">langpacks-core-en</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">langpacks-en</td>
+                <td class="all-pkgs" data-order="400">400.0 B</td>
+                
+                
+                
+                
+                <td class="in-base">langpacks-en</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libacl</td>
+                <td class="all-pkgs" data-order="48624">47.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libacl</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libacl</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libacl</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libarchive</td>
+                <td class="all-pkgs" data-order="912653">891.3 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libarchive</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libargon2</td>
+                <td class="all-pkgs" data-order="56175">54.9 kB</td>
+                
+                
+                
+                
+                <td>libargon2</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libargon2</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libargon2</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libassuan</td>
+                <td class="all-pkgs" data-order="174160">170.1 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libassuan</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libattr</td>
+                <td class="all-pkgs" data-order="30186">29.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libattr</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libattr</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libattr</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libblkid</td>
+                <td class="all-pkgs" data-order="377457">368.6 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libblkid</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libblkid</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libblkid</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libcap</td>
+                <td class="all-pkgs" data-order="150562">147.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libcap</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libcap</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libcap</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libcap-ng</td>
+                <td class="all-pkgs" data-order="55902">54.6 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libcap-ng</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libcap-ng</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libcap-ng</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libcom_err</td>
+                <td class="all-pkgs" data-order="71345">69.7 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libcom_err</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libcom_err</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libcom_err</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libcomps</td>
+                <td class="all-pkgs" data-order="217917">212.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libcomps</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libcurl</td>
+                <td class="all-pkgs" data-order="601440">587.3 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libcurl</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libdb</td>
+                <td class="all-pkgs" data-order="1962032">1.9 MB</td>
+                
+                
+                
+                
+                <td class="in-base">libdb</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libdb</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libdb</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libdb-utils</td>
+                <td class="all-pkgs" data-order="410439">400.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libdb-utils</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libdnf</td>
+                <td class="all-pkgs" data-order="2018203">1.9 MB</td>
+                
+                
+                
+                
+                <td class="in-base">libdnf</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libfdisk</td>
+                <td class="all-pkgs" data-order="507795">495.9 kB</td>
+                
+                
+                
+                
+                <td>libfdisk</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libfdisk</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libfdisk</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libffi</td>
+                <td class="all-pkgs" data-order="58548">57.2 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libffi</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libffi</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libffi</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libgcc</td>
+                <td class="all-pkgs" data-order="194880">190.3 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libgcc</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libgcc</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">libgcc</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libgcrypt</td>
+                <td class="all-pkgs" data-order="1285398">1.2 MB</td>
+                
+                
+                
+                
+                <td class="in-base">libgcrypt</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libgcrypt</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libgcrypt</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libgomp</td>
+                <td class="all-pkgs" data-order="343949">335.9 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libgomp</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libgpg-error</td>
+                <td class="all-pkgs" data-order="774893">756.7 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libgpg-error</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libgpg-error</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libgpg-error</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libidn2</td>
+                <td class="all-pkgs" data-order="258134">252.1 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libidn2</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libidn2</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libidn2</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libksba</td>
+                <td class="all-pkgs" data-order="340807">332.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libksba</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libmetalink</td>
+                <td class="all-pkgs" data-order="81760">79.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libmetalink</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libmodulemd1</td>
+                <td class="all-pkgs" data-order="562623">549.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libmodulemd1</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libmount</td>
+                <td class="all-pkgs" data-order="442829">432.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libmount</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libmount</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libmount</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libnghttp2</td>
+                <td class="all-pkgs" data-order="172548">168.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libnghttp2</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libnsl2</td>
+                <td class="all-pkgs" data-order="137730">134.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libnsl2</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libnsl2</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libnsl2</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libpcap</td>
+                <td class="all-pkgs" data-order="390130">381.0 kB</td>
+                
+                
+                
+                
+                <td>libpcap</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libpcap</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libpcap</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libpsl</td>
+                <td class="all-pkgs" data-order="74788">73.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libpsl</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libpwquality</td>
+                <td class="all-pkgs" data-order="407629">398.1 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libpwquality</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libpwquality</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libpwquality</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">librepo</td>
+                <td class="all-pkgs" data-order="233736">228.3 kB</td>
+                
+                
+                
+                
+                <td class="in-base">librepo</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libreport-filesystem</td>
+                <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td class="in-base">libreport-filesystem</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libseccomp</td>
+                <td class="all-pkgs" data-order="355467">347.1 kB</td>
+                
+                
+                
+                
+                <td>libseccomp</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libseccomp</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libseccomp</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libselinux</td>
+                <td class="all-pkgs" data-order="173680">169.6 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libselinux</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libselinux</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libselinux</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libsemanage</td>
+                <td class="all-pkgs" data-order="311877">304.6 kB</td>
+                
+                
+                
+                
+                <td>libsemanage</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libsemanage</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libsemanage</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libsepol</td>
+                <td class="all-pkgs" data-order="761280">743.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libsepol</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libsepol</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libsepol</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libsigsegv</td>
+                <td class="all-pkgs" data-order="50042">48.9 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libsigsegv</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libsigsegv</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libsigsegv</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libsmartcols</td>
+                <td class="all-pkgs" data-order="296531">289.6 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libsmartcols</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libsmartcols</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libsmartcols</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libsolv</td>
+                <td class="all-pkgs" data-order="883208">862.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libsolv</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libssh</td>
+                <td class="all-pkgs" data-order="515820">503.7 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libssh</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libssh-config</td>
+                <td class="all-pkgs" data-order="357">357.0 B</td>
+                
+                
+                
+                
+                <td class="in-base">libssh-config</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libsss_idmap</td>
+                <td class="all-pkgs" data-order="80038">78.2 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libsss_idmap</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libsss_nss_idmap</td>
+                <td class="all-pkgs" data-order="92430">90.3 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libsss_nss_idmap</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libstdc++</td>
+                <td class="all-pkgs" data-order="2272733">2.2 MB</td>
+                
+                
+                
+                
+                <td class="in-base">libstdc++</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libstdc++</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libstdc++</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libtasn1</td>
+                <td class="all-pkgs" data-order="175541">171.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libtasn1</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libtasn1</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libtasn1</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libtirpc</td>
+                <td class="all-pkgs" data-order="228396">223.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libtirpc</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libtirpc</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libtirpc</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libunistring</td>
+                <td class="all-pkgs" data-order="1713307">1.6 MB</td>
+                
+                
+                
+                
+                <td class="in-base">libunistring</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libunistring</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libunistring</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libunwind</td>
+                <td class="all-pkgs" data-order="200600">195.9 kB</td>
+                
+                
+                
+                
+                <td>libunwind</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libunwind</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libunwind</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libusbx</td>
+                <td class="all-pkgs" data-order="154073">150.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libusbx</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libutempter</td>
+                <td class="all-pkgs" data-order="59645">58.2 kB</td>
+                
+                
+                
+                
+                <td>libutempter</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libutempter</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libutempter</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libuuid</td>
+                <td class="all-pkgs" data-order="40543">39.6 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libuuid</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libuuid</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libuuid</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libverto</td>
+                <td class="all-pkgs" data-order="32076">31.3 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libverto</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libverto</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libverto</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libxcrypt</td>
+                <td class="all-pkgs" data-order="275021">268.6 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libxcrypt</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>libxcrypt</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>libxcrypt</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libxml2</td>
+                <td class="all-pkgs" data-order="1785484">1.7 MB</td>
+                
+                
+                
+                
+                <td class="in-base">libxml2</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libyaml</td>
+                <td class="all-pkgs" data-order="134867">131.7 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libyaml</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">libzstd</td>
+                <td class="all-pkgs" data-order="716821">700.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">libzstd</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">lua-libs</td>
+                <td class="all-pkgs" data-order="260320">254.2 kB</td>
+                
+                
+                
+                
+                <td class="in-base">lua-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">lz4-libs</td>
+                <td class="all-pkgs" data-order="133631">130.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">lz4-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>lz4-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>lz4-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">mpfr</td>
+                <td class="all-pkgs" data-order="721035">704.1 kB</td>
+                
+                
+                
+                
+                <td class="in-base">mpfr</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>mpfr</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>mpfr</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">ncurses</td>
+                <td class="all-pkgs" data-order="661925">646.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">ncurses</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>ncurses</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>ncurses</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">ncurses-base</td>
+                <td class="all-pkgs" data-order="285229">278.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">ncurses-base</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>ncurses-base</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">ncurses-base</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">ncurses-libs</td>
+                <td class="all-pkgs" data-order="1003872">980.3 kB</td>
+                
+                
+                
+                
+                <td class="in-base">ncurses-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>ncurses-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">ncurses-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">nettle</td>
+                <td class="all-pkgs" data-order="591247">577.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">nettle</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>nettle</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>nettle</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">nginx-filesystem</td>
+                <td class="all-pkgs" data-order="0">0.0 B</td>
+                
+                
+                
+                
+                <td>nginx-filesystem</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>nginx-filesystem</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>nginx-filesystem</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">nginx-mimetypes</td>
+                <td class="all-pkgs" data-order="40257">39.3 kB</td>
+                
+                
+                
+                
+                <td>nginx-mimetypes</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>nginx-mimetypes</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>nginx-mimetypes</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">npth</td>
+                <td class="all-pkgs" data-order="51357">50.2 kB</td>
+                
+                
+                
+                
+                <td class="in-base">npth</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">openldap</td>
+                <td class="all-pkgs" data-order="1031518">1007.3 kB</td>
+                
+                
+                
+                
+                <td class="in-base">openldap</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">openssl</td>
+                <td class="all-pkgs" data-order="1172335">1.1 MB</td>
+                
+                
+                
+                
+                <td class="in-base">openssl</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>openssl</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>openssl</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">openssl-libs</td>
+                <td class="all-pkgs" data-order="3763866">3.6 MB</td>
+                
+                
+                
+                
+                <td class="in-base">openssl-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>openssl-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>openssl-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">p11-kit</td>
+                <td class="all-pkgs" data-order="1402910">1.3 MB</td>
+                
+                
+                
+                
+                <td class="in-base">p11-kit</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>p11-kit</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>p11-kit</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">p11-kit-trust</td>
+                <td class="all-pkgs" data-order="511033">499.1 kB</td>
+                
+                
+                
+                
+                <td class="in-base">p11-kit-trust</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>p11-kit-trust</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>p11-kit-trust</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">pam</td>
+                <td class="all-pkgs" data-order="2854993">2.7 MB</td>
+                
+                
+                
+                
+                <td class="in-base">pam</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>pam</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>pam</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">pcre</td>
+                <td class="all-pkgs" data-order="524726">512.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">pcre</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>pcre</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>pcre</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">pcre2</td>
+                <td class="all-pkgs" data-order="732557">715.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">pcre2</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>pcre2</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>pcre2</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">popt</td>
+                <td class="all-pkgs" data-order="131342">128.3 kB</td>
+                
+                
+                
+                
+                <td class="in-base">popt</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">publicsuffix-list-dafsa</td>
+                <td class="all-pkgs" data-order="64992">63.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">publicsuffix-list-dafsa</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python-pip-wheel</td>
+                <td class="all-pkgs" data-order="1264410">1.2 MB</td>
+                
+                
+                
+                
+                <td class="in-base">python-pip-wheel</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>python-pip-wheel</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>python-pip-wheel</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python-setuptools-wheel</td>
+                <td class="all-pkgs" data-order="360619">352.2 kB</td>
+                
+                
+                
+                
+                <td class="in-base">python-setuptools-wheel</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>python-setuptools-wheel</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>python-setuptools-wheel</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python3</td>
+                <td class="all-pkgs" data-order="31521">30.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">python3</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>python3</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>python3</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python3-dnf</td>
+                <td class="all-pkgs" data-order="1818574">1.7 MB</td>
+                
+                
+                
+                
+                <td class="in-base">python3-dnf</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python3-gpg</td>
+                <td class="all-pkgs" data-order="1320952">1.3 MB</td>
+                
+                
+                
+                
+                <td class="in-base">python3-gpg</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python3-hawkey</td>
+                <td class="all-pkgs" data-order="275412">269.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">python3-hawkey</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python3-libcomps</td>
+                <td class="all-pkgs" data-order="155470">151.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">python3-libcomps</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python3-libdnf</td>
+                <td class="all-pkgs" data-order="3755564">3.6 MB</td>
+                
+                
+                
+                
+                <td class="in-base">python3-libdnf</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python3-libs</td>
+                <td class="all-pkgs" data-order="34822999">33.2 MB</td>
+                
+                
+                
+                
+                <td class="in-base">python3-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>python3-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>python3-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">python3-rpm</td>
+                <td class="all-pkgs" data-order="361077">352.6 kB</td>
+                
+                
+                
+                
+                <td class="in-base">python3-rpm</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">qrencode-libs</td>
+                <td class="all-pkgs" data-order="163153">159.3 kB</td>
+                
+                
+                
+                
+                <td>qrencode-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>qrencode-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>qrencode-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">readline</td>
+                <td class="all-pkgs" data-order="485139">473.8 kB</td>
+                
+                
+                
+                
+                <td class="in-base">readline</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>readline</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>readline</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">rootfiles</td>
+                <td class="all-pkgs" data-order="817">817.0 B</td>
+                
+                
+                
+                
+                <td class="in-base">rootfiles</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">rpm</td>
+                <td class="all-pkgs" data-order="2973762">2.8 MB</td>
+                
+                
+                
+                
+                <td class="in-base">rpm</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">rpm-build-libs</td>
+                <td class="all-pkgs" data-order="204200">199.4 kB</td>
+                
+                
+                
+                
+                <td class="in-base">rpm-build-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">rpm-libs</td>
+                <td class="all-pkgs" data-order="743288">725.9 kB</td>
+                
+                
+                
+                
+                <td class="in-base">rpm-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">rpm-sign-libs</td>
+                <td class="all-pkgs" data-order="28136">27.5 kB</td>
+                
+                
+                
+                
+                <td class="in-base">rpm-sign-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">sed</td>
+                <td class="all-pkgs" data-order="774118">756.0 kB</td>
+                
+                
+                
+                
+                <td class="in-base">sed</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>sed</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>sed</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">setup</td>
+                <td class="all-pkgs" data-order="726694">709.7 kB</td>
+                
+                
+                
+                
+                <td class="in-base">setup</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>setup</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">setup</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">shadow-utils</td>
+                <td class="all-pkgs" data-order="4180833">4.0 MB</td>
+                
+                
+                
+                
+                <td>shadow-utils</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>shadow-utils</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>shadow-utils</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">sqlite-libs</td>
+                <td class="all-pkgs" data-order="1187772">1.1 MB</td>
+                
+                
+                
+                
+                <td class="in-base">sqlite-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>sqlite-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>sqlite-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">sssd-client</td>
+                <td class="all-pkgs" data-order="267486">261.2 kB</td>
+                
+                
+                
+                
+                <td class="in-base">sssd-client</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">sudo</td>
+                <td class="all-pkgs" data-order="3594360">3.4 MB</td>
+                
+                
+                
+                
+                <td class="in-base">sudo</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">systemd</td>
+                <td class="all-pkgs" data-order="12495862">11.9 MB</td>
+                
+                
+                
+                
+                <td>systemd</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>systemd</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>systemd</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">systemd-libs</td>
+                <td class="all-pkgs" data-order="1731822">1.7 MB</td>
+                
+                
+                
+                
+                <td class="in-base">systemd-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>systemd-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>systemd-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">systemd-pam</td>
+                <td class="all-pkgs" data-order="343816">335.8 kB</td>
+                
+                
+                
+                
+                <td>systemd-pam</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>systemd-pam</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>systemd-pam</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">systemd-rpm-macros</td>
+                <td class="all-pkgs" data-order="5043">4.9 kB</td>
+                
+                
+                
+                
+                <td>systemd-rpm-macros</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>systemd-rpm-macros</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>systemd-rpm-macros</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">tar</td>
+                <td class="all-pkgs" data-order="3134685">3.0 MB</td>
+                
+                
+                
+                
+                <td class="in-base">tar</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">tss2</td>
+                <td class="all-pkgs" data-order="3090481">2.9 MB</td>
+                
+                
+                
+                
+                <td class="in-base">tss2</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">tzdata</td>
+                <td class="all-pkgs" data-order="1892615">1.8 MB</td>
+                
+                
+                
+                
+                <td class="in-base">tzdata</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>tzdata</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td class="in-base">tzdata</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">util-linux</td>
+                <td class="all-pkgs" data-order="13420803">12.8 MB</td>
+                
+                
+                
+                
+                <td>util-linux</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>util-linux</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>util-linux</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">vim-minimal</td>
+                <td class="all-pkgs" data-order="1385603">1.3 MB</td>
+                
+                
+                
+                
+                <td class="in-base">vim-minimal</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">xz-libs</td>
+                <td class="all-pkgs" data-order="179959">175.7 kB</td>
+                
+                
+                
+                
+                <td class="in-base">xz-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>xz-libs</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>xz-libs</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">yum</td>
+                <td class="all-pkgs" data-order="20137">19.7 kB</td>
+                
+                
+                
+                
+                <td class="in-base">yum</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">zchunk-libs</td>
+                <td class="all-pkgs" data-order="90058">87.9 kB</td>
+                
+                
+                
+                
+                <td class="in-base">zchunk-libs</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+                
+                <td> - </td>
+                <td></td>
+                
+                
+            </tr>
+            
+            <tr class="not-required">
+                <td class="all-pkgs" data-order="1"></td>
+                <td class="all-pkgs">zlib</td>
+                <td class="all-pkgs" data-order="203919">199.1 kB</td>
+                
+                
+                
+                
+                <td class="in-base">zlib</td>
+                <td class="in-base"><span class="float-right text-muted">(in base)</span></td>
+                
+                
+                
+                
+                
+                <td>zlib</td>
+                <td></td>
+                
+                
+                
+                
+                
+                <td>zlib</td>
+                <td></td>
+                
+                
+                
+            </tr>
+            
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false
+        });
+    });
+</script>
+
+
+  <br><br>
+</body>
+
+</html>
