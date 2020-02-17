@@ -31,22 +31,29 @@
       margin-bottom: 0 !important;
     }
 
-    .jumbotron-minimization {
-      background-color: #631a38 !important;
-      color: white;
-      padding: 30px 0;
-    }
 
     .jumbotron-home {
       background-color: #072b61;
       color: white;
+      padding: 120px 0;
+    }
+
+    .jumbotron-home a.btn {
+      margin-top: 30px;
     }
 
 
-
     .jumbotron-about {
+      padding: 80px 0;
+    }
 
-      padding: 30px 0;
+    .jumbotron-feature {
+      background: white;
+
+    }
+
+    .jumbotron-feature .row {
+      margin-top: 26px;
     }
 
     a.btn-minimization {
@@ -100,6 +107,20 @@
       border-top: 2px solid black !important;
       font-weight: bold !important;
     }
+
+
+    div.footer {
+      background-color: #212529;
+      padding-bottom: 60px;
+    }
+
+    div.footer h5 {
+      color: white;
+    }
+
+    div.footer div.row {
+      margin-bottom: 40px;
+    }
   </style>
 </head>
 
@@ -122,15 +143,62 @@
         <div class="row ">
             <div class="col-sm-12">
                 <h3>Fedora Minimization Objective</h3>
-                <p class="lead">Minimising the installation footprint of Fedora ecosystem to make it more suitable
-                    for
-                    modern
-                    deployments such as IoT and cloud.</p>
-                <a class="btn btn-secondary" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization — Docs</a>
+                <p class="lead">
+                    Minimization is a key goal of <a href="https://getfedora.org/">Fedora</a> focusing on installation
+                    footprint of popular use cases in the Fedora ecosystem to make them more suitable
+                    for modern deployments such as IoT and cloud.
+                </p>
+                <a class="btn btn-secondary" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora
+                    Minimization Docs</a>
             </div>
         </div>
     </div>
 </div>
+
+<div class="jumbotron jumbotron-feature">
+    <div class="container">
+
+        <h3>Feedback Pipeline Features</h3>
+        <div class="row ">
+            <div class="col-sm-8">
+                <h4>Use Case Focus</h4>
+                <p>Use cases are groups of packages in a specific environment having a specific <b>purpose</b>. Compared to
+                    repositories or packages in general, this specific definition makes it easier to make decisions
+                    about their minimization.</p>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-sm-8">
+                <h4>Growth Prevention</h4>
+                <p><b>Keeping</b> use cases small is as important as <b>making</b> them small in the first place. Feedback Pipeline
+                    monitors use cases and helps maintainers identify sudden growth caused by changes in dependencies,
+                    build configurations, etc.</p>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-sm-8">
+                <h4>Quick Inspection</h4>
+                <p>Feedback Pipeline provides <b>dependency graphs</b> for a quick inspection of dependency trees of use case
+                    installations. Clustering and interactive dependency highlights of any single package help
+                    discovering.</p>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!--div class="jumbotron jumbotron-fluid jumbotron-about">
     <div class="container">
         <div class="row ">
@@ -197,6 +265,61 @@
 </div-->
 
   <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
 </body>
 
 </html>

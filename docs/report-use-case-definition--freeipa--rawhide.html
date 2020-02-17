@@ -31,22 +31,29 @@
       margin-bottom: 0 !important;
     }
 
-    .jumbotron-minimization {
-      background-color: #631a38 !important;
-      color: white;
-      padding: 30px 0;
-    }
 
     .jumbotron-home {
       background-color: #072b61;
       color: white;
+      padding: 120px 0;
+    }
+
+    .jumbotron-home a.btn {
+      margin-top: 30px;
     }
 
 
-
     .jumbotron-about {
+      padding: 80px 0;
+    }
 
-      padding: 30px 0;
+    .jumbotron-feature {
+      background: white;
+
+    }
+
+    .jumbotron-feature .row {
+      margin-top: 26px;
     }
 
     a.btn-minimization {
@@ -100,6 +107,20 @@
       border-top: 2px solid black !important;
       font-weight: bold !important;
     }
+
+
+    div.footer {
+      background-color: #212529;
+      padding-bottom: 60px;
+    }
+
+    div.footer h5 {
+      color: white;
+    }
+
+    div.footer div.row {
+      margin-bottom: 40px;
+    }
   </style>
 </head>
 
@@ -148,7 +169,7 @@
     </nav>
 
     <h1> FreeIPA server <small class="text-muted">details</small> </h1>
-    <p> Generated at 12/02/2020 16:17. </p>
+    <p> Generated at 17/02/2020 13:56. </p>
 
     <hr>
 
@@ -243,6 +264,8 @@
                 
                     "2020-02-12-1617",
                 
+                    "2020-02-17-1356",
+                
             ],
             datasets: [
             
@@ -250,6 +273,8 @@
                 data: [
                     
                     201.34,
+                    
+                    201.36,
                     
                 ],
                 label: "fedora-container-base"
@@ -260,12 +285,16 @@
                     
                     0.0,
                     
+                    0.0,
+                    
                 ],
                 label: "fedora-empty-base"
             },
             
             {
                 data: [
+                    
+                    35.58,
                     
                     35.58,
                     
@@ -302,6 +331,61 @@
 
 
   <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
 </body>
 
 </html>
