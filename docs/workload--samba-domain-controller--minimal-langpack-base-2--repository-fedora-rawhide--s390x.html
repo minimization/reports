@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--samba-domain-controller--repository-fedora-rawhide.html">
+                    Samba AD Domain Controller
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Samba AD Domain Controller in Minimal Base 2 from Fedora rawhide s390x
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Samba AD Domain Controller <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> <a href="">Minimal Base 2</a> </small>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora rawhide</a> </small>
+        <small class="text-muted"> for </small>
+        <small> s390x</small>
+    </h1>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <br>
+                    <br>
+                    <p class="lead text-muted"> TBD</p>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>acl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="209188">204.3 kB</td>
+                <td class=>Access control list utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>alternatives</td>
+                <td>1.11-6.fc32</td>
+                <td>s390x</td>
+                <td data-order="59470">58.1 kB</td>
+                <td class=>A tool to maintain symbolic links determining default commands</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>audit-libs</td>
+                <td>3.0-0.18.20191104git1c2f876.fc32</td>
+                <td>s390x</td>
+                <td data-order="323300">315.7 kB</td>
+                <td class=>Dynamic library for libaudit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>avahi-libs</td>
+                <td>0.7-23.fc32</td>
+                <td>s390x</td>
+                <td data-order="158848">155.1 kB</td>
+                <td class=>Libraries for avahi run-time use</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>basesystem</td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>The skeleton package which defines a simple Fedora system</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>bash</td>
+                <td>5.0.11-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="7988290">7.6 MB</td>
+                <td>The GNU Bourne Again shell</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bzip2-libs</td>
+                <td>1.0.8-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="82720">80.8 kB</td>
+                <td class=>Libraries for applications using bzip2</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ca-certificates</td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td class=>The Mozilla CA root certificate bundle</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>coreutils-single</td>
+                <td>8.31-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="1724262">1.6 MB</td>
+                <td>coreutils multicall binary</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cracklib</td>
+                <td>2.9.6-22.fc32</td>
+                <td>s390x</td>
+                <td data-order="226581">221.3 kB</td>
+                <td class=>A password-checking library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>crypto-policies</td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td class=>System-wide crypto policies</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cryptsetup-libs</td>
+                <td>2.3.0-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1949615">1.9 MB</td>
+                <td class=>Cryptsetup shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cups-libs</td>
+                <td>1:2.3.1-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="764694">746.8 kB</td>
+                <td class=>CUPS printing system - libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cyrus-sasl-lib</td>
+                <td>2.1.27-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="727610">710.6 kB</td>
+                <td class=>Shared libraries needed by applications which use Cyrus SASL</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>D-BUS message bus</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-broker</td>
+                <td>22-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="458673">447.9 kB</td>
+                <td class=>Linux D-Bus Message Broker</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-common</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="11481">11.2 kB</td>
+                <td class=>D-BUS message bus configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-libs</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="461256">450.4 kB</td>
+                <td class=>Libraries for accessing D-BUS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>device-mapper</td>
+                <td>1.02.167-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="381724">372.8 kB</td>
+                <td class=>Device mapper utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>device-mapper-libs</td>
+                <td>1.02.167-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="500351">488.6 kB</td>
+                <td class=>Device-mapper shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-default-yama-scope</td>
+                <td>0.178-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td class=>Default yama attach scope sysctl setting</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-libelf</td>
+                <td>0.178-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="932571">910.7 kB</td>
+                <td class=>Library to read and write ELF files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-libs</td>
+                <td>0.178-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="786079">767.7 kB</td>
+                <td class=>Libraries to handle compiled objects</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>expat</td>
+                <td>2.2.8-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="331787">324.0 kB</td>
+                <td class=>An XML parser library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-gpg-keys</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td>Fedora RPM keys</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-release</td>
+                <td>32-0.6</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-release-common</td>
+                <td>32-0.6</td>
+                <td>noarch</td>
+                <td data-order="14592">14.2 kB</td>
+                <td>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-repos</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td>Fedora package repositories</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>filesystem</td>
+                <td>3.14-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="0">0.0 B</td>
+                <td>The basic directory layout for a Linux system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gawk</td>
+                <td>5.0.1-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="3132228">3.0 MB</td>
+                <td class=>The GNU version of the AWK text processing utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdbm-libs</td>
+                <td>1:1.18.1-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="121280">118.4 kB</td>
+                <td class=>Libraries files for gdbm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glib2</td>
+                <td>2.64.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="13585946">13.0 MB</td>
+                <td class=>A library of handy utility functions</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glibc</td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="15051098">14.4 MB</td>
+                <td>The GNU libc libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glibc-common</td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="8138585">7.8 MB</td>
+                <td>Common binaries and locale data for glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glibc-minimal-langpack</td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="0">0.0 B</td>
+                <td>Minimal language packs for glibc.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gmp</td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>s390x</td>
+                <td data-order="715572">698.8 kB</td>
+                <td class=>A GNU arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gnupg2</td>
+                <td>2.2.19-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="11167076">10.6 MB</td>
+                <td class=>Utility for secure communication and data storage</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gnutls</td>
+                <td>3.6.12-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="2806070">2.7 MB</td>
+                <td class=>A TLS protocol implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gpgme</td>
+                <td>1.13.1-6.fc32</td>
+                <td>s390x</td>
+                <td data-order="655231">639.9 kB</td>
+                <td class=>GnuPG Made Easy - high level crypto API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>grep</td>
+                <td>3.3-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="868610">848.3 kB</td>
+                <td class=>Pattern matching utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gzip</td>
+                <td>1.10-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="378258">369.4 kB</td>
+                <td class=>The GNU data compression program</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>iptables-libs</td>
+                <td>1.8.4-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="1575032">1.5 MB</td>
+                <td class=>iptables libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jansson</td>
+                <td>2.12-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="97542">95.3 kB</td>
+                <td class=>C library for encoding, decoding and manipulating JSON data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>json-c</td>
+                <td>0.13.1-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="80850">79.0 kB</td>
+                <td class=>JSON implementation in C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>keyutils-libs</td>
+                <td>1.6-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="51143">49.9 kB</td>
+                <td class=>Key utilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kmod-libs</td>
+                <td>27-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="146384">143.0 kB</td>
+                <td class=>Libraries to handle kernel module loading and unloading</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>krb5-libs</td>
+                <td>1.18-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="2474131">2.4 MB</td>
+                <td class=>The non-admin shared libraries used by Kerberos 5</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>krb5-server</td>
+                <td>1.18-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="866711">846.4 kB</td>
+                <td class=>The KDC and related programs for Kerberos 5</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ldb-tools</td>
+                <td>2.1.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="121223">118.4 kB</td>
+                <td class=>Tools to manage LDB files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libacl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="41296">40.3 kB</td>
+                <td>Dynamic library for access control list support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libargon2</td>
+                <td>20171227-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="59119">57.7 kB</td>
+                <td class=>The password-hashing library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libassuan</td>
+                <td>2.5.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="166712">162.8 kB</td>
+                <td class=>GnuPG IPC library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libattr</td>
+                <td>2.4.48-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="25178">24.6 kB</td>
+                <td>Dynamic library for extended attribute support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libblkid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="363825">355.3 kB</td>
+                <td class=>Block device ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcap</td>
+                <td>2.26-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="122258">119.4 kB</td>
+                <td>Library for getting and setting POSIX.1e capabilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap-ng</td>
+                <td>0.7.10-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="50814">49.6 kB</td>
+                <td class=>An alternate posix capabilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcom_err</td>
+                <td>1.45.5-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="61385">59.9 kB</td>
+                <td class=>Common error description library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdb</td>
+                <td>5.3.28-40.fc32</td>
+                <td>s390x</td>
+                <td data-order="1995744">1.9 MB</td>
+                <td class=>The Berkeley DB database library for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libev</td>
+                <td>4.31-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="110944">108.3 kB</td>
+                <td class=>High-performance event loop/event model with lots of features</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libfdisk</td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="524195">511.9 kB</td>
+                <td class=>Partitioning library for fdisk-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libffi</td>
+                <td>3.1-24.fc32</td>
+                <td>s390x</td>
+                <td data-order="57380">56.0 kB</td>
+                <td class=>A portable foreign function interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libgcc</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="173032">169.0 kB</td>
+                <td>GCC version 10 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcrypt</td>
+                <td>1.8.5-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="1043742">1019.3 kB</td>
+                <td class=>A general-purpose cryptography library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgpg-error</td>
+                <td>1.36-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="811413">792.4 kB</td>
+                <td class=>Library for error values used by GnuPG components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libicu</td>
+                <td>65.1-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="34072638">32.5 MB</td>
+                <td class=>International Components for Unicode - libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libidn2</td>
+                <td>2.3.0-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="257742">251.7 kB</td>
+                <td class=>Library to support IDNA2008 internationalized domain names</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libkadm5</td>
+                <td>1.18-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="235304">229.8 kB</td>
+                <td class=>Kerberos 5 Administrative libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libksba</td>
+                <td>1.3.5-11.fc32</td>
+                <td>s390x</td>
+                <td data-order="378183">369.3 kB</td>
+                <td class=>CMS and X.509 library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libldb</td>
+                <td>2.1.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="551000">538.1 kB</td>
+                <td class=>A schema-less, ldap like, API and database</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libldb-devel</td>
+                <td>2.1.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="138665">135.4 kB</td>
+                <td class=>Developer tools for the LDB library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmnl</td>
+                <td>1.0.4-11.fc32</td>
+                <td>s390x</td>
+                <td data-order="52263">51.0 kB</td>
+                <td class=>A minimalistic Netlink library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmount</td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="447285">436.8 kB</td>
+                <td class=>Device mounting library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnetfilter_conntrack</td>
+                <td>1.0.7-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="155334">151.7 kB</td>
+                <td class=>Netfilter conntrack userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnfnetlink</td>
+                <td>1.0.1-17.fc32</td>
+                <td>s390x</td>
+                <td data-order="51619">50.4 kB</td>
+                <td class=>Netfilter netlink userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnsl2</td>
+                <td>1.2.0-6.20180605git4a062cf.fc32</td>
+                <td>s390x</td>
+                <td data-order="130394">127.3 kB</td>
+                <td class=>Public client interface library for NIS(YP) and NIS+</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpcap</td>
+                <td>14:1.9.1-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="436642">426.4 kB</td>
+                <td class=>A system-independent interface for user-level packet capture</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="71589">69.9 kB</td>
+                <td class=>Backend library for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpwquality</td>
+                <td>1.4.2-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="393861">384.6 kB</td>
+                <td class=>A library for password generation and password quality checking</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libseccomp</td>
+                <td>2.4.2-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="404131">394.7 kB</td>
+                <td class=>Enhanced seccomp library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libselinux</td>
+                <td>3.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="213984">209.0 kB</td>
+                <td>SELinux library and simple utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsemanage</td>
+                <td>3.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="323490">315.9 kB</td>
+                <td class=>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsepol</td>
+                <td>3.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="944296">922.2 kB</td>
+                <td>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsigsegv</td>
+                <td>2.11-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="45122">44.1 kB</td>
+                <td class=>Library for handling page faults in user mode</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsmartcols</td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="293627">286.7 kB</td>
+                <td class=>Formatting library for ls-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsmbclient</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="181400">177.1 kB</td>
+                <td class=>The SMB client library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libss</td>
+                <td>1.45.5-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="73113">71.4 kB</td>
+                <td class=>Command line interface parsing library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libstdc++</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="2673989">2.6 MB</td>
+                <td class=>GNU Standard C++ Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtalloc</td>
+                <td>2.3.1-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="62112">60.7 kB</td>
+                <td class=>The talloc library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtalloc-devel</td>
+                <td>2.3.1-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="94593">92.4 kB</td>
+                <td class=>Developer tools for the Talloc library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtasn1</td>
+                <td>4.16.0-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="179812">175.6 kB</td>
+                <td class=>The ASN.1 library used in GNUTLS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtdb</td>
+                <td>1.4.3-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="132440">129.3 kB</td>
+                <td class=>The tdb library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtdb-devel</td>
+                <td>1.4.3-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="44586">43.5 kB</td>
+                <td class=>Header files need to link the Tdb library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtevent</td>
+                <td>0.10.2-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="90992">88.9 kB</td>
+                <td class=>The tevent library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtevent-devel</td>
+                <td>0.10.2-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="106232">103.7 kB</td>
+                <td class=>Developer tools for the Tevent library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtirpc</td>
+                <td>1.2.5-1.rc2.fc32</td>
+                <td>s390x</td>
+                <td data-order="223614">218.4 kB</td>
+                <td class=>Transport Independent RPC Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtomcrypt</td>
+                <td>1.18.2-6.fc32</td>
+                <td>s390x</td>
+                <td data-order="1063631">1.0 MB</td>
+                <td class=>A comprehensive, portable cryptographic toolkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtommath</td>
+                <td>1.1.0-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="96321">94.1 kB</td>
+                <td class=>A portable number theoretic multiple-precision integer library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libunistring</td>
+                <td>0.9.10-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="1655419">1.6 MB</td>
+                <td class=>GNU Unicode string library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libusbx</td>
+                <td>1.0.22-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="168761">164.8 kB</td>
+                <td class=>Library for accessing USB devices</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libutempter</td>
+                <td>1.1.6-18.fc32</td>
+                <td>s390x</td>
+                <td data-order="50365">49.2 kB</td>
+                <td class=>A privileged helper for utmp/wtmp updates</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libuuid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="34447">33.6 kB</td>
+                <td class=>Universally unique ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libverto</td>
+                <td>0.3.0-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="27620">27.0 kB</td>
+                <td class=>Main loop abstraction library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libverto-libev</td>
+                <td>0.3.0-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="11672">11.4 kB</td>
+                <td class=>libev module for libverto</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwbclient</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="82816">80.9 kB</td>
+                <td class=>The winbind client library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcrypt</td>
+                <td>4.4.15-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="289699">282.9 kB</td>
+                <td class=>Extended crypt library for descrypt, md5crypt, bcrypt, and others</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lmdb</td>
+                <td>0.9.23-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="65208">63.7 kB</td>
+                <td class=>Memory-mapped key-value database</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lmdb-libs</td>
+                <td>0.9.23-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="132163">129.1 kB</td>
+                <td class=>Shared libraries for lmdb</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>logrotate</td>
+                <td>3.15.1-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="155208">151.6 kB</td>
+                <td class=>Rotates, compresses, removes and mails system log files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lz4-libs</td>
+                <td>1.9.1-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="145175">141.8 kB</td>
+                <td class=>Libaries for lz4</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mpfr</td>
+                <td>4.0.2-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="651259">636.0 kB</td>
+                <td class=>A C library for multiple-precision floating-point computations</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ncurses-base</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td>Descriptions of common terminals</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ncurses-libs</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>s390x</td>
+                <td data-order="1089136">1.0 MB</td>
+                <td>Ncurses libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nettle</td>
+                <td>3.5.1-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="610311">596.0 kB</td>
+                <td class=>A low-level cryptographic library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>npth</td>
+                <td>1.6-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="51005">49.8 kB</td>
+                <td class=>The New GNU Portable Threads library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openldap</td>
+                <td>2.4.47-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="1152462">1.1 MB</td>
+                <td class=>LDAP support libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssl-libs</td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="3496794">3.3 MB</td>
+                <td class=>A general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit</td>
+                <td>0.23.20-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1832668">1.7 MB</td>
+                <td class=>Library for loading and sharing PKCS#11 modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit-trust</td>
+                <td>0.23.20-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="510761">498.8 kB</td>
+                <td class=>System trust module from p11-kit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pam</td>
+                <td>1.3.1-23.fc32</td>
+                <td>s390x</td>
+                <td data-order="2647501">2.5 MB</td>
+                <td class=>An extensible library which provides authentication for applications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre</td>
+                <td>8.44-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="335872">328.0 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>pcre2</td>
+                <td>10.34-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="517277">505.2 kB</td>
+                <td>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="72117">70.4 kB</td>
+                <td class=>Package compiler and linker metadata toolkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-m4</td>
+                <td>1.6.3-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td class=>m4 macros for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-pkg-config</td>
+                <td>1.6.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="462">462.0 B</td>
+                <td class=>pkgconf shim to provide /usr/bin/pkg-config</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>popt</td>
+                <td>1.16-19.fc32</td>
+                <td>s390x</td>
+                <td data-order="142718">139.4 kB</td>
+                <td class=>C library for parsing command line parameters</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python-pip-wheel</td>
+                <td>19.3.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="1266916">1.2 MB</td>
+                <td class=>The pip wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python-setuptools-wheel</td>
+                <td>41.6.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="360619">352.2 kB</td>
+                <td class=>The setuptools wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3</td>
+                <td>3.8.2-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="24082">23.5 kB</td>
+                <td class=>Interpreter of the Python programming language</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-crypto</td>
+                <td>2.6.1-30.fc32</td>
+                <td>s390x</td>
+                <td data-order="2052880">2.0 MB</td>
+                <td class=>Cryptography library for Python 3</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-dns</td>
+                <td>1.16.0-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="1023274">999.3 kB</td>
+                <td class=>DNS toolkit for Python</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-ecdsa</td>
+                <td>0.15-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="926114">904.4 kB</td>
+                <td class=>ECDSA cryptographic signature library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-ldb</td>
+                <td>2.1.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="145035">141.6 kB</td>
+                <td class=>Python bindings for the LDB library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-libs</td>
+                <td>3.8.2-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="34004734">32.4 MB</td>
+                <td class=>Python runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-pycryptodomex</td>
+                <td>3.9.7-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="3209561">3.1 MB</td>
+                <td class=>PyCryptodome test suite module</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-samba</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="19211941">18.3 MB</td>
+                <td class=>Samba Python3 libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-samba-dc</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="1845853">1.8 MB</td>
+                <td class=>Samba Python libraries for Samba AD</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-six</td>
+                <td>1.14.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="106208">103.7 kB</td>
+                <td class=>Python 2 and 3 compatibility utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-talloc</td>
+                <td>2.3.1-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="32760">32.0 kB</td>
+                <td class=>Python bindings for the Talloc library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-tdb</td>
+                <td>1.4.3-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="42023">41.0 kB</td>
+                <td class=>Python3 bindings for the Tdb library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-tevent</td>
+                <td>0.10.2-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="29376">28.7 kB</td>
+                <td class=>Python 3 bindings for the Tevent library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qrencode-libs</td>
+                <td>4.0.2-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="161585">157.8 kB</td>
+                <td class=>QR Code encoding library - Shared libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>readline</td>
+                <td>8.0-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="511395">499.4 kB</td>
+                <td class=>A library for editing typed command lines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>samba</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="2939930">2.8 MB</td>
+                <td class=>Server and Client software to interoperate with Windows machines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>samba-client-libs</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="23281856">22.2 MB</td>
+                <td class=>Samba client libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>samba-common</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>noarch</td>
+                <td data-order="133799">130.7 kB</td>
+                <td class=>Files used by both Samba servers and clients</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>samba-common-libs</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="291952">285.1 kB</td>
+                <td class=>Libraries used by both Samba servers and clients</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>samba-common-tools</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="1366404">1.3 MB</td>
+                <td class=>Tools for Samba servers and clients</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>samba-dc</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="1775134">1.7 MB</td>
+                <td>Samba AD Domain Controller</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>samba-dc-libs</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="2114936">2.0 MB</td>
+                <td class=>Samba AD Domain Controller Libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>samba-dc-provision</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>noarch</td>
+                <td data-order="13924272">13.3 MB</td>
+                <td class=>Samba AD files to provision a DC</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>samba-libs</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="321656">314.1 kB</td>
+                <td class=>Samba libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>samba-winbind</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="1804105">1.7 MB</td>
+                <td class=>Samba winbind</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>samba-winbind-modules</td>
+                <td>2:4.12.0-3.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="104081">101.6 kB</td>
+                <td class=>Samba winbind modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sed</td>
+                <td>4.5-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="837734">818.1 kB</td>
+                <td class=>A GNU stream text editor</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>setup</td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>A set of system configuration and setup files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>shadow-utils</td>
+                <td>2:4.8-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="4242143">4.0 MB</td>
+                <td class=>Utilities for managing accounts and shadow password files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sqlite-libs</td>
+                <td>3.31.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1626156">1.6 MB</td>
+                <td class=>Shared library for the sqlite3 embeddable SQL database engine.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd</td>
+                <td>245~rc1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="14542800">13.9 MB</td>
+                <td class=>System and Service Manager</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-libs</td>
+                <td>245~rc1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="1824006">1.7 MB</td>
+                <td class=>systemd libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-pam</td>
+                <td>245~rc1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="1028912">1004.8 kB</td>
+                <td class=>systemd PAM module</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-rpm-macros</td>
+                <td>245~rc1-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="8040">7.9 kB</td>
+                <td class=>Macros that define paths and scriptlets related to systemd</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>tdb-tools</td>
+                <td>1.4.3-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="70336">68.7 kB</td>
+                <td class=>Developer tools for the Tdb library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>tzdata</td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>Timezone data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>util-linux</td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="13867229">13.2 MB</td>
+                <td class=>A collection of basic system utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>words</td>
+                <td>3.0-35.fc32</td>
+                <td>noarch</td>
+                <td data-order="4959383">4.7 MB</td>
+                <td class=>A dictionary of English words for the /usr/share/dict directory</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xz-libs</td>
+                <td>5.2.4-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="192855">188.3 kB</td>
+                <td class=>Libraries for decoding LZMA compression</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>zlib</td>
+                <td>1.2.11-21.fc32</td>
+                <td>s390x</td>
+                <td data-order="232295">226.9 kB</td>
+                <td class=>The compression and decompression library</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--samba-domain-controller--minimal-langpack-base-2--repository-fedora-rawhide--s390x.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

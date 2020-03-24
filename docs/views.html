@@ -21,57 +21,16 @@
     src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
   <!-- Datatables test end -->
 
-
   <!-- Chart stuff start -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
     integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
   <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
   <style>
-    .jumbotron {
-      margin-bottom: 0 !important;
-    }
-
-
-    .jumbotron-home {
-      background-color: #072b61;
-      color: white;
-      padding: 120px 0;
-    }
-
-    .jumbotron-home a.btn {
-      margin-top: 30px;
-    }
-
-
-    .jumbotron-about {
-      padding: 80px 0;
-    }
-
-    .jumbotron-feature {
-      background: white;
-
-    }
-
-    .jumbotron-feature .row {
-      margin-top: 26px;
-    }
-
-    a.btn-minimization {
-      background-color: #942653;
-      border-color: #942653;
-      color: white;
-    }
-
-    a.btn-minimization:hover {
-      background-color: #7b1f45;
-      border-color: #7b1f45;
-      color: white;
-    }
-
-    #table_packages_filter {
-      float: none;
-    }
-
     table.dataTable thead .sorting,
     table.dataTable thead .sorting_asc,
     table.dataTable thead .sorting_desc,
@@ -80,7 +39,7 @@
       cursor: pointer;
       *cursor: hand;
       background-repeat: no-repeat;
-      background-position: center right;
+      background-position: 8px;
     }
 
     table.dataTable thead .sorting {
@@ -104,67 +63,77 @@
     }
 
     table.dataTable thead .sort_control_row {
-      border-top: 2px solid black !important;
       font-weight: bold !important;
     }
-
-
-    div.footer {
-      background-color: #212529;
-      padding-bottom: 60px;
-    }
-
-    div.footer h5 {
-      color: white;
-    }
-
-    div.footer div.row {
-      margin-bottom: 40px;
-    }
   </style>
+
 </head>
 
 <body>
   <nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h1">Feedback Pipeline <span class="text-muted">prototype</span></span>
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
   </nav>
+  <br>
   
 
 <div class="container">
-  <br>
 
-  
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="./">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Results</li>
-    </ol>
-  </nav>
-  
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="">Results</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Views</li>
+        </ol>
+    </nav>
 
+    <h1> Results </h1>
 
-  <h1> Results </h1>
+    <hr>
 
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="repos.html">Repositories</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="envs.html">Environments</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="workloads.html">Workloads</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="labels.html">Labels</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="views.html">Views</a>
+        </li>
+    </ul>
 
+    <br>
 
-  <div class="card">
-    <div class="row no-gutters">
-      <div class="col-sm-4">
-        <img src="_static/images/graph_image.png" class="card-img" alt="...">
-      </div>
-      <div class="col-sm-8">
-        <div class="card-body">
-          <h5 class="card-title">Dependency Reports</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Runtime dependency reports of popular use cases and base images.</h6>
-          <p class="card-text">Includes detailed package lists, interactive dependency graphs, and sizes of
-            individual packages as well as complete use cases.</p>
-          <a class="btn btn-primary" href="./view--use-cases-definitions.html">See Dependency Reports</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
+    <table class="table table-striped" id="table_packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Name</th>
+                <th>Results</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            filter: false,
+            info: false
+        });
+    });
+</script>
 
   <br><br>
 
@@ -189,7 +158,8 @@
             <h5>Fedora Minimization</h5>
             <ul class="list-unstyled text-small">
               <li>
-                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization Docs</a>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
               </li>
               <li>
                 <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>

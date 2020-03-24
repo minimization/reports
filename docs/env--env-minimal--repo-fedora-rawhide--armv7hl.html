@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./envs.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./envs.html">Environments</a></li>
+            <li class="breadcrumb-item">
+                <a href="./env-overview--env-minimal--repo-fedora-rawhide.html">
+                    Minimal Environment
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Minimal Environment from Fedora rawhide armv7hl
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Minimal Environment <small class="text-muted"> Environment</small>
+        <br>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora rawhide</a> </small>
+        <small class="text-muted"> for </small>
+        <small> armv7hl</small>
+    </h1>
+
+    <hr>
+
+    <p class="lead"> Only glibc-minimal-langpack and coreutils-single </p>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <h5 class="card-header">
+                    Packages
+                </h5>
+                <div class="card-body">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">22 Packages</li>
+                        <li class="list-inline-item">33.5 MB</li>
+                    </ul>
+                    <table id="table_packages" class="table-packages">
+                        <thead>
+                            <tr class="sort_control_row">
+                                <th>Why</th>
+                                <th>Name</th>
+                                <th>Size</th>
+                                <th>Summary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>basesystem-11-9.fc32</td>
+                                <td data-order="0">0.0 B</td>
+                                <td class=>The skeleton package which defines a simple Fedora system</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>bash-5.0.11-2.fc32</td>
+                                <td data-order="7466103">7.1 MB</td>
+                                <td class=>The GNU Bourne Again shell</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="required">
+                                <td data-order="0">(required)</td>
+                                <td>coreutils-single-8.31-10.fc32</td>
+                                <td data-order="1437614">1.4 MB</td>
+                                <td>coreutils multicall binary</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>fedora-gpg-keys-32-0.7</td>
+                                <td data-order="105452">103.0 kB</td>
+                                <td class=>Fedora RPM keys</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>fedora-release-32-0.6</td>
+                                <td data-order="691">691.0 B</td>
+                                <td class=>Fedora release files</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>fedora-release-common-32-0.6</td>
+                                <td data-order="14592">14.2 kB</td>
+                                <td class=>Fedora release files</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>fedora-repos-32-0.7</td>
+                                <td data-order="8594">8.4 kB</td>
+                                <td class=>Fedora package repositories</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>filesystem-3.14-2.fc32</td>
+                                <td data-order="0">0.0 B</td>
+                                <td class=>The basic directory layout for a Linux system</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>glibc-2.31-1.fc32</td>
+                                <td data-order="12525384">11.9 MB</td>
+                                <td class=>The GNU libc libraries</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>glibc-common-2.31-1.fc32</td>
+                                <td data-order="7990621">7.6 MB</td>
+                                <td class=>Common binaries and locale data for glibc</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="required">
+                                <td data-order="0">(required)</td>
+                                <td>glibc-minimal-langpack-2.31-1.fc32</td>
+                                <td data-order="0">0.0 B</td>
+                                <td>Minimal language packs for glibc.</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>libacl-2.2.53-5.fc32</td>
+                                <td data-order="32264">31.5 kB</td>
+                                <td class=>Dynamic library for access control list support</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>libattr-2.4.48-8.fc32</td>
+                                <td data-order="20210">19.7 kB</td>
+                                <td class=>Dynamic library for extended attribute support</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>libcap-2.26-7.fc32</td>
+                                <td data-order="105702">103.2 kB</td>
+                                <td class=>Library for getting and setting POSIX.1e capabilities</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>libgcc-10.0.1-0.9.fc32</td>
+                                <td data-order="217660">212.6 kB</td>
+                                <td class=>GCC version 10 shared support library</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>libselinux-3.0-3.fc32</td>
+                                <td data-order="151632">148.1 kB</td>
+                                <td class=>SELinux library and simple utilities</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>libsepol-3.0-3.fc32</td>
+                                <td data-order="694600">678.3 kB</td>
+                                <td class=>SELinux binary policy manipulation library</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>ncurses-base-6.1-15.20191109.fc32</td>
+                                <td data-order="285229">278.5 kB</td>
+                                <td class=>Descriptions of common terminals</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>ncurses-libs-6.1-15.20191109.fc32</td>
+                                <td data-order="735716">718.5 kB</td>
+                                <td class=>Ncurses libraries</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>pcre2-10.34-7.fc32</td>
+                                <td data-order="689393">673.2 kB</td>
+                                <td class=>Perl-compatible regular expression library</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>setup-2.13.6-2.fc32</td>
+                                <td data-order="726694">709.7 kB</td>
+                                <td class=>A set of system configuration and setup files</td>
+                            </tr>
+                            
+                            
+                            
+                            <tr class="dependency">
+                                <td class="text-muted" data-order="3"></td>
+                                <td>tzdata-2019c-3.fc32</td>
+                                <td data-order="1892615">1.8 MB</td>
+                                <td class=>Timezone data</td>
+                            </tr>
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div><br>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>
