@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+<div class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Home</a></li>
+            <li class="breadcrumb-item"><a href="./configs_repos.html">Configuration Files</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Repository: Comps group texlive for rhel-8-appstream</li>
+        </ol>
+    </nav>
+
+    <h1>
+        Comps group texlive for rhel-8-appstream
+        <small class="text-muted">workload configuration</small>
+    </h1>
+
+    <hr>
+
+    <div class="card">
+        <h5 class="card-header">
+            <a href="https://github.com/minimization/feedback-pipeline-config/blob/master/rhel-8-appstream-comps-texlive.yaml" class="btn btn-sm btn-primary float-right">Edit Configuration</a>
+            Configuration
+        </h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <dl>
+                        <dt>Name</dt>
+                        <dd>Comps group texlive for rhel-8-appstream</dd>
+
+                        <dt>Description</dt>
+                        <dd>Automatically generated.</dd>
+
+                        <dt>maintainer</dt>
+                        <dd>bakery</dd>
+                    </dl>
+                </div>
+                <div class="col-sm-3">
+                    <dl>
+                        <dt> Labels </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li>eln</li>
+                                
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-sm-3">
+                    <dl>
+                        <dt> Packages </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li class="required-package">texlive</li>
+                                
+                                <li class="required-package">texlive-adjustbox</li>
+                                
+                                <li class="required-package">texlive-ae</li>
+                                
+                                <li class="required-package">texlive-algorithms</li>
+                                
+                                <li class="required-package">texlive-amscls</li>
+                                
+                                <li class="required-package">texlive-amsfonts</li>
+                                
+                                <li class="required-package">texlive-amsmath</li>
+                                
+                                <li class="required-package">texlive-anyfontsize</li>
+                                
+                                <li class="required-package">texlive-anysize</li>
+                                
+                                <li class="required-package">texlive-appendix</li>
+                                
+                                <li class="required-package">texlive-arabxetex</li>
+                                
+                                <li class="required-package">texlive-arphic</li>
+                                
+                                <li class="required-package">texlive-attachfile</li>
+                                
+                                <li class="required-package">texlive-avantgar</li>
+                                
+                                <li class="required-package">texlive-awesomebox</li>
+                                
+                                <li class="required-package">texlive-babel</li>
+                                
+                                <li class="required-package">texlive-babel-english</li>
+                                
+                                <li class="required-package">texlive-babelbib</li>
+                                
+                                <li class="required-package">texlive-base</li>
+                                
+                                <li class="required-package">texlive-beamer</li>
+                                
+                                <li class="required-package">texlive-bera</li>
+                                
+                                <li class="required-package">texlive-beton</li>
+                                
+                                <li class="required-package">texlive-bibtex</li>
+                                
+                                <li class="required-package">texlive-bibtopic</li>
+                                
+                                <li class="required-package">texlive-bidi</li>
+                                
+                                <li class="required-package">texlive-bigfoot</li>
+                                
+                                <li class="required-package">texlive-bookman</li>
+                                
+                                <li class="required-package">texlive-booktabs</li>
+                                
+                                <li class="required-package">texlive-breakurl</li>
+                                
+                                <li class="required-package">texlive-breqn</li>
+                                
+                                <li class="required-package">texlive-capt-of</li>
+                                
+                                <li class="required-package">texlive-caption</li>
+                                
+                                <li class="required-package">texlive-carlisle</li>
+                                
+                                <li class="required-package">texlive-changebar</li>
+                                
+                                <li class="required-package">texlive-changepage</li>
+                                
+                                <li class="required-package">texlive-charter</li>
+                                
+                                <li class="required-package">texlive-chngcntr</li>
+                                
+                                <li class="required-package">texlive-cite</li>
+                                
+                                <li class="required-package">texlive-cjk</li>
+                                
+                                <li class="required-package">texlive-classpack</li>
+                                
+                                <li class="required-package">texlive-cm</li>
+                                
+                                <li class="required-package">texlive-cm-lgc</li>
+                                
+                                <li class="required-package">texlive-cm-super</li>
+                                
+                                <li class="required-package">texlive-cmap</li>
+                                
+                                <li class="required-package">texlive-cmextra</li>
+                                
+                                <li class="required-package">texlive-cns</li>
+                                
+                                <li class="required-package">texlive-collectbox</li>
+                                
+                                <li class="required-package">texlive-collection-basic</li>
+                                
+                                <li class="required-package">texlive-collection-fontsrecommended</li>
+                                
+                                <li class="required-package">texlive-collection-htmlxml</li>
+                                
+                                <li class="required-package">texlive-collection-latex</li>
+                                
+                                <li class="required-package">texlive-collection-latexrecommended</li>
+                                
+                                <li class="required-package">texlive-collection-xetex</li>
+                                
+                                <li class="required-package">texlive-colortbl</li>
+                                
+                                <li class="required-package">texlive-courier</li>
+                                
+                                <li class="required-package">texlive-crop</li>
+                                
+                                <li class="required-package">texlive-csquotes</li>
+                                
+                                <li class="required-package">texlive-ctable</li>
+                                
+                                <li class="required-package">texlive-ctablestack</li>
+                                
+                                <li class="required-package">texlive-currfile</li>
+                                
+                                <li class="required-package">texlive-datetime</li>
+                                
+                                <li class="required-package">texlive-dvipdfmx</li>
+                                
+                                <li class="required-package">texlive-dvipng</li>
+                                
+                                <li class="required-package">texlive-dvips</li>
+                                
+                                <li class="required-package">texlive-dvisvgm</li>
+                                
+                                <li class="required-package">texlive-ec</li>
+                                
+                                <li class="required-package">texlive-eepic</li>
+                                
+                                <li class="required-package">texlive-enctex</li>
+                                
+                                <li class="required-package">texlive-enumitem</li>
+                                
+                                <li class="required-package">texlive-environ</li>
+                                
+                                <li class="required-package">texlive-epsf</li>
+                                
+                                <li class="required-package">texlive-epstopdf</li>
+                                
+                                <li class="required-package">texlive-eqparbox</li>
+                                
+                                <li class="required-package">texlive-eso-pic</li>
+                                
+                                <li class="required-package">texlive-etex</li>
+                                
+                                <li class="required-package">texlive-etex-pkg</li>
+                                
+                                <li class="required-package">texlive-etoolbox</li>
+                                
+                                <li class="required-package">texlive-euenc</li>
+                                
+                                <li class="required-package">texlive-euler</li>
+                                
+                                <li class="required-package">texlive-euro</li>
+                                
+                                <li class="required-package">texlive-eurosym</li>
+                                
+                                <li class="required-package">texlive-extsizes</li>
+                                
+                                <li class="required-package">texlive-fancybox</li>
+                                
+                                <li class="required-package">texlive-fancyhdr</li>
+                                
+                                <li class="required-package">texlive-fancyref</li>
+                                
+                                <li class="required-package">texlive-fancyvrb</li>
+                                
+                                <li class="required-package">texlive-filecontents</li>
+                                
+                                <li class="required-package">texlive-filehook</li>
+                                
+                                <li class="required-package">texlive-finstrut</li>
+                                
+                                <li class="required-package">texlive-fix2col</li>
+                                
+                                <li class="required-package">texlive-fixlatvian</li>
+                                
+                                <li class="required-package">texlive-float</li>
+                                
+                                <li class="required-package">texlive-fmtcount</li>
+                                
+                                <li class="required-package">texlive-fncychap</li>
+                                
+                                <li class="required-package">texlive-fontawesome</li>
+                                
+                                <li class="required-package">texlive-fontbook</li>
+                                
+                                <li class="required-package">texlive-fonts-tlwg</li>
+                                
+                                <li class="required-package">texlive-fontspec</li>
+                                
+                                <li class="required-package">texlive-fontware</li>
+                                
+                                <li class="required-package">texlive-fontwrap</li>
+                                
+                                <li class="required-package">texlive-footmisc</li>
+                                
+                                <li class="required-package">texlive-fp</li>
+                                
+                                <li class="required-package">texlive-fpl</li>
+                                
+                                <li class="required-package">texlive-framed</li>
+                                
+                                <li class="required-package">texlive-garuda-c90</li>
+                                
+                                <li class="required-package">texlive-geometry</li>
+                                
+                                <li class="required-package">texlive-glyphlist</li>
+                                
+                                <li class="required-package">texlive-graphics</li>
+                                
+                                <li class="required-package">texlive-graphics-cfg</li>
+                                
+                                <li class="required-package">texlive-graphics-def</li>
+                                
+                                <li class="required-package">texlive-gsftopk</li>
+                                
+                                <li class="required-package">texlive-helvetic</li>
+                                
+                                <li class="required-package">texlive-hyperref</li>
+                                
+                                <li class="required-package">texlive-hyph-utf8</li>
+                                
+                                <li class="required-package">texlive-hyphen-base</li>
+                                
+                                <li class="required-package">texlive-hyphenat</li>
+                                
+                                <li class="required-package">texlive-ifetex</li>
+                                
+                                <li class="required-package">texlive-ifluatex</li>
+                                
+                                <li class="required-package">texlive-ifmtarg</li>
+                                
+                                <li class="required-package">texlive-ifoddpage</li>
+                                
+                                <li class="required-package">texlive-iftex</li>
+                                
+                                <li class="required-package">texlive-ifxetex</li>
+                                
+                                <li class="required-package">texlive-import</li>
+                                
+                                <li class="required-package">texlive-index</li>
+                                
+                                <li class="required-package">texlive-jadetex</li>
+                                
+                                <li class="required-package">texlive-jknapltx</li>
+                                
+                                <li class="required-package">texlive-kastrup</li>
+                                
+                                <li class="required-package">texlive-kerkis</li>
+                                
+                                <li class="required-package">texlive-knuth-lib</li>
+                                
+                                <li class="required-package">texlive-knuth-local</li>
+                                
+                                <li class="required-package">texlive-koma-script</li>
+                                
+                                <li class="required-package">texlive-kpathsea</li>
+                                
+                                <li class="required-package">texlive-l3experimental</li>
+                                
+                                <li class="required-package">texlive-l3kernel</li>
+                                
+                                <li class="required-package">texlive-l3packages</li>
+                                
+                                <li class="required-package">texlive-lastpage</li>
+                                
+                                <li class="required-package">texlive-latex</li>
+                                
+                                <li class="required-package">texlive-latex-fonts</li>
+                                
+                                <li class="required-package">texlive-latex2man</li>
+                                
+                                <li class="required-package">texlive-latexconfig</li>
+                                
+                                <li class="required-package">texlive-lettrine</li>
+                                
+                                <li class="required-package">texlive-lib</li>
+                                
+                                <li class="required-package">texlive-linegoal</li>
+                                
+                                <li class="required-package">texlive-lineno</li>
+                                
+                                <li class="required-package">texlive-listings</li>
+                                
+                                <li class="required-package">texlive-lm</li>
+                                
+                                <li class="required-package">texlive-lm-math</li>
+                                
+                                <li class="required-package">texlive-ltabptch</li>
+                                
+                                <li class="required-package">texlive-ltxmisc</li>
+                                
+                                <li class="required-package">texlive-lua-alt-getopt</li>
+                                
+                                <li class="required-package">texlive-lualatex-math</li>
+                                
+                                <li class="required-package">texlive-lualibs</li>
+                                
+                                <li class="required-package">texlive-luaotfload</li>
+                                
+                                <li class="required-package">texlive-luatex</li>
+                                
+                                <li class="required-package">texlive-luatex85</li>
+                                
+                                <li class="required-package">texlive-luatexbase</li>
+                                
+                                <li class="required-package">texlive-makecmds</li>
+                                
+                                <li class="required-package">texlive-makeindex</li>
+                                
+                                <li class="required-package">texlive-manfnt-font</li>
+                                
+                                <li class="required-package">texlive-marginnote</li>
+                                
+                                <li class="required-package">texlive-marvosym</li>
+                                
+                                <li class="required-package">texlive-mathpazo</li>
+                                
+                                <li class="required-package">texlive-mathspec</li>
+                                
+                                <li class="required-package">texlive-mathtools</li>
+                                
+                                <li class="required-package">texlive-mdwtools</li>
+                                
+                                <li class="required-package">texlive-memoir</li>
+                                
+                                <li class="required-package">texlive-metafont</li>
+                                
+                                <li class="required-package">texlive-metalogo</li>
+                                
+                                <li class="required-package">texlive-metapost</li>
+                                
+                                <li class="required-package">texlive-mflogo</li>
+                                
+                                <li class="required-package">texlive-mflogo-font</li>
+                                
+                                <li class="required-package">texlive-mfnfss</li>
+                                
+                                <li class="required-package">texlive-mfware</li>
+                                
+                                <li class="required-package">texlive-microtype</li>
+                                
+                                <li class="required-package">texlive-mnsymbol</li>
+                                
+                                <li class="required-package">texlive-mparhack</li>
+                                
+                                <li class="required-package">texlive-mptopdf</li>
+                                
+                                <li class="required-package">texlive-ms</li>
+                                
+                                <li class="required-package">texlive-multido</li>
+                                
+                                <li class="required-package">texlive-multirow</li>
+                                
+                                <li class="required-package">texlive-natbib</li>
+                                
+                                <li class="required-package">texlive-ncctools</li>
+                                
+                                <li class="required-package">texlive-ncntrsbk</li>
+                                
+                                <li class="required-package">texlive-needspace</li>
+                                
+                                <li class="required-package">texlive-norasi-c90</li>
+                                
+                                <li class="required-package">texlive-ntgclass</li>
+                                
+                                <li class="required-package">texlive-oberdiek</li>
+                                
+                                <li class="required-package">texlive-overpic</li>
+                                
+                                <li class="required-package">texlive-palatino</li>
+                                
+                                <li class="required-package">texlive-paralist</li>
+                                
+                                <li class="required-package">texlive-parallel</li>
+                                
+                                <li class="required-package">texlive-parskip</li>
+                                
+                                <li class="required-package">texlive-passivetex</li>
+                                
+                                <li class="required-package">texlive-pdfpages</li>
+                                
+                                <li class="required-package">texlive-pdftex</li>
+                                
+                                <li class="required-package">texlive-pgf</li>
+                                
+                                <li class="required-package">texlive-philokalia</li>
+                                
+                                <li class="required-package">texlive-placeins</li>
+                                
+                                <li class="required-package">texlive-polyglossia</li>
+                                
+                                <li class="required-package">texlive-powerdot</li>
+                                
+                                <li class="required-package">texlive-preprint</li>
+                                
+                                <li class="required-package">texlive-psfrag</li>
+                                
+                                <li class="required-package">texlive-pslatex</li>
+                                
+                                <li class="required-package">texlive-psnfss</li>
+                                
+                                <li class="required-package">texlive-pspicture</li>
+                                
+                                <li class="required-package">texlive-pst-3d</li>
+                                
+                                <li class="required-package">texlive-pst-blur</li>
+                                
+                                <li class="required-package">texlive-pst-coil</li>
+                                
+                                <li class="required-package">texlive-pst-eps</li>
+                                
+                                <li class="required-package">texlive-pst-fill</li>
+                                
+                                <li class="required-package">texlive-pst-grad</li>
+                                
+                                <li class="required-package">texlive-pst-math</li>
+                                
+                                <li class="required-package">texlive-pst-node</li>
+                                
+                                <li class="required-package">texlive-pst-plot</li>
+                                
+                                <li class="required-package">texlive-pst-slpe</li>
+                                
+                                <li class="required-package">texlive-pst-text</li>
+                                
+                                <li class="required-package">texlive-pst-tree</li>
+                                
+                                <li class="required-package">texlive-pstricks</li>
+                                
+                                <li class="required-package">texlive-pstricks-add</li>
+                                
+                                <li class="required-package">texlive-ptext</li>
+                                
+                                <li class="required-package">texlive-pxfonts</li>
+                                
+                                <li class="required-package">texlive-qstest</li>
+                                
+                                <li class="required-package">texlive-rcs</li>
+                                
+                                <li class="required-package">texlive-realscripts</li>
+                                
+                                <li class="required-package">texlive-rsfs</li>
+                                
+                                <li class="required-package">texlive-sansmath</li>
+                                
+                                <li class="required-package">texlive-sauerj</li>
+                                
+                                <li class="required-package">texlive-scheme-basic</li>
+                                
+                                <li class="required-package">texlive-section</li>
+                                
+                                <li class="required-package">texlive-sectsty</li>
+                                
+                                <li class="required-package">texlive-seminar</li>
+                                
+                                <li class="required-package">texlive-sepnum</li>
+                                
+                                <li class="required-package">texlive-setspace</li>
+                                
+                                <li class="required-package">texlive-showexpl</li>
+                                
+                                <li class="required-package">texlive-soul</li>
+                                
+                                <li class="required-package">texlive-stmaryrd</li>
+                                
+                                <li class="required-package">texlive-subfig</li>
+                                
+                                <li class="required-package">texlive-subfigure</li>
+                                
+                                <li class="required-package">texlive-svn-prov</li>
+                                
+                                <li class="required-package">texlive-symbol</li>
+                                
+                                <li class="required-package">texlive-t2</li>
+                                
+                                <li class="required-package">texlive-tabu</li>
+                                
+                                <li class="required-package">texlive-tabulary</li>
+                                
+                                <li class="required-package">texlive-tetex</li>
+                                
+                                <li class="required-package">texlive-tex</li>
+                                
+                                <li class="required-package">texlive-tex-gyre</li>
+                                
+                                <li class="required-package">texlive-tex-gyre-math</li>
+                                
+                                <li class="required-package">texlive-tex-ini-files</li>
+                                
+                                <li class="required-package">texlive-tex4ht</li>
+                                
+                                <li class="required-package">texlive-texconfig</li>
+                                
+                                <li class="required-package">texlive-texlive-common-doc</li>
+                                
+                                <li class="required-package">texlive-texlive-docindex</li>
+                                
+                                <li class="required-package">texlive-texlive-en</li>
+                                
+                                <li class="required-package">texlive-texlive-msg-translations</li>
+                                
+                                <li class="required-package">texlive-texlive-scripts</li>
+                                
+                                <li class="required-package">texlive-texlive.infra</li>
+                                
+                                <li class="required-package">texlive-textcase</li>
+                                
+                                <li class="required-package">texlive-textpos</li>
+                                
+                                <li class="required-package">texlive-threeparttable</li>
+                                
+                                <li class="required-package">texlive-thumbpdf</li>
+                                
+                                <li class="required-package">texlive-times</li>
+                                
+                                <li class="required-package">texlive-tipa</li>
+                                
+                                <li class="required-package">texlive-titlesec</li>
+                                
+                                <li class="required-package">texlive-titling</li>
+                                
+                                <li class="required-package">texlive-tocloft</li>
+                                
+                                <li class="required-package">texlive-tools</li>
+                                
+                                <li class="required-package">texlive-trimspaces</li>
+                                
+                                <li class="required-package">texlive-txfonts</li>
+                                
+                                <li class="required-package">texlive-type1cm</li>
+                                
+                                <li class="required-package">texlive-typehtml</li>
+                                
+                                <li class="required-package">texlive-ucharclasses</li>
+                                
+                                <li class="required-package">texlive-ucs</li>
+                                
+                                <li class="required-package">texlive-uhc</li>
+                                
+                                <li class="required-package">texlive-ulem</li>
+                                
+                                <li class="required-package">texlive-underscore</li>
+                                
+                                <li class="required-package">texlive-unicode-data</li>
+                                
+                                <li class="required-package">texlive-unicode-math</li>
+                                
+                                <li class="required-package">texlive-unisugar</li>
+                                
+                                <li class="required-package">texlive-updmap-map</li>
+                                
+                                <li class="required-package">texlive-upquote</li>
+                                
+                                <li class="required-package">texlive-url</li>
+                                
+                                <li class="required-package">texlive-utopia</li>
+                                
+                                <li class="required-package">texlive-varwidth</li>
+                                
+                                <li class="required-package">texlive-wadalab</li>
+                                
+                                <li class="required-package">texlive-was</li>
+                                
+                                <li class="required-package">texlive-wasy</li>
+                                
+                                <li class="required-package">texlive-wasy2-ps</li>
+                                
+                                <li class="required-package">texlive-wasysym</li>
+                                
+                                <li class="required-package">texlive-wrapfig</li>
+                                
+                                <li class="required-package">texlive-xcolor</li>
+                                
+                                <li class="required-package">texlive-xdvi</li>
+                                
+                                <li class="required-package">texlive-xecjk</li>
+                                
+                                <li class="required-package">texlive-xecolor</li>
+                                
+                                <li class="required-package">texlive-xecyr</li>
+                                
+                                <li class="required-package">texlive-xeindex</li>
+                                
+                                <li class="required-package">texlive-xepersian</li>
+                                
+                                <li class="required-package">texlive-xesearch</li>
+                                
+                                <li class="required-package">texlive-xetex</li>
+                                
+                                <li class="required-package">texlive-xetex-itrans</li>
+                                
+                                <li class="required-package">texlive-xetex-pstricks</li>
+                                
+                                <li class="required-package">texlive-xetex-tibetan</li>
+                                
+                                <li class="required-package">texlive-xetexconfig</li>
+                                
+                                <li class="required-package">texlive-xetexfontinfo</li>
+                                
+                                <li class="required-package">texlive-xifthen</li>
+                                
+                                <li class="required-package">texlive-xkeyval</li>
+                                
+                                <li class="required-package">texlive-xltxtra</li>
+                                
+                                <li class="required-package">texlive-xmltex</li>
+                                
+                                <li class="required-package">texlive-xmltexconfig</li>
+                                
+                                <li class="required-package">texlive-xstring</li>
+                                
+                                <li class="required-package">texlive-xtab</li>
+                                
+                                <li class="required-package">texlive-xunicode</li>
+                                
+                                <li class="required-package">texlive-zapfchan</li>
+                                
+                                <li class="required-package">texlive-zapfding</li>
+                                
+                            </ul>
+                        </dd>
+
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <h5 class="card-header"> Results </h5>
+        <div class="card-body">
+            <br>
+            <br>
+            <br>
+            <div style="text-align: center;">
+                <h1 class="text-muted">TBD</h1>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+</div>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

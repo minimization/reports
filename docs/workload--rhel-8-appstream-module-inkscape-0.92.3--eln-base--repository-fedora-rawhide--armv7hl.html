@@ -1,0 +1,5140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--rhel-8-appstream-module-inkscape-0.92.3--repository-fedora-rawhide.html">
+                    Module inkscape:0.92.3 for rhel-8-appstream
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Module inkscape:0.92.3 for rhel-8-appstream in ELN bootable base from Fedora rawhide armv7hl
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Module inkscape:0.92.3 for rhel-8-appstream <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> <a href="">ELN bootable base</a> </small>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora rawhide</a> </small>
+        <small class="text-muted"> for </small>
+        <small> armv7hl</small>
+    </h1>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <br>
+                    <br>
+                    <p class="lead text-muted"> TBD</p>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ImageMagick-c++</td>
+                <td>1:6.9.10.86-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="512645">500.6 kB</td>
+                <td class=>ImageMagick Magick++ library (C++ bindings)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ImageMagick-libs</td>
+                <td>1:6.9.10.86-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="7108392">6.8 MB</td>
+                <td class=>ImageMagick libraries to link with</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>LibRaw</td>
+                <td>0.19.5-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1806430">1.7 MB</td>
+                <td class=>Library for reading RAW files obtained from digital photo cameras</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>OpenEXR-libs</td>
+                <td>2.3.0-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="3053560">2.9 MB</td>
+                <td class=>OpenEXR runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>acl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="189456">185.0 kB</td>
+                <td>Access control list utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adobe-mappings-cmap</td>
+                <td>20171205-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="13746679">13.1 MB</td>
+                <td class=>CMap resources for Adobe's character collections</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adobe-mappings-cmap-deprecated</td>
+                <td>20171205-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="596942">583.0 kB</td>
+                <td class=>Deprecated CMap resources for Adobe's character collections</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adobe-mappings-pdf</td>
+                <td>20180407-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="4398414">4.2 MB</td>
+                <td class=>PDF mapping resources from Adobe</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adwaita-cursor-theme</td>
+                <td>3.36.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="12033505">11.5 MB</td>
+                <td class=>Adwaita cursor theme</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adwaita-icon-theme</td>
+                <td>3.36.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="11402680">10.9 MB</td>
+                <td class=>Adwaita icon theme</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>alternatives</td>
+                <td>1.11-6.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="50670">49.5 kB</td>
+                <td>A tool to maintain symbolic links determining default commands</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>aspell</td>
+                <td>12:0.60.8-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="3257501">3.1 MB</td>
+                <td class=>Spell checker</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>at-spi2-atk</td>
+                <td>2.34.2-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="225526">220.2 kB</td>
+                <td class=>A GTK+ module that bridges ATK to D-Bus at-spi</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>at-spi2-core</td>
+                <td>2.36.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="449310">438.8 kB</td>
+                <td class=>Protocol definitions and daemon for D-Bus at-spi</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>atk</td>
+                <td>2.35.1-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1250571">1.2 MB</td>
+                <td class=>Interfaces for accessibility support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>atkmm</td>
+                <td>2.24.3-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="262509">256.4 kB</td>
+                <td class=>C++ interface for the ATK library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>audit-libs</td>
+                <td>3.0-0.18.20191104git1c2f876.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="264708">258.5 kB</td>
+                <td>Dynamic library for libaudit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>avahi-libs</td>
+                <td>0.7-23.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="132248">129.1 kB</td>
+                <td class=>Libraries for avahi run-time use</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>b43-openfwwf</td>
+                <td>5.2-23.fc32</td>
+                <td>noarch</td>
+                <td data-order="31549">30.8 kB</td>
+                <td>Open firmware for some Broadcom 43xx series WLAN chips</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>basesystem</td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>The skeleton package which defines a simple Fedora system</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>bash</td>
+                <td>5.0.11-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="7466103">7.1 MB</td>
+                <td>The GNU Bourne Again shell</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>btrfs-progs</td>
+                <td>5.4-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="4579965">4.4 MB</td>
+                <td>Userspace programs for btrfs</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>bzip2</td>
+                <td>1.0.8-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="82153">80.2 kB</td>
+                <td>A file compression utility</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>bzip2-libs</td>
+                <td>1.0.8-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="65864">64.3 kB</td>
+                <td>Libraries for applications using bzip2</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ca-certificates</td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>The Mozilla CA root certificate bundle</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cairo</td>
+                <td>1.16.0-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1583887">1.5 MB</td>
+                <td class=>A 2D graphics library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cairo-gobject</td>
+                <td>1.16.0-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="27192">26.6 kB</td>
+                <td class=>GObject bindings for cairo</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cairomm</td>
+                <td>1.12.0-12.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="159891">156.1 kB</td>
+                <td class=>C++ API for the cairo graphics library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>checkpolicy</td>
+                <td>3.0-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1304911">1.2 MB</td>
+                <td>SELinux policy compiler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>colord-libs</td>
+                <td>1.4.4-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="711488">694.8 kB</td>
+                <td class=>Color daemon library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>coreutils-single</td>
+                <td>8.31-10.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1437614">1.4 MB</td>
+                <td>coreutils multicall binary</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>cpio</td>
+                <td>2.13-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1091618">1.0 MB</td>
+                <td>A GNU archiving program</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>cracklib</td>
+                <td>2.9.6-22.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="207253">202.4 kB</td>
+                <td>A password-checking library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>crypto-policies</td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td>System-wide crypto policies</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>cryptsetup-libs</td>
+                <td>2.3.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1870699">1.8 MB</td>
+                <td>Cryptsetup shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cups-libs</td>
+                <td>1:2.3.1-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="600030">586.0 kB</td>
+                <td class=>CUPS printing system - libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>curl</td>
+                <td>7.69.1-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="627889">613.2 kB</td>
+                <td>A utility for getting files from remote servers (FTP, HTTP, and others)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>cyrus-sasl-lib</td>
+                <td>2.1.27-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="681978">666.0 kB</td>
+                <td>Shared libraries needed by applications which use Cyrus SASL</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dbus</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="0">0.0 B</td>
+                <td>D-BUS message bus</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dbus-broker</td>
+                <td>22-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="362869">354.4 kB</td>
+                <td>Linux D-Bus Message Broker</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dbus-common</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="11481">11.2 kB</td>
+                <td>D-BUS message bus configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-libs</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="317672">310.2 kB</td>
+                <td class=>Libraries for accessing D-BUS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dejavu-sans-fonts</td>
+                <td>2.37-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="5930693">5.7 MB</td>
+                <td class=>DejaVu Sans, a variable-width sans-serif font family</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper</td>
+                <td>1.02.167-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="338124">330.2 kB</td>
+                <td>Device mapper utility</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper-event</td>
+                <td>1.02.167-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="38669">37.8 kB</td>
+                <td>Device-mapper event daemon</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper-event-libs</td>
+                <td>1.02.167-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="49760">48.6 kB</td>
+                <td>Device-mapper event daemon shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper-libs</td>
+                <td>1.02.167-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="401783">392.4 kB</td>
+                <td>Device-mapper shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper-multipath</td>
+                <td>0.8.2-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="250910">245.0 kB</td>
+                <td>Tools to manage multipath devices using device-mapper</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper-multipath-libs</td>
+                <td>0.8.2-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="626417">611.7 kB</td>
+                <td>The device-mapper-multipath modules and shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dhcp-client</td>
+                <td>12:4.4.2-5.b1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2781613">2.7 MB</td>
+                <td>Provides the ISC DHCP client daemon and dhclient-script</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dhcp-common</td>
+                <td>12:4.4.2-5.b1.fc32</td>
+                <td>noarch</td>
+                <td data-order="341740">333.7 kB</td>
+                <td>Common files used by ISC dhcp client, server and relay agent</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>diffutils</td>
+                <td>3.7-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1447080">1.4 MB</td>
+                <td>A GNU collection of diff utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dmraid</td>
+                <td>1.0.0.rc16-44.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="332248">324.5 kB</td>
+                <td>Device-mapper RAID tool and library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dmraid-events</td>
+                <td>1.0.0.rc16-44.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="12336">12.0 kB</td>
+                <td>dmevent_tool (Device-mapper event tool) and DSO</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dnf</td>
+                <td>4.2.19-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="1776836">1.7 MB</td>
+                <td>Package manager</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dnf-data</td>
+                <td>4.2.19-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="36289">35.4 kB</td>
+                <td>Common data and configuration files for DNF</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dosfstools</td>
+                <td>4.1-10.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="321525">314.0 kB</td>
+                <td>Utilities for making and checking MS-DOS FAT filesystems on Linux</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>double-conversion</td>
+                <td>3.1.5-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="88660">86.6 kB</td>
+                <td class=>Library providing binary-decimal and decimal-binary routines for IEEE doubles</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dracut</td>
+                <td>050-26.git20200316.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1063923">1.0 MB</td>
+                <td>Initramfs generator using udev</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dracut-network</td>
+                <td>050-26.git20200316.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="164034">160.2 kB</td>
+                <td>dracut modules to build a dracut initramfs with network support</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dracut-squash</td>
+                <td>050-26.git20200316.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2806">2.7 kB</td>
+                <td>dracut module to build an initramfs with most files in a squashfs image</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dtc</td>
+                <td>1.5.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="248209">242.4 kB</td>
+                <td>Device Tree Compiler</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>e2fsprogs</td>
+                <td>1.45.5-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="4212690">4.0 MB</td>
+                <td>Utilities for managing ext2, ext3, and ext4 file systems</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>e2fsprogs-libs</td>
+                <td>1.45.5-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="455017">444.4 kB</td>
+                <td>Ext2/3/4 file system specific shared libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ebtables-legacy</td>
+                <td>2.0.11-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="183534">179.2 kB</td>
+                <td>Legacy user space tool to configure bridge netfilter rules in kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>elfutils-default-yama-scope</td>
+                <td>0.178-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td>Default yama attach scope sysctl setting</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>elfutils-libelf</td>
+                <td>0.178-9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="907183">885.9 kB</td>
+                <td>Library to read and write ELF files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>elfutils-libs</td>
+                <td>0.178-9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="612203">597.9 kB</td>
+                <td>Libraries to handle compiled objects</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>emacs-filesystem</td>
+                <td>1:26.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Emacs filesystem layout</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>enchant2</td>
+                <td>2.2.8-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="121532">118.7 kB</td>
+                <td class=>An Enchanting Spell Checking Library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ethtool</td>
+                <td>2:5.4-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="439864">429.6 kB</td>
+                <td>Settings tool for Ethernet NICs</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>expat</td>
+                <td>2.2.8-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="211487">206.5 kB</td>
+                <td>An XML parser library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fcoe-utils</td>
+                <td>1.0.32-9.git9834b34.fc31</td>
+                <td>armv7hl</td>
+                <td data-order="272888">266.5 kB</td>
+                <td>Fibre Channel over Ethernet utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-gpg-keys</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td>Fedora RPM keys</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-release</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-release-common</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-repos</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td>Fedora package repositories</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fftw-libs-double</td>
+                <td>3.3.8-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1575118">1.5 MB</td>
+                <td class=>FFTW library, double precision</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>file</td>
+                <td>5.38-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="91356">89.2 kB</td>
+                <td>A utility for determining file types</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>file-libs</td>
+                <td>5.38-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="7160845">6.8 MB</td>
+                <td>Libraries for applications using libmagic</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>filesystem</td>
+                <td>3.14-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="0">0.0 B</td>
+                <td>The basic directory layout for a Linux system</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>findutils</td>
+                <td>1:4.7.0-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1743579">1.7 MB</td>
+                <td>The GNU versions of find utilities (find and xargs)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fipscheck</td>
+                <td>1.5.0-8.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="34643">33.8 kB</td>
+                <td>A library for integrity verification of FIPS validated modules</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fipscheck-lib</td>
+                <td>1.5.0-8.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="10953">10.7 kB</td>
+                <td>Library files for fipscheck</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fontconfig</td>
+                <td>2.13.92-8.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="701982">685.5 kB</td>
+                <td class=>Font configuration and customization library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fonts-filesystem</td>
+                <td>2.0.3-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Directories used by font packages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>freetype</td>
+                <td>2.10.1-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="671730">656.0 kB</td>
+                <td>A free and portable font rendering engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fribidi</td>
+                <td>1.0.9-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="324772">317.2 kB</td>
+                <td class=>Library implementing the Unicode Bidirectional Algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fuse-libs</td>
+                <td>2.9.9-9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="233322">227.9 kB</td>
+                <td>File System in Userspace (FUSE) v2 libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gawk</td>
+                <td>5.0.1-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2835720">2.7 MB</td>
+                <td>The GNU version of the AWK text processing utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gc</td>
+                <td>8.0.4-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="199080">194.4 kB</td>
+                <td class=>A garbage collector for C and C++</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gd</td>
+                <td>2.2.5-12.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="350047">341.8 kB</td>
+                <td class=>A graphics library for quick creation of PNG or JPEG images</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gdbm-libs</td>
+                <td>1:1.18.1-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="99064">96.7 kB</td>
+                <td>Libraries files for gdbm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdk-pixbuf2</td>
+                <td>2.40.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2579470">2.5 MB</td>
+                <td class=>An image loading library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdk-pixbuf2-modules</td>
+                <td>2.40.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="222752">217.5 kB</td>
+                <td class=>Additional image modules for gdk-pixbuf</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gettext</td>
+                <td>0.20.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="4945937">4.7 MB</td>
+                <td>GNU libraries and utilities for producing multi-lingual messages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gettext-libs</td>
+                <td>0.20.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="785792">767.4 kB</td>
+                <td>Libraries for gettext</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glib-networking</td>
+                <td>2.64.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="511307">499.3 kB</td>
+                <td class=>Networking support for GLib</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glib2</td>
+                <td>2.64.1-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="12480874">11.9 MB</td>
+                <td>A library of handy utility functions</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glibc</td>
+                <td>2.31-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="12525384">11.9 MB</td>
+                <td>The GNU libc libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glibc-common</td>
+                <td>2.31-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="7990621">7.6 MB</td>
+                <td>Common binaries and locale data for glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glibc-minimal-langpack</td>
+                <td>2.31-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="0">0.0 B</td>
+                <td>Minimal language packs for glibc.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibmm24</td>
+                <td>2.64.1-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2296938">2.2 MB</td>
+                <td class=>C++ interface for the GLib library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gmp</td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="531052">518.6 kB</td>
+                <td>A GNU arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gnupg2</td>
+                <td>2.2.19-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="9304260">8.9 MB</td>
+                <td>Utility for secure communication and data storage</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gnutls</td>
+                <td>3.6.12-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2784522">2.7 MB</td>
+                <td>A TLS protocol implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>google-droid-sans-fonts</td>
+                <td>20200215-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="6557507">6.3 MB</td>
+                <td class=>Droid Sans, a humanist sans-serif font family</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gpgme</td>
+                <td>1.13.1-6.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="496079">484.5 kB</td>
+                <td>GnuPG Made Easy - high level crypto API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>graphite2</td>
+                <td>1.3.13-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="183589">179.3 kB</td>
+                <td class=>Font rendering capabilities for complex non-Roman writing systems</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>graphviz</td>
+                <td>2.42.2-8.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="6960366">6.6 MB</td>
+                <td class=>Graph Visualization Tools</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>grep</td>
+                <td>3.3-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="773854">755.7 kB</td>
+                <td>Pattern matching utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>grub2-common</td>
+                <td>1:2.04-10.fc32</td>
+                <td>noarch</td>
+                <td data-order="5130689">4.9 MB</td>
+                <td>grub2 common layout</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>grub2-tools-extra</td>
+                <td>1:2.04-10.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="5506728">5.3 MB</td>
+                <td>Support tools for GRUB.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>grub2-tools-minimal</td>
+                <td>1:2.04-10.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="3188557">3.0 MB</td>
+                <td>Support tools for GRUB.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gsettings-desktop-schemas</td>
+                <td>3.36.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="4451891">4.2 MB</td>
+                <td class=>A collection of GSettings schemas</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gsl</td>
+                <td>2.6-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2742489">2.6 MB</td>
+                <td class=>The GNU Scientific Library for numerical analysis</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gssproxy</td>
+                <td>0.8.2-8.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="207813">202.9 kB</td>
+                <td>GSSAPI Proxy</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gtk-update-icon-cache</td>
+                <td>3.24.14-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="54884">53.6 kB</td>
+                <td class=>Icon theme caching utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gtk2</td>
+                <td>2.24.32-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="12835376">12.2 MB</td>
+                <td class=>GTK+ graphical user interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gtk3</td>
+                <td>3.24.14-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="17881816">17.1 MB</td>
+                <td class=>GTK+ graphical user interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gtkmm30</td>
+                <td>3.24.2-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="4118333">3.9 MB</td>
+                <td class=>C++ interface for the GTK+ library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gtkspell3</td>
+                <td>3.0.10-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="108915">106.4 kB</td>
+                <td class=>On-the-fly spell checking for GtkTextView widgets</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gts</td>
+                <td>0.7.6-37.20121130.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="540694">528.0 kB</td>
+                <td class=>GNU Triangulated Surface Library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gzip</td>
+                <td>1.10-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="349322">341.1 kB</td>
+                <td>The GNU data compression program</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>harfbuzz</td>
+                <td>2.6.4-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1537829">1.5 MB</td>
+                <td class=>Text shaping library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>hfsplus-tools</td>
+                <td>540.1.linux3-19.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="306587">299.4 kB</td>
+                <td>Tools to create/check Apple HFS+ filesystems</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hicolor-icon-theme</td>
+                <td>0.17-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="73932">72.2 kB</td>
+                <td class=>Basic requirement for icon themes</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hunspell</td>
+                <td>1.7.0-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="793638">775.0 kB</td>
+                <td class=>A spell checker and morphological analyzer library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hunspell-en-US</td>
+                <td>0.20140811.1-16.fc32</td>
+                <td>noarch</td>
+                <td data-order="556761">543.7 kB</td>
+                <td class=>US English hunspell dictionaries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>hwdata</td>
+                <td>0.333-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="7867092">7.5 MB</td>
+                <td>Hardware identification and configuration data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ilmbase</td>
+                <td>2.3.0-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="474927">463.8 kB</td>
+                <td class=>Abstraction/convenience libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ima-evm-utils</td>
+                <td>1.2.1-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="109967">107.4 kB</td>
+                <td>IMA/EVM support utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>initscripts</td>
+                <td>10.02-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1061498">1.0 MB</td>
+                <td>Basic support for legacy System V init scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>inkscape</td>
+                <td>1.0-0.beta.fc32.5</td>
+                <td>armv7hl</td>
+                <td data-order="165765262">158.1 MB</td>
+                <td>Vector-based drawing program using SVG</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ipcalc</td>
+                <td>0.4.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="70450">68.8 kB</td>
+                <td>IP network address calculator</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>iproute</td>
+                <td>5.5.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1774296">1.7 MB</td>
+                <td>Advanced IP routing and network device configuration tools</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ipset</td>
+                <td>7.6-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="62805">61.3 kB</td>
+                <td>Manage Linux IP sets</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ipset-libs</td>
+                <td>7.6-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="164774">160.9 kB</td>
+                <td>Shared library providing the IP sets functionality</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>iptables-libs</td>
+                <td>1.8.4-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1171324">1.1 MB</td>
+                <td>iptables libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>iputils</td>
+                <td>20190515-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="374077">365.3 kB</td>
+                <td>Network monitoring tools including ping</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>iscsi-initiator-utils</td>
+                <td>6.2.1.0-2.git4440e57.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1611136">1.5 MB</td>
+                <td>iSCSI daemon and utility programs</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>iscsi-initiator-utils-iscsiuio</td>
+                <td>6.2.1.0-2.git4440e57.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="171514">167.5 kB</td>
+                <td>Userspace configuration daemon required for some iSCSI hardware</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>isns-utils-libs</td>
+                <td>0.97-10.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="321900">314.4 kB</td>
+                <td>Shared library files for iSNS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>iso-codes</td>
+                <td>4.4-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="19132722">18.2 MB</td>
+                <td class=>ISO code lists and translations</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jasper-libs</td>
+                <td>2.0.16-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="317182">309.7 kB</td>
+                <td class=>Runtime libraries for jasper</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jbig2dec-libs</td>
+                <td>0.17-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="146413">143.0 kB</td>
+                <td class=>A decoder implementation of the JBIG2 image compression format</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jbigkit-libs</td>
+                <td>2.1-18.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="102585">100.2 kB</td>
+                <td class=>JBIG1 lossless image compression library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>json-c</td>
+                <td>0.13.1-9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="56010">54.7 kB</td>
+                <td>JSON implementation in C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>json-glib</td>
+                <td>1.4.4-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="496408">484.8 kB</td>
+                <td class=>Library for JavaScript Object Notation format</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kbd</td>
+                <td>2.2.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1310062">1.2 MB</td>
+                <td>Tools for configuring the console (keyboard, virtual terminals, etc.)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kbd-legacy</td>
+                <td>2.2.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="526514">514.2 kB</td>
+                <td>Legacy data for kbd package</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kbd-misc</td>
+                <td>2.2.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="2556019">2.4 MB</td>
+                <td>Data for kbd package</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-core</td>
+                <td>5.6.0-0.rc7.git0.2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="122207509">116.5 MB</td>
+                <td>The Linux kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-cross-headers</td>
+                <td>5.6.0-0.rc7.git0.1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="25295765">24.1 MB</td>
+                <td>Header files for the Linux kernel for use by cross-glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-headers</td>
+                <td>5.6.0-0.rc7.git0.1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="5059153">4.8 MB</td>
+                <td>Header files for the Linux kernel for use by glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-lpae</td>
+                <td>5.6.0-0.rc7.git0.2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="0">0.0 B</td>
+                <td>kernel meta-package for the lpae kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-lpae-core</td>
+                <td>5.6.0-0.rc7.git0.2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="83183680">79.3 MB</td>
+                <td>The Linux kernel compiled for Cortex-A15</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-lpae-modules</td>
+                <td>5.6.0-0.rc7.git0.2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="19272580">18.4 MB</td>
+                <td>kernel modules to match the core kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-modules</td>
+                <td>5.6.0-0.rc7.git0.2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="19981736">19.1 MB</td>
+                <td>kernel modules to match the core kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-modules-extra</td>
+                <td>5.6.0-0.rc7.git0.2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="978219">955.3 kB</td>
+                <td>Extra kernel modules to match the kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kexec-tools</td>
+                <td>2.0.20-10.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="333217">325.4 kB</td>
+                <td>The kexec/kdump userspace component</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>keyutils</td>
+                <td>1.6-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="105147">102.7 kB</td>
+                <td>Linux Key Management Utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>keyutils-libs</td>
+                <td>1.6-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="46487">45.4 kB</td>
+                <td>Key utilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kmod</td>
+                <td>27-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="225148">219.9 kB</td>
+                <td>Linux kernel module management utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kmod-libs</td>
+                <td>27-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="112984">110.3 kB</td>
+                <td>Libraries to handle kernel module loading and unloading</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kpartx</td>
+                <td>0.8.2-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="67939">66.3 kB</td>
+                <td>Partition device manager for device-mapper devices</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>krb5-libs</td>
+                <td>1.18-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1936423">1.8 MB</td>
+                <td>The non-admin shared libraries used by Kerberos 5</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>langpacks-core-font-en</td>
+                <td>3.0-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="351">351.0 B</td>
+                <td class=>English core font meta-package</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lasi</td>
+                <td>1.1.3-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="116394">113.7 kB</td>
+                <td class=>C++ library for creating Postscript documents</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lcms2</td>
+                <td>2.9-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="313105">305.8 kB</td>
+                <td class=>Color Management Engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libICE</td>
+                <td>1.0.10-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="152822">149.2 kB</td>
+                <td class=>X.Org X11 ICE runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libSM</td>
+                <td>1.2.3-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="86007">84.0 kB</td>
+                <td class=>X.Org X11 SM runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libX11</td>
+                <td>1.6.9-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1164612">1.1 MB</td>
+                <td class=>Core X11 protocol client library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libX11-common</td>
+                <td>1.6.9-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1339608">1.3 MB</td>
+                <td class=>Common data for libX11</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXau</td>
+                <td>1.0.9-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="55740">54.4 kB</td>
+                <td class=>Sample Authorization Protocol for X</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXaw</td>
+                <td>1.0.13-14.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="415089">405.4 kB</td>
+                <td class=>X Athena Widget Set</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXcomposite</td>
+                <td>0.4.5-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="37327">36.5 kB</td>
+                <td class=>X Composite Extension library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXcursor</td>
+                <td>1.2.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="37685">36.8 kB</td>
+                <td class=>Cursor management library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXdamage</td>
+                <td>1.1.5-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="32143">31.4 kB</td>
+                <td class=>X Damage extension library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXext</td>
+                <td>1.3.4-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="77698">75.9 kB</td>
+                <td class=>X.Org X11 libXext runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXfixes</td>
+                <td>5.0.3-11.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="22327">21.8 kB</td>
+                <td class=>X Fixes library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXft</td>
+                <td>2.3.3-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="115064">112.4 kB</td>
+                <td class=>X.Org X11 libXft runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXi</td>
+                <td>1.7.10-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="61715">60.3 kB</td>
+                <td class=>X.Org X11 libXi runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXinerama</td>
+                <td>1.1.4-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="14491">14.2 kB</td>
+                <td class=>X.Org X11 libXinerama runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXmu</td>
+                <td>1.1.3-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="153208">149.6 kB</td>
+                <td class=>X.Org X11 libXmu/libXmuu runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXpm</td>
+                <td>3.5.13-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="111706">109.1 kB</td>
+                <td class=>X.Org X11 libXpm runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXrandr</td>
+                <td>1.5.2-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="43906">42.9 kB</td>
+                <td class=>X.Org X11 libXrandr runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXrender</td>
+                <td>0.9.10-11.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="38587">37.7 kB</td>
+                <td class=>X.Org X11 libXrender runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXt</td>
+                <td>1.2.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="355363">347.0 kB</td>
+                <td class=>X.Org X11 libXt runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXtst</td>
+                <td>1.2.3-11.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="25226">24.6 kB</td>
+                <td class=>X.Org X11 libXtst runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXxf86vm</td>
+                <td>1.1.4-13.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="21132">20.6 kB</td>
+                <td class=>X.Org X11 libXxf86vm runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libacl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="32264">31.5 kB</td>
+                <td>Dynamic library for access control list support</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libaio</td>
+                <td>0.3.111-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="40220">39.3 kB</td>
+                <td>Linux-native asynchronous I/O access library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libarchive</td>
+                <td>3.4.2-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="785665">767.3 kB</td>
+                <td>A library for handling streaming archive formats</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libargon2</td>
+                <td>20171227-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="50127">49.0 kB</td>
+                <td>The password-hashing library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libassuan</td>
+                <td>2.5.3-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="149496">146.0 kB</td>
+                <td>GnuPG IPC library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libattr</td>
+                <td>2.4.48-8.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="20210">19.7 kB</td>
+                <td>Dynamic library for extended attribute support</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libbasicobjects</td>
+                <td>0.1.1-44.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="49490">48.3 kB</td>
+                <td>Basic object types for C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libblkid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="293485">286.6 kB</td>
+                <td>Block device ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libbrotli</td>
+                <td>1.0.7-10.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="724540">707.6 kB</td>
+                <td>Library for brotli lossless compression algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libbsd</td>
+                <td>0.10.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="347721">339.6 kB</td>
+                <td>Library providing BSD-compatible functions for portability</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcap</td>
+                <td>2.26-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="105702">103.2 kB</td>
+                <td>Library for getting and setting POSIX.1e capabilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcap-ng</td>
+                <td>0.7.10-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="46146">45.1 kB</td>
+                <td>An alternate posix capabilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcollection</td>
+                <td>0.7.0-44.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="82954">81.0 kB</td>
+                <td>Collection data-type for C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcom_err</td>
+                <td>1.45.5-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="56085">54.8 kB</td>
+                <td>Common error description library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcomps</td>
+                <td>0.1.14-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="158021">154.3 kB</td>
+                <td>Comps XML file manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libconfig</td>
+                <td>1.7.2-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="182769">178.5 kB</td>
+                <td>C/C++ configuration file library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcroco</td>
+                <td>0.6.13-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="287588">280.8 kB</td>
+                <td>A CSS2 parsing library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcurl</td>
+                <td>7.69.1-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="510416">498.5 kB</td>
+                <td>A library for getting files from web servers</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdatrie</td>
+                <td>0.2.9-11.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="50791">49.6 kB</td>
+                <td class=>Implementation of Double-Array structure for representing trie</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libdb</td>
+                <td>5.3.28-40.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1660484">1.6 MB</td>
+                <td>The Berkeley DB database library for C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libdb-utils</td>
+                <td>5.3.28-40.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="309291">302.0 kB</td>
+                <td>Command line tools for managing Berkeley DB databases</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libdnf</td>
+                <td>0.45.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1638635">1.6 MB</td>
+                <td>Library providing simplified C and Python API to libsolv</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libepoxy</td>
+                <td>1.5.4-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="968691">946.0 kB</td>
+                <td class=>epoxy runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libev</td>
+                <td>4.31-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="89620">87.5 kB</td>
+                <td>High-performance event loop/event model with lots of features</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libevent</td>
+                <td>2.1.8-8.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="770282">752.2 kB</td>
+                <td>Abstract asynchronous event notification library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libfdisk</td>
+                <td>2.35.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="443583">433.2 kB</td>
+                <td>Partitioning library for fdisk-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libfdt</td>
+                <td>1.5.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="50356">49.2 kB</td>
+                <td>Device tree library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libffi</td>
+                <td>3.1-24.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="44388">43.3 kB</td>
+                <td>A portable foreign function interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libfontenc</td>
+                <td>1.1.3-12.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="49757">48.6 kB</td>
+                <td class=>X.Org X11 libfontenc runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libgcc</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="217660">212.6 kB</td>
+                <td>GCC version 10 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libgcrypt</td>
+                <td>1.8.5-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="919802">898.2 kB</td>
+                <td>A general-purpose cryptography library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgdl</td>
+                <td>1:3.34.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="988434">965.3 kB</td>
+                <td class=>GNOME docking library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgfortran</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="983372">960.3 kB</td>
+                <td class=>Fortran runtime</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libgomp</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="351842">343.6 kB</td>
+                <td>GCC OpenMP v4.5 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libgpg-error</td>
+                <td>1.36-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="736249">719.0 kB</td>
+                <td>Library for error values used by GnuPG components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgs</td>
+                <td>9.50-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="17019935">16.2 MB</td>
+                <td class=>Library providing Ghostcript's core functionality</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgusb</td>
+                <td>0.3.4-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="105404">102.9 kB</td>
+                <td class=>GLib wrapper around libusb1</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libidn</td>
+                <td>1.35-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="683162">667.2 kB</td>
+                <td class=>Internationalized Domain Name support library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libidn2</td>
+                <td>2.3.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="248730">242.9 kB</td>
+                <td>Library to support IDNA2008 internationalized domain names</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libijs</td>
+                <td>0.35-11.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="54108">52.8 kB</td>
+                <td class=>IJS Raster Image Transport Protocol Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libimagequant</td>
+                <td>2.12.6-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="121537">118.7 kB</td>
+                <td class=>Palette quantization library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libini_config</td>
+                <td>1.3.1-44.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="132966">129.8 kB</td>
+                <td>INI file parser for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libjpeg-turbo</td>
+                <td>2.0.4-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="338334">330.4 kB</td>
+                <td class=>A MMX/SSE2/SIMD accelerated library for manipulating JPEG image files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libkcapi</td>
+                <td>1.1.5-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="71087">69.4 kB</td>
+                <td>User space interface to the Linux Kernel Crypto API</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libkcapi-hmaccalc</td>
+                <td>1.1.5-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="28609">27.9 kB</td>
+                <td>Drop-in replacements for hmaccalc provided by the libkcapi package</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libksba</td>
+                <td>1.3.5-11.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="299847">292.8 kB</td>
+                <td>CMS and X.509 library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>liblqr-1</td>
+                <td>0.4.2-14.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="91720">89.6 kB</td>
+                <td class=>LiquidRescale library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmcpp</td>
+                <td>2.7.2-25.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="158776">155.1 kB</td>
+                <td class=>Alternative C/C++ preprocessor (library build)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libmetalink</td>
+                <td>0.1.3-10.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="50268">49.1 kB</td>
+                <td>Metalink library written in C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libmnl</td>
+                <td>1.0.4-11.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="47259">46.2 kB</td>
+                <td>A minimalistic Netlink library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmodman</td>
+                <td>2.0.1-21.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="58643">57.3 kB</td>
+                <td class=>A simple library for managing C++ modules (plug-ins)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libmodulemd</td>
+                <td>2.9.1-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="493375">481.8 kB</td>
+                <td>Module metadata manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libmount</td>
+                <td>2.35.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="372825">364.1 kB</td>
+                <td>Device mounting library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnetfilter_conntrack</td>
+                <td>1.0.7-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="118222">115.5 kB</td>
+                <td>Netfilter conntrack userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnfnetlink</td>
+                <td>1.0.1-17.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="46711">45.6 kB</td>
+                <td>Netfilter netlink userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnfsidmap</td>
+                <td>1:2.4.3-0.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="175016">170.9 kB</td>
+                <td>NFSv4 User and Group ID Mapping Library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnghttp2</td>
+                <td>1.40.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="138448">135.2 kB</td>
+                <td>A library implementing the HTTP/2 protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnl3</td>
+                <td>3.5.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="794056">775.4 kB</td>
+                <td>Convenience library for kernel netlink sockets</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnsl2</td>
+                <td>1.2.0-6.20180605git4a062cf.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="104926">102.5 kB</td>
+                <td>Public client interface library for NIS(YP) and NIS+</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpaper</td>
+                <td>1.1.24-26.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="82631">80.7 kB</td>
+                <td class=>Library and tools for handling papersize</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpath_utils</td>
+                <td>0.2.1-44.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="53858">52.6 kB</td>
+                <td>Filesystem Path Utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpcap</td>
+                <td>14:1.9.1-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="346350">338.2 kB</td>
+                <td>A system-independent interface for user-level packet capture</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpciaccess</td>
+                <td>0.16-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="36777">35.9 kB</td>
+                <td>PCI access library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="49665">48.5 kB</td>
+                <td class=>Backend library for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpng</td>
+                <td>2:1.6.37-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="193375">188.8 kB</td>
+                <td>A library of functions for manipulating PNG image format files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libproxy</td>
+                <td>0.4.15-17.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="138262">135.0 kB</td>
+                <td class=>A library handling all the details of proxy configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpsl</td>
+                <td>0.21.0-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="65308">63.8 kB</td>
+                <td>C library for the Publix Suffix List</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpwquality</td>
+                <td>1.4.2-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="378933">370.1 kB</td>
+                <td>A library for password generation and password quality checking</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libraqm</td>
+                <td>0.7.0-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="16241">15.9 kB</td>
+                <td class=>Complex Textlayout Library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libref_array</td>
+                <td>0.1.5-44.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="53734">52.5 kB</td>
+                <td>A refcounted array for C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>librepo</td>
+                <td>1.11.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="195452">190.9 kB</td>
+                <td>Repodata downloading library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libreport-filesystem</td>
+                <td>2.12.0-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>Filesystem layout for libreport</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>librevenge</td>
+                <td>0.0.4-17.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="671319">655.6 kB</td>
+                <td class=>A base library for writing document import filters</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>librsvg2</td>
+                <td>2.48.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="7749797">7.4 MB</td>
+                <td class=>An SVG library based on cairo</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libseccomp</td>
+                <td>2.4.2-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="198531">193.9 kB</td>
+                <td>Enhanced seccomp library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libselinux</td>
+                <td>3.0-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="151632">148.1 kB</td>
+                <td>SELinux library and simple utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libselinux-utils</td>
+                <td>3.0-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="273394">267.0 kB</td>
+                <td>SELinux libselinux utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsemanage</td>
+                <td>3.0-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="260398">254.3 kB</td>
+                <td>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsepol</td>
+                <td>3.0-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="694600">678.3 kB</td>
+                <td>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsigc++20</td>
+                <td>2.10.2-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="74184">72.4 kB</td>
+                <td class=>Typesafe signal framework for C++</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsigsegv</td>
+                <td>2.11-10.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="40194">39.3 kB</td>
+                <td>Library for handling page faults in user mode</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsmartcols</td>
+                <td>2.35.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="231723">226.3 kB</td>
+                <td>Formatting library for ls-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsolv</td>
+                <td>0.7.11-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="730091">713.0 kB</td>
+                <td>Package dependency solver</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsoup</td>
+                <td>2.70.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1103320">1.1 MB</td>
+                <td class=>Soup, an HTTP library implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libss</td>
+                <td>1.45.5-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="68121">66.5 kB</td>
+                <td>Command line interface parsing library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libssh</td>
+                <td>0.9.3-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="444271">433.9 kB</td>
+                <td>A library implementing the SSH protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libssh-config</td>
+                <td>0.9.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="357">357.0 B</td>
+                <td>Configuration files for libssh</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libstdc++</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1889841">1.8 MB</td>
+                <td>GNU Standard C++ Library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libtasn1</td>
+                <td>4.16.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="158576">154.9 kB</td>
+                <td>The ASN.1 library used in GNUTLS</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libtextstyle</td>
+                <td>0.20.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="84372">82.4 kB</td>
+                <td>Text styling library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libthai</td>
+                <td>0.1.28-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="769712">751.7 kB</td>
+                <td class=>Thai language support routines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtiff</td>
+                <td>4.1.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="475101">464.0 kB</td>
+                <td class=>Library of functions for manipulating TIFF format image files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libtirpc</td>
+                <td>1.2.5-1.rc2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="173622">169.6 kB</td>
+                <td>Transport Independent RPC Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtool-ltdl</td>
+                <td>2.4.6-33.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="58794">57.4 kB</td>
+                <td class=>Runtime libraries for GNU Libtool Dynamic Module Loader</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libunistring</td>
+                <td>0.9.10-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1552179">1.5 MB</td>
+                <td>GNU Unicode string library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libusbx</td>
+                <td>1.0.22-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="131237">128.2 kB</td>
+                <td>Library for accessing USB devices</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libuser</td>
+                <td>0.62-24.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1831594">1.7 MB</td>
+                <td>A user and group account administration library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libutempter</td>
+                <td>1.1.6-18.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="40809">39.9 kB</td>
+                <td>A privileged helper for utmp/wtmp updates</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libuuid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="29863">29.2 kB</td>
+                <td>Universally unique ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libverto</td>
+                <td>0.3.0-9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="22636">22.1 kB</td>
+                <td>Main loop abstraction library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libverto-libev</td>
+                <td>0.3.0-9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="11000">10.7 kB</td>
+                <td>libev module for libverto</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwayland-client</td>
+                <td>1.18.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="46792">45.7 kB</td>
+                <td class=>Wayland client library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwayland-cursor</td>
+                <td>1.18.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="33096">32.3 kB</td>
+                <td class=>Wayland cursor library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwayland-egl</td>
+                <td>1.18.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="7896">7.7 kB</td>
+                <td class=>Wayland egl library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwebp</td>
+                <td>1.1.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="527378">515.0 kB</td>
+                <td class=>Library and tools for the WebP graphics format</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwmf-lite</td>
+                <td>0.2.12-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="146226">142.8 kB</td>
+                <td class=>Windows Metafile parser library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwpd</td>
+                <td>0.10.3-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="663766">648.2 kB</td>
+                <td class=>A library for import of WordPerfect documents</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwpg</td>
+                <td>0.3.3-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="148522">145.0 kB</td>
+                <td class=>A library for import of WordPerfect Graphics images</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcb</td>
+                <td>1.13.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="819068">799.9 kB</td>
+                <td class=>A C binding to the X11 protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libxcrypt</td>
+                <td>4.4.15-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="277131">270.6 kB</td>
+                <td>Extended crypt library for descrypt, md5crypt, bcrypt, and others</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxkbcommon</td>
+                <td>0.10.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="253366">247.4 kB</td>
+                <td class=>X.Org X11 XKB parsing library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libxml2</td>
+                <td>2.9.10-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1571040">1.5 MB</td>
+                <td>Library providing XML and HTML support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxslt</td>
+                <td>1.1.34-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="706656">690.1 kB</td>
+                <td class=>Library providing the Gnome XSLT engine</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libyaml</td>
+                <td>0.2.2-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="112259">109.6 kB</td>
+                <td>YAML 1.1 parser and emitter written in C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libzstd</td>
+                <td>1.4.4-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="586425">572.7 kB</td>
+                <td>Zstd shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>linux-firmware</td>
+                <td>20200316-106.fc32</td>
+                <td>noarch</td>
+                <td data-order="254665890">242.9 MB</td>
+                <td>Firmware files used by the Linux kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>linux-firmware-whence</td>
+                <td>20200316-106.fc32</td>
+                <td>noarch</td>
+                <td data-order="151473">147.9 kB</td>
+                <td>WHENCE License file</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>lldpad</td>
+                <td>1.0.1-16.git036e314.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="643507">628.4 kB</td>
+                <td>Intel LLDP Agent</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>lua-libs</td>
+                <td>5.3.5-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="209996">205.1 kB</td>
+                <td>Libraries for lua</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>lz4-libs</td>
+                <td>1.9.1-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="119919">117.1 kB</td>
+                <td>Libaries for lz4</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>lzo</td>
+                <td>2.10-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="145741">142.3 kB</td>
+                <td>Data compression library with very fast (de)compression</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mcpp</td>
+                <td>2.7.2-25.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="51338">50.1 kB</td>
+                <td class=>Alternative C/C++ preprocessor</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>mcstrans</td>
+                <td>3.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="266959">260.7 kB</td>
+                <td>SELinux Translation Daemon</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>mdadm</td>
+                <td>4.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1005967">982.4 kB</td>
+                <td>The mdadm program controls Linux md devices (software RAID arrays)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>mpfr</td>
+                <td>4.0.2-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="474463">463.3 kB</td>
+                <td>A C library for multiple-precision floating-point computations</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ncurses-base</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td>Descriptions of common terminals</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ncurses-libs</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="735716">718.5 kB</td>
+                <td>Ncurses libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>netpbm</td>
+                <td>10.89.00-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="505812">494.0 kB</td>
+                <td class=>A library for handling different graphics file formats</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>nettle</td>
+                <td>3.5.1-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="547983">535.1 kB</td>
+                <td>A low-level cryptographic library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>nfs-utils</td>
+                <td>1:2.4.3-0.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1345178">1.3 MB</td>
+                <td>NFS utilities and supporting clients and daemons for the kernel NFS server</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>npth</td>
+                <td>1.6-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="41837">40.9 kB</td>
+                <td>The New GNU Portable Threads library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nspr</td>
+                <td>4.25.0-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="206474">201.6 kB</td>
+                <td class=>Netscape Portable Runtime</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss</td>
+                <td>3.50.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1648354">1.6 MB</td>
+                <td class=>Network Security Services</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-softokn</td>
+                <td>3.50.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1478410">1.4 MB</td>
+                <td class=>Network Security Services Softoken Module</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-softokn-freebl</td>
+                <td>3.50.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="423154">413.2 kB</td>
+                <td class=>Freebl library for the Network Security Services</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-sysinit</td>
+                <td>3.50.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="13632">13.3 kB</td>
+                <td class=>System NSS Initialization</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-util</td>
+                <td>3.50.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="166864">163.0 kB</td>
+                <td class=>Network Security Services Utilities Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openblas</td>
+                <td>0.3.9-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="58263">56.9 kB</td>
+                <td class=>An optimized BLAS library based on GotoBLAS2</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openblas-threads</td>
+                <td>0.3.9-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="10201836">9.7 MB</td>
+                <td class=>An optimized BLAS library based on GotoBLAS2, pthreads version</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openjpeg2</td>
+                <td>2.3.1-6.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="302594">295.5 kB</td>
+                <td class=>C-Library for JPEG 2000</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>openldap</td>
+                <td>2.4.47-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="861854">841.7 kB</td>
+                <td>LDAP support libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>openssl</td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1015148">991.4 kB</td>
+                <td>Utilities from the general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>openssl-libs</td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2721474">2.6 MB</td>
+                <td>A general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>os-prober</td>
+                <td>1.77-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="130626">127.6 kB</td>
+                <td>Probes disks on the system for installed operating systems</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>p11-kit</td>
+                <td>0.23.20-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1408160">1.3 MB</td>
+                <td>Library for loading and sharing PKCS#11 modules</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>p11-kit-trust</td>
+                <td>0.23.20-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="361113">352.6 kB</td>
+                <td>System trust module from p11-kit</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>pam</td>
+                <td>1.3.1-23.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2423605">2.3 MB</td>
+                <td>An extensible library which provides authentication for applications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pango</td>
+                <td>1.44.7-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="719222">702.4 kB</td>
+                <td class=>System for layout and rendering of internationalized text</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pangomm</td>
+                <td>2.40.2-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="170132">166.1 kB</td>
+                <td class=>C++ interface for Pango</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>passwd</td>
+                <td>0.80-8.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="436989">426.7 kB</td>
+                <td>An utility for setting or changing passwords using PAM</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>pcre</td>
+                <td>8.44-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="491352">479.8 kB</td>
+                <td>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>pcre2</td>
+                <td>10.34-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="689393">673.2 kB</td>
+                <td>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pixman</td>
+                <td>0.38.4-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="607743">593.5 kB</td>
+                <td class=>Pixel manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="66985">65.4 kB</td>
+                <td class=>Package compiler and linker metadata toolkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-m4</td>
+                <td>1.6.3-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td class=>m4 macros for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-pkg-config</td>
+                <td>1.6.3-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="464">464.0 B</td>
+                <td class=>pkgconf shim to provide /usr/bin/pkg-config</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>plymouth</td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="247471">241.7 kB</td>
+                <td>Graphical Boot Animation and Logger</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>plymouth-core-libs</td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="219860">214.7 kB</td>
+                <td>Plymouth core libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>plymouth-scripts</td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="24176">23.6 kB</td>
+                <td>Plymouth related scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>policycoreutils</td>
+                <td>3.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="625787">611.1 kB</td>
+                <td>SELinux policy core utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>policycoreutils-newrole</td>
+                <td>3.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="31397">30.7 kB</td>
+                <td>The newrole application for RBAC/MLS</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>policycoreutils-python-utils</td>
+                <td>3.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="139805">136.5 kB</td>
+                <td>SELinux policy core python utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>poppler</td>
+                <td>0.84.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2674081">2.6 MB</td>
+                <td class=>PDF rendering library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>poppler-data</td>
+                <td>0.4.9-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="12058151">11.5 MB</td>
+                <td class=>Encoding files for use with poppler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>poppler-glib</td>
+                <td>0.84.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="375988">367.2 kB</td>
+                <td class=>Glib wrapper for poppler</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>popt</td>
+                <td>1.16-19.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="117222">114.5 kB</td>
+                <td>C library for parsing command line parameters</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>potrace</td>
+                <td>1.16-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="247200">241.4 kB</td>
+                <td class=>Transform bitmaps into vector graphics</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>procps-ng</td>
+                <td>3.3.15-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="805520">786.6 kB</td>
+                <td>System and process monitoring utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>psmisc</td>
+                <td>23.3-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="588645">574.8 kB</td>
+                <td>Utilities for managing processes on your system</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>publicsuffix-list-dafsa</td>
+                <td>20190417-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="64992">63.5 kB</td>
+                <td>Cross-vendor public domain suffix database in DAFSA form</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python-pip-wheel</td>
+                <td>19.3.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="1266916">1.2 MB</td>
+                <td>The pip wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python-setuptools-wheel</td>
+                <td>41.6.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="360619">352.2 kB</td>
+                <td>The setuptools wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3</td>
+                <td>3.8.2-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="23398">22.8 kB</td>
+                <td>Interpreter of the Python programming language</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-audit</td>
+                <td>3.0-0.18.20191104git1c2f876.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="295777">288.8 kB</td>
+                <td>Python3 bindings for libaudit</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-dnf</td>
+                <td>4.2.19-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="1835815">1.8 MB</td>
+                <td>Python 3 interface to DNF</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-gpg</td>
+                <td>1.13.1-6.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1273573">1.2 MB</td>
+                <td>gpgme bindings for Python 3</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-hawkey</td>
+                <td>0.45.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="198819">194.2 kB</td>
+                <td>Python 3 bindings for the hawkey library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-libcomps</td>
+                <td>0.1.14-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="108600">106.1 kB</td>
+                <td>Python 3 bindings for libcomps library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-libdnf</td>
+                <td>0.45.0-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="3364142">3.2 MB</td>
+                <td>Python 3 bindings for the libdnf library.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-libs</td>
+                <td>3.8.2-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="32332133">30.8 MB</td>
+                <td>Python runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-libselinux</td>
+                <td>3.0-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="511386">499.4 kB</td>
+                <td>SELinux python 3 bindings for libselinux</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-libsemanage</td>
+                <td>3.0-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="358323">349.9 kB</td>
+                <td>semanage python 3 bindings for libsemanage</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-lxml</td>
+                <td>4.4.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="4641333">4.4 MB</td>
+                <td class=>XML processing library combining libxml2/libxslt with the ElementTree API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-numpy</td>
+                <td>1:1.18.1-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="20978217">20.0 MB</td>
+                <td class=>A fast multidimensional array facility for Python</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-policycoreutils</td>
+                <td>3.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="5626757">5.4 MB</td>
+                <td>SELinux policy core python3 interfaces</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-rpm</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>armv7hl</td>
+                <td data-order="265029">258.8 kB</td>
+                <td>Python 3 bindings for apps which will manipulate RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-scour</td>
+                <td>0.37-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="302434">295.3 kB</td>
+                <td class=>An SVG scrubber</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-setools</td>
+                <td>4.2.2-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2366634">2.3 MB</td>
+                <td>Policy analysis tools for SELinux</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-setuptools</td>
+                <td>41.6.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="3043755">2.9 MB</td>
+                <td>Easily build and distribute Python 3 packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-six</td>
+                <td>1.14.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="106208">103.7 kB</td>
+                <td class=>Python 2 and 3 compatibility utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>qrencode-libs</td>
+                <td>4.0.2-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="144449">141.1 kB</td>
+                <td>QR Code encoding library - Shared libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>quota</td>
+                <td>1:4.05-9.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="741946">724.6 kB</td>
+                <td>System administration tools for monitoring users' disk usage</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>quota-nls</td>
+                <td>1:4.05-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="281384">274.8 kB</td>
+                <td>Gettext catalogs for disk quota tools</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>readline</td>
+                <td>8.0-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="380771">371.8 kB</td>
+                <td>A library for editing typed command lines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rest</td>
+                <td>0.8.1-7.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="156154">152.5 kB</td>
+                <td class=>A library for access to RESTful web services</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rootfiles</td>
+                <td>8.1-27.fc32</td>
+                <td>noarch</td>
+                <td data-order="817">817.0 B</td>
+                <td>The basic required files for the root user's directory</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpcbind</td>
+                <td>1.2.5-5.rc1.fc32.1</td>
+                <td>armv7hl</td>
+                <td data-order="97260">95.0 kB</td>
+                <td>Universal Addresses to RPC Program Number Mapper</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpm</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>armv7hl</td>
+                <td data-order="2835719">2.7 MB</td>
+                <td>The RPM package management system</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpm-build-libs</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>armv7hl</td>
+                <td data-order="161388">157.6 kB</td>
+                <td>Libraries for building RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpm-libs</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>armv7hl</td>
+                <td data-order="577940">564.4 kB</td>
+                <td>Libraries for manipulating RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpm-plugin-selinux</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>armv7hl</td>
+                <td data-order="10916">10.7 kB</td>
+                <td>Rpm plugin for SELinux functionality</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpm-sign-libs</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>armv7hl</td>
+                <td data-order="19116">18.7 kB</td>
+                <td>Libraries for signing RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sed</td>
+                <td>4.5-5.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="750914">733.3 kB</td>
+                <td>A GNU stream text editor</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>selinux-policy</td>
+                <td>3.14.5-31.fc32</td>
+                <td>noarch</td>
+                <td data-order="25207">24.6 kB</td>
+                <td>SELinux policy configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>selinux-policy-minimum</td>
+                <td>3.14.5-31.fc32</td>
+                <td>noarch</td>
+                <td data-order="23898309">22.8 MB</td>
+                <td>SELinux minimum base policy</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>selinux-policy-mls</td>
+                <td>3.14.5-31.fc32</td>
+                <td>noarch</td>
+                <td data-order="11319817">10.8 MB</td>
+                <td>SELinux mls base policy</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>selinux-policy-sandbox</td>
+                <td>3.14.5-31.fc32</td>
+                <td>noarch</td>
+                <td data-order="86420">84.4 kB</td>
+                <td>SELinux policy sandbox</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>selinux-policy-targeted</td>
+                <td>3.14.5-31.fc32</td>
+                <td>noarch</td>
+                <td data-order="31914424">30.4 MB</td>
+                <td>SELinux targeted base policy</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>setup</td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>A set of system configuration and setup files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sg3_utils</td>
+                <td>1.44-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2204029">2.1 MB</td>
+                <td>Utilities for devices that use SCSI command sets</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sg3_utils-libs</td>
+                <td>1.44-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="210105">205.2 kB</td>
+                <td>Shared library for sg3_utils</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sgpio</td>
+                <td>1.2.0.10-25.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="18757">18.3 kB</td>
+                <td>SGPIO captive backplane tool</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>shadow-utils</td>
+                <td>2:4.8-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="3746343">3.6 MB</td>
+                <td>Utilities for managing accounts and shadow password files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>shared-mime-info</td>
+                <td>1.15-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2493684">2.4 MB</td>
+                <td class=>Shared MIME information database</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sqlite-libs</td>
+                <td>3.31.1-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1141000">1.1 MB</td>
+                <td>Shared library for the sqlite3 embeddable SQL database engine.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>squashfs-tools</td>
+                <td>4.3-25.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="386518">377.5 kB</td>
+                <td>Utility for the creation of squashfs filesystems</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sudo</td>
+                <td>1.9.0-0.1.b1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="3802562">3.6 MB</td>
+                <td>Allows restricted root access for specified users</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>systemd</td>
+                <td>245.2-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="12007906">11.5 MB</td>
+                <td>System and Service Manager</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>systemd-libs</td>
+                <td>245.2-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1377862">1.3 MB</td>
+                <td>systemd libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>systemd-pam</td>
+                <td>245.2-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="761144">743.3 kB</td>
+                <td>systemd PAM module</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>systemd-rpm-macros</td>
+                <td>245.2-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="8040">7.9 kB</td>
+                <td>Macros that define paths and scriptlets related to systemd</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>systemd-udev</td>
+                <td>245.2-1.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="8407741">8.0 MB</td>
+                <td>Rule-based device node and kernel event manager</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>tar</td>
+                <td>2:1.32-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="3062084">2.9 MB</td>
+                <td>A GNU file archiving program</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>tss2</td>
+                <td>1331-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="2115429">2.0 MB</td>
+                <td>IBM's TCG Software Stack (TSS) for TPM 2.0 and related utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>tzdata</td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>Timezone data</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>uboot-tools</td>
+                <td>2020.04-0.4.rc3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="1564432">1.5 MB</td>
+                <td>U-Boot utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>unzip</td>
+                <td>6.0-47.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="354365">346.1 kB</td>
+                <td>A utility for unpacking zip files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-bookman-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1428518">1.4 MB</td>
+                <td class=>URW Bookman font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-c059-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1460348">1.4 MB</td>
+                <td class=>C059 font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-d050000l-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="86572">84.5 kB</td>
+                <td class=>D050000L font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="5478">5.3 kB</td>
+                <td class=>Core Font Set containing 35 freely distributable fonts from (URW)++</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-fonts-common</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="38217">37.3 kB</td>
+                <td class=>Common files of the (URW)++ Level 2 Core Font Set</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-gothic-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1216672">1.2 MB</td>
+                <td class=>URW Gothic font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-nimbus-mono-ps-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1099749">1.0 MB</td>
+                <td class=>Nimbus Mono PS font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-nimbus-roman-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1429675">1.4 MB</td>
+                <td class=>Nimbus Roman font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-nimbus-sans-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="2469317">2.4 MB</td>
+                <td class=>Nimbus Sans font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-p052-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1557171">1.5 MB</td>
+                <td class=>P052 font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-standard-symbols-ps-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="45184">44.1 kB</td>
+                <td class=>Standard Symbols PS font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-z003-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="400088">390.7 kB</td>
+                <td class=>Z003 font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>userspace-rcu</td>
+                <td>0.11.1-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="323306">315.7 kB</td>
+                <td>RCU (read-copy-update) implementation in user-space</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>util-linux</td>
+                <td>2.35.1-4.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="12768012">12.2 MB</td>
+                <td>A collection of basic system utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>which</td>
+                <td>2.21-17.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="77283">75.5 kB</td>
+                <td>Displays where a particular program in your path is located</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>xfsprogs</td>
+                <td>5.4.0-3.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="4819842">4.6 MB</td>
+                <td>Utilities for managing the XFS filesystem</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xkeyboard-config</td>
+                <td>2.29-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="5725649">5.5 MB</td>
+                <td class=>X Keyboard Extension configuration data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xml-common</td>
+                <td>0.6.3-54.fc32</td>
+                <td>noarch</td>
+                <td data-order="80250">78.4 kB</td>
+                <td class=>Common XML catalog and DTD files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xorg-x11-font-utils</td>
+                <td>1:7.5-44.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="345276">337.2 kB</td>
+                <td class=>X.Org X11 font utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xorg-x11-fonts-ISO8859-1-100dpi</td>
+                <td>7.5-24.fc32</td>
+                <td>noarch</td>
+                <td data-order="1070824">1.0 MB</td>
+                <td class=>A set of 100dpi ISO-8859-1 fonts for X</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xorg-x11-server-utils</td>
+                <td>7.7-34.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="386829">377.8 kB</td>
+                <td class=>X.Org X11 X server utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>xz</td>
+                <td>5.2.4-8.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="496020">484.4 kB</td>
+                <td>LZMA compression utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>xz-libs</td>
+                <td>5.2.4-8.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="138895">135.6 kB</td>
+                <td>Libraries for decoding LZMA compression</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>zchunk-libs</td>
+                <td>1.1.5-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="72502">70.8 kB</td>
+                <td>Zchunk library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>zlib</td>
+                <td>1.2.11-21.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="186343">182.0 kB</td>
+                <td>The compression and decompression library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>zstd</td>
+                <td>1.4.4-2.fc32</td>
+                <td>armv7hl</td>
+                <td data-order="744755">727.3 kB</td>
+                <td>Zstd compression library</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--rhel-8-appstream-module-inkscape-0.92.3--eln-base--repository-fedora-rawhide--armv7hl.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

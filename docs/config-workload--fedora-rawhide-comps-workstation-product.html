@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+<div class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Home</a></li>
+            <li class="breadcrumb-item"><a href="./configs_repos.html">Configuration Files</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Repository: Comps group workstation-product for fedora-rawhide</li>
+        </ol>
+    </nav>
+
+    <h1>
+        Comps group workstation-product for fedora-rawhide
+        <small class="text-muted">workload configuration</small>
+    </h1>
+
+    <hr>
+
+    <div class="card">
+        <h5 class="card-header">
+            <a href="https://github.com/minimization/feedback-pipeline-config/blob/master/fedora-rawhide-comps-workstation-product.yaml" class="btn btn-sm btn-primary float-right">Edit Configuration</a>
+            Configuration
+        </h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <dl>
+                        <dt>Name</dt>
+                        <dd>Comps group workstation-product for fedora-rawhide</dd>
+
+                        <dt>Description</dt>
+                        <dd>Automatically generated.</dd>
+
+                        <dt>maintainer</dt>
+                        <dd>bakery</dd>
+                    </dl>
+                </div>
+                <div class="col-sm-3">
+                    <dl>
+                        <dt> Labels </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li>eln</li>
+                                
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-sm-3">
+                    <dl>
+                        <dt> Packages </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li class="required-package">dnf</li>
+                                
+                                <li class="required-package">linux-firmware</li>
+                                
+                                <li class="required-package">microcode_ctl</li>
+                                
+                                <li class="required-package">sudo</li>
+                                
+                                <li class="required-package">systemd-udev</li>
+                                
+                                <li class="required-package">tar</li>
+                                
+                                <li class="required-package">xorg-x11-drv-libinput</li>
+                                
+                                <li class="required-package">zram</li>
+                                
+                                <li class="required-package">NetworkManager-config-connectivity-fedora</li>
+                                
+                                <li class="required-package">abrt-cli</li>
+                                
+                                <li class="required-package">abrt-desktop</li>
+                                
+                                <li class="required-package">abrt-java-connector</li>
+                                
+                                <li class="required-package">acl</li>
+                                
+                                <li class="required-package">adwaita-qt4</li>
+                                
+                                <li class="required-package">adwaita-qt5</li>
+                                
+                                <li class="required-package">at</li>
+                                
+                                <li class="required-package">attr</li>
+                                
+                                <li class="required-package">bash-completion</li>
+                                
+                                <li class="required-package">bc</li>
+                                
+                                <li class="required-package">bind-utils</li>
+                                
+                                <li class="required-package">bridge-utils</li>
+                                
+                                <li class="required-package">btrfs-progs</li>
+                                
+                                <li class="required-package">bzip2</li>
+                                
+                                <li class="required-package">chrony</li>
+                                
+                                <li class="required-package">cifs-utils</li>
+                                
+                                <li class="required-package">cpio</li>
+                                
+                                <li class="required-package">crontabs</li>
+                                
+                                <li class="required-package">cryptsetup</li>
+                                
+                                <li class="required-package">cyrus-sasl-plain</li>
+                                
+                                <li class="required-package">deltarpm</li>
+                                
+                                <li class="required-package">desktop-backgrounds-gnome</li>
+                                
+                                <li class="required-package">dnf-plugins-core</li>
+                                
+                                <li class="required-package">dos2unix</li>
+                                
+                                <li class="required-package">dosfstools</li>
+                                
+                                <li class="required-package">earlyoom</li>
+                                
+                                <li class="required-package">ethtool</li>
+                                
+                                <li class="required-package">fedora-chromium-config</li>
+                                
+                                <li class="required-package">fedora-release-workstation</li>
+                                
+                                <li class="required-package">fedora-workstation-backgrounds</li>
+                                
+                                <li class="required-package">file</li>
+                                
+                                <li class="required-package">fpaste</li>
+                                
+                                <li class="required-package">fros-gnome</li>
+                                
+                                <li class="required-package">gamemode</li>
+                                
+                                <li class="required-package">git</li>
+                                
+                                <li class="required-package">glibc-all-langpacks</li>
+                                
+                                <li class="required-package">gnome-shell-extension-background-logo</li>
+                                
+                                <li class="required-package">gnupg2</li>
+                                
+                                <li class="required-package">hunspell</li>
+                                
+                                <li class="required-package">ibus-gtk3</li>
+                                
+                                <li class="required-package">ibus-hangul</li>
+                                
+                                <li class="required-package">ibus-kkc</li>
+                                
+                                <li class="required-package">ibus-libpinyin</li>
+                                
+                                <li class="required-package">ibus-libzhuyin</li>
+                                
+                                <li class="required-package">ibus-m17n</li>
+                                
+                                <li class="required-package">ibus-qt</li>
+                                
+                                <li class="required-package">ibus-typing-booster</li>
+                                
+                                <li class="required-package">iptstate</li>
+                                
+                                <li class="required-package">jwhois</li>
+                                
+                                <li class="required-package">logrotate</li>
+                                
+                                <li class="required-package">lrzsz</li>
+                                
+                                <li class="required-package">lsof</li>
+                                
+                                <li class="required-package">mailcap</li>
+                                
+                                <li class="required-package">man-pages</li>
+                                
+                                <li class="required-package">mcelog</li>
+                                
+                                <li class="required-package">mdadm</li>
+                                
+                                <li class="required-package">mlocate</li>
+                                
+                                <li class="required-package">mtr</li>
+                                
+                                <li class="required-package">nano</li>
+                                
+                                <li class="required-package">net-tools</li>
+                                
+                                <li class="required-package">nfs-utils</li>
+                                
+                                <li class="required-package">nmap-ncat</li>
+                                
+                                <li class="required-package">nss-mdns</li>
+                                
+                                <li class="required-package">ntfs-3g</li>
+                                
+                                <li class="required-package">ntfsprogs</li>
+                                
+                                <li class="required-package">pam_afs_session</li>
+                                
+                                <li class="required-package">passwdqc</li>
+                                
+                                <li class="required-package">pciutils</li>
+                                
+                                <li class="required-package">pinentry-gnome3</li>
+                                
+                                <li class="required-package">pinfo</li>
+                                
+                                <li class="required-package">plymouth</li>
+                                
+                                <li class="required-package">policycoreutils-python-utils</li>
+                                
+                                <li class="required-package">psacct</li>
+                                
+                                <li class="required-package">psmisc</li>
+                                
+                                <li class="required-package">qgnomeplatform</li>
+                                
+                                <li class="required-package">qt</li>
+                                
+                                <li class="required-package">qt-settings</li>
+                                
+                                <li class="required-package">qt-x11</li>
+                                
+                                <li class="required-package">qt5-qtbase</li>
+                                
+                                <li class="required-package">qt5-qtbase-gui</li>
+                                
+                                <li class="required-package">qt5-qtdeclarative</li>
+                                
+                                <li class="required-package">qt5-qtxmlpatterns</li>
+                                
+                                <li class="required-package">quota</li>
+                                
+                                <li class="required-package">rdist</li>
+                                
+                                <li class="required-package">realmd</li>
+                                
+                                <li class="required-package">rhythmbox</li>
+                                
+                                <li class="required-package">rng-tools</li>
+                                
+                                <li class="required-package">rp-pppoe</li>
+                                
+                                <li class="required-package">rsync</li>
+                                
+                                <li class="required-package">sos</li>
+                                
+                                <li class="required-package">sssd</li>
+                                
+                                <li class="required-package">symlinks</li>
+                                
+                                <li class="required-package">tcpdump</li>
+                                
+                                <li class="required-package">telnet</li>
+                                
+                                <li class="required-package">time</li>
+                                
+                                <li class="required-package">traceroute</li>
+                                
+                                <li class="required-package">tree</li>
+                                
+                                <li class="required-package">unoconv</li>
+                                
+                                <li class="required-package">unzip</li>
+                                
+                                <li class="required-package">usbutils</li>
+                                
+                                <li class="required-package">vconfig</li>
+                                
+                                <li class="required-package">wget</li>
+                                
+                                <li class="required-package">which</li>
+                                
+                                <li class="required-package">wireless-tools</li>
+                                
+                                <li class="required-package">words</li>
+                                
+                                <li class="required-package">zip</li>
+                                
+                            </ul>
+                        </dd>
+
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <h5 class="card-header"> Results </h5>
+        <div class="card-body">
+            <br>
+            <br>
+            <br>
+            <div style="text-align: center;">
+                <h1 class="text-muted">TBD</h1>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+</div>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

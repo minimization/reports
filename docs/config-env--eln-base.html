@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+<div class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Home</a></li>
+            <li class="breadcrumb-item"><a href="./configs_repos.html">Configuration Files</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Repository: ELN bootable base</li>
+        </ol>
+    </nav>
+
+    <h1>
+        ELN bootable base
+        <small class="text-muted">environment configuration</small>
+    </h1>
+
+    <hr>
+
+    <div class="card">
+        <h5 class="card-header">
+            <a href="https://github.com/minimization/feedback-pipeline-config/blob/master/eln-base.yaml" class="btn btn-sm btn-primary float-right">Edit Configuration</a>
+            Configuration
+        </h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <dl>
+                        <dt>Name</dt>
+                        <dd>ELN bootable base</dd>
+
+                        <dt>Description</dt>
+                        <dd>An experimental bootable set for ELN.</dd>
+
+                        <dt>maintainer</dt>
+                        <dd>psabata</dd>
+                    </dl>
+                </div>
+                <div class="col-sm-3">
+                    <dl>
+                        <dt> Repositories </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li>repository-fedora-rawhide</li>
+                                
+                            </ul>
+                        </dd>
+
+                        <dt> Labels </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li>eln</li>
+                                
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-sm-3">
+                    <dl>
+                        <dt> Packages </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li class="required-package">b43-openfwwf</li>
+                                
+                                <li class="required-package">bash</li>
+                                
+                                <li class="required-package">btrfs-progs</li>
+                                
+                                <li class="required-package">bzip2</li>
+                                
+                                <li class="required-package">checkpolicy</li>
+                                
+                                <li class="required-package">coreutils-single</li>
+                                
+                                <li class="required-package">cpio</li>
+                                
+                                <li class="required-package">dhcp-client</li>
+                                
+                                <li class="required-package">diffutils</li>
+                                
+                                <li class="required-package">dmraid</li>
+                                
+                                <li class="required-package">dnf</li>
+                                
+                                <li class="required-package">dosfstools</li>
+                                
+                                <li class="required-package">e2fsprogs</li>
+                                
+                                <li class="required-package">ebtables</li>
+                                
+                                <li class="required-package">ethtool</li>
+                                
+                                <li class="required-package">fcoe-utils</li>
+                                
+                                <li class="required-package">fedora-release</li>
+                                
+                                <li class="required-package">findutils</li>
+                                
+                                <li class="required-package">fipscheck</li>
+                                
+                                <li class="required-package">glibc-minimal-langpack</li>
+                                
+                                <li class="required-package">gnupg2</li>
+                                
+                                <li class="required-package">grep</li>
+                                
+                                <li class="required-package">gzip</li>
+                                
+                                <li class="required-package">hfsplus-tools</li>
+                                
+                                <li class="required-package">initscripts</li>
+                                
+                                <li class="required-package">iproute</li>
+                                
+                                <li class="required-package">ipset</li>
+                                
+                                <li class="required-package">iputils</li>
+                                
+                                <li class="required-package">iscsi-initiator-utils</li>
+                                
+                                <li class="required-package">kbd</li>
+                                
+                                <li class="required-package">kernel-core</li>
+                                
+                                <li class="required-package">kernel-cross-headers</li>
+                                
+                                <li class="required-package">kernel-headers</li>
+                                
+                                <li class="required-package">kernel-modules</li>
+                                
+                                <li class="required-package">kernel-modules-extra</li>
+                                
+                                <li class="required-package">kexec-tools</li>
+                                
+                                <li class="required-package">linux-firmware</li>
+                                
+                                <li class="required-package">lldpad</li>
+                                
+                                <li class="required-package">mdadm</li>
+                                
+                                <li class="required-package">nfs-utils</li>
+                                
+                                <li class="required-package">passwd</li>
+                                
+                                <li class="required-package">psmisc</li>
+                                
+                                <li class="required-package">plymouth</li>
+                                
+                                <li class="required-package">rootfiles</li>
+                                
+                                <li class="required-package">rpm</li>
+                                
+                                <li class="required-package">sed</li>
+                                
+                                <li class="required-package">selinux-policy</li>
+                                
+                                <li class="required-package">selinux-policy-minimum</li>
+                                
+                                <li class="required-package">selinux-policy-mls</li>
+                                
+                                <li class="required-package">selinux-policy-sandbox</li>
+                                
+                                <li class="required-package">selinux-policy-targeted</li>
+                                
+                                <li class="required-package">sg3_utils</li>
+                                
+                                <li class="required-package">shadow-utils</li>
+                                
+                                <li class="required-package">systemd</li>
+                                
+                                <li class="required-package">sudo</li>
+                                
+                                <li class="required-package">tar</li>
+                                
+                                <li class="required-package">uboot-tools</li>
+                                
+                                <li class="required-package">unzip</li>
+                                
+                                <li class="required-package">util-linux</li>
+                                
+                                <li class="required-package">which</li>
+                                
+                                <li class="required-package">xfsprogs</li>
+                                
+                                <li class="required-package">xz</li>
+                                
+                                <li class="required-package">zstd</li>
+                                
+                            </ul>
+                        </dd>
+
+                        
+                        
+                        <dt> Packages just for armv7hl </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li class="required-package">kernel-lpae</li>
+                                
+                                <li class="required-package">grub2-common</li>
+                                
+                                <li class="required-package">grub2-tools-extra</li>
+                                
+                                <li class="required-package">grub2-tools-minimal</li>
+                                
+                            </ul>
+                        </dd>
+                        
+                        
+                        
+                        <dt> Packages just for aarch64 </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li class="required-package">dbxtool</li>
+                                
+                                <li class="required-package">efibootmgr</li>
+                                
+                                <li class="required-package">efivar</li>
+                                
+                                <li class="required-package">extlinux-bootloader</li>
+                                
+                                <li class="required-package">grub2-common</li>
+                                
+                                <li class="required-package">grub2-efi-aa64</li>
+                                
+                                <li class="required-package">grub2-efi-aa64-modules</li>
+                                
+                                <li class="required-package">grub2-tools</li>
+                                
+                                <li class="required-package">grub2-tools-extra</li>
+                                
+                                <li class="required-package">grub2-tools-minimal</li>
+                                
+                                <li class="required-package">mokutil</li>
+                                
+                                <li class="required-package">shim-aa64</li>
+                                
+                                <li class="required-package">shim-unsigned-aarch64</li>
+                                
+                            </ul>
+                        </dd>
+                        
+                        
+                        
+                        <dt> Packages just for ppc64le </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li class="required-package">grub2-common</li>
+                                
+                                <li class="required-package">grub2-tools</li>
+                                
+                                <li class="required-package">grub2-tools-extra</li>
+                                
+                                <li class="required-package">grub2-tools-minimal</li>
+                                
+                                <li class="required-package">powerpc-utils</li>
+                                
+                            </ul>
+                        </dd>
+                        
+                        
+                        
+                        <dt> Packages just for s390x </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li class="required-package">s390utils-base</li>
+                                
+                                <li class="required-package">s390utils-cmsfs-fuse</li>
+                                
+                            </ul>
+                        </dd>
+                        
+                        
+                        
+                        <dt> Packages just for x86_64 </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li class="required-package">dbxtool</li>
+                                
+                                <li class="required-package">efibootmgr</li>
+                                
+                                <li class="required-package">efivar</li>
+                                
+                                <li class="required-package">grub2-common</li>
+                                
+                                <li class="required-package">grub2-efi-ia32</li>
+                                
+                                <li class="required-package">grub2-efi-ia32-cdboot</li>
+                                
+                                <li class="required-package">grub2-efi-ia32-modules</li>
+                                
+                                <li class="required-package">grub2-efi-x64</li>
+                                
+                                <li class="required-package">grub2-efi-x64-cdboot</li>
+                                
+                                <li class="required-package">grub2-efi-x64-modules</li>
+                                
+                                <li class="required-package">grub2-pc</li>
+                                
+                                <li class="required-package">grub2-pc-modules</li>
+                                
+                                <li class="required-package">grub2-tools</li>
+                                
+                                <li class="required-package">grub2-tools-efi</li>
+                                
+                                <li class="required-package">grub2-tools-extra</li>
+                                
+                                <li class="required-package">grub2-tools-minimal</li>
+                                
+                                <li class="required-package">mactel-boot</li>
+                                
+                                <li class="required-package">mokutil</li>
+                                
+                                <li class="required-package">shim-ia32</li>
+                                
+                                <li class="required-package">shim-unsigned-ia32</li>
+                                
+                                <li class="required-package">shim-unsigned-x64</li>
+                                
+                                <li class="required-package">shim-x64</li>
+                                
+                                <li class="required-package">syslinux</li>
+                                
+                                <li class="required-package">syslinux-extlinux</li>
+                                
+                                <li class="required-package">syslinux-nonlinux</li>
+                                
+                            </ul>
+                        </dd>
+                        
+                        
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <h5 class="card-header"> Results </h5>
+        <div class="card-body">
+            <br>
+            <br>
+            <br>
+            <div style="text-align: center;">
+                <h1 class="text-muted">TBD</h1>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+</div>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+<div class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Home</a></li>
+            <li class="breadcrumb-item"><a href="./configs_repos.html">Configuration Files</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Repository: Comps group gnome-desktop for fedora-rawhide</li>
+        </ol>
+    </nav>
+
+    <h1>
+        Comps group gnome-desktop for fedora-rawhide
+        <small class="text-muted">workload configuration</small>
+    </h1>
+
+    <hr>
+
+    <div class="card">
+        <h5 class="card-header">
+            <a href="https://github.com/minimization/feedback-pipeline-config/blob/master/fedora-rawhide-comps-gnome-desktop.yaml" class="btn btn-sm btn-primary float-right">Edit Configuration</a>
+            Configuration
+        </h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <dl>
+                        <dt>Name</dt>
+                        <dd>Comps group gnome-desktop for fedora-rawhide</dd>
+
+                        <dt>Description</dt>
+                        <dd>Automatically generated.</dd>
+
+                        <dt>maintainer</dt>
+                        <dd>bakery</dd>
+                    </dl>
+                </div>
+                <div class="col-sm-3">
+                    <dl>
+                        <dt> Labels </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li>eln</li>
+                                
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-sm-3">
+                    <dl>
+                        <dt> Packages </dt>
+                        <dd>
+                            <ul class="list-unstyled list-packages">
+                                
+                                <li class="required-package">dconf</li>
+                                
+                                <li class="required-package">gdm</li>
+                                
+                                <li class="required-package">gedit</li>
+                                
+                                <li class="required-package">gnome-boxes</li>
+                                
+                                <li class="required-package">gnome-control-center</li>
+                                
+                                <li class="required-package">gnome-initial-setup</li>
+                                
+                                <li class="required-package">gnome-session-wayland-session</li>
+                                
+                                <li class="required-package">gnome-session-xsession</li>
+                                
+                                <li class="required-package">gnome-settings-daemon</li>
+                                
+                                <li class="required-package">gnome-shell</li>
+                                
+                                <li class="required-package">gnome-software</li>
+                                
+                                <li class="required-package">gnome-terminal</li>
+                                
+                                <li class="required-package">nautilus</li>
+                                
+                                <li class="required-package">polkit</li>
+                                
+                                <li class="required-package">yelp</li>
+                                
+                                <li class="required-package">ModemManager</li>
+                                
+                                <li class="required-package">NetworkManager-adsl</li>
+                                
+                                <li class="required-package">NetworkManager-openconnect-gnome</li>
+                                
+                                <li class="required-package">NetworkManager-openvpn-gnome</li>
+                                
+                                <li class="required-package">NetworkManager-ppp</li>
+                                
+                                <li class="required-package">NetworkManager-pptp-gnome</li>
+                                
+                                <li class="required-package">NetworkManager-ssh-gnome</li>
+                                
+                                <li class="required-package">NetworkManager-vpnc-gnome</li>
+                                
+                                <li class="required-package">NetworkManager-wwan</li>
+                                
+                                <li class="required-package">PackageKit-command-not-found</li>
+                                
+                                <li class="required-package">PackageKit-gtk3-module</li>
+                                
+                                <li class="required-package">adobe-source-code-pro-fonts</li>
+                                
+                                <li class="required-package">at-spi2-atk</li>
+                                
+                                <li class="required-package">at-spi2-core</li>
+                                
+                                <li class="required-package">avahi</li>
+                                
+                                <li class="required-package">baobab</li>
+                                
+                                <li class="required-package">cheese</li>
+                                
+                                <li class="required-package">chrome-gnome-shell</li>
+                                
+                                <li class="required-package">eog</li>
+                                
+                                <li class="required-package">evince</li>
+                                
+                                <li class="required-package">evince-djvu</li>
+                                
+                                <li class="required-package">evince-nautilus</li>
+                                
+                                <li class="required-package">file-roller</li>
+                                
+                                <li class="required-package">file-roller-nautilus</li>
+                                
+                                <li class="required-package">fprintd-pam</li>
+                                
+                                <li class="required-package">glib-networking</li>
+                                
+                                <li class="required-package">gnome-backgrounds</li>
+                                
+                                <li class="required-package">gnome-bluetooth</li>
+                                
+                                <li class="required-package">gnome-calculator</li>
+                                
+                                <li class="required-package">gnome-calendar</li>
+                                
+                                <li class="required-package">gnome-characters</li>
+                                
+                                <li class="required-package">gnome-classic-session</li>
+                                
+                                <li class="required-package">gnome-clocks</li>
+                                
+                                <li class="required-package">gnome-color-manager</li>
+                                
+                                <li class="required-package">gnome-contacts</li>
+                                
+                                <li class="required-package">gnome-disk-utility</li>
+                                
+                                <li class="required-package">gnome-font-viewer</li>
+                                
+                                <li class="required-package">gnome-getting-started-docs</li>
+                                
+                                <li class="required-package">gnome-logs</li>
+                                
+                                <li class="required-package">gnome-maps</li>
+                                
+                                <li class="required-package">gnome-photos</li>
+                                
+                                <li class="required-package">gnome-remote-desktop</li>
+                                
+                                <li class="required-package">gnome-screenshot</li>
+                                
+                                <li class="required-package">gnome-system-monitor</li>
+                                
+                                <li class="required-package">gnome-terminal-nautilus</li>
+                                
+                                <li class="required-package">gnome-themes-extra</li>
+                                
+                                <li class="required-package">gnome-user-docs</li>
+                                
+                                <li class="required-package">gnome-user-share</li>
+                                
+                                <li class="required-package">gnome-weather</li>
+                                
+                                <li class="required-package">gvfs-afc</li>
+                                
+                                <li class="required-package">gvfs-afp</li>
+                                
+                                <li class="required-package">gvfs-archive</li>
+                                
+                                <li class="required-package">gvfs-fuse</li>
+                                
+                                <li class="required-package">gvfs-goa</li>
+                                
+                                <li class="required-package">gvfs-gphoto2</li>
+                                
+                                <li class="required-package">gvfs-mtp</li>
+                                
+                                <li class="required-package">gvfs-smb</li>
+                                
+                                <li class="required-package">libcanberra-gtk2</li>
+                                
+                                <li class="required-package">libcanberra-gtk3</li>
+                                
+                                <li class="required-package">libproxy-mozjs</li>
+                                
+                                <li class="required-package">librsvg2</li>
+                                
+                                <li class="required-package">libsane-hpaio</li>
+                                
+                                <li class="required-package">mesa-libEGL</li>
+                                
+                                <li class="required-package">mousetweaks</li>
+                                
+                                <li class="required-package">nautilus-sendto</li>
+                                
+                                <li class="required-package">orca</li>
+                                
+                                <li class="required-package">rygel</li>
+                                
+                                <li class="required-package">sane-backends-drivers-scanners</li>
+                                
+                                <li class="required-package">simple-scan</li>
+                                
+                                <li class="required-package">sushi</li>
+                                
+                                <li class="required-package">totem</li>
+                                
+                                <li class="required-package">tracker</li>
+                                
+                                <li class="required-package">tracker-miners</li>
+                                
+                                <li class="required-package">xdg-desktop-portal</li>
+                                
+                                <li class="required-package">xdg-desktop-portal-gtk</li>
+                                
+                                <li class="required-package">xdg-user-dirs-gtk</li>
+                                
+                            </ul>
+                        </dd>
+
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <h5 class="card-header"> Results </h5>
+        <div class="card-body">
+            <br>
+            <br>
+            <br>
+            <div style="text-align: center;">
+                <h1 class="text-muted">TBD</h1>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+</div>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

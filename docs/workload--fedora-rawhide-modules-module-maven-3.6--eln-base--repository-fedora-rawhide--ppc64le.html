@@ -1,0 +1,5613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-modules-module-maven-3.6--repository-fedora-rawhide.html">
+                    Module maven:3.6 for fedora-rawhide-modules
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Module maven:3.6 for fedora-rawhide-modules in ELN bootable base from Fedora rawhide ppc64le
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Module maven:3.6 for fedora-rawhide-modules <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> <a href="">ELN bootable base</a> </small>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora rawhide</a> </small>
+        <small class="text-muted"> for </small>
+        <small> ppc64le</small>
+    </h1>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <br>
+                    <br>
+                    <p class="lead text-muted"> TBD</p>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>acl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="328276">320.6 kB</td>
+                <td>Access control list utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>alternatives</td>
+                <td>1.11-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="92646">90.5 kB</td>
+                <td>A tool to maintain symbolic links determining default commands</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>aopalliance</td>
+                <td>1.0-21.fc32</td>
+                <td>noarch</td>
+                <td data-order="11619">11.3 kB</td>
+                <td>Java/J2EE AOP standards</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>apache-commons-cli</td>
+                <td>1.4-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="91810">89.7 kB</td>
+                <td>Command Line Interface Library for Java</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>apache-commons-codec</td>
+                <td>1.13-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="385373">376.3 kB</td>
+                <td>Implementations of common encoders and decoders</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>apache-commons-collections</td>
+                <td>3.2.2-16.fc32</td>
+                <td>noarch</td>
+                <td data-order="630728">615.9 kB</td>
+                <td class=>Provides new interfaces, implementations and utilities for Java Collections</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>apache-commons-compress</td>
+                <td>1.19-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="636487">621.6 kB</td>
+                <td class=>Java API for working with compressed files and archivers</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>apache-commons-io</td>
+                <td>1:2.6-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="287572">280.8 kB</td>
+                <td>Utilities to assist with developing IO functionality</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>apache-commons-lang</td>
+                <td>2.6-27.fc32</td>
+                <td>noarch</td>
+                <td data-order="321407">313.9 kB</td>
+                <td class=>Provides a host of helper utilities for the java.lang API</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>apache-commons-lang3</td>
+                <td>3.8.1-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="600456">586.4 kB</td>
+                <td>Provides a host of helper utilities for the java.lang API</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>apache-commons-logging</td>
+                <td>1.2-20.fc32</td>
+                <td>noarch</td>
+                <td data-order="181812">177.6 kB</td>
+                <td>Apache Commons Logging</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>apache-parent</td>
+                <td>22-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="29773">29.1 kB</td>
+                <td class=>Parent POM file for Apache projects</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>apache-resource-bundles</td>
+                <td>2-24.fc32</td>
+                <td>noarch</td>
+                <td data-order="48062">46.9 kB</td>
+                <td class=>Apache Resource Bundles</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>atinject</td>
+                <td>1-32.20100611svn86.fc32</td>
+                <td>noarch</td>
+                <td data-order="19044">18.6 kB</td>
+                <td>Dependency injection specification for Java (JSR-330)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>audit-libs</td>
+                <td>3.0-0.18.20191104git1c2f876.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="429772">419.7 kB</td>
+                <td>Dynamic library for libaudit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>autoconf</td>
+                <td>2.69-33.fc32</td>
+                <td>noarch</td>
+                <td data-order="2323018">2.2 MB</td>
+                <td class=>A GNU tool for automatically configuring source code</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>automake</td>
+                <td>1.16.1-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1801124">1.7 MB</td>
+                <td class=>A GNU tool for automatically creating Makefiles</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>avahi-libs</td>
+                <td>0.7-23.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="232232">226.8 kB</td>
+                <td class=>Libraries for avahi run-time use</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>b43-openfwwf</td>
+                <td>5.2-23.fc32</td>
+                <td>noarch</td>
+                <td data-order="31549">30.8 kB</td>
+                <td>Open firmware for some Broadcom 43xx series WLAN chips</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>basesystem</td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>The skeleton package which defines a simple Fedora system</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>bash</td>
+                <td>5.0.11-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="7994564">7.6 MB</td>
+                <td>The GNU Bourne Again shell</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>bc</td>
+                <td>1.07.1-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="298565">291.6 kB</td>
+                <td>GNU's bc (a numeric processing language) and dc (a calculator)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>binutils</td>
+                <td>2.34-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="31235994">29.8 MB</td>
+                <td class=>A GNU collection of binary utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>binutils-gold</td>
+                <td>2.34-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4512016">4.3 MB</td>
+                <td class=>The GOLD linker, a faster alternative to the BFD linker</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bsf</td>
+                <td>2.4.0-35.fc32</td>
+                <td>noarch</td>
+                <td data-order="121161">118.3 kB</td>
+                <td class=>Bean Scripting Framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bsh</td>
+                <td>2.0-16.b6.fc32</td>
+                <td>noarch</td>
+                <td data-order="860447">840.3 kB</td>
+                <td class=>Lightweight Scripting for Java</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>btrfs-progs</td>
+                <td>5.4-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5994389">5.7 MB</td>
+                <td>Userspace programs for btrfs</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>bzip2</td>
+                <td>1.0.8-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="178421">174.2 kB</td>
+                <td>A file compression utility</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>bzip2-libs</td>
+                <td>1.0.8-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="139944">136.7 kB</td>
+                <td>Libraries for applications using bzip2</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ca-certificates</td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>The Mozilla CA root certificate bundle</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>cdi-api</td>
+                <td>1.2-12.fc32</td>
+                <td>noarch</td>
+                <td data-order="781430">763.1 kB</td>
+                <td>CDI API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cglib</td>
+                <td>3.2.9-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="350414">342.2 kB</td>
+                <td class=>Code Generation Library for Java</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>checkpolicy</td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1973963">1.9 MB</td>
+                <td>SELinux policy compiler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>copy-jdk-configs</td>
+                <td>3.7-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="16778">16.4 kB</td>
+                <td class=>JDKs configuration files copier</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>coreutils-single</td>
+                <td>8.31-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1912502">1.8 MB</td>
+                <td>coreutils multicall binary</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>cpio</td>
+                <td>2.13-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1212482">1.2 MB</td>
+                <td>A GNU archiving program</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cpp</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="27531638">26.3 MB</td>
+                <td class=>The C Preprocessor</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>cracklib</td>
+                <td>2.9.6-22.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="433149">423.0 kB</td>
+                <td>A password-checking library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>crypto-policies</td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td>System-wide crypto policies</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>cryptsetup-libs</td>
+                <td>2.3.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2167607">2.1 MB</td>
+                <td>Cryptsetup shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cups-libs</td>
+                <td>1:2.3.1-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1010310">986.6 kB</td>
+                <td class=>CUPS printing system - libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>curl</td>
+                <td>7.69.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="751293">733.7 kB</td>
+                <td>A utility for getting files from remote servers (FTP, HTTP, and others)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>cyrus-sasl-lib</td>
+                <td>2.1.27-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="993882">970.6 kB</td>
+                <td>Shared libraries needed by applications which use Cyrus SASL</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dain-snappy</td>
+                <td>0.4-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="92878">90.7 kB</td>
+                <td class=>Snappy compression library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dbus</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="0">0.0 B</td>
+                <td>D-BUS message bus</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dbus-broker</td>
+                <td>22-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="565937">552.7 kB</td>
+                <td>Linux D-Bus Message Broker</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dbus-common</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="11481">11.2 kB</td>
+                <td>D-BUS message bus configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-libs</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="564304">551.1 kB</td>
+                <td class=>Libraries for accessing D-BUS</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper</td>
+                <td>1.02.167-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="444204">433.8 kB</td>
+                <td>Device mapper utility</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper-event</td>
+                <td>1.02.167-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="72601">70.9 kB</td>
+                <td>Device-mapper event daemon</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper-event-libs</td>
+                <td>1.02.167-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="95628">93.4 kB</td>
+                <td>Device-mapper event daemon shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper-libs</td>
+                <td>1.02.167-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="521735">509.5 kB</td>
+                <td>Device-mapper shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper-multipath</td>
+                <td>0.8.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="439138">428.8 kB</td>
+                <td>Tools to manage multipath devices using device-mapper</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>device-mapper-multipath-libs</td>
+                <td>0.8.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2257753">2.2 MB</td>
+                <td>The device-mapper-multipath modules and shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dhcp-client</td>
+                <td>12:4.4.2-5.b1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3885005">3.7 MB</td>
+                <td>Provides the ISC DHCP client daemon and dhclient-script</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dhcp-common</td>
+                <td>12:4.4.2-5.b1.fc32</td>
+                <td>noarch</td>
+                <td data-order="341740">333.7 kB</td>
+                <td>Common files used by ISC dhcp client, server and relay agent</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>diffutils</td>
+                <td>3.7-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1741852">1.7 MB</td>
+                <td>A GNU collection of diff utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dmraid</td>
+                <td>1.0.0.rc16-44.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="558020">544.9 kB</td>
+                <td>Device-mapper RAID tool and library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dmraid-events</td>
+                <td>1.0.0.rc16-44.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="70684">69.0 kB</td>
+                <td>dmevent_tool (Device-mapper event tool) and DSO</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dnf</td>
+                <td>4.2.19-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="1776836">1.7 MB</td>
+                <td>Package manager</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dnf-data</td>
+                <td>4.2.19-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="36289">35.4 kB</td>
+                <td>Common data and configuration files for DNF</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dosfstools</td>
+                <td>4.1-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="508493">496.6 kB</td>
+                <td>Utilities for making and checking MS-DOS FAT filesystems on Linux</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dracut</td>
+                <td>050-26.git20200316.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1197879">1.1 MB</td>
+                <td>Initramfs generator using udev</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dracut-network</td>
+                <td>050-26.git20200316.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="164034">160.2 kB</td>
+                <td>dracut modules to build a dracut initramfs with network support</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dracut-squash</td>
+                <td>050-26.git20200316.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2806">2.7 kB</td>
+                <td>dracut module to build an initramfs with most files in a squashfs image</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>dtc</td>
+                <td>1.5.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="541861">529.2 kB</td>
+                <td>Device Tree Compiler</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>e2fsprogs</td>
+                <td>1.45.5-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5385938">5.1 MB</td>
+                <td>Utilities for managing ext2, ext3, and ext4 file systems</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>e2fsprogs-libs</td>
+                <td>1.45.5-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="715561">698.8 kB</td>
+                <td>Ext2/3/4 file system specific shared libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>easymock</td>
+                <td>3.6-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="204548">199.8 kB</td>
+                <td class=>Easy mock objects</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ebtables-legacy</td>
+                <td>2.0.11-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="385626">376.6 kB</td>
+                <td>Legacy user space tool to configure bridge netfilter rules in kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>elfutils-default-yama-scope</td>
+                <td>0.178-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td>Default yama attach scope sysctl setting</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>elfutils-libelf</td>
+                <td>0.178-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="952707">930.4 kB</td>
+                <td>Library to read and write ELF files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>elfutils-libs</td>
+                <td>0.178-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="962031">939.5 kB</td>
+                <td>Libraries to handle compiled objects</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>emacs-filesystem</td>
+                <td>1:26.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Emacs filesystem layout</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ethtool</td>
+                <td>2:5.4-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="551008">538.1 kB</td>
+                <td>Settings tool for Ethernet NICs</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>expat</td>
+                <td>2.2.8-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="380995">372.1 kB</td>
+                <td>An XML parser library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fcoe-utils</td>
+                <td>1.0.32-9.git9834b34.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="590120">576.3 kB</td>
+                <td>Fibre Channel over Ethernet utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-gpg-keys</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td>Fedora RPM keys</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-release</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-release-common</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fedora-repos</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td>Fedora package repositories</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>file</td>
+                <td>5.38-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="141656">138.3 kB</td>
+                <td>A utility for determining file types</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>file-libs</td>
+                <td>5.38-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="7275709">6.9 MB</td>
+                <td>Libraries for applications using libmagic</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>filesystem</td>
+                <td>3.14-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="0">0.0 B</td>
+                <td>The basic directory layout for a Linux system</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>findutils</td>
+                <td>1:4.7.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2008259">1.9 MB</td>
+                <td>The GNU versions of find utilities (find and xargs)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fipscheck</td>
+                <td>1.5.0-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="151371">147.8 kB</td>
+                <td>A library for integrity verification of FIPS validated modules</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fipscheck-lib</td>
+                <td>1.5.0-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="68761">67.1 kB</td>
+                <td>Library files for fipscheck</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>freetype</td>
+                <td>2.10.1-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1094426">1.0 MB</td>
+                <td>A free and portable font rendering engine</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>fuse-libs</td>
+                <td>2.9.9-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="431402">421.3 kB</td>
+                <td>File System in Userspace (FUSE) v2 libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gawk</td>
+                <td>5.0.1-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3931092">3.7 MB</td>
+                <td>The GNU version of the AWK text processing utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gc</td>
+                <td>8.0.4-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="410680">401.1 kB</td>
+                <td class=>A garbage collector for C and C++</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gcc</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="77129856">73.6 MB</td>
+                <td class=>Various compilers (C, C++, Objective-C, ...)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gdbm-libs</td>
+                <td>1:1.18.1-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="239608">234.0 kB</td>
+                <td>Libraries files for gdbm</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>geronimo-annotation</td>
+                <td>1.0-27.fc32</td>
+                <td>noarch</td>
+                <td data-order="28058">27.4 kB</td>
+                <td>Java EE: Annotation API v1.3</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gettext</td>
+                <td>0.20.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="6248561">6.0 MB</td>
+                <td>GNU libraries and utilities for producing multi-lingual messages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gettext-libs</td>
+                <td>0.20.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1404944">1.3 MB</td>
+                <td>Libraries for gettext</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>glassfish-el</td>
+                <td>3.0.1-0.13.b08.fc32</td>
+                <td>noarch</td>
+                <td data-order="192515">188.0 kB</td>
+                <td>J2EE Expression Language Implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glassfish-el-api</td>
+                <td>3.0.1-0.13.b08.fc32</td>
+                <td>noarch</td>
+                <td data-order="157289">153.6 kB</td>
+                <td class=>Expression Language 3.0 API</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glib2</td>
+                <td>2.64.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="14532458">13.9 MB</td>
+                <td>A library of handy utility functions</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glibc</td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="29737912">28.4 MB</td>
+                <td>The GNU libc libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glibc-common</td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="8617731">8.2 MB</td>
+                <td>Common binaries and locale data for glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-devel</td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1570365">1.5 MB</td>
+                <td class=>Object files for development using standard C libraries.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-headers</td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2052693">2.0 MB</td>
+                <td class=>Header files for development using standard C libraries.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>glibc-minimal-langpack</td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="0">0.0 B</td>
+                <td>Minimal language packs for glibc.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gmp</td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="801884">783.1 kB</td>
+                <td>A GNU arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gnupg2</td>
+                <td>2.2.19-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="12363460">11.8 MB</td>
+                <td>Utility for secure communication and data storage</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gnutls</td>
+                <td>3.6.12-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3323854">3.2 MB</td>
+                <td>A TLS protocol implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>google-guice</td>
+                <td>4.2.2-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="1095602">1.0 MB</td>
+                <td>Lightweight dependency injection framework for Java 5 and above</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gpgme</td>
+                <td>1.13.1-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="741647">724.3 kB</td>
+                <td>GnuPG Made Easy - high level crypto API</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>grep</td>
+                <td>3.3-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="901906">880.8 kB</td>
+                <td>Pattern matching utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>groff-base</td>
+                <td>1.22.3-21.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4968867">4.7 MB</td>
+                <td>Parts of the groff formatting system required to display manual pages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>grub2-common</td>
+                <td>1:2.04-10.fc32</td>
+                <td>noarch</td>
+                <td data-order="5130689">4.9 MB</td>
+                <td>grub2 common layout</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>grub2-tools</td>
+                <td>1:2.04-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="8555990">8.2 MB</td>
+                <td>Support tools for GRUB.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>grub2-tools-extra</td>
+                <td>1:2.04-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="6737488">6.4 MB</td>
+                <td>Support tools for GRUB.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>grub2-tools-minimal</td>
+                <td>1:2.04-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3998985">3.8 MB</td>
+                <td>Support tools for GRUB.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gssproxy</td>
+                <td>0.8.2-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="414991">405.3 kB</td>
+                <td>GSSAPI Proxy</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>guava</td>
+                <td>25.0-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="2674580">2.6 MB</td>
+                <td>Google Core Libraries for Java</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>guile22</td>
+                <td>2.2.6-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="46466789">44.3 MB</td>
+                <td class=>A GNU implementation of Scheme for application extensibility</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>gzip</td>
+                <td>1.10-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="399010">389.7 kB</td>
+                <td>The GNU data compression program</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hamcrest-core</td>
+                <td>1.3-27.fc32</td>
+                <td>noarch</td>
+                <td data-order="50342">49.2 kB</td>
+                <td class=>Core API of hamcrest matcher framework.</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>hawtjni</td>
+                <td>1.17-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="142399">139.1 kB</td>
+                <td>Code generator that produces the JNI code</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hawtjni-runtime</td>
+                <td>1.17-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="71821">70.1 kB</td>
+                <td class=>HawtJNI Runtime</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>hfsplus-tools</td>
+                <td>540.1.linux3-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="446475">436.0 kB</td>
+                <td>Tools to create/check Apple HFS+ filesystems</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>httpcomponents-client</td>
+                <td>4.5.10-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="950519">928.2 kB</td>
+                <td>HTTP agent implementation based on httpcomponents HttpCore</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>httpcomponents-core</td>
+                <td>4.4.12-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="1127268">1.1 MB</td>
+                <td>Set of low level Java HTTP transport components for HTTP services</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>hwdata</td>
+                <td>0.333-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="7867092">7.5 MB</td>
+                <td>Hardware identification and configuration data</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ima-evm-utils</td>
+                <td>1.2.1-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="182167">177.9 kB</td>
+                <td>IMA/EVM support utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>initscripts</td>
+                <td>10.02-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1308518">1.2 MB</td>
+                <td>Basic support for legacy System V init scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ipcalc</td>
+                <td>0.4.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="96086">93.8 kB</td>
+                <td>IP network address calculator</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>iproute</td>
+                <td>5.5.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3097688">3.0 MB</td>
+                <td>Advanced IP routing and network device configuration tools</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ipset</td>
+                <td>7.6-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="125773">122.8 kB</td>
+                <td>Manage Linux IP sets</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ipset-libs</td>
+                <td>7.6-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="264338">258.1 kB</td>
+                <td>Shared library providing the IP sets functionality</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>iptables-libs</td>
+                <td>1.8.4-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="7726112">7.4 MB</td>
+                <td>iptables libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>iputils</td>
+                <td>20190515-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="656117">640.7 kB</td>
+                <td>Network monitoring tools including ping</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>iscsi-initiator-utils</td>
+                <td>6.2.1.0-2.git4440e57.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2523784">2.4 MB</td>
+                <td>iSCSI daemon and utility programs</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>iscsi-initiator-utils-iscsiuio</td>
+                <td>6.2.1.0-2.git4440e57.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="271378">265.0 kB</td>
+                <td>Userspace configuration daemon required for some iSCSI hardware</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>isl</td>
+                <td>0.16.1-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4528449">4.3 MB</td>
+                <td class=>Integer point manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>isns-utils-libs</td>
+                <td>0.97-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="604184">590.0 kB</td>
+                <td>Shared library files for iSNS</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>jansi</td>
+                <td>1.18-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="115448">112.7 kB</td>
+                <td>Jansi is a java library for generating and interpreting ANSI escape sequences</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>jansi-native</td>
+                <td>1.8-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="108110">105.6 kB</td>
+                <td>Jansi Native implements the JNI Libraries used by the Jansi project</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>java-1.8.0-openjdk-headless</td>
+                <td>1:1.8.0.242.b08-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="129977048">124.0 MB</td>
+                <td class=>OpenJDK Headless Runtime Environment 8</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>javapackages-filesystem</td>
+                <td>5.3.0-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="1935">1.9 kB</td>
+                <td class=>Java packages filesystem layout</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>javapackages-tools</td>
+                <td>5.3.0-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="70329">68.7 kB</td>
+                <td class=>Macros and scripts for Java packaging support</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>jboss-interceptors-1.2-api</td>
+                <td>1.0.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="43140">42.1 kB</td>
+                <td>Java EE Interceptors 1.2 API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jcl-over-slf4j</td>
+                <td>1.7.30-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="19544">19.1 kB</td>
+                <td class=>JCL 1.1.1 implemented over SLF4J</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jdom2</td>
+                <td>2.0.6-15.fc32</td>
+                <td>noarch</td>
+                <td data-order="1058652">1.0 MB</td>
+                <td class=>Java manipulation of XML made easy</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jline</td>
+                <td>2.14.6-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="172369">168.3 kB</td>
+                <td class=>JLine is a Java library for handling console input</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>json-c</td>
+                <td>0.13.1-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="138162">134.9 kB</td>
+                <td>JSON implementation in C</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>jsoup</td>
+                <td>1.12.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="459794">449.0 kB</td>
+                <td>Java library for working with real-world HTML</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>jsr-305</td>
+                <td>0-0.27.20130910svn.fc32</td>
+                <td>noarch</td>
+                <td data-order="31550">30.8 kB</td>
+                <td>Correctness annotations for Java code</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jtidy</td>
+                <td>2:1.0-0.31.20100930svn1125.fc32</td>
+                <td>noarch</td>
+                <td data-order="202974">198.2 kB</td>
+                <td class=>HTML syntax checker and pretty printer</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>junit</td>
+                <td>1:4.12-13.fc32</td>
+                <td>noarch</td>
+                <td data-order="348167">340.0 kB</td>
+                <td class=>Java regression test package</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kbd</td>
+                <td>2.2.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2556266">2.4 MB</td>
+                <td>Tools for configuring the console (keyboard, virtual terminals, etc.)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kbd-legacy</td>
+                <td>2.2.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="526514">514.2 kB</td>
+                <td>Legacy data for kbd package</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kbd-misc</td>
+                <td>2.2.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="2556019">2.4 MB</td>
+                <td>Data for kbd package</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-core</td>
+                <td>5.6.0-0.rc7.git0.2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="141113644">134.6 MB</td>
+                <td>The Linux kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-cross-headers</td>
+                <td>5.6.0-0.rc7.git0.1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="25669025">24.5 MB</td>
+                <td>Header files for the Linux kernel for use by cross-glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-headers</td>
+                <td>5.6.0-0.rc7.git0.1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5133805">4.9 MB</td>
+                <td>Header files for the Linux kernel for use by glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-modules</td>
+                <td>5.6.0-0.rc7.git0.2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="28768252">27.4 MB</td>
+                <td>kernel modules to match the core kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kernel-modules-extra</td>
+                <td>5.6.0-0.rc7.git0.2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2289784">2.2 MB</td>
+                <td>Extra kernel modules to match the kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kexec-tools</td>
+                <td>2.0.20-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1465885">1.4 MB</td>
+                <td>The kexec/kdump userspace component</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>keyutils</td>
+                <td>1.6-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="243307">237.6 kB</td>
+                <td>Linux Key Management Utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>keyutils-libs</td>
+                <td>1.6-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="100247">97.9 kB</td>
+                <td>Key utilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kmod</td>
+                <td>27-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="353964">345.7 kB</td>
+                <td>Linux kernel module management utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kmod-libs</td>
+                <td>27-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="229064">223.7 kB</td>
+                <td>Libraries to handle kernel module loading and unloading</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>kpartx</td>
+                <td>0.8.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="97575">95.3 kB</td>
+                <td>Partition device manager for device-mapper devices</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>krb5-libs</td>
+                <td>1.18-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2916483">2.8 MB</td>
+                <td>The non-admin shared libraries used by Kerberos 5</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libacl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69808">68.2 kB</td>
+                <td>Dynamic library for access control list support</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libaio</td>
+                <td>0.3.111-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="164172">160.3 kB</td>
+                <td>Linux-native asynchronous I/O access library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libarchive</td>
+                <td>3.4.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1257057">1.2 MB</td>
+                <td>A library for handling streaming archive formats</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libargon2</td>
+                <td>20171227-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="87655">85.6 kB</td>
+                <td>The password-hashing library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libasan</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1612792">1.5 MB</td>
+                <td class=>The Address Sanitizer runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libassuan</td>
+                <td>2.5.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="219888">214.7 kB</td>
+                <td>GnuPG IPC library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libatomic</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69272">67.6 kB</td>
+                <td class=>The GNU Atomic library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libattr</td>
+                <td>2.4.48-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69898">68.3 kB</td>
+                <td>Dynamic library for extended attribute support</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libbasicobjects</td>
+                <td>0.1.1-44.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="111470">108.9 kB</td>
+                <td>Basic object types for C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libblkid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="470745">459.7 kB</td>
+                <td>Block device ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libbrotli</td>
+                <td>1.0.7-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="865108">844.8 kB</td>
+                <td>Library for brotli lossless compression algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libbsd</td>
+                <td>0.10.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="385321">376.3 kB</td>
+                <td>Library providing BSD-compatible functions for portability</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcap</td>
+                <td>2.26-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="443354">433.0 kB</td>
+                <td>Library for getting and setting POSIX.1e capabilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcap-ng</td>
+                <td>0.7.10-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="96046">93.8 kB</td>
+                <td>An alternate posix capabilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcollection</td>
+                <td>0.7.0-44.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="112238">109.6 kB</td>
+                <td>Collection data-type for C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcom_err</td>
+                <td>1.45.5-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="114449">111.8 kB</td>
+                <td>Common error description library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcomps</td>
+                <td>0.1.14-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="291013">284.2 kB</td>
+                <td>Comps XML file manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libconfig</td>
+                <td>1.7.2-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="262101">256.0 kB</td>
+                <td>C/C++ configuration file library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcroco</td>
+                <td>0.6.13-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="461052">450.2 kB</td>
+                <td>A CSS2 parsing library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libcurl</td>
+                <td>7.69.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="736112">718.9 kB</td>
+                <td>A library for getting files from web servers</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libdb</td>
+                <td>5.3.28-40.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2283760">2.2 MB</td>
+                <td>The Berkeley DB database library for C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libdb-utils</td>
+                <td>5.3.28-40.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1143839">1.1 MB</td>
+                <td>Command line tools for managing Berkeley DB databases</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libdnf</td>
+                <td>0.45.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2348275">2.2 MB</td>
+                <td>Library providing simplified C and Python API to libsolv</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libev</td>
+                <td>4.31-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="172256">168.2 kB</td>
+                <td>High-performance event loop/event model with lots of features</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libevent</td>
+                <td>2.1.8-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1248598">1.2 MB</td>
+                <td>Abstract asynchronous event notification library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libfdisk</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="635211">620.3 kB</td>
+                <td>Partitioning library for fdisk-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libfdt</td>
+                <td>1.5.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="88316">86.2 kB</td>
+                <td>Device tree library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libffi</td>
+                <td>3.1-24.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="86020">84.0 kB</td>
+                <td>A portable foreign function interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libgcc</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="226688">221.4 kB</td>
+                <td>GCC version 10 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libgcrypt</td>
+                <td>1.8.5-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1163326">1.1 MB</td>
+                <td>A general-purpose cryptography library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libgomp</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="520982">508.8 kB</td>
+                <td>GCC OpenMP v4.5 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libgpg-error</td>
+                <td>1.36-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="864677">844.4 kB</td>
+                <td>Library for error values used by GnuPG components</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libidn2</td>
+                <td>2.3.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="322958">315.4 kB</td>
+                <td>Library to support IDNA2008 internationalized domain names</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libini_config</td>
+                <td>1.3.1-44.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="244382">238.7 kB</td>
+                <td>INI file parser for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libjpeg-turbo</td>
+                <td>2.0.4-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="642378">627.3 kB</td>
+                <td class=>A MMX/SSE2/SIMD accelerated library for manipulating JPEG image files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libkcapi</td>
+                <td>1.1.5-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="100483">98.1 kB</td>
+                <td>User space interface to the Linux Kernel Crypto API</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libkcapi-hmaccalc</td>
+                <td>1.1.5-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="70597">68.9 kB</td>
+                <td>Drop-in replacements for hmaccalc provided by the libkcapi package</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libksba</td>
+                <td>1.3.5-11.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="431615">421.5 kB</td>
+                <td>CMS and X.509 library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libmetalink</td>
+                <td>0.1.3-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="136896">133.7 kB</td>
+                <td>Metalink library written in C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libmnl</td>
+                <td>1.0.4-11.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="96919">94.6 kB</td>
+                <td>A minimalistic Netlink library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libmodulemd</td>
+                <td>2.9.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="720827">703.9 kB</td>
+                <td>Module metadata manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libmount</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="627709">613.0 kB</td>
+                <td>Device mounting library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmpc</td>
+                <td>1.1.0-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="216477">211.4 kB</td>
+                <td class=>C library for multiple precision complex arithmetic</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnetfilter_conntrack</td>
+                <td>1.0.7-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="220710">215.5 kB</td>
+                <td>Netfilter conntrack userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnfnetlink</td>
+                <td>1.0.1-17.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="88043">86.0 kB</td>
+                <td>Netfilter netlink userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnfsidmap</td>
+                <td>1:2.4.3-0.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="292904">286.0 kB</td>
+                <td>NFSv4 User and Group ID Mapping Library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnghttp2</td>
+                <td>1.40.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="270284">263.9 kB</td>
+                <td>A library implementing the HTTP/2 protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnl3</td>
+                <td>3.5.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1398952">1.3 MB</td>
+                <td>Convenience library for kernel netlink sockets</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libnsl2</td>
+                <td>1.2.0-6.20180605git4a062cf.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="162978">159.2 kB</td>
+                <td>Public client interface library for NIS(YP) and NIS+</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpath_utils</td>
+                <td>0.2.1-44.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="111702">109.1 kB</td>
+                <td>Filesystem Path Utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpcap</td>
+                <td>14:1.9.1-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="473826">462.7 kB</td>
+                <td>A system-independent interface for user-level packet capture</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpciaccess</td>
+                <td>0.16-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="74121">72.4 kB</td>
+                <td>PCI access library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="136973">133.8 kB</td>
+                <td class=>Backend library for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpng</td>
+                <td>2:1.6.37-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="341627">333.6 kB</td>
+                <td>A library of functions for manipulating PNG image format files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpsl</td>
+                <td>0.21.0-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="135476">132.3 kB</td>
+                <td>C library for the Publix Suffix List</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libpwquality</td>
+                <td>1.4.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="603117">589.0 kB</td>
+                <td>A library for password generation and password quality checking</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libref_array</td>
+                <td>0.1.5-44.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="111654">109.0 kB</td>
+                <td>A refcounted array for C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>librepo</td>
+                <td>1.11.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="298384">291.4 kB</td>
+                <td>Repodata downloading library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libreport-filesystem</td>
+                <td>2.12.0-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>Filesystem layout for libreport</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>librtas</td>
+                <td>2.0.2-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="251369">245.5 kB</td>
+                <td>Libraries to provide access to RTAS calls and RTAS events</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libseccomp</td>
+                <td>2.4.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="440923">430.6 kB</td>
+                <td>Enhanced seccomp library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libselinux</td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="271360">265.0 kB</td>
+                <td>SELinux library and simple utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libselinux-utils</td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1316910">1.3 MB</td>
+                <td>SELinux libselinux utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsemanage</td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="438234">428.0 kB</td>
+                <td>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsepol</td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1031512">1007.3 kB</td>
+                <td>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsigsegv</td>
+                <td>2.11-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="98218">95.9 kB</td>
+                <td>Library for handling page faults in user mode</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsmartcols</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="363427">354.9 kB</td>
+                <td>Formatting library for ls-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libsolv</td>
+                <td>0.7.11-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1205531">1.1 MB</td>
+                <td>Package dependency solver</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libss</td>
+                <td>1.45.5-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="113881">111.2 kB</td>
+                <td>Command line interface parsing library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libssh</td>
+                <td>0.9.3-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="659371">643.9 kB</td>
+                <td>A library implementing the SSH protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libssh-config</td>
+                <td>0.9.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="357">357.0 B</td>
+                <td>Configuration files for libssh</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libstdc++</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2921269">2.8 MB</td>
+                <td>GNU Standard C++ Library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libtasn1</td>
+                <td>4.16.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="224836">219.6 kB</td>
+                <td>The ASN.1 library used in GNUTLS</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libtextstyle</td>
+                <td>0.20.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="204000">199.2 kB</td>
+                <td>Text styling library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libtirpc</td>
+                <td>1.2.5-1.rc2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="346494">338.4 kB</td>
+                <td>Transport Independent RPC Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtool</td>
+                <td>2.4.6-33.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2687534">2.6 MB</td>
+                <td class=>The GNU Portable Library Tool</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtool-ltdl</td>
+                <td>2.4.6-33.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="96394">94.1 kB</td>
+                <td class=>Runtime libraries for GNU Libtool Dynamic Module Loader</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libubsan</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="485720">474.3 kB</td>
+                <td class=>The Undefined Behavior Sanitizer runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libunistring</td>
+                <td>0.9.10-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1696387">1.6 MB</td>
+                <td>GNU Unicode string library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libusbx</td>
+                <td>1.0.22-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="176945">172.8 kB</td>
+                <td>Library for accessing USB devices</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libuser</td>
+                <td>0.62-24.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2672246">2.5 MB</td>
+                <td>A user and group account administration library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libutempter</td>
+                <td>1.1.6-18.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="165941">162.1 kB</td>
+                <td>A privileged helper for utmp/wtmp updates</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libuuid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="70943">69.3 kB</td>
+                <td>Universally unique ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libverto</td>
+                <td>0.3.0-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="72308">70.6 kB</td>
+                <td>Main loop abstraction library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libverto-libev</td>
+                <td>0.3.0-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69176">67.6 kB</td>
+                <td>libev module for libverto</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libxcrypt</td>
+                <td>4.4.15-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="334659">326.8 kB</td>
+                <td>Extended crypt library for descrypt, md5crypt, bcrypt, and others</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcrypt-devel</td>
+                <td>4.4.15-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="30986">30.3 kB</td>
+                <td class=>Development files for libxcrypt</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libxml2</td>
+                <td>2.9.10-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2391116">2.3 MB</td>
+                <td>Library providing XML and HTML support</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libyaml</td>
+                <td>0.2.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="203139">198.4 kB</td>
+                <td>YAML 1.1 parser and emitter written in C</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>libzstd</td>
+                <td>1.4.4-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="816293">797.2 kB</td>
+                <td>Zstd shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>linux-firmware</td>
+                <td>20200316-106.fc32</td>
+                <td>noarch</td>
+                <td data-order="254665890">242.9 MB</td>
+                <td>Firmware files used by the Linux kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>linux-firmware-whence</td>
+                <td>20200316-106.fc32</td>
+                <td>noarch</td>
+                <td data-order="151473">147.9 kB</td>
+                <td>WHENCE License file</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lksctp-tools</td>
+                <td>1.0.18-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="523238">511.0 kB</td>
+                <td class=>User-space access to Linux Kernel SCTP</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>lldpad</td>
+                <td>1.0.1-16.git036e314.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1135615">1.1 MB</td>
+                <td>Intel LLDP Agent</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>log4j12</td>
+                <td>1.2.17-26.fc32</td>
+                <td>noarch</td>
+                <td data-order="532175">519.7 kB</td>
+                <td class=>Java logging package</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lua</td>
+                <td>5.3.5-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="729304">712.2 kB</td>
+                <td class=>Powerful light-weight programming language</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>lua-libs</td>
+                <td>5.3.5-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="336944">329.0 kB</td>
+                <td>Libraries for lua</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lua-posix</td>
+                <td>33.3.1-16.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1263819">1.2 MB</td>
+                <td class=>A POSIX library for Lua</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>lz4-libs</td>
+                <td>1.9.1-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="202223">197.5 kB</td>
+                <td>Libaries for lz4</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>lzo</td>
+                <td>2.10-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="232269">226.8 kB</td>
+                <td>Data compression library with very fast (de)compression</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>m4</td>
+                <td>1.4.18-12.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="459416">448.6 kB</td>
+                <td class=>The GNU macro processor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>make</td>
+                <td>1:4.2.1-16.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1533896">1.5 MB</td>
+                <td class=>A GNU tool which simplifies the build process for users</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>maven</td>
+                <td>1:3.6.1-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="3160">3.1 kB</td>
+                <td>Java project management and project comprehension tool</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-archiver</td>
+                <td>3.5.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="59523">58.1 kB</td>
+                <td class=>Maven Archiver</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-artifact</td>
+                <td>2.2.1-63.fc32</td>
+                <td>noarch</td>
+                <td data-order="102225">99.8 kB</td>
+                <td class=>Compatibility Maven artifact artifact</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-artifact-manager</td>
+                <td>2.2.1-63.fc32</td>
+                <td>noarch</td>
+                <td data-order="91853">89.7 kB</td>
+                <td class=>Compatibility Maven artifact manager artifact</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-artifact-resolver</td>
+                <td>1:1.0-21.fc31</td>
+                <td>noarch</td>
+                <td data-order="38282">37.4 kB</td>
+                <td class=>Maven Artifact Resolution API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-artifact-transfer</td>
+                <td>1:0.11.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="113138">110.5 kB</td>
+                <td class=>Apache Maven Artifact Transfer</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-common-artifact-filters</td>
+                <td>3.0.1-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="77049">75.2 kB</td>
+                <td class=>Maven Common Artifact Filters</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-dependency-tree</td>
+                <td>3.0.1-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="57543">56.2 kB</td>
+                <td class=>Maven dependency tree artifact</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-doxia-core</td>
+                <td>1.9-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="229400">224.0 kB</td>
+                <td class=>Core module for maven-doxia</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-doxia-logging-api</td>
+                <td>1.9-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="30446">29.7 kB</td>
+                <td class=>Logging-api module for maven-doxia</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-doxia-module-apt</td>
+                <td>1.9-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="63508">62.0 kB</td>
+                <td class=>APT module for maven-doxia</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-doxia-module-fml</td>
+                <td>1.9-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="50340">49.2 kB</td>
+                <td class=>FML module for maven-doxia</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-doxia-module-xdoc</td>
+                <td>1.9-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="48880">47.7 kB</td>
+                <td class=>XDoc module for maven-doxia</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-doxia-module-xhtml</td>
+                <td>1.9-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="26275">25.7 kB</td>
+                <td class=>XHTML module for maven-doxia</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-doxia-module-xhtml5</td>
+                <td>1.9-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="26761">26.1 kB</td>
+                <td class=>XHTML5 module for maven-doxia</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-doxia-sink-api</td>
+                <td>1.9-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="19051">18.6 kB</td>
+                <td class=>Sink-api module for maven-doxia</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-doxia-sitetools</td>
+                <td>1.9.1-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="299580">292.6 kB</td>
+                <td class=>Doxia content generation framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-enforcer-api</td>
+                <td>3.0.0~M2-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="32146">31.4 kB</td>
+                <td class=>Enforcer API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-enforcer-plugin</td>
+                <td>3.0.0~M2-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="39808">38.9 kB</td>
+                <td class=>Enforcer Rules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-enforcer-rules</td>
+                <td>3.0.0~M2-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="116953">114.2 kB</td>
+                <td class=>Enforcer Rules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-file-management</td>
+                <td>1:3.0.0-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="59543">58.1 kB</td>
+                <td class=>Maven File Management API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-filtering</td>
+                <td>3.1.1-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="74480">72.7 kB</td>
+                <td class=>Shared component providing resource filtering</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-jar-plugin</td>
+                <td>3.2.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="53302">52.1 kB</td>
+                <td class=>Maven JAR Plugin</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-lib</td>
+                <td>1:3.6.1-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="1915238">1.8 MB</td>
+                <td class=>Core part of Maven</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-model</td>
+                <td>2.2.1-63.fc32</td>
+                <td>noarch</td>
+                <td data-order="144970">141.6 kB</td>
+                <td class=>Compatibility Maven model artifact</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-monitor</td>
+                <td>2.2.1-63.fc32</td>
+                <td>noarch</td>
+                <td data-order="31290">30.6 kB</td>
+                <td class=>Compatibility Maven monitor artifact</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-parent</td>
+                <td>33-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="80403">78.5 kB</td>
+                <td class=>Apache Maven parent POM</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-plugin-annotations</td>
+                <td>3.5.1-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="23200">22.7 kB</td>
+                <td class=>Maven Plugin Java 5 Annotations</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-plugin-plugin</td>
+                <td>3.5.1-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="81416">79.5 kB</td>
+                <td class=>Maven Plugin Plugin</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-plugin-registry</td>
+                <td>2.2.1-63.fc32</td>
+                <td>noarch</td>
+                <td data-order="49215">48.1 kB</td>
+                <td class=>Compatibility Maven plugin registry artifact</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-plugin-tools-annotations</td>
+                <td>3.5.1-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="69486">67.9 kB</td>
+                <td class=>Maven Plugin Tool for Annotations</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-plugin-tools-api</td>
+                <td>3.5.1-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="46305">45.2 kB</td>
+                <td class=>Maven Plugin Tools APIs</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-plugin-tools-generators</td>
+                <td>3.5.1-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="62446">61.0 kB</td>
+                <td class=>Maven Plugin Tools Generators</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-plugin-tools-java</td>
+                <td>3.5.1-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="30578">29.9 kB</td>
+                <td class=>Maven Plugin Tool for Java</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-plugin-tools-javadoc</td>
+                <td>3.5.1-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="45318">44.3 kB</td>
+                <td class=>Maven Plugin Tools Javadoc</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-profile</td>
+                <td>2.2.1-63.fc32</td>
+                <td>noarch</td>
+                <td data-order="55692">54.4 kB</td>
+                <td class=>Compatibility Maven profile artifact</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-project</td>
+                <td>2.2.1-63.fc32</td>
+                <td>noarch</td>
+                <td data-order="183320">179.0 kB</td>
+                <td class=>Compatibility Maven project artifact</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-remote-resources-plugin</td>
+                <td>1.5-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="97584">95.3 kB</td>
+                <td class=>Maven Remote Resources Plugin</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-reporting-api</td>
+                <td>1:3.0-18.fc32</td>
+                <td>noarch</td>
+                <td data-order="30399">29.7 kB</td>
+                <td class=>API to manage report generation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-reporting-impl</td>
+                <td>3.0.0-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="43506">42.5 kB</td>
+                <td class=>Abstract classes to manage report generation</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>maven-resolver</td>
+                <td>1:1.4.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="30450">29.7 kB</td>
+                <td>Apache Maven Artifact Resolver library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-resolver-api</td>
+                <td>1:1.4.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="167483">163.6 kB</td>
+                <td class=>Maven Artifact Resolver API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-resolver-connector-basic</td>
+                <td>1:1.4.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="55884">54.6 kB</td>
+                <td class=>Maven Artifact Resolver Connector Basic</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-resolver-impl</td>
+                <td>1:1.4.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="193083">188.6 kB</td>
+                <td class=>Maven Artifact Resolver Implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-resolver-spi</td>
+                <td>1:1.4.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="45850">44.8 kB</td>
+                <td class=>Maven Artifact Resolver SPI</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-resolver-transport-wagon</td>
+                <td>1:1.4.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="45621">44.6 kB</td>
+                <td class=>Maven Artifact Resolver Transport Wagon</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-resolver-util</td>
+                <td>1:1.4.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="175053">171.0 kB</td>
+                <td class=>Maven Artifact Resolver Utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-settings</td>
+                <td>2.2.1-63.fc32</td>
+                <td>noarch</td>
+                <td data-order="69736">68.1 kB</td>
+                <td class=>Compatibility Maven settings artifact</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-shared-io</td>
+                <td>1:3.0.0-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="64049">62.5 kB</td>
+                <td class=>API for I/O support like logging, download or file scanning</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>maven-shared-utils</td>
+                <td>3.2.1-0.5.fc32</td>
+                <td>noarch</td>
+                <td data-order="187149">182.8 kB</td>
+                <td>Maven shared utility classes</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-surefire</td>
+                <td>2.22.0-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="1329096">1.3 MB</td>
+                <td class=>Test framework project</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-verifier</td>
+                <td>1.6-10.fc32</td>
+                <td>noarch</td>
+                <td data-order="62070">60.6 kB</td>
+                <td class=>Maven verifier</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>maven-wagon</td>
+                <td>3.3.3-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="31707">31.0 kB</td>
+                <td>Tools to manage artifacts and deployment</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-wagon-file</td>
+                <td>3.3.3-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="19609">19.1 kB</td>
+                <td class=>file module for maven-wagon</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-wagon-http</td>
+                <td>3.3.3-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="26157">25.5 kB</td>
+                <td class=>http module for maven-wagon</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-wagon-http-shared</td>
+                <td>3.3.3-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="48900">47.8 kB</td>
+                <td class=>http-shared module for maven-wagon</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>maven-wagon-provider-api</td>
+                <td>3.3.3-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="63091">61.6 kB</td>
+                <td class=>provider-api module for maven-wagon</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>mcstrans</td>
+                <td>3.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="403411">394.0 kB</td>
+                <td>SELinux Translation Daemon</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>mdadm</td>
+                <td>4.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1421747">1.4 MB</td>
+                <td>The mdadm program controls Linux md devices (software RAID arrays)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>mpfr</td>
+                <td>4.0.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="803867">785.0 kB</td>
+                <td>A C library for multiple-precision floating-point computations</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ncurses</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="995669">972.3 kB</td>
+                <td>Ncurses support utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ncurses-base</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td>Descriptions of common terminals</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>ncurses-libs</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1563232">1.5 MB</td>
+                <td>Ncurses libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>nettle</td>
+                <td>3.5.1-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="741095">723.7 kB</td>
+                <td>A low-level cryptographic library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>nfs-utils</td>
+                <td>1:2.4.3-0.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2401578">2.3 MB</td>
+                <td>NFS utilities and supporting clients and daemons for the kernel NFS server</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>npth</td>
+                <td>1.6-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="95653">93.4 kB</td>
+                <td>The New GNU Portable Threads library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>objectweb-asm</td>
+                <td>7.0-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="712246">695.6 kB</td>
+                <td class=>Java bytecode manipulation and analysis framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>objenesis</td>
+                <td>2.6-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="199775">195.1 kB</td>
+                <td class=>A library for instantiating Java objects</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>openldap</td>
+                <td>2.4.47-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1389966">1.3 MB</td>
+                <td>LDAP support libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>openssl</td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1302864">1.2 MB</td>
+                <td>Utilities from the general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>openssl-libs</td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4641010">4.4 MB</td>
+                <td>A general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>os-prober</td>
+                <td>1.77-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="193286">188.8 kB</td>
+                <td>Probes disks on the system for installed operating systems</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>p11-kit</td>
+                <td>0.23.20-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2165292">2.1 MB</td>
+                <td>Library for loading and sharing PKCS#11 modules</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>p11-kit-trust</td>
+                <td>0.23.20-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="609553">595.3 kB</td>
+                <td>System trust module from p11-kit</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>pam</td>
+                <td>1.3.1-23.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5695373">5.4 MB</td>
+                <td>An extensible library which provides authentication for applications</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>passwd</td>
+                <td>0.80-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="478989">467.8 kB</td>
+                <td>An utility for setting or changing passwords using PAM</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>pcre</td>
+                <td>8.44-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="697376">681.0 kB</td>
+                <td>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>pcre2</td>
+                <td>10.34-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="850333">830.4 kB</td>
+                <td>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Carp</td>
+                <td>1.50-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="47889">46.8 kB</td>
+                <td>Alternative warn and die for modules</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Data-Dumper</td>
+                <td>2.174-443.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="135963">132.8 kB</td>
+                <td>Stringify perl data structures, suitable for printing and eval</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Encode</td>
+                <td>4:3.02-441.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="10367829">9.9 MB</td>
+                <td>Character encodings in Perl</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Errno</td>
+                <td>1.30-451.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="9524">9.3 kB</td>
+                <td>System errno constants</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Exporter</td>
+                <td>5.74-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="55358">54.1 kB</td>
+                <td>Implements default import method for modules</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-File-Path</td>
+                <td>2.16-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="65104">63.6 kB</td>
+                <td>Create or remove directory trees</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-File-Temp</td>
+                <td>1:0.230.900-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="164978">161.1 kB</td>
+                <td>Return name and handle of a temporary file safely</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Getopt-Long</td>
+                <td>1:2.51-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="140531">137.2 kB</td>
+                <td>Extended processing of command line options</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-HTTP-Tiny</td>
+                <td>0.076-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="150122">146.6 kB</td>
+                <td>Small, simple, correct HTTP/1.1 client</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-IO</td>
+                <td>1.40-451.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="190544">186.1 kB</td>
+                <td>Perl input/output modules</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-MIME-Base64</td>
+                <td>3.15-440.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="94099">91.9 kB</td>
+                <td>Encoding and decoding of Base64 and quoted-printable strings</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-PathTools</td>
+                <td>3.78-441.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="231413">226.0 kB</td>
+                <td>PathTools Perl module (Cwd, File::Spec)</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Pod-Escapes</td>
+                <td>1:1.07-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="25763">25.2 kB</td>
+                <td>Resolve POD escape sequences</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Pod-Perldoc</td>
+                <td>3.28.01-443.fc32</td>
+                <td>noarch</td>
+                <td data-order="170949">166.9 kB</td>
+                <td>Look up Perl documentation in Pod format</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Pod-Simple</td>
+                <td>1:3.40-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="576060">562.6 kB</td>
+                <td>Framework for parsing POD documentation</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Pod-Usage</td>
+                <td>4:1.69-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="49720">48.6 kB</td>
+                <td>Print a usage message from embedded POD documentation</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Scalar-List-Utils</td>
+                <td>3:1.54-440.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="146214">142.8 kB</td>
+                <td>A selection of general-utility scalar and list subroutines</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Socket</td>
+                <td>4:2.029-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="144200">140.8 kB</td>
+                <td>Networking constants and support functions</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Storable</td>
+                <td>1:3.15-443.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="246722">240.9 kB</td>
+                <td>Persistence for Perl data structures</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Term-ANSIColor</td>
+                <td>5.01-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="100302">98.0 kB</td>
+                <td>Color screen output using ANSI escape sequences</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Term-Cap</td>
+                <td>1.17-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="29850">29.2 kB</td>
+                <td>Perl termcap interface</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Text-ParseWords</td>
+                <td>3.30-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="13100">12.8 kB</td>
+                <td>Parse text into an array of tokens or array of arrays</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Text-Tabs+Wrap</td>
+                <td>2013.0523-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="24827">24.2 kB</td>
+                <td>Expand tabs and do simple line wrapping</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Thread-Queue</td>
+                <td>3.13-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="29786">29.1 kB</td>
+                <td class=>Thread-safe queues</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Time-Local</td>
+                <td>2:1.300-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="67342">65.8 kB</td>
+                <td>Efficiently compute time from local and GMT time</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-Unicode-Normalize</td>
+                <td>1.26-440.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="699039">682.7 kB</td>
+                <td>Unicode Normalization Forms</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-constant</td>
+                <td>1.33-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="27104">26.5 kB</td>
+                <td>Perl pragma to declare constants</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-interpreter</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="15879230">15.1 MB</td>
+                <td>Standalone executable Perl interpreter</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-libs</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="8298519">7.9 MB</td>
+                <td>The libraries for the perl run-time</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-macros</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5643">5.5 kB</td>
+                <td>Macros for rpmbuild</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-parent</td>
+                <td>1:0.238-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="9535">9.3 kB</td>
+                <td>Establish an ISA relationship with base classes at compile time</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-podlators</td>
+                <td>1:4.14-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="288741">282.0 kB</td>
+                <td>Format POD source into various output formats</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-threads</td>
+                <td>1:2.22-442.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="138844">135.6 kB</td>
+                <td>Perl interpreter-based threads</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>perl-threads-shared</td>
+                <td>1.60-441.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="106447">104.0 kB</td>
+                <td>Perl extension for sharing data structures between threads</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="101197">98.8 kB</td>
+                <td class=>Package compiler and linker metadata toolkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-m4</td>
+                <td>1.6.3-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td class=>m4 macros for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-pkg-config</td>
+                <td>1.6.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="464">464.0 B</td>
+                <td class=>pkgconf shim to provide /usr/bin/pkg-config</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-archiver</td>
+                <td>4.2.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="213482">208.5 kB</td>
+                <td class=>Plexus Archiver Component</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-build-api</td>
+                <td>0.0.7-27.fc32</td>
+                <td>noarch</td>
+                <td data-order="24692">24.1 kB</td>
+                <td class=>Plexus Build API</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>plexus-cipher</td>
+                <td>1.7-18.fc32</td>
+                <td>noarch</td>
+                <td data-order="30596">29.9 kB</td>
+                <td>Plexus Cipher: encryption/decryption Component</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>plexus-classworlds</td>
+                <td>2.6.0-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="74371">72.6 kB</td>
+                <td>Plexus Classworlds Classloader Framework</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>plexus-containers</td>
+                <td>2.1.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="17576">17.2 kB</td>
+                <td>Containers for Plexus</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-containers-component-annotations</td>
+                <td>2.1.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="19576">19.1 kB</td>
+                <td class=>Component API from plexus-containers</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-containers-component-metadata</td>
+                <td>2.1.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="137496">134.3 kB</td>
+                <td class=>Component metadata from plexus-containers</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-containers-container-default</td>
+                <td>2.1.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="245416">239.7 kB</td>
+                <td class=>Default Container from plexus-containers</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-i18n</td>
+                <td>1.0-0.15.b10.4.fc32</td>
+                <td>noarch</td>
+                <td data-order="16400">16.0 kB</td>
+                <td class=>Plexus I18N Component</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>plexus-interpolation</td>
+                <td>1.26-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="87228">85.2 kB</td>
+                <td>Plexus Interpolation API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-io</td>
+                <td>3.2.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="90684">88.6 kB</td>
+                <td class=>Plexus IO Components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-languages</td>
+                <td>1.0.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="69193">67.6 kB</td>
+                <td class=>Plexus Languages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-pom</td>
+                <td>5.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="33157">32.4 kB</td>
+                <td class=>Root Plexus Projects POM</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-resources</td>
+                <td>1.1.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="28870">28.2 kB</td>
+                <td class=>Plexus Resource Manager</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>plexus-sec-dispatcher</td>
+                <td>1.4-29.fc32</td>
+                <td>noarch</td>
+                <td data-order="40389">39.4 kB</td>
+                <td>Plexus Security Dispatcher Component</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>plexus-utils</td>
+                <td>3.3.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="279271">272.7 kB</td>
+                <td>Plexus Common Utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>plexus-velocity</td>
+                <td>1.2-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="24636">24.1 kB</td>
+                <td class=>Plexus Velocity Component</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>plymouth</td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="522683">510.4 kB</td>
+                <td>Graphical Boot Animation and Logger</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>plymouth-core-libs</td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="405464">396.0 kB</td>
+                <td>Plymouth core libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>plymouth-scripts</td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="24178">23.6 kB</td>
+                <td>Plymouth related scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>policycoreutils</td>
+                <td>3.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1298679">1.2 MB</td>
+                <td>SELinux policy core utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>policycoreutils-newrole</td>
+                <td>3.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="73493">71.8 kB</td>
+                <td>The newrole application for RBAC/MLS</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>policycoreutils-python-utils</td>
+                <td>3.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="139805">136.5 kB</td>
+                <td>SELinux policy core python utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>popt</td>
+                <td>1.16-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="142694">139.3 kB</td>
+                <td>C library for parsing command line parameters</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>powerpc-utils</td>
+                <td>1.3.7-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1465492">1.4 MB</td>
+                <td>Utilities for PowerPC platforms</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>powerpc-utils-core</td>
+                <td>1.3.7-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="132004">128.9 kB</td>
+                <td>Core utilities for PowerPC platforms</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>procps-ng</td>
+                <td>3.3.15-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1778252">1.7 MB</td>
+                <td>System and process monitoring utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>psmisc</td>
+                <td>23.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="886929">866.1 kB</td>
+                <td>Utilities for managing processes on your system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>publicsuffix-list</td>
+                <td>20190417-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="232511">227.1 kB</td>
+                <td class=>Cross-vendor public domain suffix database</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>publicsuffix-list-dafsa</td>
+                <td>20190417-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="64992">63.5 kB</td>
+                <td>Cross-vendor public domain suffix database in DAFSA form</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python-pip-wheel</td>
+                <td>19.3.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="1266916">1.2 MB</td>
+                <td>The pip wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python-setuptools-wheel</td>
+                <td>41.6.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="360619">352.2 kB</td>
+                <td>The setuptools wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3</td>
+                <td>3.8.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="86050">84.0 kB</td>
+                <td>Interpreter of the Python programming language</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-audit</td>
+                <td>3.0-0.18.20191104git1c2f876.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="492251">480.7 kB</td>
+                <td>Python3 bindings for libaudit</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-dnf</td>
+                <td>4.2.19-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="1835815">1.8 MB</td>
+                <td>Python 3 interface to DNF</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-gpg</td>
+                <td>1.13.1-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1647114">1.6 MB</td>
+                <td>gpgme bindings for Python 3</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-hawkey</td>
+                <td>0.45.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="380483">371.6 kB</td>
+                <td>Python 3 bindings for the hawkey library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-libcomps</td>
+                <td>0.1.14-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="220726">215.6 kB</td>
+                <td>Python 3 bindings for libcomps library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-libdnf</td>
+                <td>0.45.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4736752">4.5 MB</td>
+                <td>Python 3 bindings for the libdnf library.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-libs</td>
+                <td>3.8.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="37298137">35.6 MB</td>
+                <td>Python runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-libselinux</td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="779944">761.7 kB</td>
+                <td>SELinux python 3 bindings for libselinux</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-libsemanage</td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="521041">508.8 kB</td>
+                <td>semanage python 3 bindings for libsemanage</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-policycoreutils</td>
+                <td>3.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="5626757">5.4 MB</td>
+                <td>SELinux policy core python3 interfaces</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-rpm</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>ppc64le</td>
+                <td data-order="467385">456.4 kB</td>
+                <td>Python 3 bindings for apps which will manipulate RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-setools</td>
+                <td>4.2.2-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2949774">2.8 MB</td>
+                <td>Policy analysis tools for SELinux</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>python3-setuptools</td>
+                <td>41.6.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="3043755">2.9 MB</td>
+                <td>Easily build and distribute Python 3 packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qdox</td>
+                <td>2.0-8.M9.fc32</td>
+                <td>noarch</td>
+                <td data-order="361589">353.1 kB</td>
+                <td class=>Extract class/interface/method definitions from sources</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>qrencode-libs</td>
+                <td>4.0.2-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="235009">229.5 kB</td>
+                <td>QR Code encoding library - Shared libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>quota</td>
+                <td>1:4.05-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1379322">1.3 MB</td>
+                <td>System administration tools for monitoring users' disk usage</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>quota-nls</td>
+                <td>1:4.05-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="281384">274.8 kB</td>
+                <td>Gettext catalogs for disk quota tools</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>readline</td>
+                <td>8.0-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="638563">623.6 kB</td>
+                <td>A library for editing typed command lines</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rootfiles</td>
+                <td>8.1-27.fc32</td>
+                <td>noarch</td>
+                <td data-order="817">817.0 B</td>
+                <td>The basic required files for the root user's directory</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpcbind</td>
+                <td>1.2.5-5.rc1.fc32.1</td>
+                <td>ppc64le</td>
+                <td data-order="222396">217.2 kB</td>
+                <td>Universal Addresses to RPC Program Number Mapper</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpm</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>ppc64le</td>
+                <td data-order="3183621">3.0 MB</td>
+                <td>The RPM package management system</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpm-build-libs</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>ppc64le</td>
+                <td data-order="269160">262.9 kB</td>
+                <td>Libraries for building RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpm-libs</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>ppc64le</td>
+                <td data-order="1082328">1.0 MB</td>
+                <td>Libraries for manipulating RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpm-plugin-selinux</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>ppc64le</td>
+                <td data-order="69072">67.5 kB</td>
+                <td>Rpm plugin for SELinux functionality</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>rpm-sign-libs</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>ppc64le</td>
+                <td data-order="68752">67.1 kB</td>
+                <td>Libraries for signing RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sed</td>
+                <td>4.5-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="850374">830.4 kB</td>
+                <td>A GNU stream text editor</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>selinux-policy</td>
+                <td>3.14.5-31.fc32</td>
+                <td>noarch</td>
+                <td data-order="25207">24.6 kB</td>
+                <td>SELinux policy configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>selinux-policy-minimum</td>
+                <td>3.14.5-31.fc32</td>
+                <td>noarch</td>
+                <td data-order="23898309">22.8 MB</td>
+                <td>SELinux minimum base policy</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>selinux-policy-mls</td>
+                <td>3.14.5-31.fc32</td>
+                <td>noarch</td>
+                <td data-order="11319817">10.8 MB</td>
+                <td>SELinux mls base policy</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>selinux-policy-sandbox</td>
+                <td>3.14.5-31.fc32</td>
+                <td>noarch</td>
+                <td data-order="86420">84.4 kB</td>
+                <td>SELinux policy sandbox</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>selinux-policy-targeted</td>
+                <td>3.14.5-31.fc32</td>
+                <td>noarch</td>
+                <td data-order="31914424">30.4 MB</td>
+                <td>SELinux targeted base policy</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>setup</td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>A set of system configuration and setup files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sg3_utils</td>
+                <td>1.44-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5676429">5.4 MB</td>
+                <td>Utilities for devices that use SCSI command sets</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sg3_utils-libs</td>
+                <td>1.44-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="359601">351.2 kB</td>
+                <td>Shared library for sg3_utils</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sgpio</td>
+                <td>1.2.0.10-25.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="73229">71.5 kB</td>
+                <td>SGPIO captive backplane tool</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>shadow-utils</td>
+                <td>2:4.8-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5369487">5.1 MB</td>
+                <td>Utilities for managing accounts and shadow password files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sisu-inject</td>
+                <td>1:0.3.3-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="388277">379.2 kB</td>
+                <td class=>Sisu inject</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sisu-plexus</td>
+                <td>1:0.3.3-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="209269">204.4 kB</td>
+                <td class=>Sisu Plexus</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>slf4j</td>
+                <td>1.7.30-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="82702">80.8 kB</td>
+                <td>Simple Logging Facade for Java</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>snappy</td>
+                <td>1.1.8-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="84303">82.3 kB</td>
+                <td>Fast compression and decompression library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sqlite-libs</td>
+                <td>3.31.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1621004">1.5 MB</td>
+                <td>Shared library for the sqlite3 embeddable SQL database engine.</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>squashfs-tools</td>
+                <td>4.3-25.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="524774">512.5 kB</td>
+                <td>Utility for the creation of squashfs filesystems</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>sudo</td>
+                <td>1.9.0-0.1.b1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4732378">4.5 MB</td>
+                <td>Allows restricted root access for specified users</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>systemd</td>
+                <td>245.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="18309489">17.5 MB</td>
+                <td>System and Service Manager</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>systemd-libs</td>
+                <td>245.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2170926">2.1 MB</td>
+                <td>systemd libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>systemd-pam</td>
+                <td>245.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1141632">1.1 MB</td>
+                <td>systemd PAM module</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>systemd-rpm-macros</td>
+                <td>245.2-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="8040">7.9 kB</td>
+                <td>Macros that define paths and scriptlets related to systemd</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>systemd-udev</td>
+                <td>245.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="10335593">9.9 MB</td>
+                <td>Rule-based device node and kernel event manager</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>tar</td>
+                <td>2:1.32-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3322204">3.2 MB</td>
+                <td>A GNU file archiving program</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>tss2</td>
+                <td>1331-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="9065569">8.6 MB</td>
+                <td>IBM's TCG Software Stack (TSS) for TPM 2.0 and related utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>tzdata</td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>Timezone data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>tzdata-java</td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="373943">365.2 kB</td>
+                <td class=>Timezone data for Java</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>uboot-tools</td>
+                <td>2020.04-0.4.rc3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3054192">2.9 MB</td>
+                <td>U-Boot utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>unzip</td>
+                <td>6.0-47.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="550241">537.3 kB</td>
+                <td>A utility for unpacking zip files</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>userspace-rcu</td>
+                <td>0.11.1-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="660318">644.8 kB</td>
+                <td>RCU (read-copy-update) implementation in user-space</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>util-linux</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="18480593">17.6 MB</td>
+                <td>A collection of basic system utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>velocity</td>
+                <td>1.7-27.fc32</td>
+                <td>noarch</td>
+                <td data-order="490593">479.1 kB</td>
+                <td class=>Java-based template engine</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>which</td>
+                <td>2.21-17.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="123707">120.8 kB</td>
+                <td>Displays where a particular program in your path is located</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xalan-j2</td>
+                <td>2.7.2-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="2086889">2.0 MB</td>
+                <td class=>Java XSLT processor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xbean</td>
+                <td>4.15-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="432143">422.0 kB</td>
+                <td class=>Java plugin based web server</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xerces-j2</td>
+                <td>2.12.0-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="1394988">1.3 MB</td>
+                <td class=>Java XML parser</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>xfsprogs</td>
+                <td>5.4.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="6799254">6.5 MB</td>
+                <td>Utilities for managing the XFS filesystem</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xml-commons-apis</td>
+                <td>1.4.01-29.fc32</td>
+                <td>noarch</td>
+                <td data-order="337877">330.0 kB</td>
+                <td class=>APIs for DOM, SAX, and JAXP</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xml-commons-resolver</td>
+                <td>1.2-29.fc32</td>
+                <td>noarch</td>
+                <td data-order="123814">120.9 kB</td>
+                <td class=>Resolver subproject of xml-commons</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>xz</td>
+                <td>5.2.4-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="612352">598.0 kB</td>
+                <td>LZMA compression utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xz-java</td>
+                <td>1.8-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="113846">111.2 kB</td>
+                <td class=>Java implementation of XZ data compression</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>xz-libs</td>
+                <td>5.2.4-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="270383">264.0 kB</td>
+                <td>Libraries for decoding LZMA compression</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>zchunk-libs</td>
+                <td>1.1.5-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="138698">135.4 kB</td>
+                <td>Zchunk library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>zlib</td>
+                <td>1.2.11-21.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="236287">230.7 kB</td>
+                <td>The compression and decompression library</td>
+            </tr>
+            
+            
+            
+            <tr class="env">
+                <td class="text-muted" data-order="2">(env)</td>
+                <td>zstd</td>
+                <td>1.4.4-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="999463">976.0 kB</td>
+                <td>Zstd compression library</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-modules-module-maven-3.6--eln-base--repository-fedora-rawhide--ppc64le.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>
