@@ -1,0 +1,2909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-comps-multimedia--repository-fedora-rawhide.html">
+                    Comps group multimedia for fedora-rawhide
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group multimedia for fedora-rawhide in Empty from Fedora rawhide x86_64
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group multimedia for fedora-rawhide <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> <a href="">Empty</a> </small>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora rawhide</a> </small>
+        <small class="text-muted"> for </small>
+        <small> x86_64</small>
+    </h1>
+
+    <hr>
+
+    
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <dl>
+                        <dt>Configuration</dt>
+                        <dd><a href="config-workload--fedora-rawhide-comps-multimedia.html">fedora-rawhide-comps-multimedia.yaml</a></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>PackageKit-glib</td>
+                <td>1.1.13-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="526976">514.6 kB</td>
+                <td class=>GLib libraries for accessing PackageKit</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>PackageKit-gstreamer-plugin</td>
+                <td>1.1.13-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="24856">24.3 kB</td>
+                <td>Install GStreamer codecs using PackageKit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>acl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="214628">209.6 kB</td>
+                <td class=>Access control list utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>alsa-lib</td>
+                <td>1.2.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1419647">1.4 MB</td>
+                <td class=>The Advanced Linux Sound Architecture (ALSA) library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>alsa-plugins-pulseaudio</td>
+                <td>1.2.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="124346">121.4 kB</td>
+                <td>Alsa to PulseAudio backend</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>alsa-ucm</td>
+                <td>1.2.2-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="126391">123.4 kB</td>
+                <td>ALSA Use Case Manager configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>alsa-utils</td>
+                <td>1.2.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2183536">2.1 MB</td>
+                <td>Advanced Linux Sound Architecture (ALSA) utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>alternatives</td>
+                <td>1.11-6.fc32</td>
+                <td>x86_64</td>
+                <td data-order="64014">62.5 kB</td>
+                <td class=>A tool to maintain symbolic links determining default commands</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>audit-libs</td>
+                <td>3.0-0.18.20191104git1c2f876.fc32</td>
+                <td>x86_64</td>
+                <td data-order="295980">289.0 kB</td>
+                <td class=>Dynamic library for libaudit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>basesystem</td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The skeleton package which defines a simple Fedora system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bash</td>
+                <td>5.0.11-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="7589870">7.2 MB</td>
+                <td class=>The GNU Bourne Again shell</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bzip2-libs</td>
+                <td>1.0.8-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="79024">77.2 kB</td>
+                <td class=>Libraries for applications using bzip2</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ca-certificates</td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td class=>The Mozilla CA root certificate bundle</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cairo</td>
+                <td>1.16.0-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1861991">1.8 MB</td>
+                <td class=>A 2D graphics library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cairo-gobject</td>
+                <td>1.16.0-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="44696">43.6 kB</td>
+                <td class=>GObject bindings for cairo</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cdparanoia-libs</td>
+                <td>10.2-31.fc32</td>
+                <td>x86_64</td>
+                <td data-order="117408">114.7 kB</td>
+                <td class=>Libraries for libcdda_paranoia (Paranoia III)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils</td>
+                <td>8.31-10.fc32</td>
+                <td>x86_64</td>
+                <td data-order="7110032">6.8 MB</td>
+                <td class=>A set of basic GNU tools commonly used in shell scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils-common</td>
+                <td>8.31-10.fc32</td>
+                <td>x86_64</td>
+                <td data-order="10349258">9.9 MB</td>
+                <td class=>coreutils common optional components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cracklib</td>
+                <td>2.9.6-22.fc32</td>
+                <td>x86_64</td>
+                <td data-order="252381">246.5 kB</td>
+                <td class=>A password-checking library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>crypto-policies</td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td class=>System-wide crypto policies</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cryptsetup-libs</td>
+                <td>2.3.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1926359">1.8 MB</td>
+                <td class=>Cryptsetup shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>D-BUS message bus</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-broker</td>
+                <td>22-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="419401">409.6 kB</td>
+                <td class=>Linux D-Bus Message Broker</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-common</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="11481">11.2 kB</td>
+                <td class=>D-BUS message bus configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-libs</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="388448">379.3 kB</td>
+                <td class=>Libraries for accessing D-BUS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dejavu-sans-fonts</td>
+                <td>2.37-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="5930693">5.7 MB</td>
+                <td class=>DejaVu Sans, a variable-width sans-serif font family</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>device-mapper</td>
+                <td>1.02.167-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="358276">349.9 kB</td>
+                <td class=>Device mapper utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>device-mapper-libs</td>
+                <td>1.02.167-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="428039">418.0 kB</td>
+                <td class=>Device-mapper shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-default-yama-scope</td>
+                <td>0.178-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td class=>Default yama attach scope sysctl setting</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-libelf</td>
+                <td>0.178-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="924723">903.0 kB</td>
+                <td class=>Library to read and write ELF files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-libs</td>
+                <td>0.178-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="721711">704.8 kB</td>
+                <td class=>Libraries to handle compiled objects</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>espeak-ng</td>
+                <td>1.50-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="7518976">7.2 MB</td>
+                <td class=>eSpeak NG Text-to-Speech</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>expat</td>
+                <td>2.2.8-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="271427">265.1 kB</td>
+                <td class=>An XML parser library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fdk-aac-free</td>
+                <td>2.0.0-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="771796">753.7 kB</td>
+                <td class=>Third-Party Modified Version of the Fraunhofer FDK AAC Codec Library for Android</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-gpg-keys</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td class=>Fedora RPM keys</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release-common</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-repos</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td class=>Fedora package repositories</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>filesystem</td>
+                <td>3.14-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The basic directory layout for a Linux system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>flac-libs</td>
+                <td>1.3.3-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="577356">563.8 kB</td>
+                <td class=>Libraries for the Free Lossless Audio Codec</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fontconfig</td>
+                <td>2.13.92-8.fc32</td>
+                <td>x86_64</td>
+                <td data-order="810606">791.6 kB</td>
+                <td class=>Font configuration and customization library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fonts-filesystem</td>
+                <td>2.0.3-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Directories used by font packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>freetype</td>
+                <td>2.10.1-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="832082">812.6 kB</td>
+                <td class=>A free and portable font rendering engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fribidi</td>
+                <td>1.0.9-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="352148">343.9 kB</td>
+                <td class=>Library implementing the Unicode Bidirectional Algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gawk</td>
+                <td>5.0.1-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2994868">2.9 MB</td>
+                <td class=>The GNU version of the AWK text processing utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdk-pixbuf2</td>
+                <td>2.40.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2618970">2.5 MB</td>
+                <td class=>An image loading library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glib-networking</td>
+                <td>2.64.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="573535">560.1 kB</td>
+                <td class=>Networking support for GLib</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glib2</td>
+                <td>2.64.1-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="13032378">12.4 MB</td>
+                <td class=>A library of handy utility functions</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc</td>
+                <td>2.31-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="17294832">16.5 MB</td>
+                <td class=>The GNU libc libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-all-langpacks</td>
+                <td>2.31-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="222208346">211.9 MB</td>
+                <td class=>All language packs for glibc.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-common</td>
+                <td>2.31-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="8188318">7.8 MB</td>
+                <td class=>Common binaries and locale data for glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gmp</td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>x86_64</td>
+                <td data-order="757940">740.2 kB</td>
+                <td class=>A GNU arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gnutls</td>
+                <td>3.6.12-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2928542">2.8 MB</td>
+                <td class=>A TLS protocol implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gobject-introspection</td>
+                <td>1.64.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="950836">928.6 kB</td>
+                <td class=>Introspection system for GObject-based libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>graphite2</td>
+                <td>1.3.13-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="232809">227.4 kB</td>
+                <td class=>Font rendering capabilities for complex non-Roman writing systems</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>grep</td>
+                <td>3.3-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="804082">785.2 kB</td>
+                <td class=>Pattern matching utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gsettings-desktop-schemas</td>
+                <td>3.36.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="4451891">4.2 MB</td>
+                <td class=>A collection of GSettings schemas</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gsm</td>
+                <td>1.0.18-6.fc32</td>
+                <td>x86_64</td>
+                <td data-order="65949">64.4 kB</td>
+                <td class=>Shared libraries for GSM speech compressor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gssdp</td>
+                <td>1.0.3-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="128935">125.9 kB</td>
+                <td class=>Resource discovery and announcement over SSDP</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>gstreamer-plugins-espeak</td>
+                <td>0.5.0-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="69765">68.1 kB</td>
+                <td>A simple gstreamer plugin to use espeak</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gstreamer1</td>
+                <td>1.16.2-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="4682341">4.5 MB</td>
+                <td class=>GStreamer streaming media framework runtime</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>gstreamer1-plugins-bad-free</td>
+                <td>1.16.2-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="6713406">6.4 MB</td>
+                <td>GStreamer streaming media framework "bad" plugins</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gstreamer1-plugins-base</td>
+                <td>1.16.2-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="6853717">6.5 MB</td>
+                <td class=>GStreamer streaming media framework base plugins</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>gstreamer1-plugins-good</td>
+                <td>1.16.2-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="10667588">10.2 MB</td>
+                <td>GStreamer plugins with good code and licensing</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gupnp</td>
+                <td>1.0.4-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="310684">303.4 kB</td>
+                <td class=>A framework for creating UPnP devices & control points</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gupnp-igd</td>
+                <td>0.2.5-8.fc32</td>
+                <td>x86_64</td>
+                <td data-order="71181">69.5 kB</td>
+                <td class=>Library to handle UPnP IGD port mapping</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gzip</td>
+                <td>1.10-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="362674">354.2 kB</td>
+                <td class=>The GNU data compression program</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>harfbuzz</td>
+                <td>2.6.4-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1734141">1.7 MB</td>
+                <td class=>Text shaping library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hwdata</td>
+                <td>0.333-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="7867092">7.5 MB</td>
+                <td class=>Hardware identification and configuration data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>iptables-libs</td>
+                <td>1.8.4-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2029600">1.9 MB</td>
+                <td class=>iptables libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>iso-codes</td>
+                <td>4.4-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="19132722">18.2 MB</td>
+                <td class=>ISO code lists and translations</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>json-c</td>
+                <td>0.13.1-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="73114">71.4 kB</td>
+                <td class=>JSON implementation in C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>keyutils-libs</td>
+                <td>1.6-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="55535">54.2 kB</td>
+                <td class=>Key utilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kmod-libs</td>
+                <td>27-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="138840">135.6 kB</td>
+                <td class=>Libraries to handle kernel module loading and unloading</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>krb5-libs</td>
+                <td>1.18-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2259819">2.2 MB</td>
+                <td class=>The non-admin shared libraries used by Kerberos 5</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lame-libs</td>
+                <td>3.100-8.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1256459">1.2 MB</td>
+                <td class=>LAME MP3 encoding library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>langpacks-core-font-en</td>
+                <td>3.0-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="351">351.0 B</td>
+                <td class=>English core font meta-package</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lcms2</td>
+                <td>2.9-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="397041">387.7 kB</td>
+                <td class=>Color Management Engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libICE</td>
+                <td>1.0.10-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="175094">171.0 kB</td>
+                <td class=>X.Org X11 ICE runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libSM</td>
+                <td>1.2.3-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="95619">93.4 kB</td>
+                <td class=>X.Org X11 SM runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libX11</td>
+                <td>1.6.9-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1351840">1.3 MB</td>
+                <td class=>Core X11 protocol client library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libX11-common</td>
+                <td>1.6.9-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1339608">1.3 MB</td>
+                <td class=>Common data for libX11</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libX11-xcb</td>
+                <td>1.6.9-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="15456">15.1 kB</td>
+                <td class=>XCB interop for libX11</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXau</td>
+                <td>1.0.9-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="65212">63.7 kB</td>
+                <td class=>Sample Authorization Protocol for X</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXdamage</td>
+                <td>1.1.5-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="37111">36.2 kB</td>
+                <td class=>X Damage extension library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXext</td>
+                <td>1.3.4-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="96070">93.8 kB</td>
+                <td class=>X.Org X11 libXext runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXfixes</td>
+                <td>5.0.3-11.fc32</td>
+                <td>x86_64</td>
+                <td data-order="36007">35.2 kB</td>
+                <td class=>X Fixes library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXft</td>
+                <td>2.3.3-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="140632">137.3 kB</td>
+                <td class=>X.Org X11 libXft runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXi</td>
+                <td>1.7.10-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="75043">73.3 kB</td>
+                <td class=>X.Org X11 libXi runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXrender</td>
+                <td>0.9.10-11.fc32</td>
+                <td>x86_64</td>
+                <td data-order="51867">50.7 kB</td>
+                <td class=>X.Org X11 libXrender runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXtst</td>
+                <td>1.2.3-11.fc32</td>
+                <td>x86_64</td>
+                <td data-order="39002">38.1 kB</td>
+                <td class=>X.Org X11 libXtst runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXv</td>
+                <td>1.0.11-11.fc32</td>
+                <td>x86_64</td>
+                <td data-order="30943">30.2 kB</td>
+                <td class=>X.Org X11 libXv runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXxf86vm</td>
+                <td>1.1.4-13.fc32</td>
+                <td>x86_64</td>
+                <td data-order="26216">25.6 kB</td>
+                <td class=>X.Org X11 libXxf86vm runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libacl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="41712">40.7 kB</td>
+                <td class=>Dynamic library for access control list support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libargon2</td>
+                <td>20171227-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="55463">54.2 kB</td>
+                <td class=>The password-hashing library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libasyncns</td>
+                <td>0.8-18.fc32</td>
+                <td>x86_64</td>
+                <td data-order="61178">59.7 kB</td>
+                <td class=>Asynchronous Name Service Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libattr</td>
+                <td>2.4.48-8.fc32</td>
+                <td>x86_64</td>
+                <td data-order="29682">29.0 kB</td>
+                <td class=>Dynamic library for extended attribute support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libavc1394</td>
+                <td>0.5.4-12.fc32</td>
+                <td>x86_64</td>
+                <td data-order="151051">147.5 kB</td>
+                <td class=>Audio/Video Control library for IEEE-1394 devices</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libblkid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="344161">336.1 kB</td>
+                <td class=>Block device ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libbrotli</td>
+                <td>1.0.7-10.fc32</td>
+                <td>x86_64</td>
+                <td data-order="772732">754.6 kB</td>
+                <td class=>Library for brotli lossless compression algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap</td>
+                <td>2.26-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="148914">145.4 kB</td>
+                <td class=>Library for getting and setting POSIX.1e capabilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap-ng</td>
+                <td>0.7.10-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="55710">54.4 kB</td>
+                <td class=>An alternate posix capabilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcom_err</td>
+                <td>1.45.5-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="70065">68.4 kB</td>
+                <td class=>Common error description library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdatrie</td>
+                <td>0.2.9-11.fc32</td>
+                <td>x86_64</td>
+                <td data-order="64319">62.8 kB</td>
+                <td class=>Implementation of Double-Array structure for representing trie</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdb</td>
+                <td>5.3.28-40.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1935816">1.8 MB</td>
+                <td class=>The Berkeley DB database library for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdrm</td>
+                <td>2.4.100-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="408230">398.7 kB</td>
+                <td class=>Direct Rendering Manager runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdv</td>
+                <td>1.0.0-31.fc32</td>
+                <td>x86_64</td>
+                <td data-order="184681">180.4 kB</td>
+                <td class=>Software decoder for DV format video</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdvdnav</td>
+                <td>6.0.1-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="127547">124.6 kB</td>
+                <td class=>A library for reading DVD video discs based on Ogle code</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdvdread</td>
+                <td>6.0.2-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="156856">153.2 kB</td>
+                <td class=>A library for reading DVD video discs based on Ogle code</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libfdisk</td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="484075">472.7 kB</td>
+                <td class=>Partitioning library for fdisk-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libffi</td>
+                <td>3.1-24.fc32</td>
+                <td>x86_64</td>
+                <td data-order="57692">56.3 kB</td>
+                <td class=>A portable foreign function interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcc</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="198888">194.2 kB</td>
+                <td class=>GCC version 10 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcrypt</td>
+                <td>1.8.5-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1278182">1.2 MB</td>
+                <td class=>A general-purpose cryptography library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libglvnd</td>
+                <td>1:1.3.1-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="802680">783.9 kB</td>
+                <td class=>The GL Vendor-Neutral Dispatch library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libglvnd-egl</td>
+                <td>1:1.3.1-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="89208">87.1 kB</td>
+                <td class=>EGL support for libglvnd</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libglvnd-gles</td>
+                <td>1:1.3.1-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="132096">129.0 kB</td>
+                <td class=>GLES support for libglvnd</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libglvnd-glx</td>
+                <td>1:1.3.1-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="709264">692.6 kB</td>
+                <td class=>GLX support for libglvnd</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgomp</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="390214">381.1 kB</td>
+                <td class=>GCC OpenMP v4.5 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgpg-error</td>
+                <td>1.36-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="775677">757.5 kB</td>
+                <td class=>Library for error values used by GnuPG components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgudev</td>
+                <td>232-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="88333">86.3 kB</td>
+                <td class=>GObject-based wrapper library for libudev</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libidn2</td>
+                <td>2.3.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="258126">252.1 kB</td>
+                <td class=>Library to support IDNA2008 internationalized domain names</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libiec61883</td>
+                <td>1.2.0-23.fc32</td>
+                <td>x86_64</td>
+                <td data-order="88217">86.1 kB</td>
+                <td class=>Streaming library for IEEE1394</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libjpeg-turbo</td>
+                <td>2.0.4-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="655586">640.2 kB</td>
+                <td class=>A MMX/SSE2/SIMD accelerated library for manipulating JPEG image files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmnl</td>
+                <td>1.0.4-11.fc32</td>
+                <td>x86_64</td>
+                <td data-order="56711">55.4 kB</td>
+                <td class=>A minimalistic Netlink library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmodman</td>
+                <td>2.0.1-21.fc32</td>
+                <td>x86_64</td>
+                <td data-order="68351">66.7 kB</td>
+                <td class=>A simple library for managing C++ modules (plug-ins)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmount</td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="423373">413.5 kB</td>
+                <td class=>Device mounting library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnetfilter_conntrack</td>
+                <td>1.0.7-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="151550">148.0 kB</td>
+                <td class=>Netfilter conntrack userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnfnetlink</td>
+                <td>1.0.1-17.fc32</td>
+                <td>x86_64</td>
+                <td data-order="56083">54.8 kB</td>
+                <td class=>Netfilter netlink userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnice</td>
+                <td>0.1.16-8.fc32</td>
+                <td>x86_64</td>
+                <td data-order="501326">489.6 kB</td>
+                <td class=>GLib ICE implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnsl2</td>
+                <td>1.2.0-6.20180605git4a062cf.fc32</td>
+                <td>x86_64</td>
+                <td data-order="130834">127.8 kB</td>
+                <td class=>Public client interface library for NIS(YP) and NIS+</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libogg</td>
+                <td>2:1.3.4-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="50478">49.3 kB</td>
+                <td class=>The Ogg bitstream file format library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpcap</td>
+                <td>14:1.9.1-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="396746">387.4 kB</td>
+                <td class=>A system-independent interface for user-level packet capture</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpciaccess</td>
+                <td>0.16-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="46201">45.1 kB</td>
+                <td class=>PCI access library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpng</td>
+                <td>2:1.6.37-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="231395">226.0 kB</td>
+                <td class=>A library of functions for manipulating PNG image format files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libproxy</td>
+                <td>0.4.15-17.fc32</td>
+                <td>x86_64</td>
+                <td data-order="181102">176.9 kB</td>
+                <td class=>A library handling all the details of proxy configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpsl</td>
+                <td>0.21.0-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="74812">73.1 kB</td>
+                <td class=>C library for the Publix Suffix List</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpwquality</td>
+                <td>1.4.2-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="407613">398.1 kB</td>
+                <td class=>A library for password generation and password quality checking</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libraw1394</td>
+                <td>2.1.2-11.fc32</td>
+                <td>x86_64</td>
+                <td data-order="169443">165.5 kB</td>
+                <td class=>Library providing low-level IEEE-1394 access - 2.1.2-</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>librsvg2</td>
+                <td>2.48.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="9989809">9.5 MB</td>
+                <td class=>An SVG library based on cairo</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsamplerate</td>
+                <td>0.1.9-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1640981">1.6 MB</td>
+                <td class=>Sample rate conversion library for audio data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libseccomp</td>
+                <td>2.4.2-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="359531">351.1 kB</td>
+                <td class=>Enhanced seccomp library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libselinux</td>
+                <td>3.0-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="177736">173.6 kB</td>
+                <td class=>SELinux library and simple utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsemanage</td>
+                <td>3.0-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="311778">304.5 kB</td>
+                <td class=>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsepol</td>
+                <td>3.0-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="765232">747.3 kB</td>
+                <td class=>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libshout</td>
+                <td>2.4.3-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="157098">153.4 kB</td>
+                <td class=>Icecast source streaming library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsigsegv</td>
+                <td>2.11-10.fc32</td>
+                <td>x86_64</td>
+                <td data-order="49690">48.5 kB</td>
+                <td class=>Library for handling page faults in user mode</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsmartcols</td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="269627">263.3 kB</td>
+                <td class=>Formatting library for ls-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsndfile</td>
+                <td>1.0.28-12.fc32</td>
+                <td>x86_64</td>
+                <td data-order="511353">499.4 kB</td>
+                <td class=>Library for reading and writing sound files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsoup</td>
+                <td>2.70.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1236556">1.2 MB</td>
+                <td class=>Soup, an HTTP library implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsrtp</td>
+                <td>2.3.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="128617">125.6 kB</td>
+                <td class=>An implementation of the Secure Real-time Transport Protocol (SRTP)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libstdc++</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2239605">2.1 MB</td>
+                <td class=>GNU Standard C++ Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtasn1</td>
+                <td>4.16.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="176204">172.1 kB</td>
+                <td class=>The ASN.1 library used in GNUTLS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtdb</td>
+                <td>1.4.3-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="104352">101.9 kB</td>
+                <td class=>The tdb library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libthai</td>
+                <td>0.1.28-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="783404">765.0 kB</td>
+                <td class=>Thai language support routines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtheora</td>
+                <td>1:1.1.1-25.fc32</td>
+                <td>x86_64</td>
+                <td data-order="627202">612.5 kB</td>
+                <td class=>Theora Video Compression Codec</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtirpc</td>
+                <td>1.2.5-1.rc2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="211790">206.8 kB</td>
+                <td class=>Transport Independent RPC Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtool-ltdl</td>
+                <td>2.4.6-33.fc32</td>
+                <td>x86_64</td>
+                <td data-order="72338">70.6 kB</td>
+                <td class=>Runtime libraries for GNU Libtool Dynamic Module Loader</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libunistring</td>
+                <td>0.9.10-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1643803">1.6 MB</td>
+                <td class=>GNU Unicode string library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libusbx</td>
+                <td>1.0.22-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="152929">149.3 kB</td>
+                <td class=>Library for accessing USB devices</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libutempter</td>
+                <td>1.1.6-18.fc32</td>
+                <td>x86_64</td>
+                <td data-order="59141">57.8 kB</td>
+                <td class=>A privileged helper for utmp/wtmp updates</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libuuid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="38927">38.0 kB</td>
+                <td class=>Universally unique ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libv4l</td>
+                <td>1.18.0-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="621256">606.7 kB</td>
+                <td class=>Collection of video4linux support libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libverto</td>
+                <td>0.3.0-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="32100">31.3 kB</td>
+                <td class=>Main loop abstraction library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libvisual</td>
+                <td>1:0.4.0-28.fc32</td>
+                <td>x86_64</td>
+                <td data-order="433792">423.6 kB</td>
+                <td class=>Abstraction library for audio visualisation plugins</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libvorbis</td>
+                <td>1:1.3.6-6.fc32</td>
+                <td>x86_64</td>
+                <td data-order="932111">910.3 kB</td>
+                <td class=>The Vorbis General Audio Compression Codec</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libvpx</td>
+                <td>1.8.2-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="3185626">3.0 MB</td>
+                <td class=>VP8/VP9 Video Codec SDK</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwayland-client</td>
+                <td>1.18.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="68564">67.0 kB</td>
+                <td class=>Wayland client library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwayland-cursor</td>
+                <td>1.18.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="42612">41.6 kB</td>
+                <td class=>Wayland cursor library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwayland-egl</td>
+                <td>1.18.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="16948">16.6 kB</td>
+                <td class=>Wayland egl library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwayland-server</td>
+                <td>1.18.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="93596">91.4 kB</td>
+                <td class=>Wayland server library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwebp</td>
+                <td>1.1.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="808786">789.8 kB</td>
+                <td class=>Library and tools for the WebP graphics format</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcb</td>
+                <td>1.13.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1124784">1.1 MB</td>
+                <td class=>A C binding to the X11 protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcrypt</td>
+                <td>4.4.15-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="277923">271.4 kB</td>
+                <td class=>Extended crypt library for descrypt, md5crypt, bcrypt, and others</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxml2</td>
+                <td>2.9.10-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1813444">1.7 MB</td>
+                <td class=>Library providing XML and HTML support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxshmfence</td>
+                <td>1.3-6.fc32</td>
+                <td>x86_64</td>
+                <td data-order="16216">15.8 kB</td>
+                <td class=>X11 shared memory fences</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lilv</td>
+                <td>0.24.6-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="228739">223.4 kB</td>
+                <td class=>An LV2 Resource Description Framework Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lz4-libs</td>
+                <td>1.9.1-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="133359">130.2 kB</td>
+                <td class=>Libaries for lz4</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mesa-libEGL</td>
+                <td>20.0.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="277849">271.3 kB</td>
+                <td class=>Mesa libEGL runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mesa-libGL</td>
+                <td>20.0.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="493720">482.1 kB</td>
+                <td class=>Mesa libGL runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mesa-libgbm</td>
+                <td>20.0.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="67136">65.6 kB</td>
+                <td class=>Mesa gbm runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mesa-libglapi</td>
+                <td>20.0.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="234776">229.3 kB</td>
+                <td class=>Mesa shared glapi</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mozjs60</td>
+                <td>60.9.0-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="23516472">22.4 MB</td>
+                <td class=>SpiderMonkey JavaScript library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mpfr</td>
+                <td>4.0.2-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="612019">597.7 kB</td>
+                <td class=>A C library for multiple-precision floating-point computations</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mpg123-libs</td>
+                <td>1.25.12-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="511274">499.3 kB</td>
+                <td class=>Real time MPEG 1.0/2.0/2.5 audio player/decoder for layers 1, 2 and 3</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>x86_64</td>
+                <td data-order="661781">646.3 kB</td>
+                <td class=>Ncurses support utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-base</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td class=>Descriptions of common terminals</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-libs</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>x86_64</td>
+                <td data-order="999600">976.2 kB</td>
+                <td class=>Ncurses libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nettle</td>
+                <td>3.5.1-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="591199">577.3 kB</td>
+                <td class=>A low-level cryptographic library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nspr</td>
+                <td>4.25.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="329406">321.7 kB</td>
+                <td class=>Netscape Portable Runtime</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss</td>
+                <td>3.50.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2003846">1.9 MB</td>
+                <td class=>Network Security Services</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-softokn</td>
+                <td>3.50.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1830854">1.7 MB</td>
+                <td class=>Network Security Services Softoken Module</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-softokn-freebl</td>
+                <td>3.50.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="606394">592.2 kB</td>
+                <td class=>Freebl library for the Network Security Services</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-sysinit</td>
+                <td>3.50.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="19164">18.7 kB</td>
+                <td class=>System NSS Initialization</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-util</td>
+                <td>3.50.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="226052">220.8 kB</td>
+                <td class=>Network Security Services Utilities Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssl-libs</td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="3792138">3.6 MB</td>
+                <td class=>A general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>opus</td>
+                <td>1.3.1-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="399248">389.9 kB</td>
+                <td class=>An audio codec for use in low-delay speech and audio communication</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>orc</td>
+                <td>0.4.31-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="625511">610.9 kB</td>
+                <td class=>The Oil Run-time Compiler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit</td>
+                <td>0.23.20-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1657764">1.6 MB</td>
+                <td class=>Library for loading and sharing PKCS#11 modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit-trust</td>
+                <td>0.23.20-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="487721">476.3 kB</td>
+                <td class=>System trust module from p11-kit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pam</td>
+                <td>1.3.1-23.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2856685">2.7 MB</td>
+                <td class=>An extensible library which provides authentication for applications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pango</td>
+                <td>1.44.7-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="859842">839.7 kB</td>
+                <td class=>System for layout and rendering of internationalized text</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcaudiolib</td>
+                <td>1.1-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="62767">61.3 kB</td>
+                <td class=>Portable C Audio Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre</td>
+                <td>8.44-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="542856">530.1 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre2</td>
+                <td>10.34-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="761301">743.5 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pixman</td>
+                <td>0.38.4-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="697639">681.3 kB</td>
+                <td class=>Pixel manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>polkit</td>
+                <td>0.116-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="442753">432.4 kB</td>
+                <td class=>An authorization framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>polkit-libs</td>
+                <td>0.116-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="208972">204.1 kB</td>
+                <td class=>Libraries for polkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>polkit-pkla-compat</td>
+                <td>0.1-16.fc32</td>
+                <td>x86_64</td>
+                <td data-order="97392">95.1 kB</td>
+                <td class=>Rules for polkit to add compatibility with pklocalauthority</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>publicsuffix-list-dafsa</td>
+                <td>20190417-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="64992">63.5 kB</td>
+                <td class=>Cross-vendor public domain suffix database in DAFSA form</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>pulseaudio</td>
+                <td>13.99.1-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="4171409">4.0 MB</td>
+                <td>Improved Linux Sound Server</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pulseaudio-libs</td>
+                <td>13.99.1-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="3716546">3.5 MB</td>
+                <td class=>Libraries for PulseAudio clients</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>pulseaudio-module-x11</td>
+                <td>13.99.1-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="78465">76.6 kB</td>
+                <td>X11 support for the PulseAudio sound server</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>pulseaudio-utils</td>
+                <td>13.99.1-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="196476">191.9 kB</td>
+                <td>PulseAudio sound server utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qrencode-libs</td>
+                <td>4.0.2-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="162033">158.2 kB</td>
+                <td class=>QR Code encoding library - Shared libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>readline</td>
+                <td>8.0-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="484027">472.7 kB</td>
+                <td class=>A library for editing typed command lines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rtkit</td>
+                <td>0.11-23.fc32</td>
+                <td>x86_64</td>
+                <td data-order="154281">150.7 kB</td>
+                <td class=>Realtime Policy and Watchdog Daemon</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sed</td>
+                <td>4.5-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="773014">754.9 kB</td>
+                <td class=>A GNU stream text editor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>serd</td>
+                <td>0.30.2-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="177660">173.5 kB</td>
+                <td class=>A lightweight C library for RDF syntax</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>setup</td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td class=>A set of system configuration and setup files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>shadow-utils</td>
+                <td>2:4.8-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="4179199">4.0 MB</td>
+                <td class=>Utilities for managing accounts and shadow password files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>shared-mime-info</td>
+                <td>1.15-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2506996">2.4 MB</td>
+                <td class=>Shared MIME information database</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sord</td>
+                <td>0.16.4-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="102735">100.3 kB</td>
+                <td class=>A lightweight Resource Description Framework (RDF) C library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>soundtouch</td>
+                <td>2.1.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="203937">199.2 kB</td>
+                <td class=>Audio Processing library for changing Tempo, Pitch and Playback Rates</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>soxr</td>
+                <td>0.1.3-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="247356">241.6 kB</td>
+                <td class=>The SoX Resampler library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>speex</td>
+                <td>1.2.0-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="124532">121.6 kB</td>
+                <td class=>A voice compression format (codec)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>speexdsp</td>
+                <td>1.2-0.17.rc3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="525972">513.6 kB</td>
+                <td class=>A voice compression format (DSP)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sqlite-libs</td>
+                <td>3.31.1-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1284476">1.2 MB</td>
+                <td class=>Shared library for the sqlite3 embeddable SQL database engine.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sratom</td>
+                <td>0.6.4-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="47651">46.5 kB</td>
+                <td class=>A C library for serializing LV2 plugins</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd</td>
+                <td>245.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="13776889">13.1 MB</td>
+                <td class=>System and Service Manager</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-libs</td>
+                <td>245.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1605630">1.5 MB</td>
+                <td class=>systemd libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-pam</td>
+                <td>245.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="892984">872.1 kB</td>
+                <td class=>systemd PAM module</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-rpm-macros</td>
+                <td>245.2-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="8040">7.9 kB</td>
+                <td class=>Macros that define paths and scriptlets related to systemd</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>taglib</td>
+                <td>1.11.1-12.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1158846">1.1 MB</td>
+                <td class=>Audio Meta-Data Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>twolame-libs</td>
+                <td>0.3.13-15.fc32</td>
+                <td>x86_64</td>
+                <td data-order="139808">136.5 kB</td>
+                <td class=>TwoLAME is an optimized MPEG Audio Layer 2 encoding library based on tooLAME</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>tzdata</td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td class=>Timezone data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>util-linux</td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="14121714">13.5 MB</td>
+                <td class=>A collection of basic system utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>wavpack</td>
+                <td>5.2.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="543654">530.9 kB</td>
+                <td class=>A completely open audiocodec</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>webrtc-audio-processing</td>
+                <td>0.3.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="765978">748.0 kB</td>
+                <td class=>Library for echo cancellation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xml-common</td>
+                <td>0.6.3-54.fc32</td>
+                <td>noarch</td>
+                <td data-order="80250">78.4 kB</td>
+                <td class=>Common XML catalog and DTD files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xz-libs</td>
+                <td>5.2.4-8.fc32</td>
+                <td>x86_64</td>
+                <td data-order="172951">168.9 kB</td>
+                <td class=>Libraries for decoding LZMA compression</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>zlib</td>
+                <td>1.2.11-21.fc32</td>
+                <td>x86_64</td>
+                <td data-order="203919">199.1 kB</td>
+                <td class=>The compression and decompression library</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-comps-multimedia--fedora-empty-base--repository-fedora-rawhide--x86_64.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

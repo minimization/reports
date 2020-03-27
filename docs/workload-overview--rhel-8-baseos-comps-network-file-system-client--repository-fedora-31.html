@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Comps group network-file-system-client for rhel-8-baseos
+            </li>
+        </ol>
+    </nav>
+
+    <h1>
+        Comps group network-file-system-client for rhel-8-baseos <small class="text-muted">workload</small>
+        <br>
+        <small class="text-muted">from</small>
+        <small><a href="">Fedora 31</a></small>
+    </h1>
+
+    <hr>
+
+    
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <dl>
+                        <dt>Configuration</dt>
+                        <dd><a href="config-workload--rhel-8-baseos-comps-network-file-system-client.html">rhel-8-baseos-comps-network-file-system-client.yaml</a></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class=""> Results overview</h5>
+            <ul class="nav nav-tabs card-header-tabs">
+                
+                <li class="nav-item">
+                    
+                    <a class="nav-link active" href="#">Fedora 31</a>
+                    
+                </li>
+                
+                <li class="nav-item">
+                    
+                    <a class="nav-link"
+                        href="workload-overview--rhel-8-baseos-comps-network-file-system-client--repository-fedora-rawhide.html">Fedora rawhide</a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+
+        <br>
+
+        <table class="card-body table table-bordered grid-table" style="text-align: center">
+            <thead>
+                <tr class="sort_control_row">
+                    <th></th>
+                    
+                    <th>armv7hl</th>
+                    
+                    <th>aarch64</th>
+                    
+                    <th>ppc64le</th>
+                    
+                    <th>s390x</th>
+                    
+                    <th>x86_64</th>
+                    
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <th class="align-middle">
+                        in Empty
+                    </th>
+                    
+
+                    
+
+                    <td class="align-middle">
+
+                        <p>
+                            
+                            183 packages
+                            <br>
+                            429.3 MB
+                            
+                            
+                        </p>
+                        <b><a
+                                href="workload--rhel-8-baseos-comps-network-file-system-client--fedora-empty-base--repository-fedora-31--armv7hl.html">Details</a></b>
+                    </td>
+                    
+                    
+
+                    
+
+                    <td class="align-middle">
+
+                        <p>
+                            
+                            184 packages
+                            <br>
+                            502.0 MB
+                            
+                            
+                        </p>
+                        <b><a
+                                href="workload--rhel-8-baseos-comps-network-file-system-client--fedora-empty-base--repository-fedora-31--aarch64.html">Details</a></b>
+                    </td>
+                    
+                    
+
+                    
+
+                    <td class="align-middle">
+
+                        <p>
+                            
+                            185 packages
+                            <br>
+                            532.1 MB
+                            
+                            
+                        </p>
+                        <b><a
+                                href="workload--rhel-8-baseos-comps-network-file-system-client--fedora-empty-base--repository-fedora-31--ppc64le.html">Details</a></b>
+                    </td>
+                    
+                    
+
+                    
+
+                    <td class="align-middle">
+
+                        <p>
+                            
+                            184 packages
+                            <br>
+                            451.2 MB
+                            
+                            
+                        </p>
+                        <b><a
+                                href="workload--rhel-8-baseos-comps-network-file-system-client--fedora-empty-base--repository-fedora-31--s390x.html">Details</a></b>
+                    </td>
+                    
+                    
+
+                    
+
+                    <td class="align-middle">
+
+                        <p>
+                            
+                            184 packages
+                            <br>
+                            455.9 MB
+                            
+                            
+                        </p>
+                        <b><a
+                                href="workload--rhel-8-baseos-comps-network-file-system-client--fedora-empty-base--repository-fedora-31--x86_64.html">Details</a></b>
+                    </td>
+                    
+                    
+                    <td class="align-middle">
+                        <a href="workload-cmp-arches--rhel-8-baseos-comps-network-file-system-client--fedora-empty-base--repository-fedora-31.html">Compare
+                            all<br>architectures</a>
+                        <p>(Empty)</p>
+                    </td>
+                </tr>
+                
+
+
+                <tr>
+                    <th></th>
+                    
+                    
+                    <td>
+                        <a href="workload-cmp-envs--rhel-8-baseos-comps-network-file-system-client--repository-fedora-31--armv7hl.html">Compare in
+                            all<br>environments</a>
+                        <p>(armv7hl)</p>
+                    </td>
+                    
+                    
+                    
+                    <td>
+                        <a href="workload-cmp-envs--rhel-8-baseos-comps-network-file-system-client--repository-fedora-31--aarch64.html">Compare in
+                            all<br>environments</a>
+                        <p>(aarch64)</p>
+                    </td>
+                    
+                    
+                    
+                    <td>
+                        <a href="workload-cmp-envs--rhel-8-baseos-comps-network-file-system-client--repository-fedora-31--ppc64le.html">Compare in
+                            all<br>environments</a>
+                        <p>(ppc64le)</p>
+                    </td>
+                    
+                    
+                    
+                    <td>
+                        <a href="workload-cmp-envs--rhel-8-baseos-comps-network-file-system-client--repository-fedora-31--s390x.html">Compare in
+                            all<br>environments</a>
+                        <p>(s390x)</p>
+                    </td>
+                    
+                    
+                    
+                    <td>
+                        <a href="workload-cmp-envs--rhel-8-baseos-comps-network-file-system-client--repository-fedora-31--x86_64.html">Compare in
+                            all<br>environments</a>
+                        <p>(x86_64)</p>
+                    </td>
+                    
+                    
+                    <td></td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get('chartjs-data--workload-overview--rhel-8-baseos-comps-network-file-system-client--repository-fedora-31.json')
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

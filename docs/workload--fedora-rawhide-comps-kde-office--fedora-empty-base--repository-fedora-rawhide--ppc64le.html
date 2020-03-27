@@ -1,0 +1,4548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-comps-kde-office--repository-fedora-rawhide.html">
+                    Comps group kde-office for fedora-rawhide
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group kde-office for fedora-rawhide in Empty from Fedora rawhide ppc64le
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group kde-office for fedora-rawhide <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> <a href="">Empty</a> </small>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora rawhide</a> </small>
+        <small class="text-muted"> for </small>
+        <small> ppc64le</small>
+    </h1>
+
+    <hr>
+
+    
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <dl>
+                        <dt>Configuration</dt>
+                        <dd><a href="config-workload--fedora-rawhide-comps-kde-office.html">fedora-rawhide-comps-kde-office.yaml</a></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>accounts-qml-module</td>
+                <td>0.7-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="366960">358.4 kB</td>
+                <td class=>QML bindings for libaccounts-qt + libsignon-qt</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>acl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="328276">320.6 kB</td>
+                <td class=>Access control list utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adobe-mappings-cmap</td>
+                <td>20171205-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="13746679">13.1 MB</td>
+                <td class=>CMap resources for Adobe's character collections</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adobe-mappings-cmap-deprecated</td>
+                <td>20171205-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="596942">583.0 kB</td>
+                <td class=>Deprecated CMap resources for Adobe's character collections</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adobe-mappings-pdf</td>
+                <td>20180407-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="4398414">4.2 MB</td>
+                <td class=>PDF mapping resources from Adobe</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>alsa-lib</td>
+                <td>1.2.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1926927">1.8 MB</td>
+                <td class=>The Advanced Linux Sound Architecture (ALSA) library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>alternatives</td>
+                <td>1.11-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="92646">90.5 kB</td>
+                <td class=>A tool to maintain symbolic links determining default commands</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>audit-libs</td>
+                <td>3.0-0.18.20191104git1c2f876.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="429772">419.7 kB</td>
+                <td class=>Dynamic library for libaudit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>avahi-libs</td>
+                <td>0.7-23.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="232232">226.8 kB</td>
+                <td class=>Libraries for avahi run-time use</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>basesystem</td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The skeleton package which defines a simple Fedora system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bash</td>
+                <td>5.0.11-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="7994564">7.6 MB</td>
+                <td class=>The GNU Bourne Again shell</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>breeze-icon-theme</td>
+                <td>5.67.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="20283685">19.3 MB</td>
+                <td class=>Breeze icon theme</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bzip2-libs</td>
+                <td>1.0.8-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="139944">136.7 kB</td>
+                <td class=>Libraries for applications using bzip2</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ca-certificates</td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td class=>The Mozilla CA root certificate bundle</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>calligra-core</td>
+                <td>3.1.0-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="17130725">16.3 MB</td>
+                <td class=>Core support files for calligra</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>calligra-libs</td>
+                <td>3.1.0-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="33315792">31.8 MB</td>
+                <td class=>Runtime libraries for calligra</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>calligra-sheets</td>
+                <td>3.1.0-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1109867">1.1 MB</td>
+                <td>A fully-featured spreadsheet application</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>calligra-sheets-libs</td>
+                <td>3.1.0-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="14465728">13.8 MB</td>
+                <td class=>Runtime libraries for calligra-sheets</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>calligra-stage</td>
+                <td>3.1.0-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="9707451">9.3 MB</td>
+                <td>A full-featured presentation program</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>calligra-stage-libs</td>
+                <td>3.1.0-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="6202120">5.9 MB</td>
+                <td class=>Runtime libraries for calligra-stage</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>calligra-words</td>
+                <td>3.1.0-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="366512">357.9 kB</td>
+                <td>An intuitive word processor application with desktop publishing features</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>calligra-words-libs</td>
+                <td>3.1.0-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="6335600">6.0 MB</td>
+                <td class=>Runtime libraries for calligra-words</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>chmlib</td>
+                <td>0.40-22.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="519623">507.4 kB</td>
+                <td class=>Library for dealing with ITSS/CHM format files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>color-filesystem</td>
+                <td>1-24.fc32</td>
+                <td>noarch</td>
+                <td data-order="151">151.0 B</td>
+                <td class=>Color filesystem layout</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils</td>
+                <td>8.31-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="10745360">10.2 MB</td>
+                <td class=>A set of basic GNU tools commonly used in shell scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils-common</td>
+                <td>8.31-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="10349258">9.9 MB</td>
+                <td class=>coreutils common optional components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cracklib</td>
+                <td>2.9.6-22.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="433149">423.0 kB</td>
+                <td class=>A password-checking library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>crypto-policies</td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td class=>System-wide crypto policies</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cryptsetup-libs</td>
+                <td>2.3.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2167607">2.1 MB</td>
+                <td class=>Cryptsetup shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cups-libs</td>
+                <td>1:2.3.1-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1010310">986.6 kB</td>
+                <td class=>CUPS printing system - libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>curl</td>
+                <td>7.69.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="751293">733.7 kB</td>
+                <td class=>A utility for getting files from remote servers (FTP, HTTP, and others)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cyrus-sasl-lib</td>
+                <td>2.1.27-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="993882">970.6 kB</td>
+                <td class=>Shared libraries needed by applications which use Cyrus SASL</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>D-BUS message bus</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-broker</td>
+                <td>22-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="565937">552.7 kB</td>
+                <td class=>Linux D-Bus Message Broker</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-common</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="11481">11.2 kB</td>
+                <td class=>D-BUS message bus configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-libs</td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="564304">551.1 kB</td>
+                <td class=>Libraries for accessing D-BUS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbusmenu-qt5</td>
+                <td>0.9.3-0.22.20160218.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="296326">289.4 kB</td>
+                <td class=>A Qt implementation of the DBusMenu protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dejavu-sans-fonts</td>
+                <td>2.37-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="5930693">5.7 MB</td>
+                <td class=>DejaVu Sans, a variable-width sans-serif font family</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>device-mapper</td>
+                <td>1.02.167-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="444204">433.8 kB</td>
+                <td class=>Device mapper utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>device-mapper-libs</td>
+                <td>1.02.167-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="521735">509.5 kB</td>
+                <td class=>Device-mapper shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>djvulibre-libs</td>
+                <td>3.5.27-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2277307">2.2 MB</td>
+                <td class=>Library files for DjVuLibre</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>docbook-dtds</td>
+                <td>1.0-75.fc32</td>
+                <td>noarch</td>
+                <td data-order="8665282">8.3 MB</td>
+                <td class=>SGML and XML document type definitions for DocBook</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>docbook-style-xsl</td>
+                <td>1.79.2-11.fc32</td>
+                <td>noarch</td>
+                <td data-order="16311851">15.6 MB</td>
+                <td class=>Norman Walsh's XSL stylesheets for DocBook XML</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ebook-tools-libs</td>
+                <td>0.2.2-16.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="136512">133.3 kB</td>
+                <td class=>Libraries for ebook-tools</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-default-yama-scope</td>
+                <td>0.178-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td class=>Default yama attach scope sysctl setting</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-libelf</td>
+                <td>0.178-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="952707">930.4 kB</td>
+                <td class=>Library to read and write ELF files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-libs</td>
+                <td>0.178-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="962031">939.5 kB</td>
+                <td class=>Libraries to handle compiled objects</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>emacs-filesystem</td>
+                <td>1:26.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Emacs filesystem layout</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>exiv2-libs</td>
+                <td>0.27.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3586968">3.4 MB</td>
+                <td class=>Exif and Iptc metadata manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>expat</td>
+                <td>2.2.8-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="380995">372.1 kB</td>
+                <td class=>An XML parser library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-gpg-keys</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td class=>Fedora RPM keys</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release-common</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-repos</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td class=>Fedora package repositories</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>filesystem</td>
+                <td>3.14-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The basic directory layout for a Linux system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>flac-libs</td>
+                <td>1.3.3-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="616532">602.1 kB</td>
+                <td class=>Libraries for the Free Lossless Audio Codec</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fontconfig</td>
+                <td>2.13.92-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1442110">1.4 MB</td>
+                <td class=>Font configuration and customization library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fonts-filesystem</td>
+                <td>2.0.3-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Directories used by font packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>freetype</td>
+                <td>2.10.1-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1094426">1.0 MB</td>
+                <td class=>A free and portable font rendering engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gawk</td>
+                <td>5.0.1-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3931092">3.7 MB</td>
+                <td class=>The GNU version of the AWK text processing utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdbm-libs</td>
+                <td>1:1.18.1-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="239608">234.0 kB</td>
+                <td class=>Libraries files for gdbm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>giflib</td>
+                <td>5.2.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="132668">129.6 kB</td>
+                <td class=>A library and utilities for processing GIFs</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glib2</td>
+                <td>2.64.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="14532458">13.9 MB</td>
+                <td class=>A library of handy utility functions</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc</td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="29737912">28.4 MB</td>
+                <td class=>The GNU libc libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-all-langpacks</td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="222208346">211.9 MB</td>
+                <td class=>All language packs for glibc.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-common</td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="8617731">8.2 MB</td>
+                <td class=>Common binaries and locale data for glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glx-utils</td>
+                <td>8.4.0-6.20181118git1830dcb.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="280142">273.6 kB</td>
+                <td class=>GLX utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gmp</td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="801884">783.1 kB</td>
+                <td class=>A GNU arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gnupg2</td>
+                <td>2.2.19-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="12363460">11.8 MB</td>
+                <td class=>Utility for secure communication and data storage</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gnutls</td>
+                <td>3.6.12-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3323854">3.2 MB</td>
+                <td class=>A TLS protocol implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>google-droid-sans-fonts</td>
+                <td>20200215-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="6557507">6.3 MB</td>
+                <td class=>Droid Sans, a humanist sans-serif font family</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gpgme</td>
+                <td>1.13.1-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="741647">724.3 kB</td>
+                <td class=>GnuPG Made Easy - high level crypto API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gpgmepp</td>
+                <td>1.13.1-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="598839">584.8 kB</td>
+                <td class=>C++ bindings/wrapper for GPGME</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>graphite2</td>
+                <td>1.3.13-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="346785">338.7 kB</td>
+                <td class=>Font rendering capabilities for complex non-Roman writing systems</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>grep</td>
+                <td>3.3-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="901906">880.8 kB</td>
+                <td class=>Pattern matching utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gsl</td>
+                <td>2.6-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4386225">4.2 MB</td>
+                <td class=>The GNU Scientific Library for numerical analysis</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gsm</td>
+                <td>1.0.18-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="77685">75.9 kB</td>
+                <td class=>Shared libraries for GSM speech compressor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gstreamer1</td>
+                <td>1.16.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5757125">5.5 MB</td>
+                <td class=>GStreamer streaming media framework runtime</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gzip</td>
+                <td>1.10-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="399010">389.7 kB</td>
+                <td class=>The GNU data compression program</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>harfbuzz</td>
+                <td>2.6.4-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2129693">2.0 MB</td>
+                <td class=>Text shaping library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hicolor-icon-theme</td>
+                <td>0.17-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="73932">72.2 kB</td>
+                <td class=>Basic requirement for icon themes</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hunspell</td>
+                <td>1.7.0-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="931670">909.8 kB</td>
+                <td class=>A spell checker and morphological analyzer library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hunspell-en-US</td>
+                <td>0.20140811.1-16.fc32</td>
+                <td>noarch</td>
+                <td data-order="556761">543.7 kB</td>
+                <td class=>US English hunspell dictionaries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ilmbase</td>
+                <td>2.3.0-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="823759">804.5 kB</td>
+                <td class=>Abstraction/convenience libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>iptables-libs</td>
+                <td>1.8.4-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="7726112">7.4 MB</td>
+                <td class=>iptables libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jbig2dec-libs</td>
+                <td>0.17-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="241293">235.6 kB</td>
+                <td class=>A decoder implementation of the JBIG2 image compression format</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jbigkit-libs</td>
+                <td>2.1-18.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="185661">181.3 kB</td>
+                <td class=>JBIG1 lossless image compression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>json-c</td>
+                <td>0.13.1-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="138162">134.9 kB</td>
+                <td class=>JSON implementation in C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kaccounts-integration</td>
+                <td>19.12.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="449232">438.7 kB</td>
+                <td class=>Small system to administer web accounts across the KDE desktop</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kde-filesystem</td>
+                <td>4-63.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3982">3.9 kB</td>
+                <td class=>KDE filesystem layout</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kde-settings</td>
+                <td>32.0-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="74341">72.6 kB</td>
+                <td class=>Config files for kde</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kdegraphics-mobipocket</td>
+                <td>19.12.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="169000">165.0 kB</td>
+                <td class=>A collection of plugins to handle mobipocket files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kdiagram</td>
+                <td>2.6.1-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2465143">2.4 MB</td>
+                <td class=>Powerful libraries (KChart, KGantt) for creating business diagrams</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>keyutils-libs</td>
+                <td>1.6-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="100247">97.9 kB</td>
+                <td class=>Key utilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-attica</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="957809">935.4 kB</td>
+                <td class=>KDE Frameworks Tier 1 Addon with Open Collaboration Services API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-filesystem</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Filesystem for KDE Frameworks 5</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kactivities</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="684904">668.9 kB</td>
+                <td class=>A KDE Frameworks 5 Tier 3 to organize user work into separate activities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-karchive</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="381381">372.4 kB</td>
+                <td class=>KDE Frameworks 5 Tier 1 addon with archive functions</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kauth</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="520573">508.4 kB</td>
+                <td class=>KDE Frameworks 5 Tier 2 integration module to perform actions as privileged user</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kbookmarks</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="729193">712.1 kB</td>
+                <td class=>KDE Frameworks 5 Tier 3 addon for bookmarks manipulation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kcmutils</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1361748">1.3 MB</td>
+                <td class=>KDE Frameworks 5 Tier 3 addon with extra API to write KConfigModules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kcodecs</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="704474">688.0 kB</td>
+                <td class=>KDE Frameworks 5 Tier 1 addon with string manipulation methods</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kcompletion</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="470128">459.1 kB</td>
+                <td class=>KDE Frameworks 5 Tier 2 addon with auto completion widgets and classes</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kconfig-core</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1503047">1.4 MB</td>
+                <td class=>Non-GUI part of KConfig framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kconfig-gui</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="202560">197.8 kB</td>
+                <td class=>GUI part of KConfig framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kconfigwidgets</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1500430">1.4 MB</td>
+                <td class=>KDE Frameworks 5 Tier 3 addon for creating configuration dialogs</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kcoreaddons</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1588094">1.5 MB</td>
+                <td class=>KDE Frameworks 5 Tier 1 addon with various classes on top of QtCore</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kcrash</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="96872">94.6 kB</td>
+                <td class=>KDE Frameworks 5 Tier 2 addon for handling application crashes</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kdbusaddons</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="282848">276.2 kB</td>
+                <td class=>KDE Frameworks 5 Tier 1 addon with various classes on top of QtDBus</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kdeclarative</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1634439">1.6 MB</td>
+                <td class=>KDE Frameworks 5 Tier 3 addon for Qt declarative</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kded</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="195585">191.0 kB</td>
+                <td class=>KDE Frameworks 5 Tier 3 addon with extensible daemon for system-level services</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kdelibs4support</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="13341693">12.7 MB</td>
+                <td class=>KDE Frameworks 5 Tier 4 module with porting aid from KDELibs 4</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kdelibs4support-libs</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3801208">3.6 MB</td>
+                <td class=>Runtime libraries for kf5-kdelibs4support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kdoctools</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2544469">2.4 MB</td>
+                <td class=>KDE Frameworks 5 Tier 2 addon for generating documentation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kglobalaccel</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="174523">170.4 kB</td>
+                <td class=>KDE Frameworks 5 Tier 3 integration module for global shortcuts</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kglobalaccel-libs</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="478576">467.4 kB</td>
+                <td class=>Runtime libraries for kf5-kglobalaccel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kguiaddons</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="251973">246.1 kB</td>
+                <td class=>KDE Frameworks 5 Tier 1 addon with various classes on top of QtGui</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-khtml</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="13408966">12.8 MB</td>
+                <td class=>KDE Frameworks 5 Tier 4 solution with KHTML, a HTML rendering engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-ki18n</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="16702852">15.9 MB</td>
+                <td class=>KDE Frameworks 5 Tier 1 addon for localization</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kiconthemes</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="690111">673.9 kB</td>
+                <td class=>KDE Frameworks 5 Tier 3 integration module with icon themes</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kinit</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="966533">943.9 kB</td>
+                <td class=>KDE Frameworks 5 tier 3 solution for process launching</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kio-core</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3164447">3.0 MB</td>
+                <td class=>Core components of the KIO Framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kio-core-libs</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1929784">1.8 MB</td>
+                <td class=>Runtime libraries for KIO Core</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kio-doc</td>
+                <td>5.67.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="13554929">12.9 MB</td>
+                <td class=>Documentation files for kf5-kio</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kio-file-widgets</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1200784">1.1 MB</td>
+                <td class=>Widgets for file-handling for KIO Framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kio-ntlm</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69152">67.5 kB</td>
+                <td class=>NTLM support for KIO Framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kio-widgets</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1455262">1.4 MB</td>
+                <td class=>Widgets for KIO Framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kio-widgets-libs</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1668400">1.6 MB</td>
+                <td class=>Runtime libraries for KIO Widgets library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kitemviews</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="469760">458.8 kB</td>
+                <td class=>KDE Frameworks 5 Tier 1 addon with item views</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kjobwidgets</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="391382">382.2 kB</td>
+                <td class=>KDE Frameworks 5 Tier 2 addon for KJobs</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kjs</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1391535">1.3 MB</td>
+                <td class=>KDE Frameworks 5 Tier 3 functional module with JavaScript interpreter</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-knotifications</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="532625">520.1 kB</td>
+                <td class=>KDE Frameworks 5 Tier 2 solution with abstraction for system notifications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-knotifyconfig</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="397643">388.3 kB</td>
+                <td class=>KDE Frameworks 5 Tier 3 module for KNotify configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kpackage</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="897979">876.9 kB</td>
+                <td class=>KDE Frameworks 5 Tier 2 library to load and install packages as plugins</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kparts</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="767325">749.3 kB</td>
+                <td class=>KDE Frameworks 5 Tier 3 solution for KParts</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kpty</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="196457">191.9 kB</td>
+                <td class=>KDE Frameworks 5 Tier 2 module providing Pty abstraction</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kservice</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1222244">1.2 MB</td>
+                <td class=>KDE Frameworks 5 Tier 3 solution for advanced plugin and service introspection</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-ktextwidgets</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1466689">1.4 MB</td>
+                <td class=>KDE Frameworks 5 Tier 3 addon with advanced text editing widgets</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kwallet</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1801989">1.7 MB</td>
+                <td class=>KDE Frameworks 5 Tier 3 solution for password management</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kwallet-libs</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="404440">395.0 kB</td>
+                <td class=>KWallet framework libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kwidgetsaddons</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="7021552">6.7 MB</td>
+                <td class=>KDE Frameworks 5 Tier 1 addon with various classes on top of QtWidgets</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kwindowsystem</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="712470">695.8 kB</td>
+                <td class=>KDE Frameworks 5 Tier 1 integration module with classes for windows management</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-kxmlgui</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3212112">3.1 MB</td>
+                <td class=>KDE Frameworks 5 Tier 3 solution for user-configurable main windows</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-libkexiv2</td>
+                <td>19.12.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="550504">537.6 kB</td>
+                <td class=>A wrapper around Exiv2 library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-purpose</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2242869">2.1 MB</td>
+                <td class=>Framework for providing abstractions to get the developer's purposes fulfilled</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-solid</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2143736">2.0 MB</td>
+                <td class=>KDE Frameworks 5 Tier 1 integration module that provides hardware information</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-sonnet-core</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="677037">661.2 kB</td>
+                <td class=>Non-gui part of the Sonnet framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-sonnet-ui</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="917792">896.3 kB</td>
+                <td class=>GUI part of the Sonnet framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kf5-threadweaver</td>
+                <td>5.67.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="300492">293.4 kB</td>
+                <td class=>KDE Frameworks 5 Tier 1 addon for advanced thread management</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kmod-libs</td>
+                <td>27-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="229064">223.7 kB</td>
+                <td class=>Libraries to handle kernel module loading and unloading</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>krb5-libs</td>
+                <td>1.18-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2916483">2.8 MB</td>
+                <td class=>The non-admin shared libraries used by Kerberos 5</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>langpacks-core-font-en</td>
+                <td>3.0-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="351">351.0 B</td>
+                <td class=>English core font meta-package</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lcms2</td>
+                <td>2.9-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="548169">535.3 kB</td>
+                <td class=>Color Management Engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libICE</td>
+                <td>1.0.10-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="203126">198.4 kB</td>
+                <td class=>X.Org X11 ICE runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libSM</td>
+                <td>1.2.3-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="123667">120.8 kB</td>
+                <td class=>X.Org X11 SM runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libX11</td>
+                <td>1.6.9-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1669776">1.6 MB</td>
+                <td class=>Core X11 protocol client library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libX11-common</td>
+                <td>1.6.9-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1339608">1.3 MB</td>
+                <td class=>Common data for libX11</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libX11-xcb</td>
+                <td>1.6.9-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="68352">66.8 kB</td>
+                <td class=>XCB interop for libX11</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXau</td>
+                <td>1.0.9-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="113548">110.9 kB</td>
+                <td class=>Sample Authorization Protocol for X</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXcursor</td>
+                <td>1.2.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="70897">69.2 kB</td>
+                <td class=>Cursor management library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXdamage</td>
+                <td>1.1.5-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="90055">87.9 kB</td>
+                <td class=>X Damage extension library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXext</td>
+                <td>1.3.4-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="148574">145.1 kB</td>
+                <td class=>X.Org X11 libXext runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXfixes</td>
+                <td>5.0.3-11.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="72231">70.5 kB</td>
+                <td class=>X Fixes library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXi</td>
+                <td>1.7.10-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="139883">136.6 kB</td>
+                <td class=>X.Org X11 libXi runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXinerama</td>
+                <td>1.1.4-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="72663">71.0 kB</td>
+                <td class=>X.Org X11 libXinerama runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXmu</td>
+                <td>1.1.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="318744">311.3 kB</td>
+                <td class=>X.Org X11 libXmu/libXmuu runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXrandr</td>
+                <td>1.5.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="73410">71.7 kB</td>
+                <td class=>X.Org X11 libXrandr runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXrender</td>
+                <td>0.9.10-11.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="71699">70.0 kB</td>
+                <td class=>X.Org X11 libXrender runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXt</td>
+                <td>1.2.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="620039">605.5 kB</td>
+                <td class=>X.Org X11 libXt runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXtst</td>
+                <td>1.2.3-11.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="75250">73.5 kB</td>
+                <td class=>X.Org X11 libXtst runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXxf86vm</td>
+                <td>1.1.4-13.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="71040">69.4 kB</td>
+                <td class=>X.Org X11 libXxf86vm runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libaccounts-glib</td>
+                <td>1.23-8.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="413619">403.9 kB</td>
+                <td class=>Accounts framework for Linux and POSIX based platforms</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libaccounts-qt5</td>
+                <td>1.16-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="228258">222.9 kB</td>
+                <td class=>Accounts framework Qt5 bindings</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libacl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69808">68.2 kB</td>
+                <td class=>Dynamic library for access control list support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libarchive</td>
+                <td>3.4.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1257057">1.2 MB</td>
+                <td class=>A library for handling streaming archive formats</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libargon2</td>
+                <td>20171227-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="87655">85.6 kB</td>
+                <td class=>The password-hashing library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libassuan</td>
+                <td>2.5.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="219888">214.7 kB</td>
+                <td class=>GnuPG IPC library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libasyncns</td>
+                <td>0.8-18.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="101770">99.4 kB</td>
+                <td class=>Asynchronous Name Service Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libattr</td>
+                <td>2.4.48-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69898">68.3 kB</td>
+                <td class=>Dynamic library for extended attribute support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libblkid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="470745">459.7 kB</td>
+                <td class=>Block device ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libbrotli</td>
+                <td>1.0.7-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="865108">844.8 kB</td>
+                <td class=>Library for brotli lossless compression algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcanberra</td>
+                <td>0.30-22.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="614383">600.0 kB</td>
+                <td class=>Portable Sound Event Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap</td>
+                <td>2.26-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="443354">433.0 kB</td>
+                <td class=>Library for getting and setting POSIX.1e capabilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap-ng</td>
+                <td>0.7.10-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="96046">93.8 kB</td>
+                <td class=>An alternate posix capabilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcom_err</td>
+                <td>1.45.5-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="114449">111.8 kB</td>
+                <td class=>Common error description library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcurl</td>
+                <td>7.69.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="736112">718.9 kB</td>
+                <td class=>A library for getting files from web servers</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdb</td>
+                <td>5.3.28-40.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2283760">2.2 MB</td>
+                <td class=>The Berkeley DB database library for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdb-utils</td>
+                <td>5.3.28-40.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1143839">1.1 MB</td>
+                <td class=>Command line tools for managing Berkeley DB databases</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdrm</td>
+                <td>2.4.100-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="422206">412.3 kB</td>
+                <td class=>Direct Rendering Manager runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libepoxy</td>
+                <td>1.5.4-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1704179">1.6 MB</td>
+                <td class=>epoxy runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libetonyek</td>
+                <td>0.1.9-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4126989">3.9 MB</td>
+                <td class=>A library for import of Apple iWork documents</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libevdev</td>
+                <td>1.8.901-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="137030">133.8 kB</td>
+                <td class=>Kernel Evdev Device Wrapper Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libfdisk</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="635211">620.3 kB</td>
+                <td class=>Partitioning library for fdisk-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libffi</td>
+                <td>3.1-24.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="86020">84.0 kB</td>
+                <td class=>A portable foreign function interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libfontenc</td>
+                <td>1.1.3-12.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="101229">98.9 kB</td>
+                <td class=>X.Org X11 libfontenc runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcc</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="226688">221.4 kB</td>
+                <td class=>GCC version 10 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcrypt</td>
+                <td>1.8.5-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1163326">1.1 MB</td>
+                <td class=>A general-purpose cryptography library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libglvnd</td>
+                <td>1:1.3.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1198688">1.1 MB</td>
+                <td class=>The GL Vendor-Neutral Dispatch library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libglvnd-egl</td>
+                <td>1:1.3.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="137896">134.7 kB</td>
+                <td class=>EGL support for libglvnd</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libglvnd-glx</td>
+                <td>1:1.3.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1072136">1.0 MB</td>
+                <td class=>GLX support for libglvnd</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgpg-error</td>
+                <td>1.36-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="864677">844.4 kB</td>
+                <td class=>Library for error values used by GnuPG components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgs</td>
+                <td>9.50-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="20586739">19.6 MB</td>
+                <td class=>Library providing Ghostcript's core functionality</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgudev</td>
+                <td>232-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="104029">101.6 kB</td>
+                <td class=>GObject-based wrapper library for libudev</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libicu</td>
+                <td>65.1-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="35164558">33.5 MB</td>
+                <td class=>International Components for Unicode - libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libidn</td>
+                <td>1.35-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="787690">769.2 kB</td>
+                <td class=>Internationalized Domain Name support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libidn2</td>
+                <td>2.3.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="322958">315.4 kB</td>
+                <td class=>Library to support IDNA2008 internationalized domain names</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libijs</td>
+                <td>0.35-11.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="104088">101.6 kB</td>
+                <td class=>IJS Raster Image Transport Protocol Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libinput</td>
+                <td>1.15.4-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="997344">974.0 kB</td>
+                <td class=>Input device library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libjpeg-turbo</td>
+                <td>2.0.4-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="642378">627.3 kB</td>
+                <td class=>A MMX/SSE2/SIMD accelerated library for manipulating JPEG image files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libksba</td>
+                <td>1.3.5-11.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="431615">421.5 kB</td>
+                <td class=>CMS and X.509 library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>liblangtag</td>
+                <td>0.6.3-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="414763">405.0 kB</td>
+                <td class=>An interface library to access tags for identifying languages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>liblangtag-data</td>
+                <td>0.6.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="2025945">1.9 MB</td>
+                <td class=>liblangtag data files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmarkdown</td>
+                <td>2.2.4-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="141419">138.1 kB</td>
+                <td class=>A fast implementation of the Markdown language in C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmcpp</td>
+                <td>2.7.2-25.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="212180">207.2 kB</td>
+                <td class=>Alternative C/C++ preprocessor (library build)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmetalink</td>
+                <td>0.1.3-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="136896">133.7 kB</td>
+                <td class=>Metalink library written in C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmnl</td>
+                <td>1.0.4-11.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="96919">94.6 kB</td>
+                <td class=>A minimalistic Netlink library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmodman</td>
+                <td>2.0.1-21.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="96679">94.4 kB</td>
+                <td class=>A simple library for managing C++ modules (plug-ins)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmount</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="627709">613.0 kB</td>
+                <td class=>Device mounting library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnetfilter_conntrack</td>
+                <td>1.0.7-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="220710">215.5 kB</td>
+                <td class=>Netfilter conntrack userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnfnetlink</td>
+                <td>1.0.1-17.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="88043">86.0 kB</td>
+                <td class=>Netfilter netlink userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnghttp2</td>
+                <td>1.40.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="270284">263.9 kB</td>
+                <td class=>A library implementing the HTTP/2 protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnsl2</td>
+                <td>1.2.0-6.20180605git4a062cf.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="162978">159.2 kB</td>
+                <td class=>Public client interface library for NIS(YP) and NIS+</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libodfgen</td>
+                <td>0.1.7-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1376923">1.3 MB</td>
+                <td class=>An ODF generator library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libogg</td>
+                <td>2:1.3.4-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="78422">76.6 kB</td>
+                <td class=>The Ogg bitstream file format library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpaper</td>
+                <td>1.1.24-26.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="199191">194.5 kB</td>
+                <td class=>Library and tools for handling papersize</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpcap</td>
+                <td>14:1.9.1-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="473826">462.7 kB</td>
+                <td class=>A system-independent interface for user-level packet capture</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="136973">133.8 kB</td>
+                <td class=>Backend library for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpng</td>
+                <td>2:1.6.37-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="341627">333.6 kB</td>
+                <td class=>A library of functions for manipulating PNG image format files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libproxy</td>
+                <td>0.4.15-17.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="229726">224.3 kB</td>
+                <td class=>A library handling all the details of proxy configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpsl</td>
+                <td>0.21.0-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="135476">132.3 kB</td>
+                <td class=>C library for the Publix Suffix List</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpwquality</td>
+                <td>1.4.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="603117">589.0 kB</td>
+                <td class=>A library for password generation and password quality checking</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>librevenge</td>
+                <td>0.0.4-17.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1051527">1.0 MB</td>
+                <td class=>A base library for writing document import filters</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>librtas</td>
+                <td>2.0.2-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="251369">245.5 kB</td>
+                <td class=>Libraries to provide access to RTAS calls and RTAS events</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libseccomp</td>
+                <td>2.4.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="440923">430.6 kB</td>
+                <td class=>Enhanced seccomp library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libselinux</td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="271360">265.0 kB</td>
+                <td class=>SELinux library and simple utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsemanage</td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="438234">428.0 kB</td>
+                <td class=>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsepol</td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1031512">1007.3 kB</td>
+                <td class=>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsigsegv</td>
+                <td>2.11-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="98218">95.9 kB</td>
+                <td class=>Library for handling page faults in user mode</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsmartcols</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="363427">354.9 kB</td>
+                <td class=>Formatting library for ls-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsndfile</td>
+                <td>1.0.28-12.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="703537">687.0 kB</td>
+                <td class=>Library for reading and writing sound files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libspectre</td>
+                <td>0.2.8-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="160327">156.6 kB</td>
+                <td class=>A library for rendering PostScript(TM) documents</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libspnav</td>
+                <td>0.2.3-11.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="71527">69.9 kB</td>
+                <td class=>Open source alternative to 3DConnextion drivers</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libssh</td>
+                <td>0.9.3-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="659371">643.9 kB</td>
+                <td class=>A library implementing the SSH protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libssh-config</td>
+                <td>0.9.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="357">357.0 B</td>
+                <td class=>Configuration files for libssh</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libstdc++</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2921269">2.8 MB</td>
+                <td class=>GNU Standard C++ Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtasn1</td>
+                <td>4.16.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="224836">219.6 kB</td>
+                <td class=>The ASN.1 library used in GNUTLS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtdb</td>
+                <td>1.4.3-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="136592">133.4 kB</td>
+                <td class=>The tdb library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtiff</td>
+                <td>4.1.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="672849">657.1 kB</td>
+                <td class=>Library of functions for manipulating TIFF format image files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtirpc</td>
+                <td>1.2.5-1.rc2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="346494">338.4 kB</td>
+                <td class=>Transport Independent RPC Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtool-ltdl</td>
+                <td>2.4.6-33.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="96394">94.1 kB</td>
+                <td class=>Runtime libraries for GNU Libtool Dynamic Module Loader</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libunistring</td>
+                <td>0.9.10-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1696387">1.6 MB</td>
+                <td class=>GNU Unicode string library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libusbx</td>
+                <td>1.0.22-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="176945">172.8 kB</td>
+                <td class=>Library for accessing USB devices</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libutempter</td>
+                <td>1.1.6-18.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="165941">162.1 kB</td>
+                <td class=>A privileged helper for utmp/wtmp updates</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libuuid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="70943">69.3 kB</td>
+                <td class=>Universally unique ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libverto</td>
+                <td>0.3.0-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="72308">70.6 kB</td>
+                <td class=>Main loop abstraction library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libvisio</td>
+                <td>0.1.7-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="961987">939.4 kB</td>
+                <td class=>A library for import of Microsoft Visio diagrams</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libvorbis</td>
+                <td>1:1.3.6-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1062463">1.0 MB</td>
+                <td class=>The Vorbis General Audio Compression Codec</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwacom</td>
+                <td>1.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="143759">140.4 kB</td>
+                <td class=>Tablet Information Client Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwacom-data</td>
+                <td>1.2-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="488721">477.3 kB</td>
+                <td class=>Tablet Information Client Library Data Files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwayland-client</td>
+                <td>1.18.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="137684">134.5 kB</td>
+                <td class=>Wayland client library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwayland-server</td>
+                <td>1.18.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="138204">135.0 kB</td>
+                <td class=>Wayland server library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwpd</td>
+                <td>0.10.3-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1015174">991.4 kB</td>
+                <td class=>A library for import of WordPerfect documents</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwpg</td>
+                <td>0.3.3-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="252202">246.3 kB</td>
+                <td class=>A library for import of WordPerfect Graphics images</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwps</td>
+                <td>0.4.10-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3112622">3.0 MB</td>
+                <td class=>A library for import of Microsoft Works documents</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcb</td>
+                <td>1.13.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2251544">2.1 MB</td>
+                <td class=>A C binding to the X11 protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcrypt</td>
+                <td>4.4.15-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="334659">326.8 kB</td>
+                <td class=>Extended crypt library for descrypt, md5crypt, bcrypt, and others</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxkbcommon</td>
+                <td>0.10.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="343846">335.8 kB</td>
+                <td class=>X.Org X11 XKB parsing library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxkbcommon-x11</td>
+                <td>0.10.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69072">67.5 kB</td>
+                <td class=>X.Org X11 XKB keymap creation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxml2</td>
+                <td>2.9.10-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2391116">2.3 MB</td>
+                <td class=>Library providing XML and HTML support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxshmfence</td>
+                <td>1.3-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="68688">67.1 kB</td>
+                <td class=>X11 shared memory fences</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxslt</td>
+                <td>1.1.34-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="970620">947.9 kB</td>
+                <td class=>Library providing the Gnome XSLT engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libzip</td>
+                <td>1.6.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="204532">199.7 kB</td>
+                <td class=>C library for reading, creating, and modifying zip archives</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libzstd</td>
+                <td>1.4.4-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="816293">797.2 kB</td>
+                <td class=>Zstd shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lua-libs</td>
+                <td>5.3.5-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="336944">329.0 kB</td>
+                <td class=>Libraries for lua</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lyx-fonts</td>
+                <td>2.3.4.2-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="273774">267.4 kB</td>
+                <td class=>Lyx/MathML fonts</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lz4-libs</td>
+                <td>1.9.1-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="202223">197.5 kB</td>
+                <td class=>Libaries for lz4</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mcpp</td>
+                <td>2.7.2-25.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="114234">111.6 kB</td>
+                <td class=>Alternative C/C++ preprocessor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mesa-libEGL</td>
+                <td>20.0.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="404121">394.6 kB</td>
+                <td class=>Mesa libEGL runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mesa-libGL</td>
+                <td>20.0.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="677240">661.4 kB</td>
+                <td class=>Mesa libGL runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mesa-libgbm</td>
+                <td>20.0.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="136032">132.8 kB</td>
+                <td class=>Mesa gbm runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mesa-libglapi</td>
+                <td>20.0.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="340688">332.7 kB</td>
+                <td class=>Mesa shared glapi</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mpfr</td>
+                <td>4.0.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="803867">785.0 kB</td>
+                <td class=>A C library for multiple-precision floating-point computations</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mtdev</td>
+                <td>1.1.5-16.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="70693">69.0 kB</td>
+                <td class=>Multitouch Protocol Translation Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="995669">972.3 kB</td>
+                <td class=>Ncurses support utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-base</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td class=>Descriptions of common terminals</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-libs</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1563232">1.5 MB</td>
+                <td class=>Ncurses libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nettle</td>
+                <td>3.5.1-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="741095">723.7 kB</td>
+                <td class=>A low-level cryptographic library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>npth</td>
+                <td>1.6-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="95653">93.4 kB</td>
+                <td class=>The New GNU Portable Threads library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nspr</td>
+                <td>4.25.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="561478">548.3 kB</td>
+                <td class=>Netscape Portable Runtime</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss</td>
+                <td>3.50.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2561918">2.4 MB</td>
+                <td class=>Network Security Services</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-softokn</td>
+                <td>3.50.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2518886">2.4 MB</td>
+                <td class=>Network Security Services Softoken Module</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-softokn-freebl</td>
+                <td>3.50.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="691130">674.9 kB</td>
+                <td class=>Freebl library for the Network Security Services</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-sysinit</td>
+                <td>3.50.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="72436">70.7 kB</td>
+                <td class=>System NSS Initialization</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nss-util</td>
+                <td>3.50.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="287540">280.8 kB</td>
+                <td class=>Network Security Services Utilities Library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>okular</td>
+                <td>19.12.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="6538275">6.2 MB</td>
+                <td>A document viewer</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>okular-libs</td>
+                <td>19.12.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1405496">1.3 MB</td>
+                <td class=>Runtime files for okular</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>okular-part</td>
+                <td>19.12.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="9621066">9.2 MB</td>
+                <td class=>Okular kpart plugin</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openjpeg2</td>
+                <td>2.3.1-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="482950">471.6 kB</td>
+                <td class=>C-Library for JPEG 2000</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openldap</td>
+                <td>2.4.47-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1389966">1.3 MB</td>
+                <td class=>LDAP support libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssl-libs</td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4641010">4.4 MB</td>
+                <td class=>A general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit</td>
+                <td>0.23.20-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2165292">2.1 MB</td>
+                <td class=>Library for loading and sharing PKCS#11 modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit-trust</td>
+                <td>0.23.20-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="609553">595.3 kB</td>
+                <td class=>System trust module from p11-kit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pam</td>
+                <td>1.3.1-23.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5695373">5.4 MB</td>
+                <td class=>An extensible library which provides authentication for applications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre</td>
+                <td>8.44-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="697376">681.0 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre2</td>
+                <td>10.34-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="850333">830.4 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre2-utf16</td>
+                <td>10.34-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="715917">699.1 kB</td>
+                <td class=>UTF-16 variant of PCRE2</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Carp</td>
+                <td>1.50-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="47889">46.8 kB</td>
+                <td class=>Alternative warn and die for modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Errno</td>
+                <td>1.30-451.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="9524">9.3 kB</td>
+                <td class=>System errno constants</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Exporter</td>
+                <td>5.74-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="55358">54.1 kB</td>
+                <td class=>Implements default import method for modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-File-Path</td>
+                <td>2.16-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="65104">63.6 kB</td>
+                <td class=>Create or remove directory trees</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-IO</td>
+                <td>1.40-451.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="190544">186.1 kB</td>
+                <td class=>Perl input/output modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-PathTools</td>
+                <td>3.78-441.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="231413">226.0 kB</td>
+                <td class=>PathTools Perl module (Cwd, File::Spec)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Scalar-List-Utils</td>
+                <td>3:1.54-440.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="146214">142.8 kB</td>
+                <td class=>A selection of general-utility scalar and list subroutines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Socket</td>
+                <td>4:2.029-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="144200">140.8 kB</td>
+                <td class=>Networking constants and support functions</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Text-Tabs+Wrap</td>
+                <td>2013.0523-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="24827">24.2 kB</td>
+                <td class=>Expand tabs and do simple line wrapping</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Unicode-Normalize</td>
+                <td>1.26-440.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="699039">682.7 kB</td>
+                <td class=>Unicode Normalization Forms</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-constant</td>
+                <td>1.33-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="27104">26.5 kB</td>
+                <td class=>Perl pragma to declare constants</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-interpreter</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="15879230">15.1 MB</td>
+                <td class=>Standalone executable Perl interpreter</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-libs</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="8298519">7.9 MB</td>
+                <td class=>The libraries for the perl run-time</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-macros</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5643">5.5 kB</td>
+                <td class=>Macros for rpmbuild</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-parent</td>
+                <td>1:0.238-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="9535">9.3 kB</td>
+                <td class=>Establish an ISA relationship with base classes at compile time</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-threads</td>
+                <td>1:2.22-442.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="138844">135.6 kB</td>
+                <td class=>Perl interpreter-based threads</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-threads-shared</td>
+                <td>1.60-441.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="106447">104.0 kB</td>
+                <td class=>Perl extension for sharing data structures between threads</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>phonon-qt5</td>
+                <td>4.11.1-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1351641">1.3 MB</td>
+                <td class=>Multimedia framework api for Qt5</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="101197">98.8 kB</td>
+                <td class=>Package compiler and linker metadata toolkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-m4</td>
+                <td>1.6.3-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td class=>m4 macros for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-pkg-config</td>
+                <td>1.6.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="464">464.0 B</td>
+                <td class=>pkgconf shim to provide /usr/bin/pkg-config</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>polkit-libs</td>
+                <td>0.116-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="293636">286.8 kB</td>
+                <td class=>Libraries for polkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>polkit-qt5-1</td>
+                <td>0.113.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="302539">295.4 kB</td>
+                <td class=>PolicyKit Qt5 bindings</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>poppler</td>
+                <td>0.84.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4033777">3.8 MB</td>
+                <td class=>PDF rendering library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>poppler-data</td>
+                <td>0.4.9-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="12058151">11.5 MB</td>
+                <td class=>Encoding files for use with poppler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>poppler-qt5</td>
+                <td>0.84.0-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="735360">718.1 kB</td>
+                <td class=>Qt5 wrapper for poppler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>popt</td>
+                <td>1.16-19.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="142694">139.3 kB</td>
+                <td class=>C library for parsing command line parameters</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>publicsuffix-list-dafsa</td>
+                <td>20190417-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="64992">63.5 kB</td>
+                <td class=>Cross-vendor public domain suffix database in DAFSA form</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pulseaudio-libs</td>
+                <td>13.99.1-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3997466">3.8 MB</td>
+                <td class=>Libraries for PulseAudio clients</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pulseaudio-libs-glib2</td>
+                <td>13.99.1-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69296">67.7 kB</td>
+                <td class=>GLIB 2.x bindings for PulseAudio clients</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qca-qt5</td>
+                <td>2.2.1-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1960474">1.9 MB</td>
+                <td class=>Qt5 Cryptographic Architecture</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qrencode-libs</td>
+                <td>4.0.2-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="235009">229.5 kB</td>
+                <td class=>QR Code encoding library - Shared libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt-settings</td>
+                <td>32.0-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1164">1.1 kB</td>
+                <td class=>Configuration files for Qt</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt5-qtbase</td>
+                <td>5.13.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="12159279">11.6 MB</td>
+                <td class=>Qt5 - QtBase components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt5-qtbase-common</td>
+                <td>5.13.2-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="76">76.0 B</td>
+                <td class=>Common files for Qt5</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt5-qtbase-gui</td>
+                <td>5.13.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="24477211">23.3 MB</td>
+                <td class=>Qt5 GUI-related libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt5-qtdeclarative</td>
+                <td>5.13.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="16934909">16.2 MB</td>
+                <td class=>Qt5 - QtDeclarative component</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt5-qtspeech</td>
+                <td>5.13.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="117021">114.3 kB</td>
+                <td class=>Qt5 - Speech component</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt5-qtsvg</td>
+                <td>5.13.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="800028">781.3 kB</td>
+                <td class=>Qt5 - Support for rendering and displaying SVG</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt5-qttools-common</td>
+                <td>5.13.2-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="7651">7.5 kB</td>
+                <td class=>Common files for qt5-qttools</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt5-qttools-libs-designer</td>
+                <td>5.13.2-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="6017776">5.7 MB</td>
+                <td class=>Qt5 Designer runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt5-qtx11extras</td>
+                <td>5.13.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="166405">162.5 kB</td>
+                <td class=>Qt5 - X11 support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>readline</td>
+                <td>8.0-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="638563">623.6 kB</td>
+                <td class=>A library for editing typed command lines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>redhat-menus</td>
+                <td>12.0.2-17.fc32</td>
+                <td>noarch</td>
+                <td data-order="688500">672.4 kB</td>
+                <td class=>Configuration and data files for the desktop menus</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rpm</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>ppc64le</td>
+                <td data-order="3183621">3.0 MB</td>
+                <td class=>The RPM package management system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rpm-libs</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>ppc64le</td>
+                <td data-order="1082328">1.0 MB</td>
+                <td class=>Libraries for manipulating RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sed</td>
+                <td>4.5-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="850374">830.4 kB</td>
+                <td class=>A GNU stream text editor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>setup</td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td class=>A set of system configuration and setup files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sgml-common</td>
+                <td>0.6.3-54.fc32</td>
+                <td>noarch</td>
+                <td data-order="172085">168.1 kB</td>
+                <td class=>Common SGML catalog and DTD files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>shadow-utils</td>
+                <td>2:4.8-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5369487">5.1 MB</td>
+                <td class=>Utilities for managing accounts and shadow password files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>signon</td>
+                <td>8.60-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1726970">1.6 MB</td>
+                <td class=>Accounts framework for Linux and POSIX based platforms</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>signon-plugin-oauth2</td>
+                <td>0.22-12.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="332136">324.4 kB</td>
+                <td class=>OAuth2 plugin for the Accounts framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sound-theme-freedesktop</td>
+                <td>0.8-13.fc32</td>
+                <td>noarch</td>
+                <td data-order="471310">460.3 kB</td>
+                <td class=>freedesktop.org sound theme</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sqlite-libs</td>
+                <td>3.31.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1621004">1.5 MB</td>
+                <td class=>Shared library for the sqlite3 embeddable SQL database engine.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd</td>
+                <td>245.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="18309489">17.5 MB</td>
+                <td class=>System and Service Manager</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-libs</td>
+                <td>245.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2170926">2.1 MB</td>
+                <td class=>systemd libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-pam</td>
+                <td>245.2-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1141632">1.1 MB</td>
+                <td class=>systemd PAM module</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-rpm-macros</td>
+                <td>245.2-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="8040">7.9 kB</td>
+                <td class=>Macros that define paths and scriptlets related to systemd</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>tzdata</td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td class=>Timezone data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-bookman-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1428518">1.4 MB</td>
+                <td class=>URW Bookman font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-c059-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1460348">1.4 MB</td>
+                <td class=>C059 font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-d050000l-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="86572">84.5 kB</td>
+                <td class=>D050000L font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="5478">5.3 kB</td>
+                <td class=>Core Font Set containing 35 freely distributable fonts from (URW)++</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-fonts-common</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="38217">37.3 kB</td>
+                <td class=>Common files of the (URW)++ Level 2 Core Font Set</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-gothic-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1216672">1.2 MB</td>
+                <td class=>URW Gothic font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-nimbus-mono-ps-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1099749">1.0 MB</td>
+                <td class=>Nimbus Mono PS font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-nimbus-roman-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1429675">1.4 MB</td>
+                <td class=>Nimbus Roman font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-nimbus-sans-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="2469317">2.4 MB</td>
+                <td class=>Nimbus Sans font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-p052-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1557171">1.5 MB</td>
+                <td class=>P052 font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-standard-symbols-ps-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="45184">44.1 kB</td>
+                <td class=>Standard Symbols PS font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-z003-fonts</td>
+                <td>20170801-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="400088">390.7 kB</td>
+                <td class=>Z003 font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>util-linux</td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="18480593">17.6 MB</td>
+                <td class=>A collection of basic system utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xcb-util</td>
+                <td>0.4.0-14.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="71735">70.1 kB</td>
+                <td class=>Convenience libraries sitting on top of libxcb</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xcb-util-image</td>
+                <td>0.4.0-14.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="71581">69.9 kB</td>
+                <td class=>Port of Xlib's XImage and XShmImage functions on top of libxcb</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xcb-util-keysyms</td>
+                <td>0.4.0-12.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69977">68.3 kB</td>
+                <td class=>Standard X key constants and keycodes conversion on top of libxcb</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xcb-util-renderutil</td>
+                <td>0.3.9-15.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="74026">72.3 kB</td>
+                <td class=>Convenience functions for the Render extension</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xcb-util-wm</td>
+                <td>0.4.1-17.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="140411">137.1 kB</td>
+                <td class=>Client and window-manager helper library on top of libxcb</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xdg-user-dirs</td>
+                <td>0.17-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="216862">211.8 kB</td>
+                <td class=>Handles user special directories</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xkeyboard-config</td>
+                <td>2.29-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="5725649">5.5 MB</td>
+                <td class=>X Keyboard Extension configuration data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xml-common</td>
+                <td>0.6.3-54.fc32</td>
+                <td>noarch</td>
+                <td data-order="80250">78.4 kB</td>
+                <td class=>Common XML catalog and DTD files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xorg-x11-font-utils</td>
+                <td>1:7.5-44.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="496610">485.0 kB</td>
+                <td class=>X.Org X11 font utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xorg-x11-server-utils</td>
+                <td>7.7-34.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1153381">1.1 MB</td>
+                <td class=>X.Org X11 X server utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xz-libs</td>
+                <td>5.2.4-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="270383">264.0 kB</td>
+                <td class=>Libraries for decoding LZMA compression</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>zlib</td>
+                <td>1.2.11-21.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="236287">230.7 kB</td>
+                <td class=>The compression and decompression library</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-comps-kde-office--fedora-empty-base--repository-fedora-rawhide--ppc64le.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

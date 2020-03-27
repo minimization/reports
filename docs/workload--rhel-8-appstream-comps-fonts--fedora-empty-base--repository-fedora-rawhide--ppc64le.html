@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--rhel-8-appstream-comps-fonts--repository-fedora-rawhide.html">
+                    Comps group fonts for rhel-8-appstream
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group fonts for rhel-8-appstream in Empty from Fedora rawhide ppc64le
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group fonts for rhel-8-appstream <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> <a href="">Empty</a> </small>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora rawhide</a> </small>
+        <small class="text-muted"> for </small>
+        <small> ppc64le</small>
+    </h1>
+
+    <hr>
+
+    
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <dl>
+                        <dt>Configuration</dt>
+                        <dd><a href="config-workload--rhel-8-appstream-comps-fonts.html">rhel-8-appstream-comps-fonts.yaml</a></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>abattis-cantarell-fonts</td>
+                <td>0.201-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="916469">895.0 kB</td>
+                <td>Humanist sans serif font</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fonts-filesystem</td>
+                <td>2.0.3-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Directories used by font packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gnu-free-fonts-common</td>
+                <td>20120503-22.fc32</td>
+                <td>noarch</td>
+                <td data-order="503741">491.9 kB</td>
+                <td class=>Common files for freefont (documentation…)</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>gnu-free-mono-fonts</td>
+                <td>20120503-22.fc32</td>
+                <td>noarch</td>
+                <td data-order="1005552">982.0 kB</td>
+                <td>GNU FreeFont Monospaced Font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>gnu-free-sans-fonts</td>
+                <td>20120503-22.fc32</td>
+                <td>noarch</td>
+                <td data-order="1805844">1.7 MB</td>
+                <td>GNU FreeFont Sans-Serif Font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>gnu-free-serif-fonts</td>
+                <td>20120503-22.fc32</td>
+                <td>noarch</td>
+                <td data-order="3984146">3.8 MB</td>
+                <td>GNU FreeFont Serif Font</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>google-noto-cjk-fonts-common</td>
+                <td>20190416-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="31595">30.9 kB</td>
+                <td class=>Common files for Noto CJK fonts</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>google-noto-fonts-common</td>
+                <td>20181223-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="16087">15.7 kB</td>
+                <td class=>Common files for Noto fonts</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>google-noto-sans-cjk-ttc-fonts</td>
+                <td>20190416-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="136611786">130.3 MB</td>
+                <td>Sans OTC font files for google-noto-cjk-fonts</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>google-noto-sans-lisu-fonts</td>
+                <td>20181223-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="13535">13.2 kB</td>
+                <td>Sans Lisu font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>google-noto-sans-mandaic-fonts</td>
+                <td>20181223-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="29729">29.0 kB</td>
+                <td>Sans Mandaic font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>google-noto-sans-meetei-mayek-fonts</td>
+                <td>20181223-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="16956">16.6 kB</td>
+                <td>Sans Meetei Mayek font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>google-noto-sans-sinhala-fonts</td>
+                <td>20181223-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="11478874">10.9 MB</td>
+                <td>Sans Sinhala font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>google-noto-sans-tagalog-fonts</td>
+                <td>20181223-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="7378">7.2 kB</td>
+                <td>Sans Tagalog font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>google-noto-sans-tai-tham-fonts</td>
+                <td>20181223-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="51800">50.6 kB</td>
+                <td>Sans Tai Tham font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>google-noto-sans-tai-viet-fonts</td>
+                <td>20181223-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="31688">30.9 kB</td>
+                <td>Sans Tai Viet font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>google-noto-serif-cjk-ttc-fonts</td>
+                <td>20190416-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="172120428">164.1 MB</td>
+                <td>Serif OTC font files for google-noto-cjk-fonts</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>jomolhari-fonts</td>
+                <td>0.003-28.fc32</td>
+                <td>noarch</td>
+                <td data-order="2295691">2.2 MB</td>
+                <td>Jomolhari a Bhutanese style font for Tibetan and Dzongkha</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>julietaula-montserrat-fonts</td>
+                <td>1:7.200-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="4212714">4.0 MB</td>
+                <td>Sans-serif typeface inspired from Montserrat area</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>khmeros-base-fonts</td>
+                <td>5.0-29.fc32</td>
+                <td>noarch</td>
+                <td data-order="733627">716.4 kB</td>
+                <td>Base KhmerOS font</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>khmeros-fonts-common</td>
+                <td>5.0-29.fc32</td>
+                <td>noarch</td>
+                <td data-order="826">826.0 B</td>
+                <td class=>Common files of khmeros-fonts</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lohit-assamese-fonts</td>
+                <td>2.91.5-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="145493">142.1 kB</td>
+                <td>Free Assamese font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lohit-bengali-fonts</td>
+                <td>2.91.5-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="145587">142.2 kB</td>
+                <td>Free Bengali script font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lohit-devanagari-fonts</td>
+                <td>2.95.4-10.fc32</td>
+                <td>noarch</td>
+                <td data-order="183394">179.1 kB</td>
+                <td>Free Devanagari Script Font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lohit-gujarati-fonts</td>
+                <td>2.92.4-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="84278">82.3 kB</td>
+                <td>Free Gujarati font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lohit-gurmukhi-fonts</td>
+                <td>2.91.2-10.fc32</td>
+                <td>noarch</td>
+                <td data-order="38171">37.3 kB</td>
+                <td>Free Gurmukhi truetype font for Punjabi language</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lohit-kannada-fonts</td>
+                <td>2.5.4-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="206924">202.1 kB</td>
+                <td>Free Kannada font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lohit-odia-fonts</td>
+                <td>2.91.2-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="96197">93.9 kB</td>
+                <td>Free truetype font for Odia language</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lohit-tamil-fonts</td>
+                <td>2.91.3-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="60593">59.2 kB</td>
+                <td>Free truetype font for Tamil language</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lohit-telugu-fonts</td>
+                <td>2.5.5-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="350991">342.8 kB</td>
+                <td>Free Telugu font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>paktype-naskh-basic-fonts</td>
+                <td>5.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="1238014">1.2 MB</td>
+                <td>Fonts for Arabic, Farsi, Urdu and Sindhi from PakType</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>paratype-pt-sans-fonts</td>
+                <td>20141121-10.fc32</td>
+                <td>noarch</td>
+                <td data-order="2596068">2.5 MB</td>
+                <td>A pan-Cyrillic typeface</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>sil-abyssinica-fonts</td>
+                <td>1.200-17.fc32</td>
+                <td>noarch</td>
+                <td data-order="1171767">1.1 MB</td>
+                <td>SIL Abyssinica fonts</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>sil-nuosu-fonts</td>
+                <td>2.1.1-18.fc32</td>
+                <td>noarch</td>
+                <td data-order="524957">512.7 kB</td>
+                <td>The Nuosu SIL Font</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>sil-padauk-fonts</td>
+                <td>3.003-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="1645500">1.6 MB</td>
+                <td>A font for Burmese and the Myanmar script</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>smc-meera-fonts</td>
+                <td>7.0.3-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="349394">341.2 kB</td>
+                <td>Open Type Fonts for Malayalam script</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>stix-fonts</td>
+                <td>2.0.2-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="2583532">2.5 MB</td>
+                <td>STIX, a scientific and engineering font family</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>thai-scalable-fonts-common</td>
+                <td>0.6.5-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="17450">17.0 kB</td>
+                <td class=>Common files of thai-scalable-fonts</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>thai-scalable-waree-fonts</td>
+                <td>0.6.5-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="392793">383.6 kB</td>
+                <td>Thai Waree fonts</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--rhel-8-appstream-comps-fonts--fedora-empty-base--repository-fedora-rawhide--ppc64le.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

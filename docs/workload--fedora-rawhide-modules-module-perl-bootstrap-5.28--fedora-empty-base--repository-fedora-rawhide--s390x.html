@@ -1,0 +1,3415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-modules-module-perl-bootstrap-5.28--repository-fedora-rawhide.html">
+                    Module perl-bootstrap:5.28 for fedora-rawhide-modules
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Module perl-bootstrap:5.28 for fedora-rawhide-modules in Empty from Fedora rawhide s390x
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Module perl-bootstrap:5.28 for fedora-rawhide-modules <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> <a href="">Empty</a> </small>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora rawhide</a> </small>
+        <small class="text-muted"> for </small>
+        <small> s390x</small>
+    </h1>
+
+    <hr>
+
+    
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <dl>
+                        <dt>Configuration</dt>
+                        <dd><a href="config-workload--fedora-rawhide-modules-module-perl-bootstrap-5.28.html">fedora-rawhide-modules-module-perl-bootstrap-5.28.yaml</a></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>alternatives</td>
+                <td>1.11-6.fc32</td>
+                <td>s390x</td>
+                <td data-order="59470">58.1 kB</td>
+                <td class=>A tool to maintain symbolic links determining default commands</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>annobin</td>
+                <td>9.06-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="192114">187.6 kB</td>
+                <td class=>Binary annotation plugin for GCC</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>audit-libs</td>
+                <td>3.0-0.18.20191104git1c2f876.fc32</td>
+                <td>s390x</td>
+                <td data-order="323300">315.7 kB</td>
+                <td class=>Dynamic library for libaudit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>basesystem</td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The skeleton package which defines a simple Fedora system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bash</td>
+                <td>5.0.11-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="7988290">7.6 MB</td>
+                <td class=>The GNU Bourne Again shell</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>binutils</td>
+                <td>2.34-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="29755525">28.4 MB</td>
+                <td class=>A GNU collection of binary utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>binutils-gold</td>
+                <td>2.34-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="6094856">5.8 MB</td>
+                <td class=>The GOLD linker, a faster alternative to the BFD linker</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bzip2-libs</td>
+                <td>1.0.8-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="82720">80.8 kB</td>
+                <td class=>Libraries for applications using bzip2</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ca-certificates</td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td class=>The Mozilla CA root certificate bundle</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils</td>
+                <td>8.31-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="7947816">7.6 MB</td>
+                <td class=>A set of basic GNU tools commonly used in shell scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils-common</td>
+                <td>8.31-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="10349258">9.9 MB</td>
+                <td class=>coreutils common optional components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cpp</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="22104254">21.1 MB</td>
+                <td class=>The C Preprocessor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>crypto-policies</td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td class=>System-wide crypto policies</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>curl</td>
+                <td>7.69.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="681341">665.4 kB</td>
+                <td class=>A utility for getting files from remote servers (FTP, HTTP, and others)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cyrus-sasl-lib</td>
+                <td>2.1.27-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="727610">710.6 kB</td>
+                <td class=>Shared libraries needed by applications which use Cyrus SASL</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dwz</td>
+                <td>0.13-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="295303">288.4 kB</td>
+                <td class=>DWARF optimization and duplicate removal tool</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>efi-srpm-macros</td>
+                <td>4-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="41111">40.1 kB</td>
+                <td class=>Common SRPM Macros for building EFI-related packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-libelf</td>
+                <td>0.178-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="932571">910.7 kB</td>
+                <td class=>Library to read and write ELF files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>expat</td>
+                <td>2.2.8-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="331787">324.0 kB</td>
+                <td class=>An XML parser library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-gpg-keys</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td class=>Fedora RPM keys</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release-common</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-repos</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td class=>Fedora package repositories</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>file</td>
+                <td>5.38-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="100304">98.0 kB</td>
+                <td class=>A utility for determining file types</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>file-libs</td>
+                <td>5.38-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="7205877">6.9 MB</td>
+                <td class=>Libraries for applications using libmagic</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>filesystem</td>
+                <td>3.14-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The basic directory layout for a Linux system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>findutils</td>
+                <td>1:4.7.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="1929747">1.8 MB</td>
+                <td class=>The GNU versions of find utilities (find and xargs)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fonts-srpm-macros</td>
+                <td>2.0.3-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="56491">55.2 kB</td>
+                <td class=>Source-stage rpm automation for fonts packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fpc-srpm-macros</td>
+                <td>1.3-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="144">144.0 B</td>
+                <td class=>RPM macros needed by packages built with Free Pascal Compiler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gawk</td>
+                <td>5.0.1-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="3132228">3.0 MB</td>
+                <td class=>The GNU version of the AWK text processing utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gc</td>
+                <td>8.0.4-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="292064">285.2 kB</td>
+                <td class=>A garbage collector for C and C++</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gcc</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="65445514">62.4 MB</td>
+                <td class=>Various compilers (C, C++, Objective-C, ...)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gcc-c++</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="24860442">23.7 MB</td>
+                <td class=>C++ support for GCC</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdbm-libs</td>
+                <td>1:1.18.1-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="121280">118.4 kB</td>
+                <td class=>Libraries files for gdbm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-srpm-macros</td>
+                <td>1.5.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="535">535.0 B</td>
+                <td class=>RPM macros for building Haskell source packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc</td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="15051098">14.4 MB</td>
+                <td class=>The GNU libc libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-all-langpacks</td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="222208346">211.9 MB</td>
+                <td class=>All language packs for glibc.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-common</td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="8138585">7.8 MB</td>
+                <td class=>Common binaries and locale data for glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-devel</td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1538419">1.5 MB</td>
+                <td class=>Object files for development using standard C libraries.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-headers</td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="2034654">1.9 MB</td>
+                <td class=>Header files for development using standard C libraries.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gmp</td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>s390x</td>
+                <td data-order="715572">698.8 kB</td>
+                <td class=>A GNU arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gnat-srpm-macros</td>
+                <td>4-11.fc32</td>
+                <td>noarch</td>
+                <td data-order="725">725.0 B</td>
+                <td class=>RPM macros needed when source packages that need GNAT are built</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>go-srpm-macros</td>
+                <td>3.0.8-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="60262">58.8 kB</td>
+                <td class=>Source-stage rpm automation for Go packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>grep</td>
+                <td>3.3-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="868610">848.3 kB</td>
+                <td class=>Pattern matching utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>groff-base</td>
+                <td>1.22.3-21.fc32</td>
+                <td>s390x</td>
+                <td data-order="4621587">4.4 MB</td>
+                <td class=>Parts of the groff formatting system required to display manual pages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>guile22</td>
+                <td>2.2.6-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="46276645">44.1 MB</td>
+                <td class=>A GNU implementation of Scheme for application extensibility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>isl</td>
+                <td>0.16.1-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="4074065">3.9 MB</td>
+                <td class=>Integer point manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kernel-headers</td>
+                <td>5.6.0-0.rc7.git0.1.fc32</td>
+                <td>s390x</td>
+                <td data-order="5146292">4.9 MB</td>
+                <td class=>Header files for the Linux kernel for use by glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>keyutils-libs</td>
+                <td>1.6-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="51143">49.9 kB</td>
+                <td class=>Key utilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>krb5-libs</td>
+                <td>1.18-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="2474131">2.4 MB</td>
+                <td class=>The non-admin shared libraries used by Kerberos 5</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libacl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="41296">40.3 kB</td>
+                <td class=>Dynamic library for access control list support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libarchive</td>
+                <td>3.4.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1107481">1.1 MB</td>
+                <td class=>A library for handling streaming archive formats</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libasan</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="1496320">1.4 MB</td>
+                <td class=>The Address Sanitizer runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libatomic</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="28560">27.9 kB</td>
+                <td class=>The GNU Atomic library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libattr</td>
+                <td>2.4.48-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="25178">24.6 kB</td>
+                <td class=>Dynamic library for extended attribute support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libbrotli</td>
+                <td>1.0.7-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="808436">789.5 kB</td>
+                <td class=>Library for brotli lossless compression algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap</td>
+                <td>2.26-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="122258">119.4 kB</td>
+                <td class=>Library for getting and setting POSIX.1e capabilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap-ng</td>
+                <td>0.7.10-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="50814">49.6 kB</td>
+                <td class=>An alternate posix capabilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcom_err</td>
+                <td>1.45.5-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="61385">59.9 kB</td>
+                <td class=>Common error description library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcurl</td>
+                <td>7.69.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="702192">685.7 kB</td>
+                <td class=>A library for getting files from web servers</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdb</td>
+                <td>5.3.28-40.fc32</td>
+                <td>s390x</td>
+                <td data-order="1995744">1.9 MB</td>
+                <td class=>The Berkeley DB database library for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdb-utils</td>
+                <td>5.3.28-40.fc32</td>
+                <td>s390x</td>
+                <td data-order="409407">399.8 kB</td>
+                <td class=>Command line tools for managing Berkeley DB databases</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libffi</td>
+                <td>3.1-24.fc32</td>
+                <td>s390x</td>
+                <td data-order="57380">56.0 kB</td>
+                <td class=>A portable foreign function interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcc</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="173032">169.0 kB</td>
+                <td class=>GCC version 10 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgomp</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="467430">456.5 kB</td>
+                <td class=>GCC OpenMP v4.5 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libidn2</td>
+                <td>2.3.0-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="257742">251.7 kB</td>
+                <td class=>Library to support IDNA2008 internationalized domain names</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmetalink</td>
+                <td>0.1.3-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="79856">78.0 kB</td>
+                <td class=>Metalink library written in C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmpc</td>
+                <td>1.1.0-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="130597">127.5 kB</td>
+                <td class=>C library for multiple precision complex arithmetic</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnghttp2</td>
+                <td>1.40.0-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="208700">203.8 kB</td>
+                <td class=>A library implementing the HTTP/2 protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnsl2</td>
+                <td>1.2.0-6.20180605git4a062cf.fc32</td>
+                <td>s390x</td>
+                <td data-order="130394">127.3 kB</td>
+                <td class=>Public client interface library for NIS(YP) and NIS+</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="71589">69.9 kB</td>
+                <td class=>Backend library for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpsl</td>
+                <td>0.21.0-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="70292">68.6 kB</td>
+                <td class=>C library for the Publix Suffix List</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libselinux</td>
+                <td>3.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="213984">209.0 kB</td>
+                <td class=>SELinux library and simple utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsepol</td>
+                <td>3.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="944296">922.2 kB</td>
+                <td class=>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsigsegv</td>
+                <td>2.11-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="45122">44.1 kB</td>
+                <td class=>Library for handling page faults in user mode</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libssh</td>
+                <td>0.9.3-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="593459">579.5 kB</td>
+                <td class=>A library implementing the SSH protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libssh-config</td>
+                <td>0.9.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="357">357.0 B</td>
+                <td class=>Configuration files for libssh</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libstdc++</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="2673989">2.6 MB</td>
+                <td class=>GNU Standard C++ Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libstdc++-devel</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="12132508">11.6 MB</td>
+                <td class=>Header files and libraries for C++ development</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtasn1</td>
+                <td>4.16.0-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="179812">175.6 kB</td>
+                <td class=>The ASN.1 library used in GNUTLS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtirpc</td>
+                <td>1.2.5-1.rc2.fc32</td>
+                <td>s390x</td>
+                <td data-order="223614">218.4 kB</td>
+                <td class=>Transport Independent RPC Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtool-ltdl</td>
+                <td>2.4.6-33.fc32</td>
+                <td>s390x</td>
+                <td data-order="76034">74.3 kB</td>
+                <td class=>Runtime libraries for GNU Libtool Dynamic Module Loader</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libubsan</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="493144">481.6 kB</td>
+                <td class=>The Undefined Behavior Sanitizer runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libunistring</td>
+                <td>0.9.10-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="1655419">1.6 MB</td>
+                <td class=>GNU Unicode string library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libuuid</td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="34447">33.6 kB</td>
+                <td class=>Universally unique ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libverto</td>
+                <td>0.3.0-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="27620">27.0 kB</td>
+                <td class=>Main loop abstraction library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcrypt</td>
+                <td>4.4.15-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="289699">282.9 kB</td>
+                <td class=>Extended crypt library for descrypt, md5crypt, bcrypt, and others</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcrypt-devel</td>
+                <td>4.4.15-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="30986">30.3 kB</td>
+                <td class=>Development files for libxcrypt</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxml2</td>
+                <td>2.9.10-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="2346892">2.2 MB</td>
+                <td class=>Library providing XML and HTML support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libzstd</td>
+                <td>1.4.4-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="860813">840.6 kB</td>
+                <td class=>Zstd shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lua-libs</td>
+                <td>5.3.5-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="426544">416.5 kB</td>
+                <td class=>Libraries for lua</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lz4-libs</td>
+                <td>1.9.1-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="145175">141.8 kB</td>
+                <td class=>Libaries for lz4</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>make</td>
+                <td>1:4.2.1-16.fc32</td>
+                <td>s390x</td>
+                <td data-order="1484488">1.4 MB</td>
+                <td class=>A GNU tool which simplifies the build process for users</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mpfr</td>
+                <td>4.0.2-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="651259">636.0 kB</td>
+                <td class=>A C library for multiple-precision floating-point computations</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>s390x</td>
+                <td data-order="650741">635.5 kB</td>
+                <td class=>Ncurses support utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-base</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td class=>Descriptions of common terminals</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-libs</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>s390x</td>
+                <td data-order="1089136">1.0 MB</td>
+                <td class=>Ncurses libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nim-srpm-macros</td>
+                <td>3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="1098">1.1 kB</td>
+                <td class=>RPM macros for building Nimble source packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ocaml-srpm-macros</td>
+                <td>6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="745">745.0 B</td>
+                <td class=>OCaml architecture macros</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openblas-srpm-macros</td>
+                <td>2-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="104">104.0 B</td>
+                <td class=>OpenBLAS architecture macros</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openldap</td>
+                <td>2.4.47-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="1152462">1.1 MB</td>
+                <td class=>LDAP support libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssl-libs</td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="3496794">3.3 MB</td>
+                <td class=>A general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit</td>
+                <td>0.23.20-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1832668">1.7 MB</td>
+                <td class=>Library for loading and sharing PKCS#11 modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit-trust</td>
+                <td>0.23.20-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="510761">498.8 kB</td>
+                <td class=>System trust module from p11-kit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre</td>
+                <td>8.44-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="335872">328.0 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre2</td>
+                <td>10.34-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="517277">505.2 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="0">0.0 B</td>
+                <td>Practical Extraction and Report Language</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Algorithm-Diff</td>
+                <td>1.1903-15.fc32</td>
+                <td>noarch</td>
+                <td data-order="110533">107.9 kB</td>
+                <td>Compute `intelligent' differences between two files/lists</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Archive-Tar</td>
+                <td>2.36-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="157468">153.8 kB</td>
+                <td>A module for Perl manipulation of .tar files</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Archive-Zip</td>
+                <td>1.67-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="298251">291.3 kB</td>
+                <td>Perl library for accessing Zip archives</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Attribute-Handlers</td>
+                <td>1.01-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="39367">38.4 kB</td>
+                <td class=>Simpler definition of attribute handlers</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-B-Debug</td>
+                <td>1.26-423.fc32</td>
+                <td>noarch</td>
+                <td data-order="42008">41.0 kB</td>
+                <td>Walk Perl syntax tree, print debug information about op-codes</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-CPAN</td>
+                <td>2.27-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="1917424">1.8 MB</td>
+                <td>Query, download and build perl modules from CPAN sites</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-CPAN-Meta</td>
+                <td>2.150010-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="610128">595.8 kB</td>
+                <td>Distribution metadata for a CPAN dist</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-CPAN-Meta-Requirements</td>
+                <td>2.140-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="70661">69.0 kB</td>
+                <td>Set of version requirements for a CPAN dist</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-CPAN-Meta-YAML</td>
+                <td>0.018-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="51720">50.5 kB</td>
+                <td>Read and write a subset of YAML for CPAN Meta files</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Capture-Tiny</td>
+                <td>0.48-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="71888">70.2 kB</td>
+                <td>Capture STDOUT and STDERR from Perl, XS or external programs</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Carp</td>
+                <td>1.50-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="47889">46.8 kB</td>
+                <td>Alternative warn and die for modules</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Compress-Bzip2</td>
+                <td>2.26-16.fc32</td>
+                <td>s390x</td>
+                <td data-order="153873">150.3 kB</td>
+                <td>Interface to Bzip2 compression library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Compress-Raw-Bzip2</td>
+                <td>2.093-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="63719">62.2 kB</td>
+                <td>Low-level interface to bzip2 compression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Compress-Raw-Lzma</td>
+                <td>2.093-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="118949">116.2 kB</td>
+                <td class=>Low-level interface to lzma compression library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Compress-Raw-Zlib</td>
+                <td>2.093-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="152086">148.5 kB</td>
+                <td>Low-level interface to the zlib compression library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Config-Perl-V</td>
+                <td>0.32-442.fc32</td>
+                <td>noarch</td>
+                <td data-order="24451">23.9 kB</td>
+                <td>Structured data retrieval of perl -V output</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-DB_File</td>
+                <td>1.853-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="189420">185.0 kB</td>
+                <td>Perl5 access to Berkeley DB version 1.x</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Data-Dumper</td>
+                <td>2.174-443.fc32</td>
+                <td>s390x</td>
+                <td data-order="111379">108.8 kB</td>
+                <td>Stringify perl data structures, suitable for printing and eval</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Data-OptList</td>
+                <td>0.110-12.fc32</td>
+                <td>noarch</td>
+                <td data-order="49890">48.7 kB</td>
+                <td>Parse and validate simple name/value option pairs</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Data-Section</td>
+                <td>0.200007-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="43062">42.1 kB</td>
+                <td>Read multiple hunks of data out of your DATA section</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Devel-PPPort</td>
+                <td>3.58-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="683537">667.5 kB</td>
+                <td>Perl Pollution Portability header generator</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Devel-Peek</td>
+                <td>1.28-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="45775">44.7 kB</td>
+                <td class=>A data debugging tool for the XS programmer</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Devel-SelfStubber</td>
+                <td>1.06-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="7874">7.7 kB</td>
+                <td class=>Generate stubs for a SelfLoading module</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Devel-Size</td>
+                <td>0.83-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="51053">49.9 kB</td>
+                <td>Perl extension for finding the memory usage of Perl variables</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Digest</td>
+                <td>1.17-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="26683">26.1 kB</td>
+                <td>Modules that calculate message digests</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Digest-MD5</td>
+                <td>2.55-440.fc32</td>
+                <td>s390x</td>
+                <td data-order="60230">58.8 kB</td>
+                <td>Perl interface to the MD5 algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Digest-SHA</td>
+                <td>1:6.02-442.fc32</td>
+                <td>s390x</td>
+                <td data-order="123290">120.4 kB</td>
+                <td>Perl extension for SHA-1/224/256/384/512</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Encode</td>
+                <td>4:3.02-441.fc32</td>
+                <td>s390x</td>
+                <td data-order="10035077">9.6 MB</td>
+                <td>Character encodings in Perl</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Encode-devel</td>
+                <td>4:3.02-441.fc32</td>
+                <td>s390x</td>
+                <td data-order="102481">100.1 kB</td>
+                <td class=>Perl Encode Module Generator</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Env</td>
+                <td>1.04-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="26875">26.2 kB</td>
+                <td>Perl module that imports environment variables as scalars or arrays</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Errno</td>
+                <td>1.30-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="9518">9.3 kB</td>
+                <td class=>System errno constants</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Exporter</td>
+                <td>5.74-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="55358">54.1 kB</td>
+                <td>Implements default import method for modules</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-ExtUtils-CBuilder</td>
+                <td>1:0.280234-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="98651">96.3 kB</td>
+                <td>Compile and link C code for Perl modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-ExtUtils-Command</td>
+                <td>2:7.44-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="10095">9.9 kB</td>
+                <td class=>Perl routines to replace common UNIX commands in Makefiles</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-ExtUtils-Embed</td>
+                <td>1.35-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="16859">16.5 kB</td>
+                <td class=>Utilities for embedding Perl in C/C++ applications</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-ExtUtils-Install</td>
+                <td>2.14-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="87721">85.7 kB</td>
+                <td>Install Perl files from here to there</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-ExtUtils-MM-Utils</td>
+                <td>2:7.44-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="3226">3.2 kB</td>
+                <td class=>ExtUtils::MM methods without dependency on ExtUtils::MakeMaker</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-ExtUtils-MakeMaker</td>
+                <td>2:7.44-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="746585">729.1 kB</td>
+                <td>Create a module Makefile</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-ExtUtils-Manifest</td>
+                <td>1:1.72-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="86471">84.4 kB</td>
+                <td>Utilities to write and check a MANIFEST file</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-ExtUtils-Miniperl</td>
+                <td>1.09-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="9994">9.8 kB</td>
+                <td class=>Write the C code for perlmain.c</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-ExtUtils-ParseXS</td>
+                <td>1:3.40-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="404316">394.8 kB</td>
+                <td>Module and a script for converting Perl XS code into C code</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Fedora-VSP</td>
+                <td>0.001-17.fc32</td>
+                <td>noarch</td>
+                <td data-order="40885">39.9 kB</td>
+                <td>Perl version normalization for RPM</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-File-Fetch</td>
+                <td>0.56-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="59878">58.5 kB</td>
+                <td>Generic file fetching mechanism</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-File-HomeDir</td>
+                <td>1.004-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="123454">120.6 kB</td>
+                <td>Find your home and other directories on any platform</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-File-Path</td>
+                <td>2.16-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="65104">63.6 kB</td>
+                <td>Create or remove directory trees</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-File-Temp</td>
+                <td>1:0.230.900-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="164978">161.1 kB</td>
+                <td>Return name and handle of a temporary file safely</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-File-Which</td>
+                <td>1.23-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="30249">29.5 kB</td>
+                <td>Portable implementation of the 'which' utility</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Filter</td>
+                <td>2:1.59-443.fc32</td>
+                <td>s390x</td>
+                <td data-order="153449">149.9 kB</td>
+                <td>Perl source filters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Filter-Simple</td>
+                <td>0.95-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="52056">50.8 kB</td>
+                <td>Simplified Perl source filtering</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Getopt-Long</td>
+                <td>1:2.51-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="140531">137.2 kB</td>
+                <td>Extended processing of command line options</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-HTTP-Tiny</td>
+                <td>0.076-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="150122">146.6 kB</td>
+                <td>Small, simple, correct HTTP/1.1 client</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-IO</td>
+                <td>1.40-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="145472">142.1 kB</td>
+                <td class=>Perl input/output modules</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-IO-Compress</td>
+                <td>2.093-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="844453">824.7 kB</td>
+                <td>Read and write compressed data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-IO-Compress-Lzma</td>
+                <td>2.093-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="213530">208.5 kB</td>
+                <td class=>Read and write lzma compressed data</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-IO-Socket-IP</td>
+                <td>0.39-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="99524">97.2 kB</td>
+                <td>Drop-in replacement for IO::Socket::INET supporting both IPv4 and IPv6</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-IO-Zlib</td>
+                <td>1:1.10-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="19773">19.3 kB</td>
+                <td class=>Perl IO:: style interface to Compress::Zlib</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-IPC-Cmd</td>
+                <td>2:1.04-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="87236">85.2 kB</td>
+                <td>Finding and running system commands made easy</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-IPC-SysV</td>
+                <td>2.07-442.fc32</td>
+                <td>s390x</td>
+                <td data-order="80175">78.3 kB</td>
+                <td>Object interface to System V IPC</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-IPC-System-Simple</td>
+                <td>1.26-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="71218">69.5 kB</td>
+                <td>Run commands simply, with detailed diagnostics</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Importer</td>
+                <td>0.025-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="94885">92.7 kB</td>
+                <td>Alternative interface to modules that export symbols</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-JSON-PP</td>
+                <td>1:4.04-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="144618">141.2 kB</td>
+                <td>JSON::XS compatible pure-Perl module</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Locale-Codes</td>
+                <td>3.63-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="2402079">2.3 MB</td>
+                <td>Distribution of modules to handle locale codes</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Locale-Maketext</td>
+                <td>1.29-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="174925">170.8 kB</td>
+                <td>Framework for localization</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Locale-Maketext-Simple</td>
+                <td>1:0.21-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="14043">13.7 kB</td>
+                <td class=>Simple interface to Locale::Maketext::Lexicon</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-MIME-Base64</td>
+                <td>3.15-440.fc32</td>
+                <td>s390x</td>
+                <td data-order="40899">39.9 kB</td>
+                <td>Encoding and decoding of Base64 and quoted-printable strings</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-MRO-Compat</td>
+                <td>0.13-10.fc32</td>
+                <td>noarch</td>
+                <td data-order="25912">25.3 kB</td>
+                <td>Mro::* interface compatibility for Perls < 5.9.5</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Math-BigInt</td>
+                <td>1:1.9998.18-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="725738">708.7 kB</td>
+                <td>Arbitrary-size integer and float mathematics</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Math-BigInt-FastCalc</td>
+                <td>0.500.900-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="37681">36.8 kB</td>
+                <td>Math::BigInt::Calc with some XS for more speed</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Math-BigRat</td>
+                <td>0.2614-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="105817">103.3 kB</td>
+                <td>Arbitrary big rational numbers</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Math-Complex</td>
+                <td>1.59-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="88261">86.2 kB</td>
+                <td class=>Complex numbers and trigonometric functions</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Memoize</td>
+                <td>1.03-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="83491">81.5 kB</td>
+                <td class=>Transparently speed up functions by caching return values</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Module-Build</td>
+                <td>2:0.42.31-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="668478">652.8 kB</td>
+                <td>Build and install Perl modules</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Module-CoreList</td>
+                <td>1:5.20200314-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="945093">922.9 kB</td>
+                <td>What modules are shipped with versions of perl</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Module-CoreList-tools</td>
+                <td>1:5.20200314-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="18981">18.5 kB</td>
+                <td class=>Tool for listing modules shipped with perl</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Module-Load</td>
+                <td>1:0.34-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="15303">14.9 kB</td>
+                <td>Run-time require of both modules and files</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Module-Load-Conditional</td>
+                <td>0.70-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="29527">28.8 kB</td>
+                <td>Looking up module information / loading at run-time</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Module-Loaded</td>
+                <td>1:0.08-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="6044">5.9 kB</td>
+                <td class=>Mark modules as loaded or unloaded</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Module-Metadata</td>
+                <td>1.000037-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="69187">67.6 kB</td>
+                <td>Gather package and POD information from perl module files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Net-Ping</td>
+                <td>2.71-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="93517">91.3 kB</td>
+                <td class=>Check a remote host for reachability</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Object-HashBase</td>
+                <td>0.009-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="45124">44.1 kB</td>
+                <td class=>Build hash-based classes</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Package-Generator</td>
+                <td>1.106-17.fc32</td>
+                <td>noarch</td>
+                <td data-order="31034">30.3 kB</td>
+                <td>Generate new packages quickly and easily</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Params-Check</td>
+                <td>1:0.38-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="28457">27.8 kB</td>
+                <td>Generic input parsing/checking mechanism</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Params-Util</td>
+                <td>1.07-29.fc32</td>
+                <td>s390x</td>
+                <td data-order="74497">72.8 kB</td>
+                <td>Simple standalone parameter-checking functions</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-PathTools</td>
+                <td>3.78-441.fc32</td>
+                <td>s390x</td>
+                <td data-order="186181">181.8 kB</td>
+                <td>PathTools Perl module (Cwd, File::Spec)</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Perl-OSType</td>
+                <td>1.010-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="33834">33.0 kB</td>
+                <td>Map Perl operating system names to generic types</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-PerlIO-via-QuotedPrint</td>
+                <td>0.08-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="6009">5.9 kB</td>
+                <td>PerlIO layer for quoted-printable strings</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Pod-Checker</td>
+                <td>4:1.73-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="50339">49.2 kB</td>
+                <td>Check POD documents for syntax errors</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Pod-Escapes</td>
+                <td>1:1.07-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="25763">25.2 kB</td>
+                <td>Resolve POD escape sequences</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Pod-Html</td>
+                <td>1.24-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="37957">37.1 kB</td>
+                <td class=>Convert POD files to HTML</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Pod-Parser</td>
+                <td>1.63-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="269546">263.2 kB</td>
+                <td>Basic perl modules for handling Plain Old Documentation (POD)</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Pod-Perldoc</td>
+                <td>3.28.01-443.fc32</td>
+                <td>noarch</td>
+                <td data-order="170949">166.9 kB</td>
+                <td>Look up Perl documentation in Pod format</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Pod-Simple</td>
+                <td>1:3.40-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="576060">562.6 kB</td>
+                <td>Framework for parsing POD documentation</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Pod-Usage</td>
+                <td>4:1.69-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="49720">48.6 kB</td>
+                <td>Print a usage message from embedded POD documentation</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-SUPER</td>
+                <td>1.20190531-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="31149">30.4 kB</td>
+                <td>Sane superclass method dispatcher</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Scalar-List-Utils</td>
+                <td>3:1.54-440.fc32</td>
+                <td>s390x</td>
+                <td data-order="133886">130.7 kB</td>
+                <td>A selection of general-utility scalar and list subroutines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-SelfLoader</td>
+                <td>1.25-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="23929">23.4 kB</td>
+                <td class=>Load functions only on demand</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Socket</td>
+                <td>4:2.029-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="123736">120.8 kB</td>
+                <td>Networking constants and support functions</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Software-License</td>
+                <td>0.103014-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="464962">454.1 kB</td>
+                <td>Package that provides templated software licenses</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Storable</td>
+                <td>1:3.15-443.fc32</td>
+                <td>s390x</td>
+                <td data-order="221858">216.7 kB</td>
+                <td>Persistence for Perl data structures</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Sub-Exporter</td>
+                <td>0.987-21.fc32</td>
+                <td>noarch</td>
+                <td data-order="142829">139.5 kB</td>
+                <td>Sophisticated exporter for custom-built routines</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Sub-Identify</td>
+                <td>0.14-12.fc32</td>
+                <td>s390x</td>
+                <td data-order="28765">28.1 kB</td>
+                <td>Retrieve names of code references</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Sub-Install</td>
+                <td>0.928-22.fc32</td>
+                <td>noarch</td>
+                <td data-order="35806">35.0 kB</td>
+                <td>Install subroutines into packages easily</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Sys-Syslog</td>
+                <td>0.36-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="97256">95.0 kB</td>
+                <td>Perl interface to the UNIX syslog(3) calls</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Term-ANSIColor</td>
+                <td>5.01-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="100302">98.0 kB</td>
+                <td>Color screen output using ANSI escape sequences</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Term-Cap</td>
+                <td>1.17-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="29850">29.2 kB</td>
+                <td>Perl termcap interface</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Term-Size-Any</td>
+                <td>0.002-30.fc32</td>
+                <td>noarch</td>
+                <td data-order="8377">8.2 kB</td>
+                <td>Retrieve terminal size</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Term-Size-Perl</td>
+                <td>0.031-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="26458">25.8 kB</td>
+                <td>Perl extension for retrieving terminal size (Perl version)</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Term-Table</td>
+                <td>0.015-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="61015">59.6 kB</td>
+                <td>Format a header and rows into a table</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Test</td>
+                <td>1.31-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="38819">37.9 kB</td>
+                <td class=>Simple framework for writing test scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Test-FailWarnings</td>
+                <td>0.008-18.fc32</td>
+                <td>noarch</td>
+                <td data-order="26836">26.2 kB</td>
+                <td>Add test failures if warnings are caught</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Test-Harness</td>
+                <td>1:3.42-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="580544">566.9 kB</td>
+                <td>Run Perl standard test scripts with statistics</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Test-Inter</td>
+                <td>1.09-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="145199">141.8 kB</td>
+                <td>Framework for more readable interactive test scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Test-MockModule</td>
+                <td>0.172.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="41734">40.8 kB</td>
+                <td>Override subroutines in a module for unit testing</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Test-Needs</td>
+                <td>0.002006-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="14933">14.6 kB</td>
+                <td>Skip tests when modules not available</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Test-NoWarnings</td>
+                <td>1.04-21.fc32</td>
+                <td>noarch</td>
+                <td data-order="47286">46.2 kB</td>
+                <td>Make sure you didn't emit any warnings while testing</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Test-Simple</td>
+                <td>3:1.302172-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="1266893">1.2 MB</td>
+                <td>Basic utilities for writing tests</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Test-Warnings</td>
+                <td>0.029-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="52347">51.1 kB</td>
+                <td>Test for warnings and the lack of them</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Text-Balanced</td>
+                <td>2.03-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="156780">153.1 kB</td>
+                <td>Extract delimited text sequences from strings</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Text-Diff</td>
+                <td>1.45-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="85713">83.7 kB</td>
+                <td>Perform diffs on files and record sets</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Text-Glob</td>
+                <td>0.11-10.fc32</td>
+                <td>noarch</td>
+                <td data-order="8825">8.6 kB</td>
+                <td>Perl module to match globbing patterns against text</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Text-ParseWords</td>
+                <td>3.30-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="13100">12.8 kB</td>
+                <td>Parse text into an array of tokens or array of arrays</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Text-Tabs+Wrap</td>
+                <td>2013.0523-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="24827">24.2 kB</td>
+                <td>Expand tabs and do simple line wrapping</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Text-Template</td>
+                <td>1.58-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="115568">112.9 kB</td>
+                <td>Expand template text with embedded Perl</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Thread-Queue</td>
+                <td>3.13-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="29786">29.1 kB</td>
+                <td>Thread-safe queues</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Time-HiRes</td>
+                <td>1.9760-440.fc32</td>
+                <td>s390x</td>
+                <td data-order="116761">114.0 kB</td>
+                <td>High resolution alarm, sleep, gettimeofday, interval timers</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Time-Local</td>
+                <td>2:1.300-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="67342">65.8 kB</td>
+                <td>Efficiently compute time from local and GMT time</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Time-Piece</td>
+                <td>1.33-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="73884">72.2 kB</td>
+                <td class=>Time objects from localtime and gmtime</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Try-Tiny</td>
+                <td>0.30-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="66902">65.3 kB</td>
+                <td>Minimal try/catch with proper localization of $@</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-URI</td>
+                <td>1.76-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="215567">210.5 kB</td>
+                <td>A Perl module implementing URI parsing and manipulation</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Unicode-Collate</td>
+                <td>1.27-441.fc32</td>
+                <td>s390x</td>
+                <td data-order="5005317">4.8 MB</td>
+                <td>Unicode Collation Algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-Unicode-Normalize</td>
+                <td>1.26-440.fc32</td>
+                <td>s390x</td>
+                <td data-order="645559">630.4 kB</td>
+                <td>Unicode Normalization Forms</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-autodie</td>
+                <td>2.32-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="219790">214.6 kB</td>
+                <td>Replace functions with ones that succeed or die</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-bignum</td>
+                <td>0.51-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="91797">89.6 kB</td>
+                <td>Transparent big number support for Perl</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-constant</td>
+                <td>1.33-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="27104">26.5 kB</td>
+                <td>Perl pragma to declare constants</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-devel</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="7396947">7.1 MB</td>
+                <td class=>Header #files for use in perl development</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-encoding</td>
+                <td>4:2.22-441.fc32</td>
+                <td>s390x</td>
+                <td data-order="147083">143.6 kB</td>
+                <td class=>Write your Perl script in non-ASCII or non-UTF-8</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-experimental</td>
+                <td>0.021-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="31433">30.7 kB</td>
+                <td>Experimental features made easy</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-generators</td>
+                <td>1.11-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="21058">20.6 kB</td>
+                <td>RPM Perl dependencies generators</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-inc-latest</td>
+                <td>2:0.500-15.fc32</td>
+                <td>noarch</td>
+                <td data-order="35851">35.0 kB</td>
+                <td>Use modules bundled in inc/ if they are newer than installed ones</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-interpreter</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="14816624">14.1 MB</td>
+                <td class=>Standalone executable Perl interpreter</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-libnet</td>
+                <td>3.11-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="277124">270.6 kB</td>
+                <td>Perl clients for various network protocols</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-libnetcfg</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="18264">17.8 kB</td>
+                <td class=>Configure libnet</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-libs</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="8030791">7.7 MB</td>
+                <td class=>The libraries for the perl run-time</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-local-lib</td>
+                <td>2.000024-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="120227">117.4 kB</td>
+                <td>Create and use a local lib/ for perl modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-macros</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="5643">5.5 kB</td>
+                <td class=>Macros for rpmbuild</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-open</td>
+                <td>1.11-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="11792">11.5 kB</td>
+                <td class=>Perl pragma to set default PerlIO layers for input and output</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-parent</td>
+                <td>1:0.238-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="9535">9.3 kB</td>
+                <td>Establish an ISA relationship with base classes at compile time</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-perlfaq</td>
+                <td>5.20200125-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="742999">725.6 kB</td>
+                <td>Frequently asked questions about Perl</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-podlators</td>
+                <td>1:4.14-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="288741">282.0 kB</td>
+                <td>Format POD source into various output formats</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-srpm-macros</td>
+                <td>1-34.fc32</td>
+                <td>noarch</td>
+                <td data-order="862">862.0 B</td>
+                <td class=>RPM macros for building Perl source package from source repository</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-threads</td>
+                <td>1:2.22-442.fc32</td>
+                <td>s390x</td>
+                <td data-order="114028">111.4 kB</td>
+                <td>Perl interpreter-based threads</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-threads-shared</td>
+                <td>1.60-441.fc32</td>
+                <td>s390x</td>
+                <td data-order="94055">91.9 kB</td>
+                <td>Perl extension for sharing data structures between threads</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-utils</td>
+                <td>5.30.2-451.fc32</td>
+                <td>noarch</td>
+                <td data-order="127634">124.6 kB</td>
+                <td class=>Utilities packaged with the Perl distribution</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>perl-version</td>
+                <td>7:0.99.24-443.fc32</td>
+                <td>s390x</td>
+                <td data-order="131498">128.4 kB</td>
+                <td>Perl extension for Version Objects</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="72117">70.4 kB</td>
+                <td class=>Package compiler and linker metadata toolkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-m4</td>
+                <td>1.6.3-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td class=>m4 macros for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-pkg-config</td>
+                <td>1.6.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="462">462.0 B</td>
+                <td class=>pkgconf shim to provide /usr/bin/pkg-config</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>popt</td>
+                <td>1.16-19.fc32</td>
+                <td>s390x</td>
+                <td data-order="142718">139.4 kB</td>
+                <td class=>C library for parsing command line parameters</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>publicsuffix-list-dafsa</td>
+                <td>20190417-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="64992">63.5 kB</td>
+                <td class=>Cross-vendor public domain suffix database in DAFSA form</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python-pip-wheel</td>
+                <td>19.3.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="1266916">1.2 MB</td>
+                <td class=>The pip wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python-setuptools-wheel</td>
+                <td>41.6.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="360619">352.2 kB</td>
+                <td class=>The setuptools wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python-srpm-macros</td>
+                <td>3-54.fc32</td>
+                <td>noarch</td>
+                <td data-order="26500">25.9 kB</td>
+                <td class=>RPM macros for building Python source packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3</td>
+                <td>3.8.2-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="24082">23.5 kB</td>
+                <td class=>Interpreter of the Python programming language</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-libs</td>
+                <td>3.8.2-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="34004734">32.4 MB</td>
+                <td class=>Python runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-pyparsing</td>
+                <td>2.4.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="648460">633.3 kB</td>
+                <td class=>Documentation for pyparsing python package</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qt5-srpm-macros</td>
+                <td>5.13.2-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="492">492.0 B</td>
+                <td class=>RPM macros for source Qt5 packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>readline</td>
+                <td>8.0-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="511395">499.4 kB</td>
+                <td class=>A library for editing typed command lines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>redhat-rpm-config</td>
+                <td>150-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="166255">162.4 kB</td>
+                <td class=>Red Hat specific rpm configuration files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rpm</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="2890025">2.8 MB</td>
+                <td class=>The RPM package management system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rpm-libs</td>
+                <td>4.15.1-2.fc32.1</td>
+                <td>s390x</td>
+                <td data-order="892328">871.4 kB</td>
+                <td class=>Libraries for manipulating RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rust-srpm-macros</td>
+                <td>13-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="2439">2.4 kB</td>
+                <td class=>RPM macros for building Rust source packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sed</td>
+                <td>4.5-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="837734">818.1 kB</td>
+                <td class=>A GNU stream text editor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>setup</td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td class=>A set of system configuration and setup files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sqlite-libs</td>
+                <td>3.31.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1626156">1.6 MB</td>
+                <td class=>Shared library for the sqlite3 embeddable SQL database engine.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemtap-sdt-devel</td>
+                <td>4.3-0.20200211git91ffb97ad335.fc32</td>
+                <td>s390x</td>
+                <td data-order="189508">185.1 kB</td>
+                <td class=>Static probe support tools</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>tzdata</td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td class=>Timezone data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>unzip</td>
+                <td>6.0-47.fc32</td>
+                <td>s390x</td>
+                <td data-order="455705">445.0 kB</td>
+                <td class=>A utility for unpacking zip files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xz-libs</td>
+                <td>5.2.4-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="192855">188.3 kB</td>
+                <td class=>Libraries for decoding LZMA compression</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>zip</td>
+                <td>3.0-26.fc32</td>
+                <td>s390x</td>
+                <td data-order="867965">847.6 kB</td>
+                <td class=>A file compression and packaging utility compatible with PKZIP</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>zlib</td>
+                <td>1.2.11-21.fc32</td>
+                <td>s390x</td>
+                <td data-order="232295">226.9 kB</td>
+                <td class=>The compression and decompression library</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-modules-module-perl-bootstrap-5.28--fedora-empty-base--repository-fedora-rawhide--s390x.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

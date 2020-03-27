@@ -1,0 +1,3910 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--rhel-8-baseos-comps-core--repository-fedora-31.html">
+                    Comps group core for rhel-8-baseos
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group core for rhel-8-baseos in Empty from Fedora 31 aarch64
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group core for rhel-8-baseos <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> <a href="">Empty</a> </small>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora 31</a> </small>
+        <small class="text-muted"> for </small>
+        <small> aarch64</small>
+    </h1>
+
+    <hr>
+
+    
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <dl>
+                        <dt>Configuration</dt>
+                        <dd><a href="config-workload--rhel-8-baseos-comps-core.html">rhel-8-baseos-comps-core.yaml</a></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>NetworkManager</td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="6452974">6.2 MB</td>
+                <td>Network connection manager and user applications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>NetworkManager-libnm</td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="9261515">8.8 MB</td>
+                <td class=>Libraries for adding NetworkManager support to applications (new API).</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>NetworkManager-team</td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="69720">68.1 kB</td>
+                <td>Team device plugin for NetworkManager</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>NetworkManager-tui</td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="698856">682.5 kB</td>
+                <td>NetworkManager curses-based UI</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>acl</td>
+                <td>2.2.53-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="334772">326.9 kB</td>
+                <td class=>Access control list utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>alternatives</td>
+                <td>1.11-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="94582">92.4 kB</td>
+                <td class=>A tool to maintain symbolic links determining default commands</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>audit</td>
+                <td>3.0-0.15.20191104git1c2f876.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1095121">1.0 MB</td>
+                <td>User space tools for kernel auditing</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>audit-libs</td>
+                <td>3.0-0.15.20191104git1c2f876.fc31</td>
+                <td>aarch64</td>
+                <td data-order="334596">326.8 kB</td>
+                <td class=>Dynamic library for libaudit</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>authselect</td>
+                <td>1.1-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="126093">123.1 kB</td>
+                <td>Configures authentication and identity sources from supported profiles</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>authselect-libs</td>
+                <td>1.1-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="825212">805.9 kB</td>
+                <td class=>Utility library used by the authselect tool</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>basesystem</td>
+                <td>11-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>The skeleton package which defines a simple Fedora system</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>bash</td>
+                <td>5.0.11-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="7601167">7.2 MB</td>
+                <td>The GNU Bourne Again shell</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>brotli</td>
+                <td>1.0.7-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1513732">1.4 MB</td>
+                <td class=>Lossless compression algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bzip2-libs</td>
+                <td>1.0.8-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="79368">77.5 kB</td>
+                <td class=>Libraries for applications using bzip2</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>c-ares</td>
+                <td>1.15.0-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="295146">288.2 kB</td>
+                <td class=>A library that performs asynchronous DNS operations</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ca-certificates</td>
+                <td>2020.2.40-1.1.fc31</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td class=>The Mozilla CA root certificate bundle</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>coreutils</td>
+                <td>8.31-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="10759472">10.3 MB</td>
+                <td>A set of basic GNU tools commonly used in shell scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils-common</td>
+                <td>8.31-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="10348911">9.9 MB</td>
+                <td class=>coreutils common optional components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cpio</td>
+                <td>2.12-12.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1048371">1023.8 kB</td>
+                <td class=>A GNU archiving program</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cracklib</td>
+                <td>2.9.6-21.fc31</td>
+                <td>aarch64</td>
+                <td data-order="437943">427.7 kB</td>
+                <td class=>A password-checking library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>cronie</td>
+                <td>1.5.4-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="362059">353.6 kB</td>
+                <td>Cron daemon for executing programs at set times</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cronie-anacron</td>
+                <td>1.5.4-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="81156">79.3 kB</td>
+                <td class=>Utility for running regular jobs</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>crontabs</td>
+                <td>1.11-21.20190603git.fc31</td>
+                <td>noarch</td>
+                <td data-order="21331">20.8 kB</td>
+                <td class=>Root crontab files used to schedule the execution of programs</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>crypto-policies</td>
+                <td>20191128-2.gitcd267a5.fc31</td>
+                <td>noarch</td>
+                <td data-order="195446">190.9 kB</td>
+                <td class=>System-wide crypto policies</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cryptsetup-libs</td>
+                <td>2.3.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1905711">1.8 MB</td>
+                <td class=>Cryptsetup shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>curl</td>
+                <td>7.66.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="732538">715.4 kB</td>
+                <td>A utility for getting files from remote servers (FTP, HTTP, and others)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cyrus-sasl-lib</td>
+                <td>2.1.27-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="961626">939.1 kB</td>
+                <td class=>Shared libraries needed by applications which use Cyrus SASL</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus</td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>D-BUS message bus</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-broker</td>
+                <td>21-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="515816">503.7 kB</td>
+                <td class=>Linux D-Bus Message Broker</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-common</td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="11481">11.2 kB</td>
+                <td class=>D-BUS message bus configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-libs</td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="557344">544.3 kB</td>
+                <td class=>Libraries for accessing D-BUS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>device-mapper</td>
+                <td>1.02.165-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="463919">453.0 kB</td>
+                <td class=>Device mapper utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>device-mapper-libs</td>
+                <td>1.02.165-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="535087">522.5 kB</td>
+                <td class=>Device-mapper shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>diffutils</td>
+                <td>3.7-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1680477">1.6 MB</td>
+                <td class=>A GNU collection of diff utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dmidecode</td>
+                <td>1:3.2-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="177593">173.4 kB</td>
+                <td class=>Tool to analyse BIOS DMI data</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>dnf</td>
+                <td>4.2.18-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="1776779">1.7 MB</td>
+                <td>Package manager</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dnf-data</td>
+                <td>4.2.18-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="36289">35.4 kB</td>
+                <td class=>Common data and configuration files for DNF</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dnf-plugin-subscription-manager</td>
+                <td>1.25.9-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="100421">98.1 kB</td>
+                <td class=>Subscription Manager plugins for DNF</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>dnf-plugins-core</td>
+                <td>4.0.13-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="16886">16.5 kB</td>
+                <td>Core Plugins for DNF</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dracut</td>
+                <td>050-26.git20200316.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1196975">1.1 MB</td>
+                <td class=>Initramfs generator using udev</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>dracut-config-rescue</td>
+                <td>050-26.git20200316.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4794">4.7 kB</td>
+                <td>dracut configuration to turn on rescue image generation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dracut-network</td>
+                <td>050-26.git20200316.fc31</td>
+                <td>aarch64</td>
+                <td data-order="164034">160.2 kB</td>
+                <td class=>dracut modules to build a dracut initramfs with network support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dracut-squash</td>
+                <td>050-26.git20200316.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2806">2.7 kB</td>
+                <td class=>dracut module to build an initramfs with most files in a squashfs image</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>e2fsprogs</td>
+                <td>1.45.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4985658">4.8 MB</td>
+                <td>Utilities for managing ext2, ext3, and ext4 file systems</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>e2fsprogs-libs</td>
+                <td>1.45.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="585705">572.0 kB</td>
+                <td class=>Ext2/3/4 file system specific shared libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ebtables-legacy</td>
+                <td>2.0.10-37.fc31</td>
+                <td>aarch64</td>
+                <td data-order="421980">412.1 kB</td>
+                <td class=>Legacy user space tool to configure bridge netfilter rules in kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-default-yama-scope</td>
+                <td>0.178-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td class=>Default yama attach scope sysctl setting</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-libelf</td>
+                <td>0.178-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="953451">931.1 kB</td>
+                <td class=>Library to read and write ELF files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>elfutils-libs</td>
+                <td>0.178-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="766303">748.3 kB</td>
+                <td class=>Libraries to handle compiled objects</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ethtool</td>
+                <td>2:5.4-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="485576">474.2 kB</td>
+                <td class=>Settings tool for Ethernet NICs</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>expat</td>
+                <td>2.2.8-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="356315">348.0 kB</td>
+                <td class=>An XML parser library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-gpg-keys</td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="103813">101.4 kB</td>
+                <td class=>Fedora RPM keys</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release</td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release-common</td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="14359">14.0 kB</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-repos</td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="8785">8.6 kB</td>
+                <td class=>Fedora package repositories</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>file</td>
+                <td>5.37-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="141780">138.5 kB</td>
+                <td class=>A utility for determining file types</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>file-libs</td>
+                <td>5.37-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="6970250">6.6 MB</td>
+                <td class=>Libraries for applications using libmagic</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>filesystem</td>
+                <td>3.12-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td>The basic directory layout for a Linux system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>findutils</td>
+                <td>1:4.6.0-24.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1882697">1.8 MB</td>
+                <td class=>The GNU versions of find utilities (find and xargs)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fipscheck</td>
+                <td>1.5.0-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="153067">149.5 kB</td>
+                <td class=>A library for integrity verification of FIPS validated modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fipscheck-lib</td>
+                <td>1.5.0-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="70321">68.7 kB</td>
+                <td class=>Library files for fipscheck</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>firewalld</td>
+                <td>0.7.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="1983027">1.9 MB</td>
+                <td>A firewall daemon with D-Bus interface providing a dynamic firewall</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>firewalld-filesystem</td>
+                <td>0.7.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="239">239.0 B</td>
+                <td class=>Firewalld directory layout and rpm macros</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fuse-libs</td>
+                <td>2.9.9-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="422490">412.6 kB</td>
+                <td class=>File System in Userspace (FUSE) v2 libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gawk</td>
+                <td>5.0.1-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3841894">3.7 MB</td>
+                <td class=>The GNU version of the AWK text processing utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdbm-libs</td>
+                <td>1:1.18.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="189616">185.2 kB</td>
+                <td class=>Libraries files for gdbm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gettext</td>
+                <td>0.20.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="5914369">5.6 MB</td>
+                <td class=>GNU libraries and utilities for producing multi-lingual messages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gettext-libs</td>
+                <td>0.20.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1079400">1.0 MB</td>
+                <td class=>Libraries for gettext</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glib2</td>
+                <td>2.62.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="13450336">12.8 MB</td>
+                <td class=>A library of handy utility functions</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>glibc</td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="28878565">27.5 MB</td>
+                <td>The GNU libc libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-all-langpacks</td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="217990208">207.9 MB</td>
+                <td class=>All language packs for glibc.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-common</td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3063946">2.9 MB</td>
+                <td class=>Common binaries and locale data for glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gmp</td>
+                <td>1:6.1.2-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1448564">1.4 MB</td>
+                <td class=>A GNU arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gnupg2</td>
+                <td>2.2.18-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="10458202">10.0 MB</td>
+                <td class=>Utility for secure communication and data storage</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gnutls</td>
+                <td>3.6.11-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3690615">3.5 MB</td>
+                <td class=>A TLS protocol implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gobject-introspection</td>
+                <td>1.62.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1045964">1021.4 kB</td>
+                <td class=>Introspection system for GObject-based libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gpgme</td>
+                <td>1.13.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="702783">686.3 kB</td>
+                <td class=>GnuPG Made Easy - high level crypto API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>grep</td>
+                <td>3.3-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="871258">850.8 kB</td>
+                <td class=>Pattern matching utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>groff-base</td>
+                <td>1.22.3-20.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4905339">4.7 MB</td>
+                <td class=>Parts of the groff formatting system required to display manual pages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>grub2-common</td>
+                <td>1:2.02-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="5041972">4.8 MB</td>
+                <td class=>grub2 common layout</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>grub2-tools</td>
+                <td>1:2.02-106.fc31</td>
+                <td>aarch64</td>
+                <td data-order="7143245">6.8 MB</td>
+                <td class=>Support tools for GRUB.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>grub2-tools-minimal</td>
+                <td>1:2.02-106.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3067089">2.9 MB</td>
+                <td class=>Support tools for GRUB.</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>grubby</td>
+                <td>8.40-36.fc31</td>
+                <td>aarch64</td>
+                <td data-order="116853">114.1 kB</td>
+                <td>Command line tool for updating bootloader configs</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gzip</td>
+                <td>1.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="412802">403.1 kB</td>
+                <td class=>The GNU data compression program</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hdparm</td>
+                <td>9.58-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="209541">204.6 kB</td>
+                <td class=>A utility for displaying and/or setting hard disk parameters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>hostname</td>
+                <td>3.20-9.fc31</td>
+                <td>aarch64</td>
+                <td data-order="92899">90.7 kB</td>
+                <td>Utility to set/show the host name or domain name</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hwdata</td>
+                <td>0.333-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="7867092">7.5 MB</td>
+                <td class=>Hardware identification and configuration data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ima-evm-utils</td>
+                <td>1.2.1-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="188671">184.2 kB</td>
+                <td class=>IMA/EVM support utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>initscripts</td>
+                <td>10.02-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1310826">1.3 MB</td>
+                <td>Basic support for legacy System V init scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iproute</td>
+                <td>5.4.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2440844">2.3 MB</td>
+                <td>Advanced IP routing and network device configuration tools</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iprutils</td>
+                <td>2.4.17.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1184849">1.1 MB</td>
+                <td>Utilities for the IBM Power Linux RAID adapters</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ipset</td>
+                <td>7.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="124899">122.0 kB</td>
+                <td class=>Manage Linux IP sets</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ipset-libs</td>
+                <td>7.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="264778">258.6 kB</td>
+                <td class=>Shared library providing the IP sets functionality</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>iptables</td>
+                <td>1.8.3-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="8743390">8.3 MB</td>
+                <td class=>Tools for managing Linux kernel packet filtering capabilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>iptables-libs</td>
+                <td>1.8.3-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="278240">271.7 kB</td>
+                <td class=>iptables libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iputils</td>
+                <td>20190515-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="652957">637.7 kB</td>
+                <td>Network monitoring tools including ping</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>irqbalance</td>
+                <td>2:1.4.0-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="104919">102.5 kB</td>
+                <td>IRQ balancing daemon</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl100-firmware</td>
+                <td>39.31.5.1-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="339618">331.7 kB</td>
+                <td>Firmware for Intel(R) Wireless WiFi Link 100 Series Adapters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl1000-firmware</td>
+                <td>1:39.31.5.1-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="674622">658.8 kB</td>
+                <td>Firmware for Intel® PRO/Wireless 1000 B/G/N network adaptors</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl105-firmware</td>
+                <td>18.168.6.1-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="691726">675.5 kB</td>
+                <td>Firmware for Intel(R) Centrino Wireless-N 105 Series Adapters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl135-firmware</td>
+                <td>18.168.6.1-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="703274">686.8 kB</td>
+                <td>Firmware for Intel(R) Centrino Wireless-N 135 Series Adapters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl2000-firmware</td>
+                <td>18.168.6.1-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="697922">681.6 kB</td>
+                <td>Firmware for Intel(R) Centrino Wireless-N 2000 Series Adapters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl2030-firmware</td>
+                <td>18.168.6.1-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="709438">692.8 kB</td>
+                <td>Firmware for Intel(R) Centrino Wireless-N 2030 Series Adapters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl3160-firmware</td>
+                <td>1:25.30.13.0-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="10310354">9.8 MB</td>
+                <td>Firmware for Intel(R) Wireless WiFi Link 3160 Series Adapters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl3945-firmware</td>
+                <td>15.32.2.9-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="152146">148.6 kB</td>
+                <td>Firmware for Intel® PRO/Wireless 3945 A/B/G network adaptors</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl4965-firmware</td>
+                <td>228.61.2.24-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="190018">185.6 kB</td>
+                <td>Firmware for Intel® PRO/Wireless 4965 A/G/N network adaptors</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl5000-firmware</td>
+                <td>8.83.5.1_1-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="1040990">1016.6 kB</td>
+                <td>Firmware for Intel® PRO/Wireless 5000 A/G/N network adaptors</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl5150-firmware</td>
+                <td>8.24.2.2-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="339446">331.5 kB</td>
+                <td>Firmware for Intel® PRO/Wireless 5150 A/G/N network adaptors</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl6000-firmware</td>
+                <td>9.221.4.1-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="456654">446.0 kB</td>
+                <td>Firmware for Intel(R) Wireless WiFi Link 6000 AGN Adapter</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl6000g2a-firmware</td>
+                <td>18.168.6.1-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="1123470">1.1 MB</td>
+                <td>Firmware for Intel(R) Wireless WiFi Link 6005 Series Adapters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl6050-firmware</td>
+                <td>41.28.5.1-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="935518">913.6 kB</td>
+                <td>Firmware for Intel(R) Wireless WiFi Link 6050 Series Adapters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>iwl7260-firmware</td>
+                <td>1:25.30.13.0-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="91053086">86.8 MB</td>
+                <td>Firmware for Intel(R) Wireless WiFi Link 726x/8000/9000 Series Adapters</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jansson</td>
+                <td>2.12-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="110830">108.2 kB</td>
+                <td class=>C library for encoding, decoding and manipulating JSON data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jitterentropy</td>
+                <td>2.1.2-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="94293">92.1 kB</td>
+                <td class=>Library implementing the jitter entropy source</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>json-c</td>
+                <td>0.13.1-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="112490">109.9 kB</td>
+                <td class=>JSON implementation in C</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>kbd</td>
+                <td>2.0.4-14.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2709077">2.6 MB</td>
+                <td>Tools for configuring the console (keyboard, virtual terminals, etc.)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kbd-legacy</td>
+                <td>2.0.4-14.fc31</td>
+                <td>noarch</td>
+                <td data-order="511139">499.2 kB</td>
+                <td class=>Legacy data for kbd package</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kbd-misc</td>
+                <td>2.0.4-14.fc31</td>
+                <td>noarch</td>
+                <td data-order="2536273">2.4 MB</td>
+                <td class=>Data for kbd package</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>kernel-tools</td>
+                <td>5.5.9-200.fc31</td>
+                <td>aarch64</td>
+                <td data-order="674106">658.3 kB</td>
+                <td>Assortment of tools for the Linux kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kernel-tools-libs</td>
+                <td>5.5.9-200.fc31</td>
+                <td>aarch64</td>
+                <td data-order="68471">66.9 kB</td>
+                <td class=>Libraries for the kernels-tools</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>kexec-tools</td>
+                <td>2.0.20-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1268333">1.2 MB</td>
+                <td>The kexec/kdump userspace component</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>keyutils-libs</td>
+                <td>1.6-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="105311">102.8 kB</td>
+                <td class=>Key utilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kmod</td>
+                <td>26-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="479840">468.6 kB</td>
+                <td class=>Linux kernel module management utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kmod-libs</td>
+                <td>26-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="223920">218.7 kB</td>
+                <td class=>Libraries to handle kernel module loading and unloading</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>krb5-libs</td>
+                <td>1.17-46.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2463205">2.3 MB</td>
+                <td class=>The non-admin shared libraries used by Kerberos 5</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>less</td>
+                <td>551-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="529261">516.9 kB</td>
+                <td>A text file browser similar to more, but better</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libacl</td>
+                <td>2.2.53-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="76424">74.6 kB</td>
+                <td class=>Dynamic library for access control list support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libarchive</td>
+                <td>3.4.2-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="864313">844.1 kB</td>
+                <td class=>A library for handling streaming archive formats</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libargon2</td>
+                <td>20171227-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="95159">92.9 kB</td>
+                <td class=>The password-hashing library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libassuan</td>
+                <td>2.5.3-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="242904">237.2 kB</td>
+                <td class=>GnuPG IPC library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libattr</td>
+                <td>2.4.48-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="73458">71.7 kB</td>
+                <td class=>Dynamic library for extended attribute support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libbasicobjects</td>
+                <td>0.1.1-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="112830">110.2 kB</td>
+                <td class=>Basic object types for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libblkid</td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="405945">396.4 kB</td>
+                <td class=>Block device ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap</td>
+                <td>2.26-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="448666">438.2 kB</td>
+                <td class=>Library for getting and setting POSIX.1e capabilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap-ng</td>
+                <td>0.7.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="98742">96.4 kB</td>
+                <td class=>An alternate posix capabilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcollection</td>
+                <td>0.7.0-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="130390">127.3 kB</td>
+                <td class=>Collection data-type for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcom_err</td>
+                <td>1.45.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="114537">111.9 kB</td>
+                <td class=>Common error description library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcomps</td>
+                <td>0.1.14-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="331389">323.6 kB</td>
+                <td class=>Comps XML file manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcroco</td>
+                <td>0.6.13-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="455932">445.2 kB</td>
+                <td class=>A CSS2 parsing library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcurl</td>
+                <td>7.66.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="723360">706.4 kB</td>
+                <td class=>A library for getting files from web servers</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdaemon</td>
+                <td>0.14-18.fc31</td>
+                <td>aarch64</td>
+                <td data-order="107621">105.1 kB</td>
+                <td class=>Library for writing UNIX daemons</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdb</td>
+                <td>5.3.28-38.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2028344">1.9 MB</td>
+                <td class=>The Berkeley DB database library for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdb-utils</td>
+                <td>5.3.28-38.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1119679">1.1 MB</td>
+                <td class=>Command line tools for managing Berkeley DB databases</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdhash</td>
+                <td>0.5.0-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="114742">112.1 kB</td>
+                <td class=>Dynamic hash table</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdnf</td>
+                <td>0.43.1-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1888627">1.8 MB</td>
+                <td class=>Library providing simplified C and Python API to libsolv</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libedit</td>
+                <td>3.1-30.20191211cvs.fc31</td>
+                <td>aarch64</td>
+                <td data-order="285779">279.1 kB</td>
+                <td class=>The NetBSD Editline library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libfdisk</td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="504467">492.6 kB</td>
+                <td class=>Partitioning library for fdisk-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libffi</td>
+                <td>3.1-23.fc31</td>
+                <td>aarch64</td>
+                <td data-order="91428">89.3 kB</td>
+                <td class=>A portable foreign function interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcc</td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="226992">221.7 kB</td>
+                <td class=>GCC version 9 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcrypt</td>
+                <td>1.8.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="957774">935.3 kB</td>
+                <td class=>A general-purpose cryptography library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgomp</td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="376246">367.4 kB</td>
+                <td class=>GCC OpenMP v4.5 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgpg-error</td>
+                <td>1.36-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="845133">825.3 kB</td>
+                <td class=>Library for error values used by GnuPG components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libidn2</td>
+                <td>2.3.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="264262">258.1 kB</td>
+                <td class=>Library to support IDNA2008 internationalized domain names</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libini_config</td>
+                <td>1.3.1-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="205934">201.1 kB</td>
+                <td class=>INI file parser for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libkcapi</td>
+                <td>1.1.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="112755">110.1 kB</td>
+                <td class=>User space interface to the Linux Kernel Crypto API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libkcapi-hmaccalc</td>
+                <td>1.1.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="72565">70.9 kB</td>
+                <td class=>Drop-in replacements for hmaccalc provided by the libkcapi package</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libksba</td>
+                <td>1.3.5-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="421807">411.9 kB</td>
+                <td class=>CMS and X.509 library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libldb</td>
+                <td>2.0.9-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1304352">1.2 MB</td>
+                <td class=>A schema-less, ldap like, API and database</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmetalink</td>
+                <td>0.1.3-9.fc31</td>
+                <td>aarch64</td>
+                <td data-order="103168">100.8 kB</td>
+                <td class=>Metalink library written in C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmnl</td>
+                <td>1.0.4-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="105919">103.4 kB</td>
+                <td class=>A minimalistic Netlink library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmodulemd1</td>
+                <td>1.8.16-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="661543">646.0 kB</td>
+                <td class=>Module metadata manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmount</td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="431373">421.3 kB</td>
+                <td class=>Device mounting library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libndp</td>
+                <td>1.7-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="188572">184.2 kB</td>
+                <td class=>Library for Neighbor Discovery Protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnetfilter_conntrack</td>
+                <td>1.0.7-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="216678">211.6 kB</td>
+                <td class=>Netfilter conntrack userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnfnetlink</td>
+                <td>1.0.1-16.fc31</td>
+                <td>aarch64</td>
+                <td data-order="95659">93.4 kB</td>
+                <td class=>Netfilter netlink userspace library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnftnl</td>
+                <td>1.1.3-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="304280">297.1 kB</td>
+                <td class=>Library for low-level interaction with nftables Netlink's API over libmnl</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnghttp2</td>
+                <td>1.40.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="205140">200.3 kB</td>
+                <td class=>A library implementing the HTTP/2 protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnl3</td>
+                <td>3.5.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1588264">1.5 MB</td>
+                <td class=>Convenience library for kernel netlink sockets</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnl3-cli</td>
+                <td>3.5.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4091718">3.9 MB</td>
+                <td class=>Command line interface utils for libnl3</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnsl2</td>
+                <td>1.2.0-5.20180605git4a062cf.fc31</td>
+                <td>aarch64</td>
+                <td data-order="183546">179.2 kB</td>
+                <td class=>Public client interface library for NIS(YP) and NIS+</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpath_utils</td>
+                <td>0.2.1-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="113750">111.1 kB</td>
+                <td class=>Filesystem Path Utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpcap</td>
+                <td>14:1.9.1-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="408714">399.1 kB</td>
+                <td class=>A system-independent interface for user-level packet capture</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpipeline</td>
+                <td>1.5.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="142421">139.1 kB</td>
+                <td class=>A pipeline manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpsl</td>
+                <td>0.21.0-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="73932">72.2 kB</td>
+                <td class=>C library for the Publix Suffix List</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpwquality</td>
+                <td>1.4.2-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="606133">591.9 kB</td>
+                <td class=>A library for password generation and password quality checking</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libref_array</td>
+                <td>0.1.5-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="113478">110.8 kB</td>
+                <td class=>A refcounted array for C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>librepo</td>
+                <td>1.11.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="233312">227.8 kB</td>
+                <td class=>Repodata downloading library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libreport-filesystem</td>
+                <td>2.12.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Filesystem layout for libreport</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libseccomp</td>
+                <td>2.4.2-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="375835">367.0 kB</td>
+                <td class=>Enhanced seccomp library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libselinux</td>
+                <td>2.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="250808">244.9 kB</td>
+                <td class=>SELinux library and simple utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libselinux-utils</td>
+                <td>2.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1125300">1.1 MB</td>
+                <td class=>SELinux libselinux utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsemanage</td>
+                <td>2.9-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="393370">384.2 kB</td>
+                <td class=>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsepol</td>
+                <td>2.9-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="968104">945.4 kB</td>
+                <td class=>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsigsegv</td>
+                <td>2.11-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="100762">98.4 kB</td>
+                <td class=>Library for handling page faults in user mode</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsmartcols</td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="298163">291.2 kB</td>
+                <td class=>Formatting library for ls-like programs.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsolv</td>
+                <td>0.7.11-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="878643">858.0 kB</td>
+                <td class=>Package dependency solver</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libss</td>
+                <td>1.45.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="114337">111.7 kB</td>
+                <td class=>Command line interface parsing library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libssh</td>
+                <td>0.9.3-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="528219">515.8 kB</td>
+                <td class=>A library implementing the SSH protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libssh-config</td>
+                <td>0.9.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="357">357.0 B</td>
+                <td class=>Configuration files for libssh</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsss_certmap</td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="129714">126.7 kB</td>
+                <td class=>SSSD Certificate Mapping Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsss_idmap</td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="112406">109.8 kB</td>
+                <td class=>FreeIPA Idmap library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsss_nss_idmap</td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="113518">110.9 kB</td>
+                <td class=>Library for SID and certificate based lookups</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libstdc++</td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2193137">2.1 MB</td>
+                <td class=>GNU Standard C++ Library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>libsysfs</td>
+                <td>2.1.0-27.fc31</td>
+                <td>aarch64</td>
+                <td data-order="109701">107.1 kB</td>
+                <td>Shared library for interfacing with sysfs</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtalloc</td>
+                <td>2.3.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="81048">79.1 kB</td>
+                <td class=>The talloc library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtasn1</td>
+                <td>4.14-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="233791">228.3 kB</td>
+                <td class=>The ASN.1 library used in GNUTLS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtdb</td>
+                <td>1.4.2-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="160624">156.9 kB</td>
+                <td class=>The tdb library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libteam</td>
+                <td>1.29-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="211508">206.6 kB</td>
+                <td class=>Library for controlling team network device</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtevent</td>
+                <td>0.10.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="162280">158.5 kB</td>
+                <td class=>The tevent library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtextstyle</td>
+                <td>0.20.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="138944">135.7 kB</td>
+                <td class=>Text styling library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtirpc</td>
+                <td>1.2.5-1.rc2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="215974">210.9 kB</td>
+                <td class=>Transport Independent RPC Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libunistring</td>
+                <td>0.9.10-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1681075">1.6 MB</td>
+                <td class=>GNU Unicode string library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libusbx</td>
+                <td>1.0.22-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="199401">194.7 kB</td>
+                <td class=>Library for accessing USB devices</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libuser</td>
+                <td>0.62-21.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2654654">2.5 MB</td>
+                <td class=>A user and group account administration library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libutempter</td>
+                <td>1.1.6-17.fc31</td>
+                <td>aarch64</td>
+                <td data-order="166549">162.6 kB</td>
+                <td class=>A privileged helper for utmp/wtmp updates</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libuuid</td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="71759">70.1 kB</td>
+                <td class=>Universally unique ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libverto</td>
+                <td>0.3.0-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="77908">76.1 kB</td>
+                <td class=>Main loop abstraction library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcrypt</td>
+                <td>4.4.15-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="269651">263.3 kB</td>
+                <td class=>Extended crypt library for descrypt, md5crypt, bcrypt, and others</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxml2</td>
+                <td>2.9.10-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1800108">1.7 MB</td>
+                <td class=>Library providing XML and HTML support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libyaml</td>
+                <td>0.2.2-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="151587">148.0 kB</td>
+                <td class=>YAML 1.1 parser and emitter written in C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libzstd</td>
+                <td>1.4.4-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="685437">669.4 kB</td>
+                <td class=>Zstd shared library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>linux-firmware</td>
+                <td>20200316-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="254665890">242.9 MB</td>
+                <td>Firmware files used by the Linux kernel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>linux-firmware-whence</td>
+                <td>20200316-106.fc31</td>
+                <td>noarch</td>
+                <td data-order="151473">147.9 kB</td>
+                <td class=>WHENCE License file</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lmdb-libs</td>
+                <td>0.9.23-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="169779">165.8 kB</td>
+                <td class=>Shared libraries for lmdb</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lshw</td>
+                <td>B.02.18-22.fc31</td>
+                <td>aarch64</td>
+                <td data-order="967157">944.5 kB</td>
+                <td>Hardware lister</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>lsscsi</td>
+                <td>0.30-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="181235">177.0 kB</td>
+                <td>List SCSI devices (or hosts) and associated information</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lua-libs</td>
+                <td>5.3.5-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="351440">343.2 kB</td>
+                <td class=>Libraries for lua</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lz4-libs</td>
+                <td>1.9.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="154751">151.1 kB</td>
+                <td class=>Libaries for lz4</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lzo</td>
+                <td>2.08-16.fc31</td>
+                <td>aarch64</td>
+                <td data-order="185829">181.5 kB</td>
+                <td class=>Data compression library with very fast (de)compression</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>man-db</td>
+                <td>2.8.4-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2697790">2.6 MB</td>
+                <td>Tools for searching and reading man pages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mozjs60</td>
+                <td>60.9.0-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="21938080">20.9 MB</td>
+                <td class=>SpiderMonkey JavaScript library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mpfr</td>
+                <td>3.1.6-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="617257">602.8 kB</td>
+                <td class=>A C library for multiple-precision floating-point computations</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>ncurses</td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>aarch64</td>
+                <td data-order="947183">925.0 kB</td>
+                <td>Ncurses support utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-base</td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>noarch</td>
+                <td data-order="281668">275.1 kB</td>
+                <td class=>Descriptions of common terminals</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-libs</td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1482664">1.4 MB</td>
+                <td class=>Ncurses libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nettle</td>
+                <td>3.5.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1249441">1.2 MB</td>
+                <td class=>A low-level cryptographic library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>newt</td>
+                <td>0.52.21-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="322316">314.8 kB</td>
+                <td class=>A library for text mode user interfaces</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nftables</td>
+                <td>1:0.9.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1017684">993.8 kB</td>
+                <td class=>Netfilter Tables userspace utillites</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>npth</td>
+                <td>1.6-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="100701">98.3 kB</td>
+                <td class=>The New GNU Portable Threads library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>numactl-libs</td>
+                <td>2.0.12-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="84784">82.8 kB</td>
+                <td class=>libnuma libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openldap</td>
+                <td>2.4.47-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1261534">1.2 MB</td>
+                <td class=>LDAP support libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssh</td>
+                <td>8.1p1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2140403">2.0 MB</td>
+                <td class=>An open source implementation of SSH protocol version 2</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>openssh-clients</td>
+                <td>8.1p1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3235384">3.1 MB</td>
+                <td>An open source SSH client applications</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>openssh-server</td>
+                <td>8.1p1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1254820">1.2 MB</td>
+                <td>An open source SSH server daemon</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssl</td>
+                <td>1:1.1.1d-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1205807">1.1 MB</td>
+                <td class=>Utilities from the general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssl-libs</td>
+                <td>1:1.1.1d-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4501394">4.3 MB</td>
+                <td class=>A general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssl-pkcs11</td>
+                <td>0.4.10-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="248578">242.8 kB</td>
+                <td class=>A PKCS#11 engine for use with OpenSSL</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>os-prober</td>
+                <td>1.77-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="192934">188.4 kB</td>
+                <td class=>Probes disks on the system for installed operating systems</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit</td>
+                <td>0.23.20-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1771388">1.7 MB</td>
+                <td class=>Library for loading and sharing PKCS#11 modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit-trust</td>
+                <td>0.23.20-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="544089">531.3 kB</td>
+                <td class=>System trust module from p11-kit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pam</td>
+                <td>1.3.1-21.fc31</td>
+                <td>aarch64</td>
+                <td data-order="5504436">5.2 MB</td>
+                <td class=>An extensible library which provides authentication for applications</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>parted</td>
+                <td>3.2.153-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2701978">2.6 MB</td>
+                <td>The GNU disk partition manipulation program</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>passwd</td>
+                <td>0.80-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="485677">474.3 kB</td>
+                <td>An utility for setting or changing passwords using PAM</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre</td>
+                <td>8.44-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="567168">553.9 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre2</td>
+                <td>10.34-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="720045">703.2 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>policycoreutils</td>
+                <td>2.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1300578">1.2 MB</td>
+                <td>SELinux policy core utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>polkit</td>
+                <td>0.116-4.fc31.1</td>
+                <td>aarch64</td>
+                <td data-order="673873">658.1 kB</td>
+                <td class=>An authorization framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>polkit-libs</td>
+                <td>0.116-4.fc31.1</td>
+                <td>aarch64</td>
+                <td data-order="268460">262.2 kB</td>
+                <td class=>Libraries for polkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>polkit-pkla-compat</td>
+                <td>0.1-15.fc31</td>
+                <td>aarch64</td>
+                <td data-order="179440">175.2 kB</td>
+                <td class=>Rules for polkit to add compatibility with pklocalauthority</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>popt</td>
+                <td>1.16-18.fc31</td>
+                <td>aarch64</td>
+                <td data-order="151654">148.1 kB</td>
+                <td class=>C library for parsing command line parameters</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>procps-ng</td>
+                <td>3.3.15-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1784732">1.7 MB</td>
+                <td>System and process monitoring utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>psmisc</td>
+                <td>23.3-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="908073">886.8 kB</td>
+                <td class=>Utilities for managing processes on your system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>publicsuffix-list-dafsa</td>
+                <td>20190417-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="64992">63.5 kB</td>
+                <td class=>Cross-vendor public domain suffix database in DAFSA form</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python-pip-wheel</td>
+                <td>19.1.1-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1241316">1.2 MB</td>
+                <td class=>The pip wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python-setuptools-wheel</td>
+                <td>41.6.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="360617">352.2 kB</td>
+                <td class=>The setuptools wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3</td>
+                <td>3.7.6-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="85285">83.3 kB</td>
+                <td class=>Interpreter of the Python programming language</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-configobj</td>
+                <td>5.0.6-16.fc31</td>
+                <td>noarch</td>
+                <td data-order="349542">341.3 kB</td>
+                <td class=>Config file reading, writing, and validation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-dateutil</td>
+                <td>1:2.8.0-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="776046">757.9 kB</td>
+                <td class=>Powerful extensions to the standard datetime module</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-dbus</td>
+                <td>1.2.8-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="583990">570.3 kB</td>
+                <td class=>D-Bus bindings for python3</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-decorator</td>
+                <td>4.4.0-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="60968">59.5 kB</td>
+                <td class=>Module to simplify usage of decorators in python3</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-distro</td>
+                <td>1.4.0-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="153468">149.9 kB</td>
+                <td class=>Linux Distribution - a Linux OS platform information API</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-dnf</td>
+                <td>4.2.18-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="1826357">1.7 MB</td>
+                <td class=>Python 3 interface to DNF</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-dnf-plugins-core</td>
+                <td>4.0.13-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="646904">631.7 kB</td>
+                <td class=>Core Plugins for DNF</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-ethtool</td>
+                <td>0.14-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="130333">127.3 kB</td>
+                <td class=>Python module to interface with ethtool</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-firewall</td>
+                <td>0.7.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="1810137">1.7 MB</td>
+                <td class=>Python3 bindings for firewalld</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-gobject-base</td>
+                <td>3.34.0-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1325700">1.3 MB</td>
+                <td class=>Python 3 bindings for GObject Introspection base package</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-gpg</td>
+                <td>1.13.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1492153">1.4 MB</td>
+                <td class=>gpgme bindings for Python 3</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-hawkey</td>
+                <td>0.43.1-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="316124">308.7 kB</td>
+                <td class=>Python 3 bindings for the hawkey library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-iniparse</td>
+                <td>0.4-34.fc31</td>
+                <td>noarch</td>
+                <td data-order="108820">106.3 kB</td>
+                <td class=>Python 2 Module for Accessing and Modifying Configuration Data in INI files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-inotify</td>
+                <td>0.9.6-16.fc31</td>
+                <td>noarch</td>
+                <td data-order="248370">242.5 kB</td>
+                <td class=>Monitor filesystem events with Python under Linux</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-libcomps</td>
+                <td>0.1.14-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="205595">200.8 kB</td>
+                <td class=>Python 3 bindings for libcomps library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-libdnf</td>
+                <td>0.43.1-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3874181">3.7 MB</td>
+                <td class=>Python 3 bindings for the libdnf library.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-librepo</td>
+                <td>1.11.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="179820">175.6 kB</td>
+                <td class=>Python 3 bindings for the librepo library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-libs</td>
+                <td>3.7.6-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="35173896">33.5 MB</td>
+                <td class=>Python runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-libselinux</td>
+                <td>2.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="750175">732.6 kB</td>
+                <td class=>SELinux python 3 bindings for libselinux</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-linux-procfs</td>
+                <td>0.6.1-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="92740">90.6 kB</td>
+                <td class=>Linux /proc abstraction classes</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-perf</td>
+                <td>5.5.9-200.fc31</td>
+                <td>aarch64</td>
+                <td data-order="380788">371.9 kB</td>
+                <td class=>Python bindings for apps which will manipulate perf events</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-pyudev</td>
+                <td>0.21.0-11.fc31</td>
+                <td>noarch</td>
+                <td data-order="322981">315.4 kB</td>
+                <td class=>A libudev binding</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-rpm</td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="467534">456.6 kB</td>
+                <td class=>Python 3 bindings for apps which will manipulate RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-schedutils</td>
+                <td>0.6-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="99411">97.1 kB</td>
+                <td class=>Linux scheduler python bindings</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-setuptools</td>
+                <td>41.6.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="3037838">2.9 MB</td>
+                <td class=>Easily build and distribute Python 3 packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-six</td>
+                <td>1.12.0-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="103441">101.0 kB</td>
+                <td class=>Python 2 and 3 compatibility utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-slip</td>
+                <td>0.6.4-16.fc31</td>
+                <td>noarch</td>
+                <td data-order="61304">59.9 kB</td>
+                <td class=>Convenience, extension and workaround code for Python 3.x</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-slip-dbus</td>
+                <td>0.6.4-16.fc31</td>
+                <td>noarch</td>
+                <td data-order="71233">69.6 kB</td>
+                <td class=>Convenience functions for dbus services in Python 3.x</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-subscription-manager-rhsm</td>
+                <td>1.25.9-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="434257">424.1 kB</td>
+                <td class=>A Python library to communicate with a Red Hat Unified Entitlement Platform</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-syspurpose</td>
+                <td>1.25.9-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="126679">123.7 kB</td>
+                <td class=>A commandline utility for declaring system syspurpose</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>qrencode-libs</td>
+                <td>4.0.2-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="185129">180.8 kB</td>
+                <td class=>QR Code encoding library - Shared libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>readline</td>
+                <td>8.0-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="586267">572.5 kB</td>
+                <td class=>A library for editing typed command lines</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rng-tools</td>
+                <td>6.9-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="167026">163.1 kB</td>
+                <td>Random number generator related utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rootfiles</td>
+                <td>8.1-25.fc31</td>
+                <td>noarch</td>
+                <td data-order="599">599.0 B</td>
+                <td>The basic required files for the root user's directory</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rpm</td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3189005">3.0 MB</td>
+                <td>The RPM package management system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rpm-build-libs</td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="204088">199.3 kB</td>
+                <td class=>Libraries for building RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rpm-libs</td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="820752">801.5 kB</td>
+                <td class=>Libraries for manipulating RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rpm-plugin-selinux</td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="69152">67.5 kB</td>
+                <td class=>Rpm plugin for SELinux functionality</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rpm-sign-libs</td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="69432">67.8 kB</td>
+                <td class=>Libraries for signing RPM packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sed</td>
+                <td>4.5-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="810158">791.2 kB</td>
+                <td class=>A GNU stream text editor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>selinux-policy</td>
+                <td>3.14.4-49.fc31</td>
+                <td>noarch</td>
+                <td data-order="25207">24.6 kB</td>
+                <td class=>SELinux policy configuration</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>selinux-policy-targeted</td>
+                <td>3.14.4-49.fc31</td>
+                <td>noarch</td>
+                <td data-order="53089924">50.6 MB</td>
+                <td>SELinux targeted base policy</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>setup</td>
+                <td>2.13.6-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>A set of system configuration and setup files</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>sg3_utils</td>
+                <td>1.42-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="5273591">5.0 MB</td>
+                <td>Utilities for devices that use SCSI command sets</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>sg3_utils-libs</td>
+                <td>1.42-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="242007">236.3 kB</td>
+                <td>Shared library for sg3_utils</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>shadow-utils</td>
+                <td>2:4.6-17.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4589696">4.4 MB</td>
+                <td>Utilities for managing accounts and shadow password files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>slang</td>
+                <td>2.3.2-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1609818">1.5 MB</td>
+                <td class=>The shared library for the S-Lang extension language</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>snappy</td>
+                <td>1.1.7-9.fc31</td>
+                <td>aarch64</td>
+                <td data-order="91885">89.7 kB</td>
+                <td class=>Fast compression and decompression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sqlite-libs</td>
+                <td>3.30.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1393596">1.3 MB</td>
+                <td class=>Shared library for the sqlite3 embeddable SQL database engine.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>squashfs-tools</td>
+                <td>4.3-22.fc31</td>
+                <td>aarch64</td>
+                <td data-order="516710">504.6 kB</td>
+                <td class=>Utility for the creation of squashfs filesystems</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sssd-client</td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="477427">466.2 kB</td>
+                <td class=>SSSD Client libraries for NSS and PAM</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>sssd-common</td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="6211557">5.9 MB</td>
+                <td>Common files for the SSSD</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>sssd-kcm</td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="482129">470.8 kB</td>
+                <td>An implementation of a Kerberos KCM server</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>subscription-manager</td>
+                <td>1.25.9-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4434394">4.2 MB</td>
+                <td>Tools and libraries for subscription and repository management</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>subscription-manager-rhsm-certificates</td>
+                <td>1.25.9-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="7411">7.2 kB</td>
+                <td class=>Certificates required to communicate with a Red Hat Unified Entitlement Platform</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>sudo</td>
+                <td>1.9.0-0.1.b1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4470626">4.3 MB</td>
+                <td>Allows restricted root access for specified users</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>systemd</td>
+                <td>243.7-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="15593816">14.9 MB</td>
+                <td>System and Service Manager</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-libs</td>
+                <td>243.7-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1781294">1.7 MB</td>
+                <td class=>systemd libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-pam</td>
+                <td>243.7-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="339224">331.3 kB</td>
+                <td class=>systemd PAM module</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-rpm-macros</td>
+                <td>243.7-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="5043">4.9 kB</td>
+                <td class=>Macros that define paths and scriptlets related to systemd</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-udev</td>
+                <td>243.7-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="9629192">9.2 MB</td>
+                <td class=>Rule-based device node and kernel event manager</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>teamd</td>
+                <td>1.29-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="437067">426.8 kB</td>
+                <td class=>Team network device control daemon</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>tss2</td>
+                <td>1331-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="8686089">8.3 MB</td>
+                <td class=>IBM's TCG Software Stack (TSS) for TPM 2.0 and related utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>tuned</td>
+                <td>2.13.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="844395">824.6 kB</td>
+                <td>A dynamic adaptive system tuning daemon</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>tzdata</td>
+                <td>2019c-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td class=>Timezone data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>usermode</td>
+                <td>1.112-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="938047">916.1 kB</td>
+                <td class=>Tools for certain user account management tasks</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>util-linux</td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="16225179">15.5 MB</td>
+                <td>A collection of basic system utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>vim-minimal</td>
+                <td>2:8.2.348-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1404403">1.3 MB</td>
+                <td>A minimal version of the VIM editor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>virt-what</td>
+                <td>1.19-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="108525">106.0 kB</td>
+                <td class=>Detect if we are running in a virtual machine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>which</td>
+                <td>2.21-15.fc31</td>
+                <td>aarch64</td>
+                <td data-order="126638">123.7 kB</td>
+                <td class=>Displays where a particular program in your path is located</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>xfsprogs</td>
+                <td>5.1.0-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="6476535">6.2 MB</td>
+                <td>Utilities for managing the XFS filesystem</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xz</td>
+                <td>5.2.4-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="544408">531.6 kB</td>
+                <td class=>LZMA compression utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xz-libs</td>
+                <td>5.2.4-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="241695">236.0 kB</td>
+                <td class=>Libraries for decoding LZMA compression</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>yum</td>
+                <td>4.2.18-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="20410">19.9 kB</td>
+                <td>Package manager</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>zchunk-libs</td>
+                <td>1.1.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="139082">135.8 kB</td>
+                <td class=>Zchunk library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>zlib</td>
+                <td>1.2.11-20.fc31</td>
+                <td>aarch64</td>
+                <td data-order="251183">245.3 kB</td>
+                <td class=>The compression and decompression library</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--rhel-8-baseos-comps-core--fedora-empty-base--repository-fedora-31--aarch64.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

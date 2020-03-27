@@ -1,0 +1,3261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-comps-rubyonrails--repository-fedora-31.html">
+                    Comps group rubyonrails for fedora-rawhide
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group rubyonrails for fedora-rawhide in Empty from Fedora 31 ppc64le
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group rubyonrails for fedora-rawhide <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> <a href="">Empty</a> </small>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora 31</a> </small>
+        <small class="text-muted"> for </small>
+        <small> ppc64le</small>
+    </h1>
+
+    <hr>
+
+    
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <dl>
+                        <dt>Configuration</dt>
+                        <dd><a href="config-workload--fedora-rawhide-comps-rubyonrails.html">fedora-rawhide-comps-rubyonrails.yaml</a></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ImageMagick</td>
+                <td>1:6.9.10.86-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1236421">1.2 MB</td>
+                <td class=>An X application for displaying and manipulating images</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ImageMagick-libs</td>
+                <td>1:6.9.10.86-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="14412736">13.7 MB</td>
+                <td class=>ImageMagick libraries to link with</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>LibRaw</td>
+                <td>0.19.5-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2277766">2.2 MB</td>
+                <td class=>Library for reading RAW files obtained from digital photo cameras</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>OpenEXR-libs</td>
+                <td>2.3.0-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="3797312">3.6 MB</td>
+                <td class=>OpenEXR runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adobe-mappings-cmap</td>
+                <td>20171205-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="13746679">13.1 MB</td>
+                <td class=>CMap resources for Adobe's character collections</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adobe-mappings-cmap-deprecated</td>
+                <td>20171205-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="596942">583.0 kB</td>
+                <td class=>Deprecated CMap resources for Adobe's character collections</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>adobe-mappings-pdf</td>
+                <td>20180407-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="4398414">4.2 MB</td>
+                <td class=>PDF mapping resources from Adobe</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>alternatives</td>
+                <td>1.11-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="93710">91.5 kB</td>
+                <td class=>A tool to maintain symbolic links determining default commands</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>atk</td>
+                <td>2.34.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1429110">1.4 MB</td>
+                <td class=>Interfaces for accessibility support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>avahi-libs</td>
+                <td>0.7-20.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="254944">249.0 kB</td>
+                <td class=>Libraries for avahi run-time use</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>basesystem</td>
+                <td>11-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The skeleton package which defines a simple Fedora system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bash</td>
+                <td>5.0.11-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="7995143">7.6 MB</td>
+                <td class=>The GNU Bourne Again shell</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bzip2-libs</td>
+                <td>1.0.8-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="147280">143.8 kB</td>
+                <td class=>Libraries for applications using bzip2</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ca-certificates</td>
+                <td>2020.2.40-1.1.fc31</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td class=>The Mozilla CA root certificate bundle</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cairo</td>
+                <td>1.16.0-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2453391">2.3 MB</td>
+                <td class=>A 2D graphics library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cairo-gobject</td>
+                <td>1.16.0-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="70608">69.0 kB</td>
+                <td class=>GObject bindings for cairo</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils</td>
+                <td>8.31-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="14051360">13.4 MB</td>
+                <td class=>A set of basic GNU tools commonly used in shell scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils-common</td>
+                <td>8.31-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="10348911">9.9 MB</td>
+                <td class=>coreutils common optional components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>crypto-policies</td>
+                <td>20191128-2.gitcd267a5.fc31</td>
+                <td>noarch</td>
+                <td data-order="195446">190.9 kB</td>
+                <td class=>System-wide crypto policies</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cups-libs</td>
+                <td>1:2.2.12-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="979916">956.9 kB</td>
+                <td class=>CUPS printing system - libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>dbus-libs</td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="553016">540.1 kB</td>
+                <td class=>Libraries for accessing D-BUS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>emacs-filesystem</td>
+                <td>1:26.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Emacs filesystem layout</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>expat</td>
+                <td>2.2.8-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="389459">380.3 kB</td>
+                <td class=>An XML parser library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-gpg-keys</td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="103813">101.4 kB</td>
+                <td class=>Fedora RPM keys</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release</td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release-common</td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="14359">14.0 kB</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-repos</td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="8785">8.6 kB</td>
+                <td class=>Fedora package repositories</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fftw-libs-double</td>
+                <td>3.3.8-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2239682">2.1 MB</td>
+                <td class=>FFTW library, double precision</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>filesystem</td>
+                <td>3.12-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The basic directory layout for a Linux system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fontconfig</td>
+                <td>2.13.92-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1417886">1.4 MB</td>
+                <td class=>Font configuration and customization library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fonts-filesystem</td>
+                <td>2.0.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Directories used by font packages</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>freetype</td>
+                <td>2.10.0-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1078035">1.0 MB</td>
+                <td class=>A free and portable font rendering engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fribidi</td>
+                <td>1.0.5-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="390461">381.3 kB</td>
+                <td class=>Library implementing the Unicode Bidirectional Algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gawk</td>
+                <td>5.0.1-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="3969630">3.8 MB</td>
+                <td class=>The GNU version of the AWK text processing utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gd</td>
+                <td>2.2.5-12.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="528851">516.5 kB</td>
+                <td class=>A graphics library for quick creation of PNG or JPEG images</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdbm-libs</td>
+                <td>1:1.18.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="290528">283.7 kB</td>
+                <td class=>Libraries files for gdbm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdk-pixbuf2</td>
+                <td>2.40.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2833802">2.7 MB</td>
+                <td class=>An image loading library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdk-pixbuf2-modules</td>
+                <td>2.40.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="909688">888.4 kB</td>
+                <td class=>Additional image modules for gdk-pixbuf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glib2</td>
+                <td>2.62.5-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="14437520">13.8 MB</td>
+                <td class=>A library of handy utility functions</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc</td>
+                <td>2.30-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="29487717">28.1 MB</td>
+                <td class=>The GNU libc libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-all-langpacks</td>
+                <td>2.30-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="217990208">207.9 MB</td>
+                <td class=>All language packs for glibc.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-common</td>
+                <td>2.30-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="3125546">3.0 MB</td>
+                <td class=>Common binaries and locale data for glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gmp</td>
+                <td>1:6.1.2-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1535132">1.5 MB</td>
+                <td class=>A GNU arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gnutls</td>
+                <td>3.6.11-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="3870879">3.7 MB</td>
+                <td class=>A TLS protocol implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>google-droid-sans-fonts</td>
+                <td>20120715-16.fc31</td>
+                <td>noarch</td>
+                <td data-order="6229278">5.9 MB</td>
+                <td class=>A humanist sans serif typeface</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>graphite2</td>
+                <td>1.3.13-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="346785">338.7 kB</td>
+                <td class=>Font rendering capabilities for complex non-Roman writing systems</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>graphviz</td>
+                <td>2.40.1-54.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="11055567">10.5 MB</td>
+                <td class=>Graph Visualization Tools</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>grep</td>
+                <td>3.3-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="882274">861.6 kB</td>
+                <td class=>Pattern matching utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gtk-update-icon-cache</td>
+                <td>3.24.13-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="99925">97.6 kB</td>
+                <td class=>Icon theme caching utility</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gtk2</td>
+                <td>2.24.32-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="16399693">15.6 MB</td>
+                <td class=>GTK+ graphical user interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gts</td>
+                <td>0.7.6-36.20121130.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1325962">1.3 MB</td>
+                <td class=>GNU Triangulated Surface Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>harfbuzz</td>
+                <td>2.6.1-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2457756">2.3 MB</td>
+                <td class=>Text shaping library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>hicolor-icon-theme</td>
+                <td>0.17-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="73932">72.2 kB</td>
+                <td class=>Basic requirement for icon themes</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ilmbase</td>
+                <td>2.3.0-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="858295">838.2 kB</td>
+                <td class=>Abstraction/convenience libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jasper-libs</td>
+                <td>2.0.14-9.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="548546">535.7 kB</td>
+                <td class=>Runtime libraries for jasper</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jbig2dec-libs</td>
+                <td>0.16-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="259187">253.1 kB</td>
+                <td class=>A decoder implementation of the JBIG2 image compression format</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>jbigkit-libs</td>
+                <td>2.1-17.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="189693">185.2 kB</td>
+                <td class=>JBIG1 lossless image compression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>js-coffee-script</td>
+                <td>1.10.0-12.fc31</td>
+                <td>noarch</td>
+                <td data-order="442872">432.5 kB</td>
+                <td class=>A programming that transcompiles to JavaScript - core compiler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>keyutils-libs</td>
+                <td>1.6-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="100575">98.2 kB</td>
+                <td class=>Key utilities library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>krb5-libs</td>
+                <td>1.17-46.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2920189">2.8 MB</td>
+                <td class=>The non-admin shared libraries used by Kerberos 5</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lasi</td>
+                <td>1.1.2-13.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="185424">181.1 kB</td>
+                <td class=>C++ library for creating Postscript documents</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lcms2</td>
+                <td>2.9-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="512809">500.8 kB</td>
+                <td class=>Color Management Engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libICE</td>
+                <td>1.0.10-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="224558">219.3 kB</td>
+                <td class=>X.Org X11 ICE runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libSM</td>
+                <td>1.2.3-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="130387">127.3 kB</td>
+                <td class=>X.Org X11 SM runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libX11</td>
+                <td>1.6.9-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1604728">1.5 MB</td>
+                <td class=>Core X11 protocol client library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libX11-common</td>
+                <td>1.6.9-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1339608">1.3 MB</td>
+                <td class=>Common data for libX11</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXau</td>
+                <td>1.0.9-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="122612">119.7 kB</td>
+                <td class=>Sample Authorization Protocol for X</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXaw</td>
+                <td>1.0.13-13.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="615397">601.0 kB</td>
+                <td class=>X Athena Widget Set</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXcomposite</td>
+                <td>0.4.4-17.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="93088">90.9 kB</td>
+                <td class=>X Composite Extension library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXcursor</td>
+                <td>1.1.15-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="76119">74.3 kB</td>
+                <td class=>Cursor management library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXdamage</td>
+                <td>1.1.4-17.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="87552">85.5 kB</td>
+                <td class=>X Damage extension library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXext</td>
+                <td>1.3.4-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="165758">161.9 kB</td>
+                <td class=>X.Org X11 libXext runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXfixes</td>
+                <td>5.0.3-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="77247">75.4 kB</td>
+                <td class=>X Fixes library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXft</td>
+                <td>2.3.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="191256">186.8 kB</td>
+                <td class=>X.Org X11 libXft runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXi</td>
+                <td>1.7.10-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="205867">201.0 kB</td>
+                <td class=>X.Org X11 libXi runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXinerama</td>
+                <td>1.1.4-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="72991">71.3 kB</td>
+                <td class=>X.Org X11 libXinerama runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXmu</td>
+                <td>1.1.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="375032">366.2 kB</td>
+                <td class=>X.Org X11 libXmu/libXmuu runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXpm</td>
+                <td>3.5.12-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="210103">205.2 kB</td>
+                <td class=>X.Org X11 libXpm runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXrandr</td>
+                <td>1.5.2-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="84762">82.8 kB</td>
+                <td class=>X.Org X11 libXrandr runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXrender</td>
+                <td>0.9.10-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="86107">84.1 kB</td>
+                <td class=>X.Org X11 libXrender runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXt</td>
+                <td>1.1.5-12.20190424gitba4ec9376.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="616887">602.4 kB</td>
+                <td class=>X.Org X11 libXt runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libXxf86vm</td>
+                <td>1.1.4-12.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="71368">69.7 kB</td>
+                <td class=>X.Org X11 libXxf86vm runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libacl</td>
+                <td>2.2.53-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="131096">128.0 kB</td>
+                <td class=>Dynamic library for access control list support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libattr</td>
+                <td>2.4.48-7.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="76570">74.8 kB</td>
+                <td class=>Dynamic library for extended attribute support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libblkid</td>
+                <td>2.34-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="470793">459.8 kB</td>
+                <td class=>Block device ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap</td>
+                <td>2.26-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="454634">444.0 kB</td>
+                <td class=>Library for getting and setting POSIX.1e capabilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcom_err</td>
+                <td>1.45.5-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="114825">112.1 kB</td>
+                <td class=>Common error description library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcroco</td>
+                <td>0.6.13-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="492300">480.8 kB</td>
+                <td class=>A CSS2 parsing library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libdatrie</td>
+                <td>0.2.9-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="103743">101.3 kB</td>
+                <td class=>Implementation of Double-Array structure for representing trie</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libffi</td>
+                <td>3.1-23.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="93580">91.4 kB</td>
+                <td class=>A portable foreign function interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libfontenc</td>
+                <td>1.1.3-11.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="102085">99.7 kB</td>
+                <td class=>X.Org X11 libfontenc runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcc</td>
+                <td>9.2.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="227072">221.8 kB</td>
+                <td class=>GCC version 9 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcrypt</td>
+                <td>1.8.5-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1257486">1.2 MB</td>
+                <td class=>A general-purpose cryptography library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgomp</td>
+                <td>9.2.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="441958">431.6 kB</td>
+                <td class=>GCC OpenMP v4.5 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgpg-error</td>
+                <td>1.36-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="884677">863.9 kB</td>
+                <td class=>Library for error values used by GnuPG components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgs</td>
+                <td>9.27-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="20303114">19.4 MB</td>
+                <td class=>Library providing Ghostcript's core functionality</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libidn</td>
+                <td>1.35-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="820073">800.9 kB</td>
+                <td class=>Internationalized Domain Name support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libidn2</td>
+                <td>2.3.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="346502">338.4 kB</td>
+                <td class=>Library to support IDNA2008 internationalized domain names</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libijs</td>
+                <td>0.35-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="108432">105.9 kB</td>
+                <td class=>IJS Raster Image Transport Protocol Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libimagequant</td>
+                <td>2.12.5-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="211685">206.7 kB</td>
+                <td class=>Palette quantization library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libjpeg-turbo</td>
+                <td>2.0.2-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="711106">694.4 kB</td>
+                <td class=>A MMX/SSE2/SIMD accelerated library for manipulating JPEG image files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>liblqr-1</td>
+                <td>0.4.2-13.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="189888">185.4 kB</td>
+                <td class=>LiquidRescale library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmcpp</td>
+                <td>2.7.2-24.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="219588">214.4 kB</td>
+                <td class=>Alternative C/C++ preprocessor (library build)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmount</td>
+                <td>2.34-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="627733">613.0 kB</td>
+                <td class=>Device mounting library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnghttp2</td>
+                <td>1.40.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="270372">264.0 kB</td>
+                <td class=>A library implementing the HTTP/2 protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libnsl2</td>
+                <td>1.2.0-5.20180605git4a062cf.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="221202">216.0 kB</td>
+                <td class=>Public client interface library for NIS(YP) and NIS+</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpaper</td>
+                <td>1.1.24-25.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="202846">198.1 kB</td>
+                <td class=>Library and tools for handling papersize</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpkgconf</td>
+                <td>1.6.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="153013">149.4 kB</td>
+                <td class=>Backend library for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpng</td>
+                <td>2:1.6.37-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="361699">353.2 kB</td>
+                <td class=>A library of functions for manipulating PNG image format files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libraqm</td>
+                <td>0.7.0-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="70033">68.4 kB</td>
+                <td class=>Complex Textlayout Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libreport-filesystem</td>
+                <td>2.12.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>Filesystem layout for libreport</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>librsvg2</td>
+                <td>2.46.4-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="4234622">4.0 MB</td>
+                <td class=>An SVG library based on cairo</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libselinux</td>
+                <td>2.9-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="330528">322.8 kB</td>
+                <td class=>SELinux library and simple utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsepol</td>
+                <td>2.9-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1108456">1.1 MB</td>
+                <td class=>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsigsegv</td>
+                <td>2.11-8.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="103242">100.8 kB</td>
+                <td class=>Library for handling page faults in user mode</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libstdc++</td>
+                <td>9.2.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2849681">2.7 MB</td>
+                <td class=>GNU Standard C++ Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtasn1</td>
+                <td>4.14-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="234895">229.4 kB</td>
+                <td class=>The ASN.1 library used in GNUTLS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libthai</td>
+                <td>0.1.28-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="824084">804.8 kB</td>
+                <td class=>Thai language support routines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtiff</td>
+                <td>4.0.10-8.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="672744">657.0 kB</td>
+                <td class=>Library of functions for manipulating TIFF format image files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtirpc</td>
+                <td>1.2.5-1.rc2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="281022">274.4 kB</td>
+                <td class=>Transport Independent RPC Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtool-ltdl</td>
+                <td>2.4.6-31.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="106122">103.6 kB</td>
+                <td class=>Runtime libraries for GNU Libtool Dynamic Module Loader</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libunistring</td>
+                <td>0.9.10-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2303627">2.2 MB</td>
+                <td class=>GNU Unicode string library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libuuid</td>
+                <td>2.34-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="70911">69.2 kB</td>
+                <td class=>Universally unique ID library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libuv</td>
+                <td>1:1.34.2-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="448339">437.8 kB</td>
+                <td class=>Platform layer for node.js</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libverto</td>
+                <td>0.3.0-8.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="74316">72.6 kB</td>
+                <td class=>Main loop abstraction library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwebp</td>
+                <td>1.0.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1058519">1.0 MB</td>
+                <td class=>Library and tools for the WebP graphics format</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libwmf-lite</td>
+                <td>0.2.12-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="233874">228.4 kB</td>
+                <td class=>Windows Metafile parser library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcb</td>
+                <td>1.13.1-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2206104">2.1 MB</td>
+                <td class=>A C binding to the X11 protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcrypt</td>
+                <td>4.4.15-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="334699">326.9 kB</td>
+                <td class=>Extended crypt library for descrypt, md5crypt, bcrypt, and others</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxml2</td>
+                <td>2.9.10-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2326428">2.2 MB</td>
+                <td class=>Library providing XML and HTML support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxslt</td>
+                <td>1.1.34-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="970532">947.8 kB</td>
+                <td class=>Library providing the Gnome XSLT engine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libyaml</td>
+                <td>0.2.2-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="212187">207.2 kB</td>
+                <td class=>YAML 1.1 parser and emitter written in C</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>lz4-libs</td>
+                <td>1.9.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="206575">201.7 kB</td>
+                <td class=>Libaries for lz4</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mcpp</td>
+                <td>2.7.2-24.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="115298">112.6 kB</td>
+                <td class=>Alternative C/C++ preprocessor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mpfr</td>
+                <td>3.1.6-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="892465">871.5 kB</td>
+                <td class=>A C library for multiple-precision floating-point computations</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses</td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1018295">994.4 kB</td>
+                <td class=>Ncurses support utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-base</td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>noarch</td>
+                <td data-order="281668">275.1 kB</td>
+                <td class=>Descriptions of common terminals</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-libs</td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2047696">2.0 MB</td>
+                <td class=>Ncurses libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>netpbm</td>
+                <td>10.89.00-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="622288">607.7 kB</td>
+                <td class=>A library for handling different graphics file formats</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nettle</td>
+                <td>3.5.1-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2015401">1.9 MB</td>
+                <td class=>A low-level cryptographic library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>nodejs</td>
+                <td>1:12.16.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="324302">316.7 kB</td>
+                <td>JavaScript runtime</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>nodejs-libs</td>
+                <td>1:12.16.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="56125303">53.5 MB</td>
+                <td class=>Node.js and v8 libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>npm</td>
+                <td>1:6.13.4-1.12.16.1.1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="16443504">15.7 MB</td>
+                <td class=>Node.js Package Manager</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openjpeg2</td>
+                <td>2.3.1-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="482910">471.6 kB</td>
+                <td class=>C-Library for JPEG 2000</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssl</td>
+                <td>1:1.1.1d-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1346079">1.3 MB</td>
+                <td class=>Utilities from the general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssl-libs</td>
+                <td>1:1.1.1d-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="5222546">5.0 MB</td>
+                <td class=>A general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit</td>
+                <td>0.23.20-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2100148">2.0 MB</td>
+                <td class=>Library for loading and sharing PKCS#11 modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit-trust</td>
+                <td>0.23.20-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="609993">595.7 kB</td>
+                <td class=>System trust module from p11-kit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pango</td>
+                <td>1.44.7-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1182698">1.1 MB</td>
+                <td class=>System for layout and rendering of internationalized text</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre</td>
+                <td>8.44-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="631696">616.9 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre2</td>
+                <td>10.34-7.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="850157">830.2 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pixman</td>
+                <td>0.38.4-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="633415">618.6 kB</td>
+                <td class=>Pixel manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf</td>
+                <td>1.6.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="104285">101.8 kB</td>
+                <td class=>Package compiler and linker metadata toolkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-m4</td>
+                <td>1.6.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td class=>m4 macros for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-pkg-config</td>
+                <td>1.6.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="464">464.0 B</td>
+                <td class=>pkgconf shim to provide /usr/bin/pkg-config</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>procps-ng</td>
+                <td>3.3.15-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1846708">1.8 MB</td>
+                <td class=>System and process monitoring utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python-pip-wheel</td>
+                <td>19.1.1-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1241316">1.2 MB</td>
+                <td class=>The pip wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python-setuptools-wheel</td>
+                <td>41.6.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="360617">352.2 kB</td>
+                <td class=>The setuptools wheel</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3</td>
+                <td>3.7.6-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="85765">83.8 kB</td>
+                <td class=>Interpreter of the Python programming language</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>python3-libs</td>
+                <td>3.7.6-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="36405368">34.7 MB</td>
+                <td class=>Python runtime libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>readline</td>
+                <td>8.0-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="687251">671.1 kB</td>
+                <td class=>A library for editing typed command lines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ruby</td>
+                <td>2.6.5-124.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="148032">144.6 kB</td>
+                <td class=>An interpreter of object-oriented scripting language</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>ruby-devel</td>
+                <td>2.6.5-124.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1229472">1.2 MB</td>
+                <td>A Ruby development environment</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ruby-libs</td>
+                <td>2.6.5-124.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="16448295">15.7 MB</td>
+                <td class=>Libraries necessary to run Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-abrt</td>
+                <td>0.3.0-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="5636">5.5 kB</td>
+                <td>ABRT support for Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-actioncable</td>
+                <td>5.2.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="113739">111.1 kB</td>
+                <td class=>WebSocket framework for Rails</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-actionmailer</td>
+                <td>1:5.2.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="84162">82.2 kB</td>
+                <td class=>Email composition, delivery, and receiving framework (part of Rails)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-actionpack</td>
+                <td>1:5.2.3-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="765888">747.9 kB</td>
+                <td class=>Web-flow and rendering framework putting the VC in MVC (part of Rails)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-actionview</td>
+                <td>5.2.3-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="672869">657.1 kB</td>
+                <td class=>Rendering framework putting the V in MVC (part of Rails)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-activejob</td>
+                <td>5.2.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="84042">82.1 kB</td>
+                <td class=>Job framework with pluggable queues</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-activemodel</td>
+                <td>5.2.3-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="215338">210.3 kB</td>
+                <td class=>A toolkit for building modeling frameworks (part of Rails)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-activerecord</td>
+                <td>1:5.2.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1422032">1.4 MB</td>
+                <td class=>Object-relational mapper framework (part of Rails)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-activestorage</td>
+                <td>5.2.3-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="145197">141.8 kB</td>
+                <td class=>Local and cloud file storage framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-activesupport</td>
+                <td>1:5.2.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1869604">1.8 MB</td>
+                <td class=>A support libraries and Ruby core extensions extracted from the Rails framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-addressable</td>
+                <td>2.5.2-5.fc31</td>
+                <td>noarch</td>
+                <td data-order="278079">271.6 kB</td>
+                <td class=>URI Implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-arel</td>
+                <td>9.0.0-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="113241">110.6 kB</td>
+                <td class=>Arel is a SQL AST manager for Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-bcrypt</td>
+                <td>3.1.12-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="85110">83.1 kB</td>
+                <td>Wrapper around bcrypt() password hashing algorithm</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-bigdecimal</td>
+                <td>1.4.1-124.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="222117">216.9 kB</td>
+                <td class=>BigDecimal provides arbitrary-precision floating point decimal arithmetic</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-bindex</td>
+                <td>0.5.0-11.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="73739">72.0 kB</td>
+                <td class=>Bindings for your Ruby exceptions</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-bootsnap</td>
+                <td>1.3.2-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="108929">106.4 kB</td>
+                <td>Boot large ruby/rails apps faster</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-builder</td>
+                <td>3.2.3-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="32030">31.3 kB</td>
+                <td class=>Builders for MarkUp</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-bundler</td>
+                <td>1.17.2-124.fc31</td>
+                <td>noarch</td>
+                <td data-order="982161">959.1 kB</td>
+                <td class=>Library and utilities to manage a Ruby application's gem dependencies</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-byebug</td>
+                <td>11.1.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="315382">308.0 kB</td>
+                <td>Ruby 2.0 fast debugger - base + CLI</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-capybara</td>
+                <td>3.8.1-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="1070371">1.0 MB</td>
+                <td>Capybara aims to simplify the process of integration testing Rack applications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-childprocess</td>
+                <td>1.0.1-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="100042">97.7 kB</td>
+                <td class=>A gem for controlling external programs running in the background</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-coffee-rails</td>
+                <td>4.2.2-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="4817">4.7 kB</td>
+                <td>Coffee Script adapter for the Rails asset pipeline</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-coffee-script</td>
+                <td>2.4.1-9.fc31</td>
+                <td>noarch</td>
+                <td data-order="4649">4.5 kB</td>
+                <td class=>Ruby CoffeeScript Compiler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-coffee-script-source</td>
+                <td>1.10.0-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="1145">1.1 kB</td>
+                <td class=>The CoffeeScript Compiler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-concurrent-ruby</td>
+                <td>1.0.5-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="478082">466.9 kB</td>
+                <td class=>Modern concurrency tools for Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-crass</td>
+                <td>1.0.4-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="43703">42.7 kB</td>
+                <td class=>CSS parser based on the CSS Syntax Level 3 spec</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-erubi</td>
+                <td>1.7.0-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="11306">11.0 kB</td>
+                <td class=>Small ERB Implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-execjs</td>
+                <td>2.7.0-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="26052">25.4 kB</td>
+                <td class=>Run JavaScript code from Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-ffi</td>
+                <td>1.10.0-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="534349">521.8 kB</td>
+                <td class=>FFI Extensions for Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-globalid</td>
+                <td>0.4.2-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="22700">22.2 kB</td>
+                <td class=>Refer to any model with a URI: gid://app/class/id</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-i18n</td>
+                <td>1.1.1-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="136332">133.1 kB</td>
+                <td class=>New wave Internationalization support for Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-io-console</td>
+                <td>0.4.7-124.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="71328">69.7 kB</td>
+                <td class=>IO/Console is a simple console utilizing library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-jbuilder</td>
+                <td>2.7.0-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="29183">28.5 kB</td>
+                <td>Create JSON structures via a Builder-style DSL</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-json</td>
+                <td>2.2.0-201.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="207045">202.2 kB</td>
+                <td>A JSON implementation in Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-listen</td>
+                <td>3.1.5-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="64102">62.6 kB</td>
+                <td>Listen to file modifications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-loofah</td>
+                <td>2.2.3-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="49218">48.1 kB</td>
+                <td class=>Manipulate and transform HTML/XML documents and fragments</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-mail</td>
+                <td>2.6.4-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="2356836">2.2 MB</td>
+                <td class=>Mail provides a nice Ruby DSL for making, sending and reading emails</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-marcel</td>
+                <td>0.3.2-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="9487">9.3 kB</td>
+                <td class=>Simple mime type detection using magic numbers, file names, and extensions</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-method_source</td>
+                <td>0.8.2-10.fc31</td>
+                <td>noarch</td>
+                <td data-order="16573">16.2 kB</td>
+                <td class=>Retrieve the source code for a method</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-mime-types</td>
+                <td>3.2.2-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="49378">48.2 kB</td>
+                <td class=>The mime-types library provides a library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-mime-types-data</td>
+                <td>3.2019.0331-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="1083553">1.0 MB</td>
+                <td class=>A registry for information about MIME media type definitions</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-mimemagic</td>
+                <td>0.3.2-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="2160249">2.1 MB</td>
+                <td class=>Fast mime detection by extension or content</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-mini_magick</td>
+                <td>4.9.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="46713">45.6 kB</td>
+                <td>Manipulate images with minimal use of memory via ImageMagick</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-mini_mime</td>
+                <td>1.0.0-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="215088">210.0 kB</td>
+                <td class=>A lightweight mime type lookup toy</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-minitest</td>
+                <td>5.11.3-204.fc31</td>
+                <td>noarch</td>
+                <td data-order="121072">118.2 kB</td>
+                <td class=>minitest provides a complete suite of testing facilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-msgpack</td>
+                <td>1.1.0-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="176654">172.5 kB</td>
+                <td class=>MessagePack, a binary-based efficient data interchange format</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-multi_json</td>
+                <td>1.13.1-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="34209">33.4 kB</td>
+                <td class=>A common interface to multiple JSON libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-nio4r</td>
+                <td>2.4.0-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="164685">160.8 kB</td>
+                <td class=>New IO for Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-nokogiri</td>
+                <td>1.10.9-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="603027">588.9 kB</td>
+                <td class=>An HTML, XML, SAX, and Reader parser</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-openssl</td>
+                <td>2.1.2-124.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="626456">611.8 kB</td>
+                <td class=>OpenSSL provides SSL, TLS and general purpose cryptography</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-psych</td>
+                <td>3.1.0-124.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="169949">166.0 kB</td>
+                <td class=>A libyaml wrapper for Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-public_suffix</td>
+                <td>3.0.1-5.fc31</td>
+                <td>noarch</td>
+                <td data-order="234435">228.9 kB</td>
+                <td class=>Domain name parser based on the Public Suffix List</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-puma</td>
+                <td>3.12.0-2.fc30</td>
+                <td>ppc64le</td>
+                <td data-order="273551">267.1 kB</td>
+                <td>A simple, fast, threaded, and highly concurrent HTTP 1.1 server</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-racc</td>
+                <td>1.4.16-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="246205">240.4 kB</td>
+                <td class=>LALR(1) parser generator</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-rack</td>
+                <td>1:2.0.8-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="286122">279.4 kB</td>
+                <td class=>A modular Ruby webserver interface</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-rack-test</td>
+                <td>0.8.3-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="29910">29.2 kB</td>
+                <td class=>Simple testing API built on Rack</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-rails</td>
+                <td>1:5.2.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="3355">3.3 kB</td>
+                <td>Full-stack web application framework</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-rails-dom-testing</td>
+                <td>2.0.2-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="24193">23.6 kB</td>
+                <td class=>Dom and Selector assertions for Rails applications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-rails-html-sanitizer</td>
+                <td>1.0.4-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="16772">16.4 kB</td>
+                <td class=>This gem is responsible to sanitize HTML fragments in Rails applications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-railties</td>
+                <td>5.2.3-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="602367">588.2 kB</td>
+                <td class=>Tools for creating, working with, and running Rails applications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-rake</td>
+                <td>12.3.2-201.fc31.1</td>
+                <td>noarch</td>
+                <td data-order="212491">207.5 kB</td>
+                <td class=>Rake is a Make-like program implemented in Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-rb-inotify</td>
+                <td>0.10.0-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="25912">25.3 kB</td>
+                <td class=>A Ruby wrapper for Linux inotify, using FFI</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-rubyzip</td>
+                <td>1.1.7-10.fc31</td>
+                <td>noarch</td>
+                <td data-order="118590">115.8 kB</td>
+                <td class=>A ruby module for reading and writing zip files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-sass</td>
+                <td>3.7.3-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="823809">804.5 kB</td>
+                <td class=>A powerful but elegant CSS compiler that makes CSS fun again</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-sass-rails</td>
+                <td>5.0.7-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="16590">16.2 kB</td>
+                <td>Sass adapter for the Rails asset pipeline</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-selenium-webdriver</td>
+                <td>2.45.0-11.fc31</td>
+                <td>noarch</td>
+                <td data-order="6367755">6.1 MB</td>
+                <td>The next generation developer focused tool for automated testing of webapps</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-spring</td>
+                <td>2.0.0-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="104203">101.8 kB</td>
+                <td>Rails application preloader</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-spring-watcher-listen</td>
+                <td>2.0.1-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="4481">4.4 kB</td>
+                <td>Makes spring watch files using the listen gem</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-sprockets</td>
+                <td>3.7.2-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="227246">221.9 kB</td>
+                <td class=>Rack-based asset packaging system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-sprockets-rails</td>
+                <td>3.2.1-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="28875">28.2 kB</td>
+                <td class=>Sprockets Rails integration</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-sqlite3</td>
+                <td>1.4.1-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="139657">136.4 kB</td>
+                <td>Allows Ruby scripts to interface with a SQLite3 database</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-thor</td>
+                <td>0.20.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="175586">171.5 kB</td>
+                <td class=>Thor is a toolkit for building powerful command-line interfaces</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-thread_safe</td>
+                <td>0.3.6-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="80701">78.8 kB</td>
+                <td class=>Thread-safe collections and utilities for Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-tilt</td>
+                <td>2.0.8-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="75510">73.7 kB</td>
+                <td class=>Generic interface to multiple Ruby template engines</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-turbolinks</td>
+                <td>5.1.1-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="6080">5.9 kB</td>
+                <td>Turbolinks makes navigating your web application faster</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-turbolinks-source</td>
+                <td>5.1.0-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="39464">38.5 kB</td>
+                <td class=>Turbolinks JavaScript assets</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-tzinfo</td>
+                <td>1.2.5-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="155201">151.6 kB</td>
+                <td class=>Daylight savings aware timezone library</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-uglifier</td>
+                <td>3.2.0-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="650089">634.9 kB</td>
+                <td>Ruby wrapper for UglifyJS JavaScript compressor</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>rubygem-web-console</td>
+                <td>3.5.1-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="61728">60.3 kB</td>
+                <td>A debugging tool for your Ruby on Rails applications</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-websocket</td>
+                <td>1.2.2-11.fc31</td>
+                <td>noarch</td>
+                <td data-order="60043">58.6 kB</td>
+                <td class=>Universal Ruby library to handle WebSocket protocol</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-websocket-driver</td>
+                <td>0.6.5-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="111073">108.5 kB</td>
+                <td class=>WebSocket protocol handler with pluggable I/O</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-websocket-extensions</td>
+                <td>0.1.2-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="8803">8.6 kB</td>
+                <td class=>Generic extension manager for WebSocket connections</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygem-xpath</td>
+                <td>3.1.0-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="11559">11.3 kB</td>
+                <td class=>Generate XPath expressions from Ruby</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubygems</td>
+                <td>3.0.3-124.fc31</td>
+                <td>noarch</td>
+                <td data-order="970502">947.8 kB</td>
+                <td class=>The Ruby standard for packaging ruby libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>rubypick</td>
+                <td>1.1.1-11.fc31</td>
+                <td>noarch</td>
+                <td data-order="4555">4.4 kB</td>
+                <td class=>Stub to allow choosing Ruby runtime</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sed</td>
+                <td>4.5-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="888598">867.8 kB</td>
+                <td class=>A GNU stream text editor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>setup</td>
+                <td>2.13.6-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td class=>A set of system configuration and setup files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>shared-mime-info</td>
+                <td>1.15-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2581384">2.5 MB</td>
+                <td class=>Shared MIME information database</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sqlite-libs</td>
+                <td>3.30.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1491860">1.4 MB</td>
+                <td class=>Shared library for the sqlite3 embeddable SQL database engine.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>systemd-libs</td>
+                <td>243.7-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2240462">2.1 MB</td>
+                <td class=>systemd libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>tzdata</td>
+                <td>2019c-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td class=>Timezone data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-bookman-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1428518">1.4 MB</td>
+                <td class=>URW Bookman font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-c059-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1460348">1.4 MB</td>
+                <td class=>C059 font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-d050000l-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="86572">84.5 kB</td>
+                <td class=>D050000L font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="5478">5.3 kB</td>
+                <td class=>Core Font Set containing 35 freely distributable fonts from (URW)++</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-fonts-common</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="38217">37.3 kB</td>
+                <td class=>Common files of the (URW)++ Level 2 Core Font Set</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-gothic-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1216672">1.2 MB</td>
+                <td class=>URW Gothic font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-nimbus-mono-ps-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1099749">1.0 MB</td>
+                <td class=>Nimbus Mono PS font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-nimbus-roman-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1429675">1.4 MB</td>
+                <td class=>Nimbus Roman font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-nimbus-sans-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="2469317">2.4 MB</td>
+                <td class=>Nimbus Sans font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-p052-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1557171">1.5 MB</td>
+                <td class=>P052 font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-standard-symbols-ps-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="45184">44.1 kB</td>
+                <td class=>Standard Symbols PS font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>urw-base35-z003-fonts</td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="400088">390.7 kB</td>
+                <td class=>Z003 font family [part of Level 2 Core Font Set]</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>web-assets-filesystem</td>
+                <td>5-10.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The basic directory layout for Web Assets</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xorg-x11-font-utils</td>
+                <td>1:7.5-43.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="496690">485.0 kB</td>
+                <td class=>X.Org X11 font utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xorg-x11-fonts-ISO8859-1-100dpi</td>
+                <td>7.5-23.fc31</td>
+                <td>noarch</td>
+                <td data-order="1070824">1.0 MB</td>
+                <td class=>A set of 100dpi ISO-8859-1 fonts for X</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xorg-x11-server-utils</td>
+                <td>7.7-32.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1275575">1.2 MB</td>
+                <td class=>X.Org X11 X server utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>xz-libs</td>
+                <td>5.2.4-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="355127">346.8 kB</td>
+                <td class=>Libraries for decoding LZMA compression</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>zlib</td>
+                <td>1.2.11-20.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="254719">248.7 kB</td>
+                <td class=>The compression and decompression library</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-comps-rubyonrails--fedora-empty-base--repository-fedora-31--ppc64le.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

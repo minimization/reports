@@ -99,13 +99,13 @@
             <a class="nav-link active" href="envs.html">Environments</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="repos.html">Repositories</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link " href="views.html">Views</a>
+            <a class="nav-link " href="views.html">User-defined views</a>
         </li>
         <li class="nav-item">
             <a class="nav-link " href="labels.html">Labels</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="repos.html">Repositories</a>
         </li>
     </ul>
 
@@ -116,6 +116,7 @@
             <tr class="sort_control_row">
                 <th>Name</th>
                 <th>Results</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -126,7 +127,13 @@
                     
                     <a class="card-link" href="env-overview--eln-base--repository-fedora-rawhide.html">
                         Fedora rawhide
+                        
                     </a>
+                    
+                </td>
+                <td>
+                    
+                    <span class="text-success">Success</span>
                     
                 </td>
             </tr>
@@ -137,11 +144,18 @@
                     
                     <a class="card-link" href="env-overview--fedora-container-base--repository-fedora-31.html">
                         Fedora 31
+                        
                     </a>
                     
                     <a class="card-link" href="env-overview--fedora-container-base--repository-fedora-rawhide.html">
                         Fedora rawhide
+                        
                     </a>
+                    
+                </td>
+                <td>
+                    
+                    <span class="text-success">Success</span>
                     
                 </td>
             </tr>
@@ -152,11 +166,18 @@
                     
                     <a class="card-link" href="env-overview--fedora-empty-base--repository-fedora-31.html">
                         Fedora 31
+                        
                     </a>
                     
                     <a class="card-link" href="env-overview--fedora-empty-base--repository-fedora-rawhide.html">
                         Fedora rawhide
+                        
                     </a>
+                    
+                </td>
+                <td>
+                    
+                    <span class="text-success">Success</span>
                     
                 </td>
             </tr>
@@ -167,11 +188,18 @@
                     
                     <a class="card-link" href="env-overview--minimal-base-2-dnf--repository-fedora-31.html">
                         Fedora 31
+                        
                     </a>
                     
                     <a class="card-link" href="env-overview--minimal-base-2-dnf--repository-fedora-rawhide.html">
                         Fedora rawhide
+                        
                     </a>
+                    
+                </td>
+                <td>
+                    
+                    <span class="text-success">Success</span>
                     
                 </td>
             </tr>
@@ -182,11 +210,18 @@
                     
                     <a class="card-link" href="env-overview--minimal-base-2-microdnf--repository-fedora-31.html">
                         Fedora 31
+                        
                     </a>
                     
                     <a class="card-link" href="env-overview--minimal-base-2-microdnf--repository-fedora-rawhide.html">
                         Fedora rawhide
+                        
                     </a>
+                    
+                </td>
+                <td>
+                    
+                    <span class="text-success">Success</span>
                     
                 </td>
             </tr>
@@ -197,11 +232,18 @@
                     
                     <a class="card-link" href="env-overview--minimal-langpack-base-2--repository-fedora-31.html">
                         Fedora 31
+                        
                     </a>
                     
                     <a class="card-link" href="env-overview--minimal-langpack-base-2--repository-fedora-rawhide.html">
                         Fedora rawhide
+                        
                     </a>
+                    
+                </td>
+                <td>
+                    
+                    <span class="text-success">Success</span>
                     
                 </td>
             </tr>
@@ -214,7 +256,6 @@
     $(document).ready(function () {
         $('#table_packages').DataTable({
             paging: false,
-            filter: false,
             info: false
         });
     });

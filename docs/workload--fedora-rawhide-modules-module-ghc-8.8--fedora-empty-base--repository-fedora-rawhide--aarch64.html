@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-modules-module-ghc-8.8--repository-fedora-rawhide.html">
+                    Module ghc:8.8 for fedora-rawhide-modules
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Module ghc:8.8 for fedora-rawhide-modules in Empty from Fedora rawhide aarch64
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Module ghc:8.8 for fedora-rawhide-modules <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> <a href="">Empty</a> </small>
+        <small class="text-muted"> from </small>
+        <small> <a href="">Fedora rawhide</a> </small>
+        <small class="text-muted"> for </small>
+        <small> aarch64</small>
+    </h1>
+
+    <hr>
+
+    
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <dl>
+                        <dt>Configuration</dt>
+                        <dd><a href="config-workload--fedora-rawhide-modules-module-ghc-8.8.html">fedora-rawhide-modules-module-ghc-8.8.yaml</a></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>alternatives</td>
+                <td>1.11-6.fc32</td>
+                <td>aarch64</td>
+                <td data-order="92438">90.3 kB</td>
+                <td class=>A tool to maintain symbolic links determining default commands</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>basesystem</td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The skeleton package which defines a simple Fedora system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>bash</td>
+                <td>5.0.11-2.fc32</td>
+                <td>aarch64</td>
+                <td data-order="7666492">7.3 MB</td>
+                <td class=>The GNU Bourne Again shell</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>binutils</td>
+                <td>2.34-2.fc32</td>
+                <td>aarch64</td>
+                <td data-order="30274317">28.9 MB</td>
+                <td class=>A GNU collection of binary utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>binutils-gold</td>
+                <td>2.34-2.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3395856">3.2 MB</td>
+                <td class=>The GOLD linker, a faster alternative to the BFD linker</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ca-certificates</td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td class=>The Mozilla CA root certificate bundle</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils</td>
+                <td>8.31-10.fc32</td>
+                <td>aarch64</td>
+                <td data-order="9462888">9.0 MB</td>
+                <td class=>A set of basic GNU tools commonly used in shell scripts</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>coreutils-common</td>
+                <td>8.31-10.fc32</td>
+                <td>aarch64</td>
+                <td data-order="10349258">9.9 MB</td>
+                <td class=>coreutils common optional components</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>cpp</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="24078062">23.0 MB</td>
+                <td class=>The C Preprocessor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>crypto-policies</td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td class=>System-wide crypto policies</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-gpg-keys</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td class=>Fedora RPM keys</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-release-common</td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td class=>Fedora release files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>fedora-repos</td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td class=>Fedora package repositories</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>filesystem</td>
+                <td>3.14-2.fc32</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>The basic directory layout for a Linux system</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gcc</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="70044721">66.8 MB</td>
+                <td class=>Various compilers (C, C++, Objective-C, ...)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gdbm-libs</td>
+                <td>1:1.18.1-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="175480">171.4 kB</td>
+                <td class=>Libraries files for gdbm</td>
+            </tr>
+            
+            
+            
+            <tr class="required">
+                <td data-order="0">(required)</td>
+                <td>ghc</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td>Glasgow Haskell Compiler</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-Cabal</td>
+                <td>2.4.0.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="35616437">34.0 MB</td>
+                <td class=>Haskell Cabal library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-Cabal-devel</td>
+                <td>2.4.0.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="233925758">223.1 MB</td>
+                <td class=>Haskell Cabal library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-array</td>
+                <td>0.5.3.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="813505">794.4 kB</td>
+                <td class=>Haskell array library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-array-devel</td>
+                <td>0.5.3.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="5534322">5.3 MB</td>
+                <td class=>Haskell array library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-base</td>
+                <td>4.12.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="23356270">22.3 MB</td>
+                <td class=>Haskell base library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-base-devel</td>
+                <td>4.12.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="124555706">118.8 MB</td>
+                <td class=>Haskell base library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-binary</td>
+                <td>0.8.6.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="947675">925.5 kB</td>
+                <td class=>Haskell binary library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-binary-devel</td>
+                <td>0.8.6.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="5505600">5.3 MB</td>
+                <td class=>Haskell binary library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-bytestring</td>
+                <td>0.10.8.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1362472">1.3 MB</td>
+                <td class=>Haskell bytestring library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-bytestring-devel</td>
+                <td>0.10.8.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="8252570">7.9 MB</td>
+                <td class=>Haskell bytestring library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-compiler</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="82301106">78.5 MB</td>
+                <td class=>GHC compiler and utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-containers</td>
+                <td>0.6.0.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="4632143">4.4 MB</td>
+                <td class=>Haskell containers library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-containers-devel</td>
+                <td>0.6.0.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="27906114">26.6 MB</td>
+                <td class=>Haskell containers library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-deepseq</td>
+                <td>1.4.4.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="204913">200.1 kB</td>
+                <td class=>Haskell deepseq library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-deepseq-devel</td>
+                <td>1.4.4.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="939368">917.4 kB</td>
+                <td class=>Haskell deepseq library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-devel</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td class=>GHC development libraries meta package</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-directory</td>
+                <td>1.3.3.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="620270">605.7 kB</td>
+                <td class=>Haskell directory library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-directory-devel</td>
+                <td>1.3.3.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3265849">3.1 MB</td>
+                <td class=>Haskell directory library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-filepath</td>
+                <td>1.4.2.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="272852">266.5 kB</td>
+                <td class=>Haskell filepath library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-filepath-devel</td>
+                <td>1.4.2.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1336908">1.3 MB</td>
+                <td class=>Haskell filepath library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghc</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="94632667">90.2 MB</td>
+                <td class=>Haskell ghc library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghc-boot</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="745123">727.7 kB</td>
+                <td class=>Haskell ghc-boot library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghc-boot-devel</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="5441162">5.2 MB</td>
+                <td class=>Haskell ghc-boot library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghc-boot-th</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="309475">302.2 kB</td>
+                <td class=>Haskell ghc-boot-th library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghc-boot-th-devel</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1677219">1.6 MB</td>
+                <td class=>Haskell ghc-boot-th library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghc-compact</td>
+                <td>0.1.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="71866">70.2 kB</td>
+                <td class=>Haskell ghc-compact library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghc-compact-devel</td>
+                <td>0.1.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="329801">322.1 kB</td>
+                <td class=>Haskell ghc-compact library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghc-devel</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="274573680">261.9 MB</td>
+                <td class=>Haskell ghc library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghc-heap</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="487079">475.7 kB</td>
+                <td class=>Haskell ghc-heap library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghc-heap-devel</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2450727">2.3 MB</td>
+                <td class=>Haskell ghc-heap library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghci</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3067535">2.9 MB</td>
+                <td class=>Haskell ghci library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-ghci-devel</td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="23025035">22.0 MB</td>
+                <td class=>Haskell ghci library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-haskeline</td>
+                <td>0.7.4.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2318946">2.2 MB</td>
+                <td class=>Haskell haskeline library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-haskeline-devel</td>
+                <td>0.7.4.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="13867301">13.2 MB</td>
+                <td class=>Haskell haskeline library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-hpc</td>
+                <td>0.6.0.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="347549">339.4 kB</td>
+                <td class=>Haskell hpc library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-hpc-devel</td>
+                <td>0.6.0.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1573662">1.5 MB</td>
+                <td class=>Haskell hpc library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-libiserv</td>
+                <td>8.6.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="72119">70.4 kB</td>
+                <td class=>Haskell libiserv library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-libiserv-devel</td>
+                <td>8.6.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="151615">148.1 kB</td>
+                <td class=>Haskell libiserv library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-mtl</td>
+                <td>2.2.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="338607">330.7 kB</td>
+                <td class=>Haskell mtl library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-mtl-devel</td>
+                <td>2.2.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2147007">2.0 MB</td>
+                <td class=>Haskell mtl library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-parsec</td>
+                <td>3.1.13.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1021868">997.9 kB</td>
+                <td class=>Haskell parsec library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-parsec-devel</td>
+                <td>3.1.13.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="6098357">5.8 MB</td>
+                <td class=>Haskell parsec library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-pretty</td>
+                <td>1.1.3.6-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="625389">610.7 kB</td>
+                <td class=>Haskell pretty library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-pretty-devel</td>
+                <td>1.1.3.6-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3738838">3.6 MB</td>
+                <td class=>Haskell pretty library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-process</td>
+                <td>1.6.5.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="346561">338.4 kB</td>
+                <td class=>Haskell process library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-process-devel</td>
+                <td>1.6.5.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2014565">1.9 MB</td>
+                <td class=>Haskell process library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-stm</td>
+                <td>2.5.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="209139">204.2 kB</td>
+                <td class=>Haskell stm library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-stm-devel</td>
+                <td>2.5.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1077895">1.0 MB</td>
+                <td class=>Haskell stm library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-template-haskell</td>
+                <td>2.14.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="4814918">4.6 MB</td>
+                <td class=>Haskell template-haskell library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-template-haskell-devel</td>
+                <td>2.14.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="30258647">28.9 MB</td>
+                <td class=>Haskell template-haskell library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-terminfo</td>
+                <td>0.4.1.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="347403">339.3 kB</td>
+                <td class=>Haskell terminfo library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-terminfo-devel</td>
+                <td>0.4.1.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1851015">1.8 MB</td>
+                <td class=>Haskell terminfo library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-text</td>
+                <td>1.2.3.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2907435">2.8 MB</td>
+                <td class=>Haskell text library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-text-devel</td>
+                <td>1.2.3.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="18393628">17.5 MB</td>
+                <td class=>Haskell text library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-time</td>
+                <td>1.8.0.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1314278">1.3 MB</td>
+                <td class=>Haskell time library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-time-devel</td>
+                <td>1.8.0.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="7854630">7.5 MB</td>
+                <td class=>Haskell time library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-transformers</td>
+                <td>0.5.6.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1954159">1.9 MB</td>
+                <td class=>Haskell transformers library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-transformers-devel</td>
+                <td>0.5.6.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="12823052">12.2 MB</td>
+                <td class=>Haskell transformers library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-unix</td>
+                <td>2.7.2.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1253619">1.2 MB</td>
+                <td class=>Haskell unix library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-unix-devel</td>
+                <td>2.7.2.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="7607388">7.3 MB</td>
+                <td class=>Haskell unix library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-xhtml</td>
+                <td>3000.2.2.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="622953">608.4 kB</td>
+                <td class=>Haskell xhtml library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ghc-xhtml-devel</td>
+                <td>3000.2.2.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3059549">2.9 MB</td>
+                <td class=>Haskell xhtml library development files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc</td>
+                <td>2.31-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="28637424">27.3 MB</td>
+                <td class=>The GNU libc libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-all-langpacks</td>
+                <td>2.31-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="222208346">211.9 MB</td>
+                <td class=>All language packs for glibc.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-common</td>
+                <td>2.31-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="8421835">8.0 MB</td>
+                <td class=>Common binaries and locale data for glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-devel</td>
+                <td>2.31-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1184528">1.1 MB</td>
+                <td class=>Object files for development using standard C libraries.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>glibc-headers</td>
+                <td>2.31-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2026635">1.9 MB</td>
+                <td class=>Header files for development using standard C libraries.</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gmp</td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>aarch64</td>
+                <td data-order="605396">591.2 kB</td>
+                <td class=>A GNU arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gmp-c++</td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>aarch64</td>
+                <td data-order="70184">68.5 kB</td>
+                <td class=>C++ bindings for the GNU MP arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>gmp-devel</td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>aarch64</td>
+                <td data-order="354049">345.8 kB</td>
+                <td class=>Development tools for the GNU MP arbitrary precision library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>grep</td>
+                <td>3.3-4.fc32</td>
+                <td>aarch64</td>
+                <td data-order="836402">816.8 kB</td>
+                <td class=>Pattern matching utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>isl</td>
+                <td>0.16.1-10.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3283073">3.1 MB</td>
+                <td class=>Integer point manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>kernel-headers</td>
+                <td>5.6.0-0.rc7.git0.1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="5048828">4.8 MB</td>
+                <td class=>Header files for the Linux kernel for use by glibc</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libacl</td>
+                <td>2.2.53-5.fc32</td>
+                <td>aarch64</td>
+                <td data-order="70440">68.8 kB</td>
+                <td class=>Dynamic library for access control list support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libasan</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1219064">1.2 MB</td>
+                <td class=>The Address Sanitizer runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libatomic</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="70384">68.7 kB</td>
+                <td class=>The GNU Atomic library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libattr</td>
+                <td>2.4.48-8.fc32</td>
+                <td>aarch64</td>
+                <td data-order="70730">69.1 kB</td>
+                <td class=>Dynamic library for extended attribute support</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libcap</td>
+                <td>2.26-7.fc32</td>
+                <td>aarch64</td>
+                <td data-order="442922">432.5 kB</td>
+                <td class=>Library for getting and setting POSIX.1e capabilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libedit</td>
+                <td>3.1-32.20191231cvs.fc32</td>
+                <td>aarch64</td>
+                <td data-order="285933">279.2 kB</td>
+                <td class=>The NetBSD Editline library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libffi</td>
+                <td>3.1-24.fc32</td>
+                <td>aarch64</td>
+                <td data-order="86564">84.5 kB</td>
+                <td class=>A portable foreign function interface library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libffi-devel</td>
+                <td>3.1-24.fc32</td>
+                <td>aarch64</td>
+                <td data-order="24196">23.6 kB</td>
+                <td class=>Development files for libffi</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgcc</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="226888">221.6 kB</td>
+                <td class=>GCC version 10 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libgomp</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="389766">380.6 kB</td>
+                <td class=>GCC OpenMP v4.5 shared support library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libmpc</td>
+                <td>1.1.0-8.fc32</td>
+                <td>aarch64</td>
+                <td data-order="151605">148.1 kB</td>
+                <td class=>C library for multiple precision complex arithmetic</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libpkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="71933">70.2 kB</td>
+                <td class=>Backend library for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libselinux</td>
+                <td>3.0-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="206216">201.4 kB</td>
+                <td class=>SELinux library and simple utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libsepol</td>
+                <td>3.0-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="769032">751.0 kB</td>
+                <td class=>SELinux binary policy manipulation library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libstdc++</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2199085">2.1 MB</td>
+                <td class=>GNU Standard C++ Library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libtasn1</td>
+                <td>4.16.0-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="225292">220.0 kB</td>
+                <td class=>The ASN.1 library used in GNUTLS</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libubsan</td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="419880">410.0 kB</td>
+                <td class=>The Undefined Behavior Sanitizer runtime library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcrypt</td>
+                <td>4.4.15-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="269659">263.3 kB</td>
+                <td class=>Extended crypt library for descrypt, md5crypt, bcrypt, and others</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>libxcrypt-devel</td>
+                <td>4.4.15-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="30986">30.3 kB</td>
+                <td class=>Development files for libxcrypt</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>llvm6.0</td>
+                <td>6.0.1-10.fc32</td>
+                <td>aarch64</td>
+                <td data-order="11019855">10.5 MB</td>
+                <td class=>The Low Level Virtual Machine</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>llvm6.0-libs</td>
+                <td>6.0.1-10.fc32</td>
+                <td>aarch64</td>
+                <td data-order="52393167">50.0 MB</td>
+                <td class=>LLVM shared libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>mpfr</td>
+                <td>4.0.2-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="606787">592.6 kB</td>
+                <td class=>A C library for multiple-precision floating-point computations</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>aarch64</td>
+                <td data-order="930845">909.0 kB</td>
+                <td class=>Ncurses support utilities</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-base</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td class=>Descriptions of common terminals</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-c++-libs</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>aarch64</td>
+                <td data-order="272664">266.3 kB</td>
+                <td class=>Ncurses C++ bindings</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-devel</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>aarch64</td>
+                <td data-order="844644">824.8 kB</td>
+                <td class=>Development files for the ncurses library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>ncurses-libs</td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1240280">1.2 MB</td>
+                <td class=>Ncurses libraries</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>openssl-libs</td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3656794">3.5 MB</td>
+                <td class=>A general purpose cryptography library with TLS implementation</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit</td>
+                <td>0.23.20-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1772572">1.7 MB</td>
+                <td class=>Library for loading and sharing PKCS#11 modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>p11-kit-trust</td>
+                <td>0.23.20-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="544689">531.9 kB</td>
+                <td class=>System trust module from p11-kit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre</td>
+                <td>8.44-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="567256">554.0 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pcre2</td>
+                <td>10.34-7.fc32</td>
+                <td>aarch64</td>
+                <td data-order="720181">703.3 kB</td>
+                <td class=>Perl-compatible regular expression library</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Carp</td>
+                <td>1.50-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="47889">46.8 kB</td>
+                <td class=>Alternative warn and die for modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Errno</td>
+                <td>1.30-451.fc32</td>
+                <td>aarch64</td>
+                <td data-order="9524">9.3 kB</td>
+                <td class=>System errno constants</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Exporter</td>
+                <td>5.74-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="55358">54.1 kB</td>
+                <td class=>Implements default import method for modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-File-Path</td>
+                <td>2.16-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="65104">63.6 kB</td>
+                <td class=>Create or remove directory trees</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-IO</td>
+                <td>1.40-451.fc32</td>
+                <td>aarch64</td>
+                <td data-order="190792">186.3 kB</td>
+                <td class=>Perl input/output modules</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-PathTools</td>
+                <td>3.78-441.fc32</td>
+                <td>aarch64</td>
+                <td data-order="231509">226.1 kB</td>
+                <td class=>PathTools Perl module (Cwd, File::Spec)</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Scalar-List-Utils</td>
+                <td>3:1.54-440.fc32</td>
+                <td>aarch64</td>
+                <td data-order="146470">143.0 kB</td>
+                <td class=>A selection of general-utility scalar and list subroutines</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Socket</td>
+                <td>4:2.029-5.fc32</td>
+                <td>aarch64</td>
+                <td data-order="144520">141.1 kB</td>
+                <td class=>Networking constants and support functions</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Text-Tabs+Wrap</td>
+                <td>2013.0523-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="24827">24.2 kB</td>
+                <td class=>Expand tabs and do simple line wrapping</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-Unicode-Normalize</td>
+                <td>1.26-440.fc32</td>
+                <td>aarch64</td>
+                <td data-order="699127">682.7 kB</td>
+                <td class=>Unicode Normalization Forms</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-constant</td>
+                <td>1.33-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="27104">26.5 kB</td>
+                <td class=>Perl pragma to declare constants</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-interpreter</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>aarch64</td>
+                <td data-order="15821963">15.1 MB</td>
+                <td class=>Standalone executable Perl interpreter</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-libs</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>aarch64</td>
+                <td data-order="7643823">7.3 MB</td>
+                <td class=>The libraries for the perl run-time</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-macros</td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>aarch64</td>
+                <td data-order="5643">5.5 kB</td>
+                <td class=>Macros for rpmbuild</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-parent</td>
+                <td>1:0.238-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="9535">9.3 kB</td>
+                <td class=>Establish an ISA relationship with base classes at compile time</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-threads</td>
+                <td>1:2.22-442.fc32</td>
+                <td>aarch64</td>
+                <td data-order="138940">135.7 kB</td>
+                <td class=>Perl interpreter-based threads</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>perl-threads-shared</td>
+                <td>1.60-441.fc32</td>
+                <td>aarch64</td>
+                <td data-order="106671">104.2 kB</td>
+                <td class=>Perl extension for sharing data structures between threads</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf</td>
+                <td>1.6.3-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="101381">99.0 kB</td>
+                <td class=>Package compiler and linker metadata toolkit</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-m4</td>
+                <td>1.6.3-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td class=>m4 macros for pkgconf</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>pkgconf-pkg-config</td>
+                <td>1.6.3-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="464">464.0 B</td>
+                <td class=>pkgconf shim to provide /usr/bin/pkg-config</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>sed</td>
+                <td>4.5-5.fc32</td>
+                <td>aarch64</td>
+                <td data-order="784926">766.5 kB</td>
+                <td class=>A GNU stream text editor</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>setup</td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td class=>A set of system configuration and setup files</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>tzdata</td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td class=>Timezone data</td>
+            </tr>
+            
+            
+            
+            <tr class="dependency">
+                <td class="text-muted" data-order="3"></td>
+                <td>zlib</td>
+                <td>1.2.11-21.fc32</td>
+                <td>aarch64</td>
+                <td data-order="236591">231.0 kB</td>
+                <td class=>The compression and decompression library</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-modules-module-ghc-8.8--fedora-empty-base--repository-fedora-rawhide--aarch64.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>
