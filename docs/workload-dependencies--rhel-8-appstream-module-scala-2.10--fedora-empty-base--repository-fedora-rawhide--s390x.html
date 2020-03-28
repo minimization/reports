@@ -1,0 +1,5298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--rhel-8-appstream-module-scala-2.10--repository-fedora-rawhide.html">
+                    Module scala:2.10 for rhel-8-appstream
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Module scala:2.10 for rhel-8-appstream in Empty from Fedora rawhide s390x
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Module scala:2.10 for rhel-8-appstream <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora rawhide</small>
+        <small class="text-muted"> for </small>
+        <small> s390x</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--rhel-8-appstream-module-scala-2.10--fedora-empty-base--repository-fedora-rawhide--s390x.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--rhel-8-appstream-module-scala-2.10--fedora-empty-base--repository-fedora-rawhide--s390x.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alternatives
+                </td>
+                <td>1.11-6.fc32</td>
+                <td>s390x</td>
+                <td data-order="59470">58.1 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    apache-commons-cli
+                </td>
+                <td>1.4-8.fc32</td>
+                <td>noarch</td>
+                <td data-order="91810">89.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    apache-commons-lang
+                </td>
+                <td>2.6-27.fc32</td>
+                <td>noarch</td>
+                <td data-order="321407">313.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    apache-commons-logging
+                </td>
+                <td>1.2-20.fc32</td>
+                <td>noarch</td>
+                <td data-order="181812">177.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xbean-4.15-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    autoconf
+                </td>
+                <td>2.69-33.fc32</td>
+                <td>noarch</td>
+                <td data-order="2323018">2.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    <li>libtool-2.4.6-33.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    automake
+                </td>
+                <td>1.16.1-14.fc32</td>
+                <td>noarch</td>
+                <td data-order="1801124">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    <li>libtool-2.4.6-33.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    avahi-libs
+                </td>
+                <td>0.7-23.fc32</td>
+                <td>s390x</td>
+                <td data-order="158848">155.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cups-libs-1:2.3.1-5.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    basesystem
+                </td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bash
+                </td>
+                <td>5.0.11-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="7988290">7.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>binutils-2.34-2.fc32.s390x</li>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>copy-jdk-configs-3.7-5.fc32.noarch</li>
+    
+    <li>filesystem-3.14-2.fc32.s390x</li>
+    
+    <li>freetype-2.10.1-2.fc32.s390x</li>
+    
+    <li>glibc-common-2.31-1.fc32.s390x</li>
+    
+    <li>glibc-headers-2.31-1.fc32.s390x</li>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>libsepol-3.0-3.fc32.s390x</li>
+    
+    <li>log4j12-1.2.17-26.fc32.noarch</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    binutils
+                </td>
+                <td>2.34-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="29755525">28.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-gold-2.34-2.fc32.s390x</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    binutils-gold
+                </td>
+                <td>2.34-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="6094856">5.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bzip2-libs
+                </td>
+                <td>1.0.8-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="82720">80.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>freetype-2.10.1-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ca-certificates
+                </td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    copy-jdk-configs
+                </td>
+                <td>3.7-5.fc32</td>
+                <td>noarch</td>
+                <td data-order="16778">16.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils
+                </td>
+                <td>8.31-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="7947816">7.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.s390x</li>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>glibc-headers-2.31-1.fc32.s390x</li>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    <li>javapackages-tools-5.3.0-9.fc32.noarch</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils-common
+                </td>
+                <td>8.31-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="10349258">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cpp
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="22104254">21.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    crypto-policies
+                </td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cups-libs
+                </td>
+                <td>1:2.3.1-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="764694">746.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-libs
+                </td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="461256">450.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>avahi-libs-0.7-23.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    emacs-filesystem
+                </td>
+                <td>1:26.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-gpg-keys
+                </td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-repos-32-0.7.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release
+                </td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    <li>fedora-repos-32-0.7.noarch</li>
+    
+    <li>setup-2.13.6-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release-common
+                </td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-32-0.8.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-repos
+                </td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    filesystem
+                </td>
+                <td>3.14-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-9.fc32.noarch</li>
+    
+    <li>bash-5.0.11-2.fc32.s390x</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    findutils
+                </td>
+                <td>1:4.7.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="1929747">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>javapackages-tools-5.3.0-9.fc32.noarch</li>
+    
+    <li>libtool-2.4.6-33.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    freetype
+                </td>
+                <td>2.10.1-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="1018746">994.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gawk
+                </td>
+                <td>5.0.1-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="3132228">3.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gc
+                </td>
+                <td>8.0.4-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="292064">285.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gcc
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="65445514">62.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtool-2.4.6-33.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdbm-libs
+                </td>
+                <td>1:1.18.1-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="121280">118.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="15051098">14.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>alternatives-1.11-6.fc32.s390x</li>
+    
+    <li>avahi-libs-0.7-23.fc32.s390x</li>
+    
+    <li>bash-5.0.11-2.fc32.s390x</li>
+    
+    <li>binutils-2.34-2.fc32.s390x</li>
+    
+    <li>binutils-gold-2.34-2.fc32.s390x</li>
+    
+    <li>bzip2-libs-1.0.8-2.fc32.s390x</li>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>cups-libs-1:2.3.1-5.fc32.s390x</li>
+    
+    <li>dbus-libs-1:1.12.16-4.fc32.s390x</li>
+    
+    <li>findutils-1:4.7.0-3.fc32.s390x</li>
+    
+    <li>freetype-2.10.1-2.fc32.s390x</li>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    <li>gc-8.0.4-3.fc32.s390x</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>gdbm-libs-1:1.18.1-3.fc32.s390x</li>
+    
+    <li>glibc-all-langpacks-2.31-1.fc32.s390x</li>
+    
+    <li>glibc-common-2.31-1.fc32.s390x</li>
+    
+    <li>glibc-devel-2.31-1.fc32.s390x</li>
+    
+    <li>glibc-headers-2.31-1.fc32.s390x</li>
+    
+    <li>gmp-1:6.1.2-13.fc32.s390x</li>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>grep-3.3-4.fc32.s390x</li>
+    
+    <li>groff-base-1.22.3-21.fc32.s390x</li>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    <li>isl-0.16.1-10.fc32.s390x</li>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    <li>keyutils-libs-1.6-4.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>libacl-2.2.53-5.fc32.s390x</li>
+    
+    <li>libasan-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libatomic-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libattr-2.4.48-8.fc32.s390x</li>
+    
+    <li>libcap-2.26-7.fc32.s390x</li>
+    
+    <li>libcom_err-1.45.5-3.fc32.s390x</li>
+    
+    <li>libffi-3.1-24.fc32.s390x</li>
+    
+    <li>libgcrypt-1.8.5-3.fc32.s390x</li>
+    
+    <li>libgomp-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libgpg-error-1.36-3.fc32.s390x</li>
+    
+    <li>libidn2-2.3.0-2.fc32.s390x</li>
+    
+    <li>libjpeg-turbo-2.0.4-1.fc32.s390x</li>
+    
+    <li>libmpc-1.1.0-8.fc32.s390x</li>
+    
+    <li>libpkgconf-1.6.3-3.fc32.s390x</li>
+    
+    <li>libpng-2:1.6.37-3.fc32.s390x</li>
+    
+    <li>libselinux-3.0-3.fc32.s390x</li>
+    
+    <li>libsepol-3.0-3.fc32.s390x</li>
+    
+    <li>libsigsegv-2.11-10.fc32.s390x</li>
+    
+    <li>libstdc++-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libtasn1-4.16.0-1.fc32.s390x</li>
+    
+    <li>libtool-ltdl-2.4.6-33.fc32.s390x</li>
+    
+    <li>libubsan-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libunistring-0.9.10-7.fc32.s390x</li>
+    
+    <li>libverto-0.3.0-9.fc32.s390x</li>
+    
+    <li>libxcrypt-4.4.15-1.fc32.s390x</li>
+    
+    <li>lksctp-tools-1.0.18-4.fc32.s390x</li>
+    
+    <li>lua-5.3.5-7.fc32.s390x</li>
+    
+    <li>lua-libs-5.3.5-7.fc32.s390x</li>
+    
+    <li>lua-posix-33.3.1-16.fc32.s390x</li>
+    
+    <li>lz4-libs-1.9.1-2.fc32.s390x</li>
+    
+    <li>m4-1.4.18-12.fc32.s390x</li>
+    
+    <li>make-1:4.2.1-16.fc32.s390x</li>
+    
+    <li>mpfr-4.0.2-3.fc32.s390x</li>
+    
+    <li>ncurses-6.1-15.20191109.fc32.s390x</li>
+    
+    <li>ncurses-libs-6.1-15.20191109.fc32.s390x</li>
+    
+    <li>nettle-3.5.1-5.fc32.s390x</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.s390x</li>
+    
+    <li>p11-kit-0.23.20-1.fc32.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.s390x</li>
+    
+    <li>pcre-8.44-1.fc32.s390x</li>
+    
+    <li>pcre2-10.34-7.fc32.s390x</li>
+    
+    <li>perl-Data-Dumper-2.174-443.fc32.s390x</li>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    <li>perl-IO-1.40-451.fc32.s390x</li>
+    
+    <li>perl-MIME-Base64-3.15-440.fc32.s390x</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.s390x</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.54-440.fc32.s390x</li>
+    
+    <li>perl-Socket-4:2.029-5.fc32.s390x</li>
+    
+    <li>perl-Storable-1:3.15-443.fc32.s390x</li>
+    
+    <li>perl-Unicode-Normalize-1.26-440.fc32.s390x</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-libs-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-threads-1:2.22-442.fc32.s390x</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.s390x</li>
+    
+    <li>pkgconf-1.6.3-3.fc32.s390x</li>
+    
+    <li>readline-8.0-4.fc32.s390x</li>
+    
+    <li>sed-4.5-5.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    <li>tar-2:1.32-4.fc32.s390x</li>
+    
+    <li>which-2.21-17.fc32.s390x</li>
+    
+    <li>xz-libs-5.2.4-8.fc32.s390x</li>
+    
+    <li>zlib-1.2.11-21.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-all-langpacks
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="222208346">211.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-common
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="8138585">7.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.s390x</li>
+    
+    <li>glibc-all-langpacks-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-devel
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1538419">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libxcrypt-devel-4.4.15-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-headers
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="2034654">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-devel-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp
+                </td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>s390x</td>
+                <td data-order="715572">698.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    <li>isl-0.16.1-10.fc32.s390x</li>
+    
+    <li>libmpc-1.1.0-8.fc32.s390x</li>
+    
+    <li>mpfr-4.0.2-3.fc32.s390x</li>
+    
+    <li>nettle-3.5.1-5.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gnutls
+                </td>
+                <td>3.6.12-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="2806070">2.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cups-libs-1:2.3.1-5.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    grep
+                </td>
+                <td>3.3-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="868610">848.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    groff-base
+                </td>
+                <td>1.22.3-21.fc32</td>
+                <td>s390x</td>
+                <td data-order="4621587">4.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    guile22
+                </td>
+                <td>2.2.6-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="46276645">44.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>make-1:4.2.1-16.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    hawtjni
+                </td>
+                <td>1.17-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="142399">139.1 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    hawtjni-runtime
+                </td>
+                <td>1.17-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="71821">70.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    <li>jansi-1.18-3.fc32.noarch</li>
+    
+    <li>jansi-native-1.8-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    isl
+                </td>
+                <td>0.16.1-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="4074065">3.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    jansi
+                </td>
+                <td>1.18-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="115448">112.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>jline-2.14.6-6.fc32.noarch</li>
+    
+    <li>scala-2.10.6-17.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    jansi-native
+                </td>
+                <td>1.8-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="105985">103.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>jansi-1.18-3.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    java-1.8.0-openjdk-headless
+                </td>
+                <td>1:1.8.0.242.b08-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="118081038">112.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>apache-commons-cli-1.4-8.fc32.noarch</li>
+    
+    <li>apache-commons-lang-2.6-27.fc32.noarch</li>
+    
+    <li>apache-commons-logging-1.2-20.fc32.noarch</li>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    <li>hawtjni-runtime-1.17-2.fc32.noarch</li>
+    
+    <li>jansi-1.18-3.fc32.noarch</li>
+    
+    <li>jansi-native-1.8-2.fc32.s390x</li>
+    
+    <li>javapackages-tools-5.3.0-9.fc32.noarch</li>
+    
+    <li>jline-2.14.6-6.fc32.noarch</li>
+    
+    <li>log4j12-1.2.17-26.fc32.noarch</li>
+    
+    <li>objectweb-asm-7.0-4.fc32.noarch</li>
+    
+    <li>scala-2.10.6-17.fc32.noarch</li>
+    
+    <li>slf4j-1.7.30-1.fc32.noarch</li>
+    
+    <li>xbean-4.15-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    javapackages-filesystem
+                </td>
+                <td>5.3.0-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="1935">1.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>apache-commons-cli-1.4-8.fc32.noarch</li>
+    
+    <li>apache-commons-lang-2.6-27.fc32.noarch</li>
+    
+    <li>apache-commons-logging-1.2-20.fc32.noarch</li>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    <li>hawtjni-runtime-1.17-2.fc32.noarch</li>
+    
+    <li>jansi-1.18-3.fc32.noarch</li>
+    
+    <li>jansi-native-1.8-2.fc32.s390x</li>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    <li>javapackages-tools-5.3.0-9.fc32.noarch</li>
+    
+    <li>jline-2.14.6-6.fc32.noarch</li>
+    
+    <li>log4j12-1.2.17-26.fc32.noarch</li>
+    
+    <li>objectweb-asm-7.0-4.fc32.noarch</li>
+    
+    <li>scala-2.10.6-17.fc32.noarch</li>
+    
+    <li>slf4j-1.7.30-1.fc32.noarch</li>
+    
+    <li>xbean-4.15-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    javapackages-tools
+                </td>
+                <td>5.3.0-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="70329">68.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>objectweb-asm-7.0-4.fc32.noarch</li>
+    
+    <li>scala-2.10.6-17.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    jline
+                </td>
+                <td>2.14.6-6.fc32</td>
+                <td>noarch</td>
+                <td data-order="172369">168.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>scala-2.10.6-17.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kernel-headers
+                </td>
+                <td>5.6.0-0.rc7.git0.1.fc32</td>
+                <td>s390x</td>
+                <td data-order="5146292">4.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-headers-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    keyutils-libs
+                </td>
+                <td>1.6-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="51143">49.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    krb5-libs
+                </td>
+                <td>1.18-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="2474131">2.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cups-libs-1:2.3.1-5.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libacl
+                </td>
+                <td>2.2.53-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="41296">40.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>sed-4.5-5.fc32.s390x</li>
+    
+    <li>tar-2:1.32-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libasan
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="1496320">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libatomic
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="28560">27.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libattr
+                </td>
+                <td>2.4.48-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="25178">24.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>libacl-2.2.53-5.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap
+                </td>
+                <td>2.26-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="122258">119.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcom_err
+                </td>
+                <td>1.45.5-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="61385">59.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi
+                </td>
+                <td>3.1-24.fc32</td>
+                <td>s390x</td>
+                <td data-order="57380">56.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    <li>p11-kit-0.23.20-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcc
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="173032">169.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.s390x</li>
+    
+    <li>binutils-gold-2.34-2.fc32.s390x</li>
+    
+    <li>gc-8.0.4-3.fc32.s390x</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>glibc-2.31-1.fc32.s390x</li>
+    
+    <li>groff-base-1.22.3-21.fc32.s390x</li>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    <li>libasan-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libstdc++-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libubsan-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcrypt
+                </td>
+                <td>1.8.5-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="1043742">1019.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgomp
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="467430">456.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgpg-error
+                </td>
+                <td>1.36-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="811413">792.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgcrypt-1.8.5-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libidn2
+                </td>
+                <td>2.3.0-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="257742">251.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libjpeg-turbo
+                </td>
+                <td>2.0.4-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="527386">515.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmpc
+                </td>
+                <td>1.1.0-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="130597">127.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cpp-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpkgconf
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="71589">69.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-1.6.3-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpng
+                </td>
+                <td>2:1.6.37-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="251203">245.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>freetype-2.10.1-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="213984">209.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>findutils-1:4.7.0-3.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>sed-4.5-5.fc32.s390x</li>
+    
+    <li>tar-2:1.32-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsepol
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="944296">922.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-3.0-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsigsegv
+                </td>
+                <td>2.11-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="45122">44.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libstdc++
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="2673989">2.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.s390x</li>
+    
+    <li>binutils-gold-2.34-2.fc32.s390x</li>
+    
+    <li>gc-8.0.4-3.fc32.s390x</li>
+    
+    <li>groff-base-1.22.3-21.fc32.s390x</li>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    <li>libasan-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libubsan-10.0.1-0.9.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtasn1
+                </td>
+                <td>4.16.0-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="179812">175.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtool
+                </td>
+                <td>2.4.6-33.fc32</td>
+                <td>s390x</td>
+                <td data-order="2687544">2.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtool-ltdl
+                </td>
+                <td>2.4.6-33.fc32</td>
+                <td>s390x</td>
+                <td data-order="76034">74.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libubsan
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="493144">481.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libunistring
+                </td>
+                <td>0.9.10-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="1655419">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    <li>libidn2-2.3.0-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libverto
+                </td>
+                <td>0.3.0-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="27620">27.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt
+                </td>
+                <td>4.4.15-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="289699">282.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    <li>libxcrypt-devel-4.4.15-1.fc32.s390x</li>
+    
+    <li>lua-posix-33.3.1-16.fc32.s390x</li>
+    
+    <li>perl-libs-4:5.30.2-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt-devel
+                </td>
+                <td>4.4.15-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="30986">30.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-devel-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lksctp-tools
+                </td>
+                <td>1.0.18-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="260494">254.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    log4j12
+                </td>
+                <td>1.2.17-26.fc32</td>
+                <td>noarch</td>
+                <td data-order="532175">519.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xbean-4.15-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lua
+                </td>
+                <td>5.3.5-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="732512">715.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>copy-jdk-configs-3.7-5.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lua-libs
+                </td>
+                <td>5.3.5-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="426544">416.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>lua-5.3.5-7.fc32.s390x</li>
+    
+    <li>lua-posix-33.3.1-16.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lua-posix
+                </td>
+                <td>33.3.1-16.fc32</td>
+                <td>s390x</td>
+                <td data-order="1214403">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>copy-jdk-configs-3.7-5.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lz4-libs
+                </td>
+                <td>1.9.1-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="145175">141.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    m4
+                </td>
+                <td>1.4.18-12.fc32</td>
+                <td>s390x</td>
+                <td data-order="426384">416.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    make
+                </td>
+                <td>1:4.2.1-16.fc32</td>
+                <td>s390x</td>
+                <td data-order="1484488">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mpfr
+                </td>
+                <td>4.0.2-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="651259">636.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cpp-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libmpc-1.1.0-8.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>s390x</td>
+                <td data-order="650741">635.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>perl-Term-Cap-1.17-440.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-base
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-libs-6.1-15.20191109.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-libs
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>s390x</td>
+                <td data-order="1089136">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>bash-5.0.11-2.fc32.s390x</li>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    <li>lua-posix-33.3.1-16.fc32.s390x</li>
+    
+    <li>ncurses-6.1-15.20191109.fc32.s390x</li>
+    
+    <li>readline-8.0-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nettle
+                </td>
+                <td>3.5.1-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="610311">596.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    objectweb-asm
+                </td>
+                <td>7.0-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="712246">695.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    <li>xbean-4.15-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl-libs
+                </td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="3496794">3.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit
+                </td>
+                <td>0.23.20-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1832668">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit-trust
+                </td>
+                <td>0.23.20-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="510761">498.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre
+                </td>
+                <td>8.44-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="335872">328.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>grep-3.3-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre2
+                </td>
+                <td>10.34-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="517277">505.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-3.0-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Carp
+                </td>
+                <td>1.50-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="47889">46.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-Carp-1.50-440.fc32.noarch</li>
+    
+    <li>perl-Data-Dumper-2.174-443.fc32.s390x</li>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    <li>perl-Errno-1.30-451.fc32.s390x</li>
+    
+    <li>perl-Exporter-5.74-2.fc32.noarch</li>
+    
+    <li>perl-File-Path-2.16-440.fc32.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-HTTP-Tiny-0.076-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.s390x</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.s390x</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.40-2.fc32.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-440.fc32.noarch</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.54-440.fc32.s390x</li>
+    
+    <li>perl-Socket-4:2.029-5.fc32.s390x</li>
+    
+    <li>perl-Storable-1:3.15-443.fc32.s390x</li>
+    
+    <li>perl-Term-Cap-1.17-440.fc32.noarch</li>
+    
+    <li>perl-Text-ParseWords-3.30-440.fc32.noarch</li>
+    
+    <li>perl-Thread-Queue-3.13-440.fc32.noarch</li>
+    
+    <li>perl-Time-Local-2:1.300-2.fc32.noarch</li>
+    
+    <li>perl-Unicode-Normalize-1.26-440.fc32.s390x</li>
+    
+    <li>perl-constant-1.33-441.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-libs-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    <li>perl-threads-1:2.22-442.fc32.s390x</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Data-Dumper
+                </td>
+                <td>2.174-443.fc32</td>
+                <td>s390x</td>
+                <td data-order="111379">108.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Encode
+                </td>
+                <td>4:3.02-441.fc32</td>
+                <td>s390x</td>
+                <td data-order="10035077">9.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.40-2.fc32.noarch</li>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Errno
+                </td>
+                <td>1.30-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="9518">9.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-HTTP-Tiny-0.076-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.s390x</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Exporter
+                </td>
+                <td>5.74-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="55358">54.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-Carp-1.50-440.fc32.noarch</li>
+    
+    <li>perl-Data-Dumper-2.174-443.fc32.s390x</li>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    <li>perl-Errno-1.30-451.fc32.s390x</li>
+    
+    <li>perl-Exporter-5.74-2.fc32.noarch</li>
+    
+    <li>perl-File-Path-2.16-440.fc32.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-Getopt-Long-1:2.51-2.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.s390x</li>
+    
+    <li>perl-MIME-Base64-3.15-440.fc32.s390x</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.s390x</li>
+    
+    <li>perl-Pod-Escapes-1:1.07-440.fc32.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-440.fc32.noarch</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.54-440.fc32.s390x</li>
+    
+    <li>perl-Socket-4:2.029-5.fc32.s390x</li>
+    
+    <li>perl-Storable-1:3.15-443.fc32.s390x</li>
+    
+    <li>perl-Term-ANSIColor-5.01-2.fc32.noarch</li>
+    
+    <li>perl-Text-ParseWords-3.30-440.fc32.noarch</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-440.fc32.noarch</li>
+    
+    <li>perl-Time-Local-2:1.300-2.fc32.noarch</li>
+    
+    <li>perl-Unicode-Normalize-1.26-440.fc32.s390x</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-libs-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-File-Path
+                </td>
+                <td>2.16-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="65104">63.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-File-Temp
+                </td>
+                <td>1:0.230.900-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="164978">161.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Getopt-Long
+                </td>
+                <td>1:2.51-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="140531">137.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    <li>perl-Pod-Simple-1:3.40-2.fc32.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-440.fc32.noarch</li>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-HTTP-Tiny
+                </td>
+                <td>0.076-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="150122">146.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-IO
+                </td>
+                <td>1.40-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="145472">142.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-HTTP-Tiny-0.076-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.s390x</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    <li>perl-Storable-1:3.15-443.fc32.s390x</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-MIME-Base64
+                </td>
+                <td>3.15-440.fc32</td>
+                <td>s390x</td>
+                <td data-order="40899">39.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    <li>perl-HTTP-Tiny-0.076-440.fc32.noarch</li>
+    
+    <li>perl-MIME-Base64-3.15-440.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-PathTools
+                </td>
+                <td>3.78-441.fc32</td>
+                <td>s390x</td>
+                <td data-order="186181">181.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-File-Path-2.16-440.fc32.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.s390x</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.s390x</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.40-2.fc32.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-440.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Pod-Escapes
+                </td>
+                <td>1:1.07-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="25763">25.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Simple-1:3.40-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Pod-Perldoc
+                </td>
+                <td>3.28.01-443.fc32</td>
+                <td>noarch</td>
+                <td data-order="170949">166.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-440.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Pod-Simple
+                </td>
+                <td>1:3.40-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="576060">562.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.40-2.fc32.noarch</li>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Pod-Usage
+                </td>
+                <td>4:1.69-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="49720">48.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Getopt-Long-1:2.51-2.fc32.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-440.fc32.noarch</li>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Scalar-List-Utils
+                </td>
+                <td>3:1.54-440.fc32</td>
+                <td>s390x</td>
+                <td data-order="133886">130.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Data-Dumper-2.174-443.fc32.s390x</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.s390x</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.54-440.fc32.s390x</li>
+    
+    <li>perl-Thread-Queue-3.13-440.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Socket
+                </td>
+                <td>4:2.029-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="123736">120.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-HTTP-Tiny-0.076-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Storable
+                </td>
+                <td>1:3.15-443.fc32</td>
+                <td>s390x</td>
+                <td data-order="221858">216.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Term-ANSIColor
+                </td>
+                <td>5.01-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="100302">98.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Term-Cap
+                </td>
+                <td>1.17-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="29850">29.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Text-ParseWords
+                </td>
+                <td>3.30-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="13100">12.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>perl-Getopt-Long-1:2.51-2.fc32.noarch</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Text-Tabs+Wrap
+                </td>
+                <td>2013.0523-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="24827">24.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Simple-1:3.40-2.fc32.noarch</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-440.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Thread-Queue
+                </td>
+                <td>3.13-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="29786">29.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Time-Local
+                </td>
+                <td>2:1.300-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="67342">65.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-HTTP-Tiny-0.076-440.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Unicode-Normalize
+                </td>
+                <td>1.26-440.fc32</td>
+                <td>s390x</td>
+                <td data-order="645559">630.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-constant
+                </td>
+                <td>1.33-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="27104">26.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-Data-Dumper-2.174-443.fc32.s390x</li>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-Getopt-Long-1:2.51-2.fc32.noarch</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.s390x</li>
+    
+    <li>perl-Time-Local-2:1.300-2.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-interpreter
+                </td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="14816624">14.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-Data-Dumper-2.174-443.fc32.s390x</li>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    <li>perl-Errno-1.30-451.fc32.s390x</li>
+    
+    <li>perl-File-Path-2.16-440.fc32.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-Getopt-Long-1:2.51-2.fc32.noarch</li>
+    
+    <li>perl-HTTP-Tiny-0.076-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.s390x</li>
+    
+    <li>perl-MIME-Base64-3.15-440.fc32.s390x</li>
+    
+    <li>perl-Pod-Escapes-1:1.07-440.fc32.noarch</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.40-2.fc32.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-440.fc32.noarch</li>
+    
+    <li>perl-Socket-4:2.029-5.fc32.s390x</li>
+    
+    <li>perl-Storable-1:3.15-443.fc32.s390x</li>
+    
+    <li>perl-Term-Cap-1.17-440.fc32.noarch</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-440.fc32.noarch</li>
+    
+    <li>perl-constant-1.33-441.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-macros-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    <li>perl-threads-1:2.22-442.fc32.s390x</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-libs
+                </td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="8030791">7.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-33.fc32.noarch</li>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-Carp-1.50-440.fc32.noarch</li>
+    
+    <li>perl-Data-Dumper-2.174-443.fc32.s390x</li>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    <li>perl-Errno-1.30-451.fc32.s390x</li>
+    
+    <li>perl-Exporter-5.74-2.fc32.noarch</li>
+    
+    <li>perl-File-Path-2.16-440.fc32.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-Getopt-Long-1:2.51-2.fc32.noarch</li>
+    
+    <li>perl-HTTP-Tiny-0.076-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.s390x</li>
+    
+    <li>perl-MIME-Base64-3.15-440.fc32.s390x</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.s390x</li>
+    
+    <li>perl-Pod-Escapes-1:1.07-440.fc32.noarch</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.40-2.fc32.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-440.fc32.noarch</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.54-440.fc32.s390x</li>
+    
+    <li>perl-Socket-4:2.029-5.fc32.s390x</li>
+    
+    <li>perl-Storable-1:3.15-443.fc32.s390x</li>
+    
+    <li>perl-Term-ANSIColor-5.01-2.fc32.noarch</li>
+    
+    <li>perl-Term-Cap-1.17-440.fc32.noarch</li>
+    
+    <li>perl-Text-ParseWords-3.30-440.fc32.noarch</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-440.fc32.noarch</li>
+    
+    <li>perl-Thread-Queue-3.13-440.fc32.noarch</li>
+    
+    <li>perl-Time-Local-2:1.300-2.fc32.noarch</li>
+    
+    <li>perl-Unicode-Normalize-1.26-440.fc32.s390x</li>
+    
+    <li>perl-constant-1.33-441.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-libs-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-macros-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-parent-1:0.238-1.fc32.noarch</li>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    <li>perl-threads-1:2.22-442.fc32.s390x</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>perl-PathTools-3.78-441.fc32.s390x</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-macros
+                </td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>s390x</td>
+                <td data-order="5643">5.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-parent
+                </td>
+                <td>1:0.238-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="9535">9.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Encode-4:3.02-441.fc32.s390x</li>
+    
+    <li>perl-File-Temp-1:0.230.900-440.fc32.noarch</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    <li>perl-Time-Local-2:1.300-2.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-podlators
+                </td>
+                <td>1:4.14-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="288741">282.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-443.fc32.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-440.fc32.noarch</li>
+    
+    <li>perl-podlators-1:4.14-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-threads
+                </td>
+                <td>1:2.22-442.fc32</td>
+                <td>s390x</td>
+                <td data-order="114028">111.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>automake-1.16.1-14.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-threads-shared
+                </td>
+                <td>1.60-441.fc32</td>
+                <td>s390x</td>
+                <td data-order="94055">91.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Thread-Queue-3.13-440.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="72117">70.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-m4
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-pkg-config
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="462">462.0 B</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    readline
+                </td>
+                <td>8.0-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="511395">499.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    <li>guile22-2.2.6-4.fc32.s390x</li>
+    
+    <li>lua-5.3.5-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    scala
+                </td>
+                <td>2.10.6-17.fc32</td>
+                <td>noarch</td>
+                <td data-order="26410241">25.2 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sed
+                </td>
+                <td>4.5-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="837734">818.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>libtool-2.4.6-33.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    setup
+                </td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-9.fc32.noarch</li>
+    
+    <li>filesystem-3.14-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    slf4j
+                </td>
+                <td>1.7.30-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="82702">80.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xbean-4.15-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-libs
+                </td>
+                <td>245.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1828062">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-libs-1:1.12.16-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tar
+                </td>
+                <td>2:1.32-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="3304124">3.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtool-2.4.6-33.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata
+                </td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-common-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata-java
+                </td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="373943">365.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    which
+                </td>
+                <td>2.21-17.fc32</td>
+                <td>s390x</td>
+                <td data-order="82627">80.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>javapackages-tools-5.3.0-9.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xbean
+                </td>
+                <td>4.15-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="432143">422.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>hawtjni-1.17-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz-libs
+                </td>
+                <td>5.2.4-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="192855">188.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zlib
+                </td>
+                <td>1.2.11-21.fc32</td>
+                <td>s390x</td>
+                <td data-order="232295">226.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.s390x</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>cups-libs-1:2.3.1-5.fc32.s390x</li>
+    
+    <li>freetype-2.10.1-2.fc32.s390x</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>java-1.8.0-openjdk-headless-1:1.8.0.242.b08-1.fc32.s390x</li>
+    
+    <li>libpng-2:1.6.37-3.fc32.s390x</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--rhel-8-appstream-module-scala-2.10--fedora-empty-base--repository-fedora-rawhide--s390x.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

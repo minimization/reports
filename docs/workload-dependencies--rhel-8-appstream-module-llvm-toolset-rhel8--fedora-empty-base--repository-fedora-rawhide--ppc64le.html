@@ -1,0 +1,3230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--rhel-8-appstream-module-llvm-toolset-rhel8--repository-fedora-rawhide.html">
+                    Module llvm-toolset:rhel8 for rhel-8-appstream
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Module llvm-toolset:rhel8 for rhel-8-appstream in Empty from Fedora rawhide ppc64le
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Module llvm-toolset:rhel8 for rhel-8-appstream <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora rawhide</small>
+        <small class="text-muted"> for </small>
+        <small> ppc64le</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--rhel-8-appstream-module-llvm-toolset-rhel8--fedora-empty-base--repository-fedora-rawhide--ppc64le.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--rhel-8-appstream-module-llvm-toolset-rhel8--fedora-empty-base--repository-fedora-rawhide--ppc64le.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alternatives
+                </td>
+                <td>1.11-6.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="92646">90.5 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    basesystem
+                </td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bash
+                </td>
+                <td>5.0.11-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="7994564">7.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.ppc64le</li>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>filesystem-3.14-2.fc32.ppc64le</li>
+    
+    <li>glibc-common-2.31-1.fc32.ppc64le</li>
+    
+    <li>glibc-headers-2.31-1.fc32.ppc64le</li>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    <li>libsepol-3.0-3.fc32.ppc64le</li>
+    
+    <li>lld-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    binutils
+                </td>
+                <td>2.34-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="31235994">29.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-gold-2.34-2.fc32.ppc64le</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    binutils-gold
+                </td>
+                <td>2.34-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4512016">4.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bzip2-libs
+                </td>
+                <td>1.0.8-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="139944">136.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ca-certificates
+                </td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.ppc64le</li>
+    
+    <li>python-pip-wheel-19.3.1-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    clang
+                </td>
+                <td>10.0.0-0.1.rc2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="36304571">34.6 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    clang-libs
+                </td>
+                <td>10.0.0-0.1.rc2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="114850936">109.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>clang-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    compiler-rt
+                </td>
+                <td>10.0.0-0.1.rc1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="25127732">24.0 MB</td>
+                <td>
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>clang-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils
+                </td>
+                <td>8.31-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="10745360">10.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.ppc64le</li>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>glibc-headers-2.31-1.fc32.ppc64le</li>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils-common
+                </td>
+                <td>8.31-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="10349258">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cpp
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="27531638">26.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    crypto-policies
+                </td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libelf
+                </td>
+                <td>0.178-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="952707">930.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libomp-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    emacs-filesystem
+                </td>
+                <td>1:26.3-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>clang-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    expat
+                </td>
+                <td>2.2.8-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="380995">372.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-gpg-keys
+                </td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-repos-32-0.7.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release
+                </td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    <li>fedora-repos-32-0.7.noarch</li>
+    
+    <li>setup-2.13.6-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release-common
+                </td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-32-0.8.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-repos
+                </td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    filesystem
+                </td>
+                <td>3.14-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-9.fc32.noarch</li>
+    
+    <li>bash-5.0.11-2.fc32.ppc64le</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>gawk-5.0.1-7.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gawk
+                </td>
+                <td>5.0.1-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="3931092">3.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gcc
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="77129856">73.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-c++-10.0.1-0.9.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gcc-c++
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="30337026">28.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>clang-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdbm-libs
+                </td>
+                <td>1:1.18.1-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="239608">234.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="29737912">28.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>alternatives-1.11-6.fc32.ppc64le</li>
+    
+    <li>bash-5.0.11-2.fc32.ppc64le</li>
+    
+    <li>binutils-2.34-2.fc32.ppc64le</li>
+    
+    <li>binutils-gold-2.34-2.fc32.ppc64le</li>
+    
+    <li>bzip2-libs-1.0.8-2.fc32.ppc64le</li>
+    
+    <li>clang-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>clang-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>compiler-rt-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>coreutils-8.31-10.fc32.ppc64le</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>elfutils-libelf-0.178-9.fc32.ppc64le</li>
+    
+    <li>expat-2.2.8-2.fc32.ppc64le</li>
+    
+    <li>gawk-5.0.1-7.fc32.ppc64le</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>gcc-c++-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>gdbm-libs-1:1.18.1-3.fc32.ppc64le</li>
+    
+    <li>glibc-all-langpacks-2.31-1.fc32.ppc64le</li>
+    
+    <li>glibc-common-2.31-1.fc32.ppc64le</li>
+    
+    <li>glibc-devel-2.31-1.fc32.ppc64le</li>
+    
+    <li>glibc-headers-2.31-1.fc32.ppc64le</li>
+    
+    <li>gmp-1:6.1.2-13.fc32.ppc64le</li>
+    
+    <li>grep-3.3-4.fc32.ppc64le</li>
+    
+    <li>isl-0.16.1-10.fc32.ppc64le</li>
+    
+    <li>keyutils-libs-1.6-4.fc32.ppc64le</li>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    <li>libacl-2.2.53-5.fc32.ppc64le</li>
+    
+    <li>libasan-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libatomic-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libattr-2.4.48-8.fc32.ppc64le</li>
+    
+    <li>libcap-2.26-7.fc32.ppc64le</li>
+    
+    <li>libcom_err-1.45.5-3.fc32.ppc64le</li>
+    
+    <li>libedit-3.1-32.20191231cvs.fc32.ppc64le</li>
+    
+    <li>libffi-3.1-24.fc32.ppc64le</li>
+    
+    <li>libgomp-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libmpc-1.1.0-8.fc32.ppc64le</li>
+    
+    <li>libnsl2-1.2.0-6.20180605git4a062cf.fc32.ppc64le</li>
+    
+    <li>libomp-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>libpkgconf-1.6.3-3.fc32.ppc64le</li>
+    
+    <li>libselinux-3.0-3.fc32.ppc64le</li>
+    
+    <li>libsepol-3.0-3.fc32.ppc64le</li>
+    
+    <li>libsigsegv-2.11-10.fc32.ppc64le</li>
+    
+    <li>libstdc++-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libtasn1-4.16.0-1.fc32.ppc64le</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc32.ppc64le</li>
+    
+    <li>libubsan-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libuuid-2.35.1-4.fc32.ppc64le</li>
+    
+    <li>libverto-0.3.0-9.fc32.ppc64le</li>
+    
+    <li>libxcrypt-4.4.15-1.fc32.ppc64le</li>
+    
+    <li>libxml2-2.9.10-3.fc32.ppc64le</li>
+    
+    <li>lld-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>lld-libs-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>llvm-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>mpfr-4.0.2-3.fc32.ppc64le</li>
+    
+    <li>ncurses-6.1-15.20191109.fc32.ppc64le</li>
+    
+    <li>ncurses-libs-6.1-15.20191109.fc32.ppc64le</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.ppc64le</li>
+    
+    <li>p11-kit-0.23.20-1.fc32.ppc64le</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.ppc64le</li>
+    
+    <li>pcre-8.44-1.fc32.ppc64le</li>
+    
+    <li>pcre2-10.34-7.fc32.ppc64le</li>
+    
+    <li>pkgconf-1.6.3-3.fc32.ppc64le</li>
+    
+    <li>python3-3.8.2-2.fc32.ppc64le</li>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    <li>readline-8.0-4.fc32.ppc64le</li>
+    
+    <li>sed-4.5-5.fc32.ppc64le</li>
+    
+    <li>sqlite-libs-3.31.1-1.fc32.ppc64le</li>
+    
+    <li>xz-libs-5.2.4-8.fc32.ppc64le</li>
+    
+    <li>zlib-1.2.11-21.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-all-langpacks
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="222208346">211.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.ppc64le</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-common
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="8617731">8.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.ppc64le</li>
+    
+    <li>glibc-all-langpacks-2.31-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-devel
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1570365">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libxcrypt-devel-4.4.15-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-headers
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2052693">2.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-devel-2.31-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp
+                </td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="801884">783.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.ppc64le</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>gawk-5.0.1-7.fc32.ppc64le</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>gcc-c++-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>isl-0.16.1-10.fc32.ppc64le</li>
+    
+    <li>libmpc-1.1.0-8.fc32.ppc64le</li>
+    
+    <li>mpfr-4.0.2-3.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    grep
+                </td>
+                <td>3.3-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="901906">880.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    isl
+                </td>
+                <td>0.16.1-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4528449">4.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kernel-headers
+                </td>
+                <td>5.6.0-0.rc7.git0.1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="5133805">4.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-headers-2.31-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    keyutils-libs
+                </td>
+                <td>1.6-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="100247">97.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    krb5-libs
+                </td>
+                <td>1.18-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2916483">2.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libacl
+                </td>
+                <td>2.2.53-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69808">68.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.ppc64le</li>
+    
+    <li>sed-4.5-5.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libasan
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1612792">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libatomic
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69272">67.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libattr
+                </td>
+                <td>2.4.48-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69898">68.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.ppc64le</li>
+    
+    <li>libacl-2.2.53-5.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap
+                </td>
+                <td>2.26-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="443354">433.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcom_err
+                </td>
+                <td>1.45.5-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="114449">111.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libedit
+                </td>
+                <td>3.1-32.20191231cvs.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="351165">342.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi
+                </td>
+                <td>3.1-24.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="86020">84.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libomp-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>p11-kit-0.23.20-1.fc32.ppc64le</li>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcc
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="226688">221.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.ppc64le</li>
+    
+    <li>binutils-gold-2.34-2.fc32.ppc64le</li>
+    
+    <li>clang-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>clang-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>compiler-rt-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>glibc-2.31-1.fc32.ppc64le</li>
+    
+    <li>libasan-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libomp-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>libstdc++-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libubsan-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>llvm-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgomp
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="520982">508.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmpc
+                </td>
+                <td>1.1.0-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="216477">211.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cpp-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>gcc-c++-10.0.1-0.9.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnsl2
+                </td>
+                <td>1.2.0-6.20180605git4a062cf.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="162978">159.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    libomp
+                </td>
+                <td>10.0.0-0.1.rc1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1304712">1.2 MB</td>
+                <td>
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>clang-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpkgconf
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="136973">133.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-1.6.3-3.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="271360">265.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.ppc64le</li>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    <li>sed-4.5-5.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsepol
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1031512">1007.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-3.0-3.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsigsegv
+                </td>
+                <td>2.11-10.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="98218">95.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-7.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libstdc++
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2921269">2.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.ppc64le</li>
+    
+    <li>binutils-gold-2.34-2.fc32.ppc64le</li>
+    
+    <li>clang-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>clang-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>compiler-rt-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>gcc-c++-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libasan-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libomp-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>libstdc++-devel-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libubsan-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>lld-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>lld-libs-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>llvm-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libstdc++-devel
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="12099273">11.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>clang-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>gcc-c++-10.0.1-0.9.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtasn1
+                </td>
+                <td>4.16.0-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="224836">219.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtirpc
+                </td>
+                <td>1.2.5-1.rc2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="346494">338.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnsl2-1.2.0-6.20180605git4a062cf.fc32.ppc64le</li>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libubsan
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="485720">474.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libuuid
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="70943">69.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libverto
+                </td>
+                <td>0.3.0-9.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="72308">70.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt
+                </td>
+                <td>4.4.15-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="334659">326.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libxcrypt-devel-4.4.15-1.fc32.ppc64le</li>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt-devel
+                </td>
+                <td>4.4.15-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="30986">30.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-devel-2.31-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxml2
+                </td>
+                <td>2.9.10-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2391116">2.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>clang-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    lld
+                </td>
+                <td>10.0.0-0.1.rc1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="69784">68.1 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lld-libs
+                </td>
+                <td>10.0.0-0.1.rc1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="7613080">7.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>lld-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    lldb
+                </td>
+                <td>10.0.0-0.1.rc1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="31627672">30.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    llvm
+                </td>
+                <td>10.0.0-0.1.rc2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="19500769">18.6 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    llvm-libs
+                </td>
+                <td>10.0.0-0.1.rc2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="92843488">88.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>clang-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>clang-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>lld-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>lld-libs-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>llvm-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mpfr
+                </td>
+                <td>4.0.2-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="803867">785.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cpp-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>gawk-5.0.1-7.fc32.ppc64le</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>gcc-c++-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libmpc-1.1.0-8.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="995669">972.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-base
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-libs-6.1-15.20191109.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-libs
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1563232">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>bash-5.0.11-2.fc32.ppc64le</li>
+    
+    <li>clang-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>libedit-3.1-32.20191231cvs.fc32.ppc64le</li>
+    
+    <li>lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>llvm-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>ncurses-6.1-15.20191109.fc32.ppc64le</li>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    <li>readline-8.0-4.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl-libs
+                </td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="4641010">4.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.ppc64le</li>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit
+                </td>
+                <td>0.23.20-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="2165292">2.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit-trust
+                </td>
+                <td>0.23.20-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="609553">595.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre
+                </td>
+                <td>8.44-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="697376">681.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>grep-3.3-4.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre2
+                </td>
+                <td>10.34-7.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="850333">830.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-3.0-3.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="101197">98.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-3.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-m4
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-3.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-pkg-config
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="464">464.0 B</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-pip-wheel
+                </td>
+                <td>19.3.1-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="1266916">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-setuptools-wheel
+                </td>
+                <td>41.6.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="360619">352.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3
+                </td>
+                <td>3.8.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="86050">84.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>python3-six-1.14.0-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libs
+                </td>
+                <td>3.8.2-2.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="37298137">35.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>python3-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-lldb
+                </td>
+                <td>10.0.0-0.1.rc1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1418351">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-six
+                </td>
+                <td>1.14.0-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="106208">103.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    readline
+                </td>
+                <td>8.0-4.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="638563">623.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-7.fc32.ppc64le</li>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sed
+                </td>
+                <td>4.5-5.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="850374">830.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>krb5-libs-1.18-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    setup
+                </td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-9.fc32.noarch</li>
+    
+    <li>filesystem-3.14-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sqlite-libs
+                </td>
+                <td>3.31.1-1.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="1621004">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata
+                </td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-common-2.31-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz-libs
+                </td>
+                <td>5.2.4-8.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="270383">264.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libxml2-2.9.10-3.fc32.ppc64le</li>
+    
+    <li>lldb-10.0.0-0.1.rc1.fc32.ppc64le</li>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zlib
+                </td>
+                <td>1.2.11-21.fc32</td>
+                <td>ppc64le</td>
+                <td data-order="236287">230.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.ppc64le</li>
+    
+    <li>clang-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>elfutils-libelf-0.178-9.fc32.ppc64le</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>gcc-c++-10.0.1-0.9.fc32.ppc64le</li>
+    
+    <li>libxml2-2.9.10-3.fc32.ppc64le</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.ppc64le</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.ppc64le</li>
+    
+    <li>python3-libs-3.8.2-2.fc32.ppc64le</li>
+    
+    <li>sqlite-libs-3.31.1-1.fc32.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--rhel-8-appstream-module-llvm-toolset-rhel8--fedora-empty-base--repository-fedora-rawhide--ppc64le.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

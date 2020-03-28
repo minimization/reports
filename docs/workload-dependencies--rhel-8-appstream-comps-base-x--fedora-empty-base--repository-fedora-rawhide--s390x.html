@@ -1,0 +1,6994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--rhel-8-appstream-comps-base-x--repository-fedora-rawhide.html">
+                    Comps group base-x for rhel-8-appstream
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group base-x for rhel-8-appstream in Empty from Fedora rawhide s390x
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group base-x for rhel-8-appstream <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora rawhide</small>
+        <small class="text-muted"> for </small>
+        <small> s390x</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--rhel-8-appstream-comps-base-x--fedora-empty-base--repository-fedora-rawhide--s390x.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--rhel-8-appstream-comps-base-x--fedora-empty-base--repository-fedora-rawhide--s390x.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    abattis-cantarell-fonts
+                </td>
+                <td>0.201-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="916469">895.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-theme-spinner-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    acl
+                </td>
+                <td>2.2.53-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="209188">204.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alternatives
+                </td>
+                <td>1.11-6.fc32</td>
+                <td>s390x</td>
+                <td data-order="59470">58.1 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    audit-libs
+                </td>
+                <td>3.0-0.18.20191104git1c2f876.fc32</td>
+                <td>s390x</td>
+                <td data-order="323300">315.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    <li>libsemanage-3.0-3.fc32.s390x</li>
+    
+    <li>pam-1.3.1-23.fc32.s390x</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    basesystem
+                </td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bash
+                </td>
+                <td>5.0.11-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="7988290">7.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    <li>dbus-common-1:1.12.16-4.fc32.noarch</li>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>elfutils-default-yama-scope-0.178-9.fc32.noarch</li>
+    
+    <li>filesystem-3.14-2.fc32.s390x</li>
+    
+    <li>fontconfig-2.13.92-8.fc32.s390x</li>
+    
+    <li>freetype-2.10.1-2.fc32.s390x</li>
+    
+    <li>glib2-2.64.1-1.fc32.s390x</li>
+    
+    <li>glibc-common-2.31-1.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>libblkid-2.35.1-4.fc32.s390x</li>
+    
+    <li>libinput-1.15.4-1.fc32.s390x</li>
+    
+    <li>libsepol-3.0-3.fc32.s390x</li>
+    
+    <li>libutempter-1.1.6-18.fc32.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.s390x</li>
+    
+    <li>plymouth-theme-spinner-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bzip2-libs
+                </td>
+                <td>1.0.8-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="82720">80.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-9.fc32.s390x</li>
+    
+    <li>freetype-2.10.1-2.fc32.s390x</li>
+    
+    <li>libsemanage-3.0-3.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ca-certificates
+                </td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cairo
+                </td>
+                <td>1.16.0-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="2251687">2.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils
+                </td>
+                <td>8.31-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="7947816">7.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>fontconfig-2.13.92-8.fc32.s390x</li>
+    
+    <li>gzip-1.10-2.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>libblkid-2.35.1-4.fc32.s390x</li>
+    
+    <li>plymouth-scripts-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    <li>xorg-x11-xinit-1.4.0-6.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils-common
+                </td>
+                <td>8.31-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="10349258">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cpio
+                </td>
+                <td>2.13-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="1167122">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>plymouth-scripts-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cracklib
+                </td>
+                <td>2.9.6-22.fc32</td>
+                <td>s390x</td>
+                <td data-order="226581">221.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libpwquality-1.4.2-2.fc32.s390x</li>
+    
+    <li>pam-1.3.1-23.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    crypto-policies
+                </td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cryptsetup-libs
+                </td>
+                <td>2.3.0-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1949615">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus
+                </td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-broker
+                </td>
+                <td>22-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="458673">447.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-1:1.12.16-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-common
+                </td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="11481">11.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-libs
+                </td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="461256">450.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dejavu-sans-fonts
+                </td>
+                <td>2.37-7.fc32</td>
+                <td>noarch</td>
+                <td data-order="5930693">5.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>langpacks-core-font-en-3.0-3.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-8.fc32.s390x</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    device-mapper
+                </td>
+                <td>1.02.167-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="381724">372.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>device-mapper-libs-1.02.167-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    device-mapper-libs
+                </td>
+                <td>1.02.167-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="500351">488.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.s390x</li>
+    
+    <li>device-mapper-1.02.167-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dracut
+                </td>
+                <td>050-26.git20200316.fc32</td>
+                <td>s390x</td>
+                <td data-order="1120050">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-scripts-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-default-yama-scope
+                </td>
+                <td>0.178-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-9.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libelf
+                </td>
+                <td>0.178-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="932571">910.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-9.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libs
+                </td>
+                <td>0.178-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="786079">767.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    expat
+                </td>
+                <td>2.2.8-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="331787">324.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    <li>fontconfig-2.13.92-8.fc32.s390x</li>
+    
+    <li>mesa-dri-drivers-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libgbm-20.0.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-gpg-keys
+                </td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-repos-32-0.7.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-logos
+                </td>
+                <td>30.0.2-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="9226725">8.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-graphics-libs-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release
+                </td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    <li>fedora-repos-32-0.7.noarch</li>
+    
+    <li>setup-2.13.6-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release-common
+                </td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-32-0.8.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-repos
+                </td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    filesystem
+                </td>
+                <td>3.14-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-9.fc32.noarch</li>
+    
+    <li>bash-5.0.11-2.fc32.s390x</li>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    findutils
+                </td>
+                <td>1:4.7.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="1929747">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>plymouth-scripts-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fontconfig
+                </td>
+                <td>2.13.92-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="970350">947.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>libXft-2.3.3-3.fc32.s390x</li>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fonts-filesystem
+                </td>
+                <td>2.0.3-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>abattis-cantarell-fonts-0.201-2.fc32.noarch</li>
+    
+    <li>dejavu-sans-fonts-2.37-7.fc32.noarch</li>
+    
+    <li>fontconfig-2.13.92-8.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    freetype
+                </td>
+                <td>2.10.1-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="1018746">994.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>fontconfig-2.13.92-8.fc32.s390x</li>
+    
+    <li>harfbuzz-2.6.4-3.fc32.s390x</li>
+    
+    <li>libXfont2-2.0.3-7.fc32.s390x</li>
+    
+    <li>libXft-2.3.3-3.fc32.s390x</li>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fribidi
+                </td>
+                <td>1.0.9-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="339036">331.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gawk
+                </td>
+                <td>5.0.1-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="3132228">3.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glib2
+                </td>
+                <td>2.64.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="13585946">13.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>harfbuzz-2.6.4-3.fc32.s390x</li>
+    
+    <li>libgudev-232-7.fc32.s390x</li>
+    
+    <li>libwacom-1.2-3.fc32.s390x</li>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="15051098">14.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>acl-2.2.53-5.fc32.s390x</li>
+    
+    <li>alternatives-1.11-6.fc32.s390x</li>
+    
+    <li>audit-libs-3.0-0.18.20191104git1c2f876.fc32.s390x</li>
+    
+    <li>bash-5.0.11-2.fc32.s390x</li>
+    
+    <li>bzip2-libs-1.0.8-2.fc32.s390x</li>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>cpio-2.13-4.fc32.s390x</li>
+    
+    <li>cracklib-2.9.6-22.fc32.s390x</li>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.s390x</li>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    <li>dbus-libs-1:1.12.16-4.fc32.s390x</li>
+    
+    <li>device-mapper-1.02.167-2.fc32.s390x</li>
+    
+    <li>device-mapper-libs-1.02.167-2.fc32.s390x</li>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>elfutils-libelf-0.178-9.fc32.s390x</li>
+    
+    <li>elfutils-libs-0.178-9.fc32.s390x</li>
+    
+    <li>expat-2.2.8-2.fc32.s390x</li>
+    
+    <li>findutils-1:4.7.0-3.fc32.s390x</li>
+    
+    <li>fontconfig-2.13.92-8.fc32.s390x</li>
+    
+    <li>freetype-2.10.1-2.fc32.s390x</li>
+    
+    <li>fribidi-1.0.9-1.fc32.s390x</li>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    <li>glib2-2.64.1-1.fc32.s390x</li>
+    
+    <li>glibc-all-langpacks-2.31-1.fc32.s390x</li>
+    
+    <li>glibc-common-2.31-1.fc32.s390x</li>
+    
+    <li>glx-utils-8.4.0-6.20181118git1830dcb.fc32.s390x</li>
+    
+    <li>gmp-1:6.1.2-13.fc32.s390x</li>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>graphite2-1.3.13-1.fc32.s390x</li>
+    
+    <li>grep-3.3-4.fc32.s390x</li>
+    
+    <li>gzip-1.10-2.fc32.s390x</li>
+    
+    <li>harfbuzz-2.6.4-3.fc32.s390x</li>
+    
+    <li>iptables-libs-1.8.4-7.fc32.s390x</li>
+    
+    <li>json-c-0.13.1-9.fc32.s390x</li>
+    
+    <li>kbd-2.2.0-1.fc32.s390x</li>
+    
+    <li>keyutils-libs-1.6-4.fc32.s390x</li>
+    
+    <li>kmod-27-1.fc32.s390x</li>
+    
+    <li>kmod-libs-27-1.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>libICE-1.0.10-3.fc32.s390x</li>
+    
+    <li>libSM-1.2.3-5.fc32.s390x</li>
+    
+    <li>libX11-1.6.9-3.fc32.s390x</li>
+    
+    <li>libX11-xcb-1.6.9-3.fc32.s390x</li>
+    
+    <li>libXau-1.0.9-3.fc32.s390x</li>
+    
+    <li>libXcomposite-0.4.5-2.fc32.s390x</li>
+    
+    <li>libXcursor-1.2.0-2.fc32.s390x</li>
+    
+    <li>libXdamage-1.1.5-2.fc32.s390x</li>
+    
+    <li>libXdmcp-1.1.3-3.fc32.s390x</li>
+    
+    <li>libXext-1.3.4-3.fc32.s390x</li>
+    
+    <li>libXfixes-5.0.3-11.fc32.s390x</li>
+    
+    <li>libXfont2-2.0.3-7.fc32.s390x</li>
+    
+    <li>libXft-2.3.3-3.fc32.s390x</li>
+    
+    <li>libXi-1.7.10-3.fc32.s390x</li>
+    
+    <li>libXinerama-1.1.4-5.fc32.s390x</li>
+    
+    <li>libXmu-1.1.3-3.fc32.s390x</li>
+    
+    <li>libXrandr-1.5.2-3.fc32.s390x</li>
+    
+    <li>libXrender-0.9.10-11.fc32.s390x</li>
+    
+    <li>libXt-1.2.0-1.fc32.s390x</li>
+    
+    <li>libXtst-1.2.3-11.fc32.s390x</li>
+    
+    <li>libXv-1.0.11-11.fc32.s390x</li>
+    
+    <li>libXxf86dga-1.1.5-3.fc32.s390x</li>
+    
+    <li>libXxf86vm-1.1.4-13.fc32.s390x</li>
+    
+    <li>libacl-2.2.53-5.fc32.s390x</li>
+    
+    <li>libargon2-20171227-4.fc32.s390x</li>
+    
+    <li>libattr-2.4.48-8.fc32.s390x</li>
+    
+    <li>libblkid-2.35.1-4.fc32.s390x</li>
+    
+    <li>libcap-2.26-7.fc32.s390x</li>
+    
+    <li>libcap-ng-0.7.10-2.fc32.s390x</li>
+    
+    <li>libcom_err-1.45.5-3.fc32.s390x</li>
+    
+    <li>libdatrie-0.2.9-11.fc32.s390x</li>
+    
+    <li>libdb-5.3.28-40.fc32.s390x</li>
+    
+    <li>libdmx-1.1.4-7.fc32.s390x</li>
+    
+    <li>libdrm-2.4.100-2.fc32.s390x</li>
+    
+    <li>libedit-3.1-32.20191231cvs.fc32.s390x</li>
+    
+    <li>libepoxy-1.5.4-2.fc32.s390x</li>
+    
+    <li>libevdev-1.8.901-1.fc32.s390x</li>
+    
+    <li>libfdisk-2.35.1-4.fc32.s390x</li>
+    
+    <li>libffi-3.1-24.fc32.s390x</li>
+    
+    <li>libfontenc-1.1.3-12.fc32.s390x</li>
+    
+    <li>libgcrypt-1.8.5-3.fc32.s390x</li>
+    
+    <li>libglvnd-1:1.3.1-1.fc32.s390x</li>
+    
+    <li>libglvnd-egl-1:1.3.1-1.fc32.s390x</li>
+    
+    <li>libglvnd-glx-1:1.3.1-1.fc32.s390x</li>
+    
+    <li>libgpg-error-1.36-3.fc32.s390x</li>
+    
+    <li>libgudev-232-7.fc32.s390x</li>
+    
+    <li>libidn2-2.3.0-2.fc32.s390x</li>
+    
+    <li>libinput-1.15.4-1.fc32.s390x</li>
+    
+    <li>libkcapi-1.1.5-2.fc32.s390x</li>
+    
+    <li>libkcapi-hmaccalc-1.1.5-2.fc32.s390x</li>
+    
+    <li>libmcpp-2.7.2-25.fc32.s390x</li>
+    
+    <li>libmnl-1.0.4-11.fc32.s390x</li>
+    
+    <li>libmount-2.35.1-4.fc32.s390x</li>
+    
+    <li>libnetfilter_conntrack-1.0.7-4.fc32.s390x</li>
+    
+    <li>libnfnetlink-1.0.1-17.fc32.s390x</li>
+    
+    <li>libnsl2-1.2.0-6.20180605git4a062cf.fc32.s390x</li>
+    
+    <li>libpcap-14:1.9.1-3.fc32.s390x</li>
+    
+    <li>libpciaccess-0.16-2.fc32.s390x</li>
+    
+    <li>libpng-2:1.6.37-3.fc32.s390x</li>
+    
+    <li>libpwquality-1.4.2-2.fc32.s390x</li>
+    
+    <li>libseccomp-2.4.2-3.fc32.s390x</li>
+    
+    <li>libselinux-3.0-3.fc32.s390x</li>
+    
+    <li>libsemanage-3.0-3.fc32.s390x</li>
+    
+    <li>libsepol-3.0-3.fc32.s390x</li>
+    
+    <li>libsigsegv-2.11-10.fc32.s390x</li>
+    
+    <li>libsmartcols-2.35.1-4.fc32.s390x</li>
+    
+    <li>libstdc++-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>libtasn1-4.16.0-1.fc32.s390x</li>
+    
+    <li>libthai-0.1.28-4.fc32.s390x</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc32.s390x</li>
+    
+    <li>libunistring-0.9.10-7.fc32.s390x</li>
+    
+    <li>libutempter-1.1.6-18.fc32.s390x</li>
+    
+    <li>libuuid-2.35.1-4.fc32.s390x</li>
+    
+    <li>libverto-0.3.0-9.fc32.s390x</li>
+    
+    <li>libwacom-1.2-3.fc32.s390x</li>
+    
+    <li>libwayland-client-1.18.0-1.fc32.s390x</li>
+    
+    <li>libwayland-server-1.18.0-1.fc32.s390x</li>
+    
+    <li>libxcb-1.13.1-4.fc32.s390x</li>
+    
+    <li>libxcrypt-4.4.15-1.fc32.s390x</li>
+    
+    <li>libxkbfile-1.1.0-3.fc32.s390x</li>
+    
+    <li>libxshmfence-1.3-6.fc32.s390x</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.s390x</li>
+    
+    <li>lz4-libs-1.9.1-2.fc32.s390x</li>
+    
+    <li>mcpp-2.7.2-25.fc32.s390x</li>
+    
+    <li>mesa-dri-drivers-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libgbm-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libglapi-20.0.2-1.fc32.s390x</li>
+    
+    <li>mpfr-4.0.2-3.fc32.s390x</li>
+    
+    <li>mtdev-1.1.5-16.fc32.s390x</li>
+    
+    <li>ncurses-6.1-15.20191109.fc32.s390x</li>
+    
+    <li>ncurses-libs-6.1-15.20191109.fc32.s390x</li>
+    
+    <li>nettle-3.5.1-5.fc32.s390x</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.s390x</li>
+    
+    <li>p11-kit-0.23.20-1.fc32.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.s390x</li>
+    
+    <li>pam-1.3.1-23.fc32.s390x</li>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    <li>pcre-8.44-1.fc32.s390x</li>
+    
+    <li>pcre2-10.34-7.fc32.s390x</li>
+    
+    <li>pixman-0.38.4-2.fc32.s390x</li>
+    
+    <li>plymouth-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-core-libs-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-graphics-libs-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-two-step-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>procps-ng-3.3.15-7.fc32.s390x</li>
+    
+    <li>qrencode-libs-4.0.2-5.fc32.s390x</li>
+    
+    <li>readline-8.0-4.fc32.s390x</li>
+    
+    <li>sed-4.5-5.fc32.s390x</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-pam-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-evdev-2.10.6-6.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-libinput-0.29.0-2.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-wacom-0.39.0-2.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-wacom-serial-support-0.39.0-2.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    <li>xorg-x11-xauth-1:1.1-3.fc32.s390x</li>
+    
+    <li>xorg-x11-xinit-1.4.0-6.fc32.s390x</li>
+    
+    <li>xorg-x11-xkb-utils-7.7-32.fc32.s390x</li>
+    
+    <li>xz-5.2.4-8.fc32.s390x</li>
+    
+    <li>xz-libs-5.2.4-8.fc32.s390x</li>
+    
+    <li>zlib-1.2.11-21.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-all-langpacks
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="222208346">211.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-common
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="8138585">7.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.s390x</li>
+    
+    <li>glibc-all-langpacks-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    glx-utils
+                </td>
+                <td>8.4.0-6.20181118git1830dcb.fc32</td>
+                <td>s390x</td>
+                <td data-order="168934">165.0 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp
+                </td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>s390x</td>
+                <td data-order="715572">698.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>mpfr-4.0.2-3.fc32.s390x</li>
+    
+    <li>nettle-3.5.1-5.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gnutls
+                </td>
+                <td>3.6.12-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="2806070">2.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    graphite2
+                </td>
+                <td>1.3.13-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="218929">213.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>harfbuzz-2.6.4-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    grep
+                </td>
+                <td>3.3-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="868610">848.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>fontconfig-2.13.92-8.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    <li>xz-5.2.4-8.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gzip
+                </td>
+                <td>1.10-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="378258">369.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cracklib-2.9.6-22.fc32.s390x</li>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>plymouth-scripts-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    harfbuzz
+                </td>
+                <td>2.6.4-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="1829509">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    hwdata
+                </td>
+                <td>0.333-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="7867092">7.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libpciaccess-0.16-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    iptables-libs
+                </td>
+                <td>1.8.4-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="1575032">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    json-c
+                </td>
+                <td>0.13.1-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="80850">79.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kbd
+                </td>
+                <td>2.2.0-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1562238">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kbd-legacy
+                </td>
+                <td>2.2.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="526514">514.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>kbd-2.2.0-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kbd-misc
+                </td>
+                <td>2.2.0-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="2556019">2.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>kbd-2.2.0-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    keyutils-libs
+                </td>
+                <td>1.6-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="51143">49.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kmod
+                </td>
+                <td>27-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="283148">276.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kmod-libs
+                </td>
+                <td>27-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="146384">143.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    krb5-libs
+                </td>
+                <td>1.18-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="2474131">2.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    langpacks-core-font-en
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="351">351.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-8.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libICE
+                </td>
+                <td>1.0.10-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="178550">174.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libSM-1.2.3-5.fc32.s390x</li>
+    
+    <li>libXt-1.2.0-1.fc32.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libSM
+                </td>
+                <td>1.2.3-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="91083">88.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libXt-1.2.0-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libX11
+                </td>
+                <td>1.6.9-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="1463800">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>glx-utils-8.4.0-6.20181118git1830dcb.fc32.s390x</li>
+    
+    <li>libXcomposite-0.4.5-2.fc32.s390x</li>
+    
+    <li>libXcursor-1.2.0-2.fc32.s390x</li>
+    
+    <li>libXdamage-1.1.5-2.fc32.s390x</li>
+    
+    <li>libXext-1.3.4-3.fc32.s390x</li>
+    
+    <li>libXfixes-5.0.3-11.fc32.s390x</li>
+    
+    <li>libXft-2.3.3-3.fc32.s390x</li>
+    
+    <li>libXi-1.7.10-3.fc32.s390x</li>
+    
+    <li>libXinerama-1.1.4-5.fc32.s390x</li>
+    
+    <li>libXmu-1.1.3-3.fc32.s390x</li>
+    
+    <li>libXrandr-1.5.2-3.fc32.s390x</li>
+    
+    <li>libXrender-0.9.10-11.fc32.s390x</li>
+    
+    <li>libXt-1.2.0-1.fc32.s390x</li>
+    
+    <li>libXtst-1.2.3-11.fc32.s390x</li>
+    
+    <li>libXv-1.0.11-11.fc32.s390x</li>
+    
+    <li>libXxf86dga-1.1.5-3.fc32.s390x</li>
+    
+    <li>libXxf86vm-1.1.4-13.fc32.s390x</li>
+    
+    <li>libdmx-1.1.4-7.fc32.s390x</li>
+    
+    <li>libglvnd-glx-1:1.3.1-1.fc32.s390x</li>
+    
+    <li>libxkbfile-1.1.0-3.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-wacom-0.39.0-2.fc32.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    <li>xorg-x11-xauth-1:1.1-3.fc32.s390x</li>
+    
+    <li>xorg-x11-xinit-1.4.0-6.fc32.s390x</li>
+    
+    <li>xorg-x11-xkb-utils-7.7-32.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libX11-common
+                </td>
+                <td>1.6.9-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1339608">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libX11-1.6.9-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libX11-xcb
+                </td>
+                <td>1.6.9-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="6968">6.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXau
+                </td>
+                <td>1.0.9-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="60700">59.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libxcb-1.13.1-4.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    <li>xorg-x11-xauth-1:1.1-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXcomposite
+                </td>
+                <td>0.4.5-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="37907">37.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXcursor
+                </td>
+                <td>1.2.0-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="50609">49.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXdamage
+                </td>
+                <td>1.1.5-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="32727">32.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXdmcp
+                </td>
+                <td>1.1.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="71698">70.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXext
+                </td>
+                <td>1.3.4-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="111766">109.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>libXi-1.7.10-3.fc32.s390x</li>
+    
+    <li>libXinerama-1.1.4-5.fc32.s390x</li>
+    
+    <li>libXmu-1.1.3-3.fc32.s390x</li>
+    
+    <li>libXrandr-1.5.2-3.fc32.s390x</li>
+    
+    <li>libXtst-1.2.3-11.fc32.s390x</li>
+    
+    <li>libXv-1.0.11-11.fc32.s390x</li>
+    
+    <li>libXxf86dga-1.1.5-3.fc32.s390x</li>
+    
+    <li>libXxf86vm-1.1.4-13.fc32.s390x</li>
+    
+    <li>libdmx-1.1.4-7.fc32.s390x</li>
+    
+    <li>libglvnd-glx-1:1.3.1-1.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    <li>xorg-x11-xauth-1:1.1-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXfixes
+                </td>
+                <td>5.0.3-11.fc32</td>
+                <td>s390x</td>
+                <td data-order="27383">26.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libXcursor-1.2.0-2.fc32.s390x</li>
+    
+    <li>libXdamage-1.1.5-2.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXfont2
+                </td>
+                <td>2.0.3-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="358649">350.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXft
+                </td>
+                <td>2.3.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="156440">152.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXi
+                </td>
+                <td>1.7.10-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="82675">80.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libXtst-1.2.3-11.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-wacom-0.39.0-2.fc32.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXinerama
+                </td>
+                <td>1.1.4-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="15143">14.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-drv-wacom-0.39.0-2.fc32.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXmu
+                </td>
+                <td>1.1.3-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="192264">187.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    <li>xorg-x11-xauth-1:1.1-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXrandr
+                </td>
+                <td>1.5.2-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="53090">51.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-drv-wacom-0.39.0-2.fc32.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXrender
+                </td>
+                <td>0.9.10-11.fc32</td>
+                <td>s390x</td>
+                <td data-order="47291">46.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>libXcursor-1.2.0-2.fc32.s390x</li>
+    
+    <li>libXft-2.3.3-3.fc32.s390x</li>
+    
+    <li>libXrandr-1.5.2-3.fc32.s390x</li>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXt
+                </td>
+                <td>1.2.0-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="525087">512.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libXmu-1.1.3-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXtst
+                </td>
+                <td>1.2.3-11.fc32</td>
+                <td>s390x</td>
+                <td data-order="38154">37.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXv
+                </td>
+                <td>1.0.11-11.fc32</td>
+                <td>s390x</td>
+                <td data-order="26463">25.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXxf86dga
+                </td>
+                <td>1.1.5-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="30569">29.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXxf86vm
+                </td>
+                <td>1.1.4-13.fc32</td>
+                <td>s390x</td>
+                <td data-order="25824">25.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libacl
+                </td>
+                <td>2.2.53-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="41296">40.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>acl-2.2.53-5.fc32.s390x</li>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>sed-4.5-5.fc32.s390x</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libargon2
+                </td>
+                <td>20171227-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="59119">57.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libattr
+                </td>
+                <td>2.4.48-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="25178">24.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>libacl-2.2.53-5.fc32.s390x</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libblkid
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="363825">355.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.s390x</li>
+    
+    <li>libfdisk-2.35.1-4.fc32.s390x</li>
+    
+    <li>libmount-2.35.1-4.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap
+                </td>
+                <td>2.26-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="122258">119.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap-ng
+                </td>
+                <td>0.7.10-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="50814">49.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>audit-libs-3.0-0.18.20191104git1c2f876.fc32.s390x</li>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcom_err
+                </td>
+                <td>1.45.5-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="61385">59.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdatrie
+                </td>
+                <td>0.2.9-11.fc32</td>
+                <td>s390x</td>
+                <td data-order="59823">58.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libthai-0.1.28-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdb
+                </td>
+                <td>5.3.28-40.fc32</td>
+                <td>s390x</td>
+                <td data-order="1995744">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-23.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdmx
+                </td>
+                <td>1.1.4-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="20978">20.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdrm
+                </td>
+                <td>2.4.100-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="271902">265.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-dri-drivers-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libgbm-20.0.2-1.fc32.s390x</li>
+    
+    <li>plymouth-graphics-libs-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libedit
+                </td>
+                <td>3.1-32.20191231cvs.fc32</td>
+                <td>s390x</td>
+                <td data-order="302005">294.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libepoxy
+                </td>
+                <td>1.5.4-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="1375315">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libevdev
+                </td>
+                <td>1.8.901-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="115918">113.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libinput-1.15.4-1.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-evdev-2.10.6-6.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libfdisk
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="524195">511.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi
+                </td>
+                <td>3.1-24.fc32</td>
+                <td>s390x</td>
+                <td data-order="57380">56.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.64.1-1.fc32.s390x</li>
+    
+    <li>libwayland-client-1.18.0-1.fc32.s390x</li>
+    
+    <li>libwayland-server-1.18.0-1.fc32.s390x</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.s390x</li>
+    
+    <li>p11-kit-0.23.20-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libfontenc
+                </td>
+                <td>1.1.3-12.fc32</td>
+                <td>s390x</td>
+                <td data-order="59885">58.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libXfont2-2.0.3-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcc
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="173032">169.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>glibc-2.31-1.fc32.s390x</li>
+    
+    <li>graphite2-1.3.13-1.fc32.s390x</li>
+    
+    <li>harfbuzz-2.6.4-3.fc32.s390x</li>
+    
+    <li>kmod-27-1.fc32.s390x</li>
+    
+    <li>kmod-libs-27-1.fc32.s390x</li>
+    
+    <li>libstdc++-10.0.1-0.9.fc32.s390x</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.s390x</li>
+    
+    <li>mesa-dri-drivers-20.0.2-1.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-pam-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcrypt
+                </td>
+                <td>1.8.5-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="1043742">1019.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libglvnd
+                </td>
+                <td>1:1.3.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="928704">906.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libglvnd-egl-1:1.3.1-1.fc32.s390x</li>
+    
+    <li>libglvnd-glx-1:1.3.1-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libglvnd-egl
+                </td>
+                <td>1:1.3.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="105088">102.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libglvnd-glx
+                </td>
+                <td>1:1.3.1-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="954232">931.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glx-utils-8.4.0-6.20181118git1830dcb.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgpg-error
+                </td>
+                <td>1.36-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="811413">792.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgcrypt-1.8.5-3.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgudev
+                </td>
+                <td>232-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="79781">77.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libwacom-1.2-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libidn2
+                </td>
+                <td>2.3.0-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="257742">251.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libinput
+                </td>
+                <td>1.15.4-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="650840">635.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-drv-libinput-0.29.0-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libkcapi
+                </td>
+                <td>1.1.5-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="88347">86.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libkcapi-hmaccalc-1.1.5-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libkcapi-hmaccalc
+                </td>
+                <td>1.1.5-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="33701">32.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmcpp
+                </td>
+                <td>2.7.2-25.fc32</td>
+                <td>s390x</td>
+                <td data-order="175300">171.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mcpp-2.7.2-25.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmnl
+                </td>
+                <td>1.0.4-11.fc32</td>
+                <td>s390x</td>
+                <td data-order="52263">51.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnetfilter_conntrack-1.0.7-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmount
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="447285">436.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.64.1-1.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnetfilter_conntrack
+                </td>
+                <td>1.0.7-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="155334">151.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iptables-libs-1.8.4-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnfnetlink
+                </td>
+                <td>1.0.1-17.fc32</td>
+                <td>s390x</td>
+                <td data-order="51619">50.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnetfilter_conntrack-1.0.7-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnsl2
+                </td>
+                <td>1.2.0-6.20180605git4a062cf.fc32</td>
+                <td>s390x</td>
+                <td data-order="130394">127.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-23.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpcap
+                </td>
+                <td>14:1.9.1-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="436642">426.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iptables-libs-1.8.4-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpciaccess
+                </td>
+                <td>0.16-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="49889">48.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpng
+                </td>
+                <td>2:1.6.37-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="251203">245.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>freetype-2.10.1-2.fc32.s390x</li>
+    
+    <li>plymouth-graphics-libs-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-two-step-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpwquality
+                </td>
+                <td>1.4.2-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="393861">384.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-23.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libseccomp
+                </td>
+                <td>2.4.2-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="404131">394.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="213984">209.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    <li>device-mapper-libs-1.02.167-2.fc32.s390x</li>
+    
+    <li>findutils-1:4.7.0-3.fc32.s390x</li>
+    
+    <li>glib2-2.64.1-1.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>libmount-2.35.1-4.fc32.s390x</li>
+    
+    <li>libsemanage-3.0-3.fc32.s390x</li>
+    
+    <li>mesa-libglapi-20.0.2-1.fc32.s390x</li>
+    
+    <li>pam-1.3.1-23.fc32.s390x</li>
+    
+    <li>sed-4.5-5.fc32.s390x</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsemanage
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="323490">315.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>shadow-utils-2:4.8-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsepol
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="944296">922.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-3.0-3.fc32.s390x</li>
+    
+    <li>libsemanage-3.0-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsigsegv
+                </td>
+                <td>2.11-10.fc32</td>
+                <td>s390x</td>
+                <td data-order="45122">44.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsmartcols
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="293627">286.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libstdc++
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>s390x</td>
+                <td data-order="2673989">2.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>graphite2-1.3.13-1.fc32.s390x</li>
+    
+    <li>harfbuzz-2.6.4-3.fc32.s390x</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.s390x</li>
+    
+    <li>mesa-dri-drivers-20.0.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtasn1
+                </td>
+                <td>4.16.0-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="179812">175.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libthai
+                </td>
+                <td>0.1.28-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="782900">764.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtirpc
+                </td>
+                <td>1.2.5-1.rc2.fc32</td>
+                <td>s390x</td>
+                <td data-order="223614">218.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnsl2-1.2.0-6.20180605git4a062cf.fc32.s390x</li>
+    
+    <li>pam-1.3.1-23.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libunistring
+                </td>
+                <td>0.9.10-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="1655419">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>libidn2-2.3.0-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libutempter
+                </td>
+                <td>1.1.6-18.fc32</td>
+                <td>s390x</td>
+                <td data-order="50365">49.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libuuid
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="34447">33.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.s390x</li>
+    
+    <li>libSM-1.2.3-5.fc32.s390x</li>
+    
+    <li>libblkid-2.35.1-4.fc32.s390x</li>
+    
+    <li>libfdisk-2.35.1-4.fc32.s390x</li>
+    
+    <li>libmount-2.35.1-4.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libverto
+                </td>
+                <td>0.3.0-9.fc32</td>
+                <td>s390x</td>
+                <td data-order="27620">27.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libwacom
+                </td>
+                <td>1.2-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="73855">72.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libinput-1.15.4-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libwacom-data
+                </td>
+                <td>1.2-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="488721">477.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libwacom-1.2-3.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libwayland-client
+                </td>
+                <td>1.18.0-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="80380">78.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libwayland-server
+                </td>
+                <td>1.18.0-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="105380">102.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libgbm-20.0.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcb
+                </td>
+                <td>1.13.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="1092776">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>libX11-1.6.9-3.fc32.s390x</li>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>xorg-x11-utils-7.5-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt
+                </td>
+                <td>4.4.15-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="289699">282.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-23.fc32.s390x</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxkbfile
+                </td>
+                <td>1.1.0-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="218038">212.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-xkb-utils-7.7-32.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxshmfence
+                </td>
+                <td>1.3-6.fc32</td>
+                <td>s390x</td>
+                <td data-order="11776">11.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    llvm-libs
+                </td>
+                <td>10.0.0-0.1.rc2.fc32</td>
+                <td>s390x</td>
+                <td data-order="90034856">85.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-dri-drivers-20.0.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lz4-libs
+                </td>
+                <td>1.9.1-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="145175">141.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mcpp
+                </td>
+                <td>2.7.2-25.fc32</td>
+                <td>s390x</td>
+                <td data-order="52050">50.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-utils-7.7-34.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    mesa-dri-drivers
+                </td>
+                <td>20.0.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="12553278">12.0 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mesa-filesystem
+                </td>
+                <td>20.0.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="3682">3.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-dri-drivers-20.0.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mesa-libEGL
+                </td>
+                <td>20.0.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="342393">334.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libglvnd-egl-1:1.3.1-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mesa-libGL
+                </td>
+                <td>20.0.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="636360">621.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libglvnd-glx-1:1.3.1-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mesa-libgbm
+                </td>
+                <td>20.0.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="70616">69.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mesa-libglapi
+                </td>
+                <td>20.0.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="374464">365.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mesa-dri-drivers-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libEGL-20.0.2-1.fc32.s390x</li>
+    
+    <li>mesa-libGL-20.0.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mpfr
+                </td>
+                <td>4.0.2-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="651259">636.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mtdev
+                </td>
+                <td>1.1.5-16.fc32</td>
+                <td>s390x</td>
+                <td data-order="25997">25.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libinput-1.15.4-1.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-evdev-2.10.6-6.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>s390x</td>
+                <td data-order="650741">635.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-base
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-libs-6.1-15.20191109.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-libs
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>s390x</td>
+                <td data-order="1089136">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>bash-5.0.11-2.fc32.s390x</li>
+    
+    <li>libedit-3.1-32.20191231cvs.fc32.s390x</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.s390x</li>
+    
+    <li>ncurses-6.1-15.20191109.fc32.s390x</li>
+    
+    <li>procps-ng-3.3.15-7.fc32.s390x</li>
+    
+    <li>readline-8.0-4.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nettle
+                </td>
+                <td>3.5.1-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="610311">596.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl-libs
+                </td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="3496794">3.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.s390x</li>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.s390x</li>
+    
+    <li>kmod-27-1.fc32.s390x</li>
+    
+    <li>kmod-libs-27-1.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit
+                </td>
+                <td>0.23.20-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1832668">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit-trust
+                </td>
+                <td>0.23.20-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="510761">498.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>gnutls-3.6.12-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pam
+                </td>
+                <td>1.3.1-23.fc32</td>
+                <td>s390x</td>
+                <td data-order="2647501">2.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>kbd-2.2.0-1.fc32.s390x</li>
+    
+    <li>libpwquality-1.4.2-2.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-pam-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pango
+                </td>
+                <td>1.44.7-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="901898">880.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre
+                </td>
+                <td>8.44-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="335872">328.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.64.1-1.fc32.s390x</li>
+    
+    <li>grep-3.3-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre2
+                </td>
+                <td>10.34-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="517277">505.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-3.0-3.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pixman
+                </td>
+                <td>0.38.4-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="519527">507.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    <li>xorg-x11-server-common-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    plymouth
+                </td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>s390x</td>
+                <td data-order="361827">353.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-two-step-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-scripts-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    plymouth-core-libs
+                </td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>s390x</td>
+                <td data-order="323504">315.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-graphics-libs-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-two-step-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    plymouth-graphics-libs
+                </td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>s390x</td>
+                <td data-order="171536">167.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-two-step-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    plymouth-plugin-label
+                </td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>s390x</td>
+                <td data-order="19848">19.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-plugin-two-step-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    plymouth-plugin-two-step
+                </td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>s390x</td>
+                <td data-order="81584">79.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-theme-spinner-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    plymouth-scripts
+                </td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>s390x</td>
+                <td data-order="24178">23.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-theme-spinner-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    plymouth-system-theme
+                </td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>s390x</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    plymouth-theme-spinner
+                </td>
+                <td>0.9.4-13.20200306git58a7289.fc32</td>
+                <td>s390x</td>
+                <td data-order="143428">140.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-system-theme-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    procps-ng
+                </td>
+                <td>3.3.15-7.fc32</td>
+                <td>s390x</td>
+                <td data-order="986300">963.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    qrencode-libs
+                </td>
+                <td>4.0.2-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="161585">157.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    readline
+                </td>
+                <td>8.0-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="511395">499.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-7.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sed
+                </td>
+                <td>4.5-5.fc32</td>
+                <td>s390x</td>
+                <td data-order="837734">818.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>krb5-libs-1.18-1.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    setup
+                </td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-9.fc32.noarch</li>
+    
+    <li>filesystem-3.14-2.fc32.s390x</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    shadow-utils
+                </td>
+                <td>2:4.8-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="4242143">4.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    <li>libutempter-1.1.6-18.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd
+                </td>
+                <td>245.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="14383793">13.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    <li>dbus-common-1:1.12.16-4.fc32.noarch</li>
+    
+    <li>device-mapper-1.02.167-2.fc32.s390x</li>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>libkcapi-1.1.5-2.fc32.s390x</li>
+    
+    <li>systemd-pam-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-udev-245.2-1.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>elfutils-default-yama-scope-0.178-9.fc32.noarch</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-libs
+                </td>
+                <td>245.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1828062">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.s390x</li>
+    
+    <li>dbus-libs-1:1.12.16-4.fc32.s390x</li>
+    
+    <li>device-mapper-libs-1.02.167-2.fc32.s390x</li>
+    
+    <li>libgudev-232-7.fc32.s390x</li>
+    
+    <li>libinput-1.15.4-1.fc32.s390x</li>
+    
+    <li>plymouth-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-core-libs-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-graphics-libs-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-two-step-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>procps-ng-3.3.15-7.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-evdev-2.10.6-6.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-wacom-serial-support-0.39.0-2.fc32.s390x</li>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-pam
+                </td>
+                <td>245.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="1028944">1004.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-rpm-macros
+                </td>
+                <td>245.2-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="8040">7.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-udev
+                </td>
+                <td>245.2-1.fc32</td>
+                <td>s390x</td>
+                <td data-order="8771249">8.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata
+                </td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-common-2.31-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    util-linux
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>s390x</td>
+                <td data-order="13867229">13.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>device-mapper-1.02.167-2.fc32.s390x</li>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xkeyboard-config
+                </td>
+                <td>2.29-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="5725649">5.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-drv-evdev-2.10.6-6.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-libinput-0.29.0-2.fc32.s390x</li>
+    
+    <li>xorg-x11-server-common-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    xorg-x11-drv-evdev
+                </td>
+                <td>2.10.6-6.fc32</td>
+                <td>s390x</td>
+                <td data-order="79707">77.8 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    xorg-x11-drv-libinput
+                </td>
+                <td>0.29.0-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="98622">96.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    xorg-x11-drv-wacom
+                </td>
+                <td>0.39.0-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="1097388">1.0 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xorg-x11-drv-wacom-serial-support
+                </td>
+                <td>0.39.0-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="41520">40.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-drv-wacom-0.39.0-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    xorg-x11-server-Xorg
+                </td>
+                <td>1.20.7-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="4186835">4.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-drv-evdev-2.10.6-6.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-libinput-0.29.0-2.fc32.s390x</li>
+    
+    <li>xorg-x11-drv-wacom-0.39.0-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xorg-x11-server-common
+                </td>
+                <td>1.20.7-2.fc32</td>
+                <td>s390x</td>
+                <td data-order="130250">127.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-Xorg-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xorg-x11-server-utils
+                </td>
+                <td>7.7-34.fc32</td>
+                <td>s390x</td>
+                <td data-order="476101">464.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-xinit-1.4.0-6.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    xorg-x11-utils
+                </td>
+                <td>7.5-34.fc32</td>
+                <td>s390x</td>
+                <td data-order="273863">267.4 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    xorg-x11-xauth
+                </td>
+                <td>1:1.1-3.fc32</td>
+                <td>s390x</td>
+                <td data-order="66065">64.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-xinit-1.4.0-6.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    xorg-x11-xinit
+                </td>
+                <td>1.4.0-6.fc32</td>
+                <td>s390x</td>
+                <td data-order="127588">124.6 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    xorg-x11-xinit-session
+                </td>
+                <td>1.4.0-6.fc32</td>
+                <td>s390x</td>
+                <td data-order="266">266.0 B</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xorg-x11-xkb-utils
+                </td>
+                <td>7.7-32.fc32</td>
+                <td>s390x</td>
+                <td data-order="319251">311.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-common-1.20.7-2.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz
+                </td>
+                <td>5.2.4-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="517792">505.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz-libs
+                </td>
+                <td>5.2.4-8.fc32</td>
+                <td>s390x</td>
+                <td data-order="192855">188.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-9.fc32.s390x</li>
+    
+    <li>kmod-27-1.fc32.s390x</li>
+    
+    <li>kmod-libs-27-1.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>systemd-libs-245.2-1.fc32.s390x</li>
+    
+    <li>xz-5.2.4-8.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zlib
+                </td>
+                <td>1.2.11-21.fc32</td>
+                <td>s390x</td>
+                <td data-order="232295">226.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-7.fc32.s390x</li>
+    
+    <li>cracklib-2.9.6-22.fc32.s390x</li>
+    
+    <li>elfutils-libelf-0.178-9.fc32.s390x</li>
+    
+    <li>elfutils-libs-0.178-9.fc32.s390x</li>
+    
+    <li>freetype-2.10.1-2.fc32.s390x</li>
+    
+    <li>glib2-2.64.1-1.fc32.s390x</li>
+    
+    <li>kmod-27-1.fc32.s390x</li>
+    
+    <li>kmod-libs-27-1.fc32.s390x</li>
+    
+    <li>libXfont2-2.0.3-7.fc32.s390x</li>
+    
+    <li>libfontenc-1.1.3-12.fc32.s390x</li>
+    
+    <li>libpng-2:1.6.37-3.fc32.s390x</li>
+    
+    <li>llvm-libs-10.0.0-0.1.rc2.fc32.s390x</li>
+    
+    <li>mesa-dri-drivers-20.0.2-1.fc32.s390x</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.s390x</li>
+    
+    <li>plymouth-graphics-libs-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-label-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>plymouth-plugin-two-step-0.9.4-13.20200306git58a7289.fc32.s390x</li>
+    
+    <li>systemd-245.2-1.fc32.s390x</li>
+    
+    <li>util-linux-2.35.1-4.fc32.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--rhel-8-appstream-comps-base-x--fedora-empty-base--repository-fedora-rawhide--s390x.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

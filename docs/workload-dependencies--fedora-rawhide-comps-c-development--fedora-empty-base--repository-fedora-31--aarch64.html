@@ -1,0 +1,5608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-comps-c-development--repository-fedora-31.html">
+                    Comps group c-development for fedora-rawhide
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group c-development for fedora-rawhide in Empty from Fedora 31 aarch64
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group c-development for fedora-rawhide <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora 31</small>
+        <small class="text-muted"> for </small>
+        <small> aarch64</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--fedora-rawhide-comps-c-development--fedora-empty-base--repository-fedora-31--aarch64.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--fedora-rawhide-comps-c-development--fedora-empty-base--repository-fedora-31--aarch64.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alternatives
+                </td>
+                <td>1.11-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="94582">92.4 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    audit-libs
+                </td>
+                <td>3.0-0.15.20191104git1c2f876.fc31</td>
+                <td>aarch64</td>
+                <td data-order="334596">326.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libsemanage-2.9-3.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    autoconf
+                </td>
+                <td>2.69-31.fc31</td>
+                <td>noarch</td>
+                <td data-order="2323019">2.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>libtool-2.4.6-31.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    automake
+                </td>
+                <td>1.16.1-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1801118">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtool-2.4.6-31.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    basesystem
+                </td>
+                <td>11-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bash
+                </td>
+                <td>5.0.11-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="7601167">7.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>binutils-2.32-31.fc31.aarch64</li>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>ccache-3.7.7-1.fc31.aarch64</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>cscope-15.9-5.fc31.aarch64</li>
+    
+    <li>elfutils-default-yama-scope-0.178-7.fc31.noarch</li>
+    
+    <li>filesystem-3.12-2.fc31.aarch64</li>
+    
+    <li>gdb-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>glibc-common-2.30-10.fc31.aarch64</li>
+    
+    <li>glibc-headers-2.30-10.fc31.aarch64</li>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libblkid-2.34-4.fc31.aarch64</li>
+    
+    <li>libsepol-2.9-2.fc31.aarch64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    binutils
+                </td>
+                <td>2.32-31.fc31</td>
+                <td>aarch64</td>
+                <td data-order="28646959">27.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-gold-2.32-31.fc31.aarch64</li>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    binutils-gold
+                </td>
+                <td>2.32-31.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3328864">3.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.32-31.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    bison
+                </td>
+                <td>3.4.1-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2792046">2.7 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    boost-regex
+                </td>
+                <td>1.69.0-9.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1385690">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>source-highlight-3.1.9-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    byacc
+                </td>
+                <td>1.9.20190617-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="306884">299.7 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bzip2
+                </td>
+                <td>1.0.8-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="182277">178.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bzip2-libs
+                </td>
+                <td>1.0.8-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="79368">77.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>bzip2-1.0.8-1.fc31.aarch64</li>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    <li>libsemanage-2.9-3.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ca-certificates
+                </td>
+                <td>2020.2.40-1.1.fc31</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.aarch64</li>
+    
+    <li>python-pip-wheel-19.1.1-7.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    ccache
+                </td>
+                <td>3.7.7-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="637559">622.6 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils
+                </td>
+                <td>8.31-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="10759472">10.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.32-31.fc31.aarch64</li>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>ccache-3.7.7-1.fc31.aarch64</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>cscope-15.9-5.fc31.aarch64</li>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libblkid-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils-common
+                </td>
+                <td>8.31-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="10348911">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cpp
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="21286959">20.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    crypto-policies
+                </td>
+                <td>20191128-2.gitcd267a5.fc31</td>
+                <td>noarch</td>
+                <td data-order="195446">190.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    cscope
+                </td>
+                <td>15.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1028118">1004.0 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    ctags
+                </td>
+                <td>5.8-26.fc31</td>
+                <td>aarch64</td>
+                <td data-order="460772">450.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>source-highlight-3.1.9-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    elfutils
+                </td>
+                <td>0.178-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3482540">3.3 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-default-yama-scope
+                </td>
+                <td>0.178-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libelf
+                </td>
+                <td>0.178-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="953451">931.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-0.178-7.fc31.aarch64</li>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    <li>libbabeltrace-1.5.7-2.fc31.aarch64</li>
+    
+    <li>ltrace-0.7.91-35.fc31.aarch64</li>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libs
+                </td>
+                <td>0.178-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="766303">748.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-0.178-7.fc31.aarch64</li>
+    
+    <li>libbabeltrace-1.5.7-2.fc31.aarch64</li>
+    
+    <li>ltrace-0.7.91-35.fc31.aarch64</li>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    <li>strace-5.5-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    emacs-filesystem
+                </td>
+                <td>1:26.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>cscope-15.9-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    expat
+                </td>
+                <td>2.2.8-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="356315">348.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-gpg-keys
+                </td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="103813">101.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-repos-31-1.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release
+                </td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    <li>fedora-repos-31-1.noarch</li>
+    
+    <li>setup-2.13.6-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release-common
+                </td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="14359">14.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-31-2.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-repos
+                </td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="8785">8.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    filesystem
+                </td>
+                <td>3.12-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-8.fc31.noarch</li>
+    
+    <li>bash-5.0.11-1.fc31.aarch64</li>
+    
+    <li>cpp-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    findutils
+                </td>
+                <td>1:4.6.0-24.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1882697">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtool-2.4.6-31.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    flex
+                </td>
+                <td>2.6.4-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1028940">1004.8 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gawk
+                </td>
+                <td>5.0.1-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3841894">3.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gc
+                </td>
+                <td>7.6.4-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="411568">401.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    gcc
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="45460332">43.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-c++-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libtool-2.4.6-31.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    gcc-c++
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="23774829">22.7 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    gdb
+                </td>
+                <td>8.3.50.20190824-30.fc31</td>
+                <td>aarch64</td>
+                <td data-order="384038">375.0 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdb-headless
+                </td>
+                <td>8.3.50.20190824-30.fc31</td>
+                <td>aarch64</td>
+                <td data-order="10600665">10.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdb-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdbm-libs
+                </td>
+                <td>1:1.18.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="189616">185.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glib2
+                </td>
+                <td>2.62.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="13450336">12.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libbabeltrace-1.5.7-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="28878565">27.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>alternatives-1.11-5.fc31.aarch64</li>
+    
+    <li>audit-libs-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    <li>bash-5.0.11-1.fc31.aarch64</li>
+    
+    <li>binutils-2.32-31.fc31.aarch64</li>
+    
+    <li>binutils-gold-2.32-31.fc31.aarch64</li>
+    
+    <li>bison-3.4.1-2.fc31.aarch64</li>
+    
+    <li>boost-regex-1.69.0-9.fc31.aarch64</li>
+    
+    <li>byacc-1.9.20190617-2.fc31.aarch64</li>
+    
+    <li>bzip2-1.0.8-1.fc31.aarch64</li>
+    
+    <li>bzip2-libs-1.0.8-1.fc31.aarch64</li>
+    
+    <li>ccache-3.7.7-1.fc31.aarch64</li>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>cpp-9.2.1-1.fc31.aarch64</li>
+    
+    <li>cscope-15.9-5.fc31.aarch64</li>
+    
+    <li>ctags-5.8-26.fc31.aarch64</li>
+    
+    <li>elfutils-0.178-7.fc31.aarch64</li>
+    
+    <li>elfutils-libelf-0.178-7.fc31.aarch64</li>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    <li>expat-2.2.8-1.fc31.aarch64</li>
+    
+    <li>findutils-1:4.6.0-24.fc31.aarch64</li>
+    
+    <li>flex-2.6.4-3.fc31.aarch64</li>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    <li>gc-7.6.4-6.fc31.aarch64</li>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gcc-c++-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>gdbm-libs-1:1.18.1-1.fc31.aarch64</li>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>glibc-all-langpacks-2.30-10.fc31.aarch64</li>
+    
+    <li>glibc-common-2.30-10.fc31.aarch64</li>
+    
+    <li>glibc-devel-2.30-10.fc31.aarch64</li>
+    
+    <li>glibc-headers-2.30-10.fc31.aarch64</li>
+    
+    <li>gmp-1:6.1.2-10.fc31.aarch64</li>
+    
+    <li>grep-3.3-3.fc31.aarch64</li>
+    
+    <li>groff-base-1.22.3-20.fc31.aarch64</li>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    <li>indent-2.2.12-4.fc31.aarch64</li>
+    
+    <li>isl-0.16.1-9.fc31.aarch64</li>
+    
+    <li>keyutils-libs-1.6-3.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libacl-2.2.53-4.fc31.aarch64</li>
+    
+    <li>libasan-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libatomic-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libatomic_ops-7.6.10-2.fc31.aarch64</li>
+    
+    <li>libattr-2.4.48-7.fc31.aarch64</li>
+    
+    <li>libbabeltrace-1.5.7-2.fc31.aarch64</li>
+    
+    <li>libblkid-2.34-4.fc31.aarch64</li>
+    
+    <li>libcap-2.26-6.fc31.aarch64</li>
+    
+    <li>libcap-ng-0.7.10-1.fc31.aarch64</li>
+    
+    <li>libcom_err-1.45.5-1.fc31.aarch64</li>
+    
+    <li>libffi-3.1-23.fc31.aarch64</li>
+    
+    <li>libgomp-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libicu-63.2-3.fc31.aarch64</li>
+    
+    <li>libmount-2.34-4.fc31.aarch64</li>
+    
+    <li>libmpc-1.1.0-4.fc31.aarch64</li>
+    
+    <li>libnsl2-1.2.0-5.20180605git4a062cf.fc31.aarch64</li>
+    
+    <li>libpkgconf-1.6.3-2.fc31.aarch64</li>
+    
+    <li>libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>libsemanage-2.9-3.fc31.aarch64</li>
+    
+    <li>libsepol-2.9-2.fc31.aarch64</li>
+    
+    <li>libsigsegv-2.11-8.fc31.aarch64</li>
+    
+    <li>libstdc++-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libtasn1-4.14-2.fc31.aarch64</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.aarch64</li>
+    
+    <li>libtool-ltdl-2.4.6-31.fc31.aarch64</li>
+    
+    <li>libubsan-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libunistring-0.9.10-6.fc31.aarch64</li>
+    
+    <li>libuuid-2.34-4.fc31.aarch64</li>
+    
+    <li>libverto-0.3.0-8.fc31.aarch64</li>
+    
+    <li>libxcrypt-4.4.15-1.fc31.aarch64</li>
+    
+    <li>ltrace-0.7.91-35.fc31.aarch64</li>
+    
+    <li>m4-1.4.18-11.fc31.aarch64</li>
+    
+    <li>make-1:4.2.1-15.fc31.aarch64</li>
+    
+    <li>mpfr-3.1.6-5.fc31.aarch64</li>
+    
+    <li>ncurses-6.1-12.20190803.fc31.aarch64</li>
+    
+    <li>ncurses-libs-6.1-12.20190803.fc31.aarch64</li>
+    
+    <li>numactl-libs-2.0.12-3.fc31.aarch64</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.aarch64</li>
+    
+    <li>p11-kit-0.23.20-1.fc31.aarch64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.aarch64</li>
+    
+    <li>pcre-8.44-1.fc31.aarch64</li>
+    
+    <li>pcre2-10.34-7.fc31.aarch64</li>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    <li>perl-Data-Dumper-2.174-440.fc31.aarch64</li>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    <li>perl-IO-1.40-450.fc31.aarch64</li>
+    
+    <li>perl-MIME-Base64-3.15-439.fc31.aarch64</li>
+    
+    <li>perl-PathTools-3.78-439.fc31.aarch64</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.53-439.fc31.aarch64</li>
+    
+    <li>perl-Socket-4:2.029-4.fc31.aarch64</li>
+    
+    <li>perl-Storable-1:3.15-442.fc31.aarch64</li>
+    
+    <li>perl-Unicode-Normalize-1.26-439.fc31.aarch64</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-libs-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-threads-1:2.22-439.fc31.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-440.fc31.aarch64</li>
+    
+    <li>pkgconf-1.6.3-2.fc31.aarch64</li>
+    
+    <li>popt-1.16-18.fc31.aarch64</li>
+    
+    <li>python3-3.7.6-2.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>readline-8.0-3.fc31.aarch64</li>
+    
+    <li>sed-4.5-4.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    <li>slang-2.3.2-6.fc31.aarch64</li>
+    
+    <li>source-highlight-3.1.9-1.fc31.aarch64</li>
+    
+    <li>sqlite-libs-3.30.0-1.fc31.aarch64</li>
+    
+    <li>strace-5.5-1.fc31.aarch64</li>
+    
+    <li>tar-2:1.32-2.fc31.aarch64</li>
+    
+    <li>valgrind-1:3.15.0-20.fc31.aarch64</li>
+    
+    <li>xz-libs-5.2.4-6.fc31.aarch64</li>
+    
+    <li>zlib-1.2.11-20.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-all-langpacks
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="217990208">207.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-common
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3063946">2.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.aarch64</li>
+    
+    <li>glibc-all-langpacks-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    glibc-devel
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1201677">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libxcrypt-devel-4.4.15-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-headers
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2026379">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-devel-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp
+                </td>
+                <td>1:6.1.2-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1448564">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>cpp-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gcc-c++-9.2.1-1.fc31.aarch64</li>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    <li>isl-0.16.1-9.fc31.aarch64</li>
+    
+    <li>libmpc-1.1.0-4.fc31.aarch64</li>
+    
+    <li>mpfr-3.1.6-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    grep
+                </td>
+                <td>3.3-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="871258">850.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    groff-base
+                </td>
+                <td>1.22.3-20.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4905339">4.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    guile
+                </td>
+                <td>5:2.0.14-17.fc31</td>
+                <td>aarch64</td>
+                <td data-order="12482146">11.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    guile22
+                </td>
+                <td>2.2.6-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="46502085">44.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>make-1:4.2.1-15.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    indent
+                </td>
+                <td>2.2.12-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="526999">514.6 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    isl
+                </td>
+                <td>0.16.1-9.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4317273">4.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kernel-headers
+                </td>
+                <td>5.5.9-200.fc31</td>
+                <td>aarch64</td>
+                <td data-order="5008997">4.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-headers-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    keyutils-libs
+                </td>
+                <td>1.6-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="105311">102.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    krb5-libs
+                </td>
+                <td>1.17-46.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2463205">2.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libacl
+                </td>
+                <td>2.2.53-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="76424">74.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>sed-4.5-4.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    <li>tar-2:1.32-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libasan
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1545960">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libatomic
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="70464">68.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libatomic_ops
+                </td>
+                <td>7.6.10-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="194514">190.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gc-7.6.4-6.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libattr
+                </td>
+                <td>2.4.48-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="73458">71.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>libacl-2.2.53-4.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libbabeltrace
+                </td>
+                <td>1.5.7-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="843531">823.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libblkid
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="405945">396.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libmount-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap
+                </td>
+                <td>2.26-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="448666">438.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap-ng
+                </td>
+                <td>0.7.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="98742">96.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>audit-libs-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcom_err
+                </td>
+                <td>1.45.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="114537">111.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi
+                </td>
+                <td>3.1-23.fc31</td>
+                <td>aarch64</td>
+                <td data-order="91428">89.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    <li>p11-kit-0.23.20-1.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcc
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="226992">221.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.32-31.fc31.aarch64</li>
+    
+    <li>binutils-gold-2.32-31.fc31.aarch64</li>
+    
+    <li>boost-regex-1.69.0-9.fc31.aarch64</li>
+    
+    <li>gc-7.6.4-6.fc31.aarch64</li>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>glibc-2.30-10.fc31.aarch64</li>
+    
+    <li>groff-base-1.22.3-20.fc31.aarch64</li>
+    
+    <li>libasan-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libicu-63.2-3.fc31.aarch64</li>
+    
+    <li>libstdc++-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libubsan-9.2.1-1.fc31.aarch64</li>
+    
+    <li>source-highlight-3.1.9-1.fc31.aarch64</li>
+    
+    <li>valgrind-1:3.15.0-20.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgomp
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="376246">367.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libicu
+                </td>
+                <td>63.2-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="33958645">32.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>boost-regex-1.69.0-9.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmount
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="431373">421.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmpc
+                </td>
+                <td>1.1.0-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="163933">160.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cpp-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gcc-c++-9.2.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnsl2
+                </td>
+                <td>1.2.0-5.20180605git4a062cf.fc31</td>
+                <td>aarch64</td>
+                <td data-order="183546">179.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpkgconf
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="86877">84.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-1.6.3-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="250808">244.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>findutils-1:4.6.0-24.fc31.aarch64</li>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>glibc-common-2.30-10.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libmount-2.34-4.fc31.aarch64</li>
+    
+    <li>libsemanage-2.9-3.fc31.aarch64</li>
+    
+    <li>ltrace-0.7.91-35.fc31.aarch64</li>
+    
+    <li>sed-4.5-4.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    <li>tar-2:1.32-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsemanage
+                </td>
+                <td>2.9-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="393370">384.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsepol
+                </td>
+                <td>2.9-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="968104">945.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>libsemanage-2.9-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsigsegv
+                </td>
+                <td>2.11-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="100762">98.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libstdc++
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2193137">2.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.32-31.fc31.aarch64</li>
+    
+    <li>binutils-gold-2.32-31.fc31.aarch64</li>
+    
+    <li>boost-regex-1.69.0-9.fc31.aarch64</li>
+    
+    <li>elfutils-0.178-7.fc31.aarch64</li>
+    
+    <li>gc-7.6.4-6.fc31.aarch64</li>
+    
+    <li>gcc-c++-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>groff-base-1.22.3-20.fc31.aarch64</li>
+    
+    <li>libasan-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libicu-63.2-3.fc31.aarch64</li>
+    
+    <li>libstdc++-devel-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libubsan-9.2.1-1.fc31.aarch64</li>
+    
+    <li>ltrace-0.7.91-35.fc31.aarch64</li>
+    
+    <li>source-highlight-3.1.9-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libstdc++-devel
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="11753227">11.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-c++-9.2.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtasn1
+                </td>
+                <td>4.14-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="233791">228.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtirpc
+                </td>
+                <td>1.2.5-1.rc2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="215974">210.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnsl2-1.2.0-5.20180605git4a062cf.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    libtool
+                </td>
+                <td>2.4.6-31.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2687406">2.6 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtool-ltdl
+                </td>
+                <td>2.4.6-31.fc31</td>
+                <td>aarch64</td>
+                <td data-order="107666">105.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libubsan
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="354008">345.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libunistring
+                </td>
+                <td>0.9.10-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1681075">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libuuid
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="71759">70.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libbabeltrace-1.5.7-2.fc31.aarch64</li>
+    
+    <li>libblkid-2.34-4.fc31.aarch64</li>
+    
+    <li>libmount-2.34-4.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libverto
+                </td>
+                <td>0.3.0-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="77908">76.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt
+                </td>
+                <td>4.4.15-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="269651">263.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    <li>libxcrypt-devel-4.4.15-1.fc31.aarch64</li>
+    
+    <li>perl-libs-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt-devel
+                </td>
+                <td>4.4.15-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="30986">30.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-devel-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    ltrace
+                </td>
+                <td>0.7.91-35.fc31</td>
+                <td>aarch64</td>
+                <td data-order="452994">442.4 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    m4
+                </td>
+                <td>1.4.18-11.fc31</td>
+                <td>aarch64</td>
+                <td data-order="434840">424.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>bison-3.4.1-2.fc31.aarch64</li>
+    
+    <li>flex-2.6.4-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    make
+                </td>
+                <td>1:4.2.1-15.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1468320">1.4 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mpfr
+                </td>
+                <td>3.1.6-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="617257">602.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cpp-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gcc-c++-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>libmpc-1.1.0-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>aarch64</td>
+                <td data-order="947183">925.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>perl-Term-Cap-1.17-439.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-base
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>noarch</td>
+                <td data-order="281668">275.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-libs-6.1-12.20190803.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-libs
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1482664">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>bash-5.0.11-1.fc31.aarch64</li>
+    
+    <li>cscope-15.9-5.fc31.aarch64</li>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    <li>ncurses-6.1-12.20190803.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>readline-8.0-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    numactl-libs
+                </td>
+                <td>2.0.12-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="84784">82.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl-libs
+                </td>
+                <td>1:1.1.1d-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4501394">4.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit
+                </td>
+                <td>0.23.20-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1771388">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit-trust
+                </td>
+                <td>0.23.20-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="544089">531.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre
+                </td>
+                <td>8.44-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="567168">553.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>grep-3.3-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre2
+                </td>
+                <td>10.34-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="720045">703.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-2.9-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    perf
+                </td>
+                <td>5.5.9-200.fc31</td>
+                <td>aarch64</td>
+                <td data-order="7474595">7.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Carp
+                </td>
+                <td>1.50-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="47890">46.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perl-Carp-1.50-439.fc31.noarch</li>
+    
+    <li>perl-Data-Dumper-2.174-440.fc31.aarch64</li>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    <li>perl-Errno-1.30-450.fc31.aarch64</li>
+    
+    <li>perl-Exporter-5.74-1.fc31.noarch</li>
+    
+    <li>perl-File-Path-2.16-439.fc31.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-HTTP-Tiny-0.076-439.fc31.noarch</li>
+    
+    <li>perl-IO-1.40-450.fc31.aarch64</li>
+    
+    <li>perl-PathTools-3.78-439.fc31.aarch64</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.39-2.fc31.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-439.fc31.noarch</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.53-439.fc31.aarch64</li>
+    
+    <li>perl-Socket-4:2.029-4.fc31.aarch64</li>
+    
+    <li>perl-Storable-1:3.15-442.fc31.aarch64</li>
+    
+    <li>perl-Term-Cap-1.17-439.fc31.noarch</li>
+    
+    <li>perl-Text-ParseWords-3.30-439.fc31.noarch</li>
+    
+    <li>perl-Thread-Queue-3.13-439.fc31.noarch</li>
+    
+    <li>perl-Time-Local-2:1.300-1.fc31.noarch</li>
+    
+    <li>perl-Unicode-Normalize-1.26-439.fc31.aarch64</li>
+    
+    <li>perl-constant-1.33-440.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-libs-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    <li>perl-threads-1:2.22-439.fc31.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-440.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Data-Dumper
+                </td>
+                <td>2.174-440.fc31</td>
+                <td>aarch64</td>
+                <td data-order="136938">133.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Encode
+                </td>
+                <td>4:3.04-442.fc31</td>
+                <td>aarch64</td>
+                <td data-order="10370473">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.39-2.fc31.noarch</li>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Errno
+                </td>
+                <td>1.30-450.fc31</td>
+                <td>aarch64</td>
+                <td data-order="9524">9.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-HTTP-Tiny-0.076-439.fc31.noarch</li>
+    
+    <li>perl-IO-1.40-450.fc31.aarch64</li>
+    
+    <li>perl-PathTools-3.78-439.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Exporter
+                </td>
+                <td>5.74-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="55358">54.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    <li>perl-Carp-1.50-439.fc31.noarch</li>
+    
+    <li>perl-Data-Dumper-2.174-440.fc31.aarch64</li>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    <li>perl-Errno-1.30-450.fc31.aarch64</li>
+    
+    <li>perl-Exporter-5.74-1.fc31.noarch</li>
+    
+    <li>perl-File-Path-2.16-439.fc31.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-Getopt-Long-1:2.51-1.fc31.noarch</li>
+    
+    <li>perl-IO-1.40-450.fc31.aarch64</li>
+    
+    <li>perl-MIME-Base64-3.15-439.fc31.aarch64</li>
+    
+    <li>perl-PathTools-3.78-439.fc31.aarch64</li>
+    
+    <li>perl-Pod-Escapes-1:1.07-439.fc31.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-439.fc31.noarch</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.53-439.fc31.aarch64</li>
+    
+    <li>perl-Socket-4:2.029-4.fc31.aarch64</li>
+    
+    <li>perl-Storable-1:3.15-442.fc31.aarch64</li>
+    
+    <li>perl-Term-ANSIColor-4.06-440.fc31.noarch</li>
+    
+    <li>perl-Text-ParseWords-3.30-439.fc31.noarch</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-439.fc31.noarch</li>
+    
+    <li>perl-Time-Local-2:1.300-1.fc31.noarch</li>
+    
+    <li>perl-Unicode-Normalize-1.26-439.fc31.aarch64</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-libs-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-File-Path
+                </td>
+                <td>2.16-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="65103">63.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-File-Temp
+                </td>
+                <td>1:0.230.900-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="164979">161.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Getopt-Long
+                </td>
+                <td>1:2.51-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="140532">137.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    <li>perl-Pod-Simple-1:3.39-2.fc31.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-439.fc31.noarch</li>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-HTTP-Tiny
+                </td>
+                <td>0.076-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="150121">146.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-IO
+                </td>
+                <td>1.40-450.fc31</td>
+                <td>aarch64</td>
+                <td data-order="190776">186.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-HTTP-Tiny-0.076-439.fc31.noarch</li>
+    
+    <li>perl-IO-1.40-450.fc31.aarch64</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    <li>perl-Storable-1:3.15-442.fc31.aarch64</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-MIME-Base64
+                </td>
+                <td>3.15-439.fc31</td>
+                <td>aarch64</td>
+                <td data-order="95116">92.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    <li>perl-HTTP-Tiny-0.076-439.fc31.noarch</li>
+    
+    <li>perl-MIME-Base64-3.15-439.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-PathTools
+                </td>
+                <td>3.78-439.fc31</td>
+                <td>aarch64</td>
+                <td data-order="232833">227.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perl-File-Path-2.16-439.fc31.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-IO-1.40-450.fc31.aarch64</li>
+    
+    <li>perl-PathTools-3.78-439.fc31.aarch64</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.39-2.fc31.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-439.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Pod-Escapes
+                </td>
+                <td>1:1.07-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="25764">25.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Simple-1:3.39-2.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Pod-Perldoc
+                </td>
+                <td>3.28.01-442.fc31</td>
+                <td>noarch</td>
+                <td data-order="170963">167.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-439.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Pod-Simple
+                </td>
+                <td>1:3.39-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="573496">560.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.39-2.fc31.noarch</li>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Pod-Usage
+                </td>
+                <td>4:1.69-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="49723">48.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Getopt-Long-1:2.51-1.fc31.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-439.fc31.noarch</li>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Scalar-List-Utils
+                </td>
+                <td>3:1.53-439.fc31</td>
+                <td>aarch64</td>
+                <td data-order="146772">143.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Data-Dumper-2.174-440.fc31.aarch64</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-PathTools-3.78-439.fc31.aarch64</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.53-439.fc31.aarch64</li>
+    
+    <li>perl-Thread-Queue-3.13-439.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-440.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Socket
+                </td>
+                <td>4:2.029-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="147201">143.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-HTTP-Tiny-0.076-439.fc31.noarch</li>
+    
+    <li>perl-IO-1.40-450.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Storable
+                </td>
+                <td>1:3.15-442.fc31</td>
+                <td>aarch64</td>
+                <td data-order="256923">250.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Term-ANSIColor
+                </td>
+                <td>4.06-440.fc31</td>
+                <td>noarch</td>
+                <td data-order="89627">87.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Term-Cap
+                </td>
+                <td>1.17-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="29853">29.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Text-ParseWords
+                </td>
+                <td>3.30-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="13101">12.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>perl-Getopt-Long-1:2.51-1.fc31.noarch</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Text-Tabs+Wrap
+                </td>
+                <td>2013.0523-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="24828">24.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Simple-1:3.39-2.fc31.noarch</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-439.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Thread-Queue
+                </td>
+                <td>3.13-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="29787">29.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Time-Local
+                </td>
+                <td>2:1.300-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="67342">65.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-HTTP-Tiny-0.076-439.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Unicode-Normalize
+                </td>
+                <td>1.26-439.fc31</td>
+                <td>aarch64</td>
+                <td data-order="702631">686.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-constant
+                </td>
+                <td>1.33-440.fc31</td>
+                <td>noarch</td>
+                <td data-order="27106">26.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perl-Data-Dumper-2.174-440.fc31.aarch64</li>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-Getopt-Long-1:2.51-1.fc31.noarch</li>
+    
+    <li>perl-PathTools-3.78-439.fc31.aarch64</li>
+    
+    <li>perl-Time-Local-2:1.300-1.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-interpreter
+                </td>
+                <td>4:5.30.2-450.fc31</td>
+                <td>aarch64</td>
+                <td data-order="15820788">15.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    <li>perl-Data-Dumper-2.174-440.fc31.aarch64</li>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    <li>perl-Errno-1.30-450.fc31.aarch64</li>
+    
+    <li>perl-File-Path-2.16-439.fc31.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-Getopt-Long-1:2.51-1.fc31.noarch</li>
+    
+    <li>perl-HTTP-Tiny-0.076-439.fc31.noarch</li>
+    
+    <li>perl-IO-1.40-450.fc31.aarch64</li>
+    
+    <li>perl-MIME-Base64-3.15-439.fc31.aarch64</li>
+    
+    <li>perl-Pod-Escapes-1:1.07-439.fc31.noarch</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.39-2.fc31.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-439.fc31.noarch</li>
+    
+    <li>perl-Socket-4:2.029-4.fc31.aarch64</li>
+    
+    <li>perl-Storable-1:3.15-442.fc31.aarch64</li>
+    
+    <li>perl-Term-Cap-1.17-439.fc31.noarch</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-439.fc31.noarch</li>
+    
+    <li>perl-constant-1.33-440.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-macros-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    <li>perl-threads-1:2.22-439.fc31.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-440.fc31.aarch64</li>
+    
+    <li>valgrind-1:3.15.0-20.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-libs
+                </td>
+                <td>4:5.30.2-450.fc31</td>
+                <td>aarch64</td>
+                <td data-order="7643415">7.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>autoconf-2.69-31.fc31.noarch</li>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    <li>perl-Carp-1.50-439.fc31.noarch</li>
+    
+    <li>perl-Data-Dumper-2.174-440.fc31.aarch64</li>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    <li>perl-Errno-1.30-450.fc31.aarch64</li>
+    
+    <li>perl-Exporter-5.74-1.fc31.noarch</li>
+    
+    <li>perl-File-Path-2.16-439.fc31.noarch</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-Getopt-Long-1:2.51-1.fc31.noarch</li>
+    
+    <li>perl-HTTP-Tiny-0.076-439.fc31.noarch</li>
+    
+    <li>perl-IO-1.40-450.fc31.aarch64</li>
+    
+    <li>perl-MIME-Base64-3.15-439.fc31.aarch64</li>
+    
+    <li>perl-PathTools-3.78-439.fc31.aarch64</li>
+    
+    <li>perl-Pod-Escapes-1:1.07-439.fc31.noarch</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    <li>perl-Pod-Simple-1:3.39-2.fc31.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-439.fc31.noarch</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.53-439.fc31.aarch64</li>
+    
+    <li>perl-Socket-4:2.029-4.fc31.aarch64</li>
+    
+    <li>perl-Storable-1:3.15-442.fc31.aarch64</li>
+    
+    <li>perl-Term-ANSIColor-4.06-440.fc31.noarch</li>
+    
+    <li>perl-Term-Cap-1.17-439.fc31.noarch</li>
+    
+    <li>perl-Text-ParseWords-3.30-439.fc31.noarch</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-439.fc31.noarch</li>
+    
+    <li>perl-Thread-Queue-3.13-439.fc31.noarch</li>
+    
+    <li>perl-Time-Local-2:1.300-1.fc31.noarch</li>
+    
+    <li>perl-Unicode-Normalize-1.26-439.fc31.aarch64</li>
+    
+    <li>perl-constant-1.33-440.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-libs-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-macros-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-parent-1:0.237-439.fc31.noarch</li>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    <li>perl-threads-1:2.22-439.fc31.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-440.fc31.aarch64</li>
+    
+    <li>valgrind-1:3.15.0-20.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>perl-PathTools-3.78-439.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-macros
+                </td>
+                <td>4:5.30.2-450.fc31</td>
+                <td>aarch64</td>
+                <td data-order="5643">5.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-parent
+                </td>
+                <td>1:0.237-439.fc31</td>
+                <td>noarch</td>
+                <td data-order="9188">9.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Encode-4:3.04-442.fc31.aarch64</li>
+    
+    <li>perl-File-Temp-1:0.230.900-439.fc31.noarch</li>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    <li>perl-Time-Local-2:1.300-1.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-podlators
+                </td>
+                <td>1:4.12-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="288018">281.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Pod-Perldoc-3.28.01-442.fc31.noarch</li>
+    
+    <li>perl-Pod-Usage-4:1.69-439.fc31.noarch</li>
+    
+    <li>perl-podlators-1:4.12-2.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-threads
+                </td>
+                <td>1:2.22-439.fc31</td>
+                <td>aarch64</td>
+                <td data-order="142925">139.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>automake-1.16.1-13.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-440.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-threads-shared
+                </td>
+                <td>1.60-440.fc31</td>
+                <td>aarch64</td>
+                <td data-order="112024">109.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Thread-Queue-3.13-439.fc31.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-450.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    pkgconf
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="105157">102.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-m4
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-pkg-config
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="464">464.0 B</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    popt
+                </td>
+                <td>1.16-18.fc31</td>
+                <td>aarch64</td>
+                <td data-order="151654">148.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libbabeltrace-1.5.7-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-pip-wheel
+                </td>
+                <td>19.1.1-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1241316">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-setuptools-wheel
+                </td>
+                <td>41.6.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="360617">352.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3
+                </td>
+                <td>3.7.6-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="85285">83.3 kB</td>
+                <td>
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libs
+                </td>
+                <td>3.7.6-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="35173896">33.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    <li>python3-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    readline
+                </td>
+                <td>8.0-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="586267">572.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>guile-5:2.0.14-17.fc31.aarch64</li>
+    
+    <li>guile22-2.2.6-2.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sed
+                </td>
+                <td>4.5-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="810158">791.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libtool-2.4.6-31.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    setup
+                </td>
+                <td>2.13.6-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-8.fc31.noarch</li>
+    
+    <li>filesystem-3.12-2.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    shadow-utils
+                </td>
+                <td>2:4.6-17.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4589696">4.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ccache-3.7.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    slang
+                </td>
+                <td>2.3.2-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1609818">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    source-highlight
+                </td>
+                <td>3.1.9-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3516693">3.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sqlite-libs
+                </td>
+                <td>3.30.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1393596">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    strace
+                </td>
+                <td>5.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2151218">2.1 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tar
+                </td>
+                <td>2:1.32-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3242381">3.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtool-2.4.6-31.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata
+                </td>
+                <td>2019c-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-common-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    valgrind
+                </td>
+                <td>1:3.15.0-20.fc31</td>
+                <td>aarch64</td>
+                <td data-order="29861447">28.5 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xemacs-filesystem
+                </td>
+                <td>21.5.34-34.20190323hgc0ed7ef9a5a1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cscope-15.9-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz-libs
+                </td>
+                <td>5.2.4-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="241695">236.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zlib
+                </td>
+                <td>1.2.11-20.fc31</td>
+                <td>aarch64</td>
+                <td data-order="251183">245.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.32-31.fc31.aarch64</li>
+    
+    <li>ccache-3.7.7-1.fc31.aarch64</li>
+    
+    <li>cpp-9.2.1-1.fc31.aarch64</li>
+    
+    <li>elfutils-libelf-0.178-7.fc31.aarch64</li>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    <li>gcc-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gcc-c++-9.2.1-1.fc31.aarch64</li>
+    
+    <li>gdb-headless-8.3.50.20190824-30.fc31.aarch64</li>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.aarch64</li>
+    
+    <li>perf-5.5.9-200.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>sqlite-libs-3.30.0-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-comps-c-development--fedora-empty-base--repository-fedora-31--aarch64.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

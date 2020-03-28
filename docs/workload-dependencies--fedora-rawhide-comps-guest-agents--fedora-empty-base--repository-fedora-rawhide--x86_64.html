@@ -1,0 +1,4160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-comps-guest-agents--repository-fedora-rawhide.html">
+                    Comps group guest-agents for fedora-rawhide
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group guest-agents for fedora-rawhide in Empty from Fedora rawhide x86_64
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group guest-agents for fedora-rawhide <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora rawhide</small>
+        <small class="text-muted"> for </small>
+        <small> x86_64</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--fedora-rawhide-comps-guest-agents--fedora-empty-base--repository-fedora-rawhide--x86_64.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--fedora-rawhide-comps-guest-agents--fedora-empty-base--repository-fedora-rawhide--x86_64.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    acl
+                </td>
+                <td>2.2.53-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="214628">209.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alternatives
+                </td>
+                <td>1.11-6.fc32</td>
+                <td>x86_64</td>
+                <td data-order="64014">62.5 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    audit-libs
+                </td>
+                <td>3.0-0.18.20191104git1c2f876.fc32</td>
+                <td>x86_64</td>
+                <td data-order="295980">289.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    <li>libsemanage-3.0-3.fc32.x86_64</li>
+    
+    <li>pam-1.3.1-23.fc32.x86_64</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    basesystem
+                </td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bash
+                </td>
+                <td>5.0.11-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="7589870">7.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    <li>dbus-common-1:1.12.16-4.fc32.noarch</li>
+    
+    <li>elfutils-default-yama-scope-0.178-9.fc32.noarch</li>
+    
+    <li>filesystem-3.14-2.fc32.x86_64</li>
+    
+    <li>glib2-2.64.1-1.fc32.x86_64</li>
+    
+    <li>glibc-common-2.31-1.fc32.x86_64</li>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    <li>libblkid-2.35.1-4.fc32.x86_64</li>
+    
+    <li>libsepol-3.0-3.fc32.x86_64</li>
+    
+    <li>libutempter-1.1.6-18.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.x86_64</li>
+    
+    <li>qemu-guest-agent-2:4.2.0-5.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-libs-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bzip2-libs
+                </td>
+                <td>1.0.8-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="79024">77.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-9.fc32.x86_64</li>
+    
+    <li>libsemanage-3.0-3.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ca-certificates
+                </td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils
+                </td>
+                <td>8.31-10.fc32</td>
+                <td>x86_64</td>
+                <td data-order="7110032">6.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>gzip-1.10-2.fc32.x86_64</li>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    <li>libblkid-2.35.1-4.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-libs-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils-common
+                </td>
+                <td>8.31-10.fc32</td>
+                <td>x86_64</td>
+                <td data-order="10349258">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cracklib
+                </td>
+                <td>2.9.6-22.fc32</td>
+                <td>x86_64</td>
+                <td data-order="252381">246.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libpwquality-1.4.2-2.fc32.x86_64</li>
+    
+    <li>pam-1.3.1-23.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    crypto-policies
+                </td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.x86_64</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cryptsetup-libs
+                </td>
+                <td>2.3.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1926359">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus
+                </td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-broker
+                </td>
+                <td>22-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="419401">409.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-1:1.12.16-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-common
+                </td>
+                <td>1:1.12.16-4.fc32</td>
+                <td>noarch</td>
+                <td data-order="11481">11.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    device-mapper
+                </td>
+                <td>1.02.167-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="358276">349.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>device-mapper-libs-1.02.167-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    device-mapper-libs
+                </td>
+                <td>1.02.167-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="428039">418.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.x86_64</li>
+    
+    <li>device-mapper-1.02.167-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-default-yama-scope
+                </td>
+                <td>0.178-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-9.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libelf
+                </td>
+                <td>0.178-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="924723">903.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-9.fc32.x86_64</li>
+    
+    <li>iproute-5.5.0-1.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libs
+                </td>
+                <td>0.178-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="721711">704.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    expat
+                </td>
+                <td>2.2.8-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="271427">265.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-gpg-keys
+                </td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-repos-32-0.7.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release
+                </td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    <li>fedora-repos-32-0.7.noarch</li>
+    
+    <li>setup-2.13.6-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release-common
+                </td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-32-0.8.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-repos
+                </td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    filesystem
+                </td>
+                <td>3.14-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-9.fc32.noarch</li>
+    
+    <li>bash-5.0.11-2.fc32.x86_64</li>
+    
+    <li>gawk-5.0.1-7.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fuse
+                </td>
+                <td>2.9.9-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="225849">220.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fuse-common
+                </td>
+                <td>3.9.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="38">38.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fuse-2.9.9-9.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fuse-libs
+                </td>
+                <td>2.9.9-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="317698">310.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gawk
+                </td>
+                <td>5.0.1-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2994868">2.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glib2
+                </td>
+                <td>2.64.1-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="13032378">12.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>qemu-guest-agent-2:4.2.0-5.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="17294832">16.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>acl-2.2.53-5.fc32.x86_64</li>
+    
+    <li>alternatives-1.11-6.fc32.x86_64</li>
+    
+    <li>audit-libs-3.0-0.18.20191104git1c2f876.fc32.x86_64</li>
+    
+    <li>bash-5.0.11-2.fc32.x86_64</li>
+    
+    <li>bzip2-libs-1.0.8-2.fc32.x86_64</li>
+    
+    <li>coreutils-8.31-10.fc32.x86_64</li>
+    
+    <li>cracklib-2.9.6-22.fc32.x86_64</li>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.x86_64</li>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    <li>device-mapper-1.02.167-2.fc32.x86_64</li>
+    
+    <li>device-mapper-libs-1.02.167-2.fc32.x86_64</li>
+    
+    <li>elfutils-libelf-0.178-9.fc32.x86_64</li>
+    
+    <li>elfutils-libs-0.178-9.fc32.x86_64</li>
+    
+    <li>expat-2.2.8-2.fc32.x86_64</li>
+    
+    <li>fuse-2.9.9-9.fc32.x86_64</li>
+    
+    <li>fuse-libs-2.9.9-9.fc32.x86_64</li>
+    
+    <li>gawk-5.0.1-7.fc32.x86_64</li>
+    
+    <li>glib2-2.64.1-1.fc32.x86_64</li>
+    
+    <li>glibc-all-langpacks-2.31-1.fc32.x86_64</li>
+    
+    <li>glibc-common-2.31-1.fc32.x86_64</li>
+    
+    <li>gmp-1:6.1.2-13.fc32.x86_64</li>
+    
+    <li>gnutls-3.6.12-1.fc32.x86_64</li>
+    
+    <li>grep-3.3-4.fc32.x86_64</li>
+    
+    <li>gzip-1.10-2.fc32.x86_64</li>
+    
+    <li>iproute-5.5.0-1.fc32.x86_64</li>
+    
+    <li>iptables-libs-1.8.4-7.fc32.x86_64</li>
+    
+    <li>json-c-0.13.1-9.fc32.x86_64</li>
+    
+    <li>keyutils-libs-1.6-4.fc32.x86_64</li>
+    
+    <li>kmod-libs-27-1.fc32.x86_64</li>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    <li>libacl-2.2.53-5.fc32.x86_64</li>
+    
+    <li>libargon2-20171227-4.fc32.x86_64</li>
+    
+    <li>libattr-2.4.48-8.fc32.x86_64</li>
+    
+    <li>libblkid-2.35.1-4.fc32.x86_64</li>
+    
+    <li>libcap-2.26-7.fc32.x86_64</li>
+    
+    <li>libcap-ng-0.7.10-2.fc32.x86_64</li>
+    
+    <li>libcom_err-1.45.5-3.fc32.x86_64</li>
+    
+    <li>libdb-5.3.28-40.fc32.x86_64</li>
+    
+    <li>libdrm-2.4.100-2.fc32.x86_64</li>
+    
+    <li>libfdisk-2.35.1-4.fc32.x86_64</li>
+    
+    <li>libffi-3.1-24.fc32.x86_64</li>
+    
+    <li>libgcrypt-1.8.5-3.fc32.x86_64</li>
+    
+    <li>libgpg-error-1.36-3.fc32.x86_64</li>
+    
+    <li>libidn2-2.3.0-2.fc32.x86_64</li>
+    
+    <li>libmnl-1.0.4-11.fc32.x86_64</li>
+    
+    <li>libmount-2.35.1-4.fc32.x86_64</li>
+    
+    <li>libmspack-0.10.1-0.3.alpha.fc32.x86_64</li>
+    
+    <li>libnetfilter_conntrack-1.0.7-4.fc32.x86_64</li>
+    
+    <li>libnfnetlink-1.0.1-17.fc32.x86_64</li>
+    
+    <li>libnsl2-1.2.0-6.20180605git4a062cf.fc32.x86_64</li>
+    
+    <li>libpcap-14:1.9.1-3.fc32.x86_64</li>
+    
+    <li>libpciaccess-0.16-2.fc32.x86_64</li>
+    
+    <li>libpwquality-1.4.2-2.fc32.x86_64</li>
+    
+    <li>libseccomp-2.4.2-3.fc32.x86_64</li>
+    
+    <li>libselinux-3.0-3.fc32.x86_64</li>
+    
+    <li>libsemanage-3.0-3.fc32.x86_64</li>
+    
+    <li>libsepol-3.0-3.fc32.x86_64</li>
+    
+    <li>libsigsegv-2.11-10.fc32.x86_64</li>
+    
+    <li>libsmartcols-2.35.1-4.fc32.x86_64</li>
+    
+    <li>libtasn1-4.16.0-1.fc32.x86_64</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc32.x86_64</li>
+    
+    <li>libtool-ltdl-2.4.6-33.fc32.x86_64</li>
+    
+    <li>libunistring-0.9.10-7.fc32.x86_64</li>
+    
+    <li>libutempter-1.1.6-18.fc32.x86_64</li>
+    
+    <li>libuuid-2.35.1-4.fc32.x86_64</li>
+    
+    <li>libverto-0.3.0-9.fc32.x86_64</li>
+    
+    <li>libxcrypt-4.4.15-1.fc32.x86_64</li>
+    
+    <li>libxml2-2.9.10-3.fc32.x86_64</li>
+    
+    <li>libxslt-1.1.34-1.fc32.x86_64</li>
+    
+    <li>lz4-libs-1.9.1-2.fc32.x86_64</li>
+    
+    <li>mpfr-4.0.2-3.fc32.x86_64</li>
+    
+    <li>ncurses-6.1-15.20191109.fc32.x86_64</li>
+    
+    <li>ncurses-libs-6.1-15.20191109.fc32.x86_64</li>
+    
+    <li>nettle-3.5.1-5.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.x86_64</li>
+    
+    <li>p11-kit-0.23.20-1.fc32.x86_64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.x86_64</li>
+    
+    <li>pam-1.3.1-23.fc32.x86_64</li>
+    
+    <li>pciutils-3.6.4-1.fc32.x86_64</li>
+    
+    <li>pciutils-libs-3.6.4-1.fc32.x86_64</li>
+    
+    <li>pcre-8.44-1.fc32.x86_64</li>
+    
+    <li>pcre2-10.34-7.fc32.x86_64</li>
+    
+    <li>pixman-0.38.4-2.fc32.x86_64</li>
+    
+    <li>psmisc-23.3-3.fc32.x86_64</li>
+    
+    <li>qemu-guest-agent-2:4.2.0-5.fc32.x86_64</li>
+    
+    <li>qrencode-libs-4.0.2-5.fc32.x86_64</li>
+    
+    <li>readline-8.0-4.fc32.x86_64</li>
+    
+    <li>sed-4.5-5.fc32.x86_64</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-libs-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-pam-245.2-1.fc32.x86_64</li>
+    
+    <li>tar-2:1.32-4.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    <li>which-2.21-17.fc32.x86_64</li>
+    
+    <li>xmlsec1-1.2.29-1.fc32.x86_64</li>
+    
+    <li>xmlsec1-openssl-1.2.29-1.fc32.x86_64</li>
+    
+    <li>xz-libs-5.2.4-8.fc32.x86_64</li>
+    
+    <li>zlib-1.2.11-21.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-all-langpacks
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="222208346">211.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.x86_64</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-common
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="8188318">7.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.x86_64</li>
+    
+    <li>glibc-all-langpacks-2.31-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp
+                </td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>x86_64</td>
+                <td data-order="757940">740.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.x86_64</li>
+    
+    <li>gawk-5.0.1-7.fc32.x86_64</li>
+    
+    <li>gnutls-3.6.12-1.fc32.x86_64</li>
+    
+    <li>mpfr-4.0.2-3.fc32.x86_64</li>
+    
+    <li>nettle-3.5.1-5.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gnutls
+                </td>
+                <td>3.6.12-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2928542">2.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    grep
+                </td>
+                <td>3.3-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="804082">785.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-libs-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gzip
+                </td>
+                <td>1.10-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="362674">354.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cracklib-2.9.6-22.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    hwdata
+                </td>
+                <td>0.333-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="7867092">7.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libpciaccess-0.16-2.fc32.x86_64</li>
+    
+    <li>pciutils-3.6.4-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    iproute
+                </td>
+                <td>5.5.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2013896">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    iptables-libs
+                </td>
+                <td>1.8.4-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2029600">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    json-c
+                </td>
+                <td>0.13.1-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="73114">71.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    keyutils-libs
+                </td>
+                <td>1.6-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="55535">54.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kmod-libs
+                </td>
+                <td>27-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="138840">135.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pciutils-3.6.4-1.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    krb5-libs
+                </td>
+                <td>1.18-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2259819">2.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libacl
+                </td>
+                <td>2.2.53-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="41712">40.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>acl-2.2.53-5.fc32.x86_64</li>
+    
+    <li>coreutils-8.31-10.fc32.x86_64</li>
+    
+    <li>sed-4.5-5.fc32.x86_64</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>tar-2:1.32-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libargon2
+                </td>
+                <td>20171227-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="55463">54.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libattr
+                </td>
+                <td>2.4.48-8.fc32</td>
+                <td>x86_64</td>
+                <td data-order="29682">29.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.x86_64</li>
+    
+    <li>libacl-2.2.53-5.fc32.x86_64</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libblkid
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="344161">336.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.x86_64</li>
+    
+    <li>libfdisk-2.35.1-4.fc32.x86_64</li>
+    
+    <li>libmount-2.35.1-4.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap
+                </td>
+                <td>2.26-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="148914">145.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.x86_64</li>
+    
+    <li>iproute-5.5.0-1.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap-ng
+                </td>
+                <td>0.7.10-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="55710">54.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>audit-libs-3.0-0.18.20191104git1c2f876.fc32.x86_64</li>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcom_err
+                </td>
+                <td>1.45.5-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="70065">68.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdb
+                </td>
+                <td>5.3.28-40.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1935816">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iproute-5.5.0-1.fc32.x86_64</li>
+    
+    <li>pam-1.3.1-23.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdrm
+                </td>
+                <td>2.4.100-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="408230">398.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libfdisk
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="484075">472.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi
+                </td>
+                <td>3.1-24.fc32</td>
+                <td>x86_64</td>
+                <td data-order="57692">56.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.64.1-1.fc32.x86_64</li>
+    
+    <li>p11-kit-0.23.20-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcc
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="198888">194.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    <li>glibc-2.31-1.fc32.x86_64</li>
+    
+    <li>kmod-libs-27-1.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>qemu-guest-agent-2:4.2.0-5.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-libs-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-pam-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcrypt
+                </td>
+                <td>1.8.5-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1278182">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libxslt-1.1.34-1.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-libs-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgpg-error
+                </td>
+                <td>1.36-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="775677">757.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgcrypt-1.8.5-3.fc32.x86_64</li>
+    
+    <li>libxslt-1.1.34-1.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libidn2
+                </td>
+                <td>2.3.0-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="258126">252.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmnl
+                </td>
+                <td>1.0.4-11.fc32</td>
+                <td>x86_64</td>
+                <td data-order="56711">55.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iproute-5.5.0-1.fc32.x86_64</li>
+    
+    <li>libnetfilter_conntrack-1.0.7-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmount
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="423373">413.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.64.1-1.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmspack
+                </td>
+                <td>0.10.1-0.3.alpha.fc32</td>
+                <td>x86_64</td>
+                <td data-order="147792">144.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnetfilter_conntrack
+                </td>
+                <td>1.0.7-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="151550">148.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iptables-libs-1.8.4-7.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnfnetlink
+                </td>
+                <td>1.0.1-17.fc32</td>
+                <td>x86_64</td>
+                <td data-order="56083">54.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnetfilter_conntrack-1.0.7-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnsl2
+                </td>
+                <td>1.2.0-6.20180605git4a062cf.fc32</td>
+                <td>x86_64</td>
+                <td data-order="130834">127.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-23.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpcap
+                </td>
+                <td>14:1.9.1-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="396746">387.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iptables-libs-1.8.4-7.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpciaccess
+                </td>
+                <td>0.16-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="46201">45.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libdrm-2.4.100-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpwquality
+                </td>
+                <td>1.4.2-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="407613">398.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-23.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libseccomp
+                </td>
+                <td>2.4.2-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="359531">351.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="177736">173.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.x86_64</li>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    <li>device-mapper-libs-1.02.167-2.fc32.x86_64</li>
+    
+    <li>glib2-2.64.1-1.fc32.x86_64</li>
+    
+    <li>iproute-5.5.0-1.fc32.x86_64</li>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    <li>libmount-2.35.1-4.fc32.x86_64</li>
+    
+    <li>libsemanage-3.0-3.fc32.x86_64</li>
+    
+    <li>pam-1.3.1-23.fc32.x86_64</li>
+    
+    <li>psmisc-23.3-3.fc32.x86_64</li>
+    
+    <li>sed-4.5-5.fc32.x86_64</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>tar-2:1.32-4.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsemanage
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="311778">304.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>shadow-utils-2:4.8-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsepol
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="765232">747.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-3.0-3.fc32.x86_64</li>
+    
+    <li>libsemanage-3.0-3.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsigsegv
+                </td>
+                <td>2.11-10.fc32</td>
+                <td>x86_64</td>
+                <td data-order="49690">48.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-7.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsmartcols
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="269627">263.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtasn1
+                </td>
+                <td>4.16.0-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="176204">172.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.x86_64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtirpc
+                </td>
+                <td>1.2.5-1.rc2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="211790">206.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnsl2-1.2.0-6.20180605git4a062cf.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>pam-1.3.1-23.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtool-ltdl
+                </td>
+                <td>2.4.6-33.fc32</td>
+                <td>x86_64</td>
+                <td data-order="72338">70.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xmlsec1-1.2.29-1.fc32.x86_64</li>
+    
+    <li>xmlsec1-openssl-1.2.29-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libunistring
+                </td>
+                <td>0.9.10-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1643803">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.x86_64</li>
+    
+    <li>libidn2-2.3.0-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libutempter
+                </td>
+                <td>1.1.6-18.fc32</td>
+                <td>x86_64</td>
+                <td data-order="59141">57.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libuuid
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="38927">38.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.x86_64</li>
+    
+    <li>libblkid-2.35.1-4.fc32.x86_64</li>
+    
+    <li>libfdisk-2.35.1-4.fc32.x86_64</li>
+    
+    <li>libmount-2.35.1-4.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libverto
+                </td>
+                <td>0.3.0-9.fc32</td>
+                <td>x86_64</td>
+                <td data-order="32100">31.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt
+                </td>
+                <td>4.4.15-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="277923">271.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-23.fc32.x86_64</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxml2
+                </td>
+                <td>2.9.10-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1813444">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libxslt-1.1.34-1.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>xmlsec1-1.2.29-1.fc32.x86_64</li>
+    
+    <li>xmlsec1-openssl-1.2.29-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxslt
+                </td>
+                <td>1.1.34-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="779028">760.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xmlsec1-1.2.29-1.fc32.x86_64</li>
+    
+    <li>xmlsec1-openssl-1.2.29-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lz4-libs
+                </td>
+                <td>1.9.1-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="133359">130.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-libs-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mpfr
+                </td>
+                <td>4.0.2-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="612019">597.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-7.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>x86_64</td>
+                <td data-order="661781">646.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-base
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-libs-6.1-15.20191109.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-libs
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>x86_64</td>
+                <td data-order="999600">976.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>bash-5.0.11-2.fc32.x86_64</li>
+    
+    <li>ncurses-6.1-15.20191109.fc32.x86_64</li>
+    
+    <li>psmisc-23.3-3.fc32.x86_64</li>
+    
+    <li>readline-8.0-4.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nettle
+                </td>
+                <td>3.5.1-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="591199">577.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.12-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    open-vm-tools
+                </td>
+                <td>11.0.5-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2320132">2.2 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl-libs
+                </td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="3792138">3.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.x86_64</li>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc32.x86_64</li>
+    
+    <li>kmod-libs-27-1.fc32.x86_64</li>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>xmlsec1-openssl-1.2.29-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit
+                </td>
+                <td>0.23.20-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1657764">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>gnutls-3.6.12-1.fc32.x86_64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit-trust
+                </td>
+                <td>0.23.20-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="487721">476.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>gnutls-3.6.12-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pam
+                </td>
+                <td>1.3.1-23.fc32</td>
+                <td>x86_64</td>
+                <td data-order="2856685">2.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libpwquality-1.4.2-2.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-pam-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pciutils
+                </td>
+                <td>3.6.4-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="218488">213.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pciutils-libs
+                </td>
+                <td>3.6.4-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="81339">79.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pciutils-3.6.4-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre
+                </td>
+                <td>8.44-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="542856">530.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.64.1-1.fc32.x86_64</li>
+    
+    <li>grep-3.3-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre2
+                </td>
+                <td>10.34-7.fc32</td>
+                <td>x86_64</td>
+                <td data-order="761301">743.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-3.0-3.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pixman
+                </td>
+                <td>0.38.4-2.fc32</td>
+                <td>x86_64</td>
+                <td data-order="697639">681.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>qemu-guest-agent-2:4.2.0-5.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    psmisc
+                </td>
+                <td>23.3-3.fc32</td>
+                <td>x86_64</td>
+                <td data-order="637601">622.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iproute-5.5.0-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    qemu-guest-agent
+                </td>
+                <td>2:4.2.0-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="340730">332.7 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    qrencode-libs
+                </td>
+                <td>4.0.2-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="162033">158.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    readline
+                </td>
+                <td>8.0-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="484027">472.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-7.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sed
+                </td>
+                <td>4.5-5.fc32</td>
+                <td>x86_64</td>
+                <td data-order="773014">754.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>krb5-libs-1.18-1.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-libs-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    setup
+                </td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-9.fc32.noarch</li>
+    
+    <li>filesystem-3.14-2.fc32.x86_64</li>
+    
+    <li>shadow-utils-2:4.8-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    shadow-utils
+                </td>
+                <td>2:4.8-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="4179199">4.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    <li>libutempter-1.1.6-18.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd
+                </td>
+                <td>245.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="13776889">13.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    <li>dbus-common-1:1.12.16-4.fc32.noarch</li>
+    
+    <li>device-mapper-1.02.167-2.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>qemu-guest-agent-2:4.2.0-5.fc32.x86_64</li>
+    
+    <li>systemd-pam-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>elfutils-default-yama-scope-0.178-9.fc32.noarch</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-libs
+                </td>
+                <td>245.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="1605630">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-22-1.fc32.x86_64</li>
+    
+    <li>device-mapper-libs-1.02.167-2.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>qemu-guest-agent-2:4.2.0-5.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-pam
+                </td>
+                <td>245.2-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="892984">872.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-rpm-macros
+                </td>
+                <td>245.2-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="8040">7.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tar
+                </td>
+                <td>2:1.32-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="3122068">3.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata
+                </td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-common-2.31-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    util-linux
+                </td>
+                <td>2.35.1-4.fc32</td>
+                <td>x86_64</td>
+                <td data-order="14121714">13.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>device-mapper-1.02.167-2.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    which
+                </td>
+                <td>2.21-17.fc32</td>
+                <td>x86_64</td>
+                <td data-order="87251">85.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fuse-2.9.9-9.fc32.x86_64</li>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xmlsec1
+                </td>
+                <td>1.2.29-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="616761">602.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    <li>xmlsec1-openssl-1.2.29-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xmlsec1-openssl
+                </td>
+                <td>1.2.29-1.fc32</td>
+                <td>x86_64</td>
+                <td data-order="292296">285.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>open-vm-tools-11.0.5-2.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz-libs
+                </td>
+                <td>5.2.4-8.fc32</td>
+                <td>x86_64</td>
+                <td data-order="172951">168.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-9.fc32.x86_64</li>
+    
+    <li>kmod-libs-27-1.fc32.x86_64</li>
+    
+    <li>libxml2-2.9.10-3.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>systemd-libs-245.2-1.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zlib
+                </td>
+                <td>1.2.11-21.fc32</td>
+                <td>x86_64</td>
+                <td data-order="203919">199.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cracklib-2.9.6-22.fc32.x86_64</li>
+    
+    <li>elfutils-libelf-0.178-9.fc32.x86_64</li>
+    
+    <li>elfutils-libs-0.178-9.fc32.x86_64</li>
+    
+    <li>glib2-2.64.1-1.fc32.x86_64</li>
+    
+    <li>kmod-libs-27-1.fc32.x86_64</li>
+    
+    <li>libxml2-2.9.10-3.fc32.x86_64</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.x86_64</li>
+    
+    <li>systemd-245.2-1.fc32.x86_64</li>
+    
+    <li>util-linux-2.35.1-4.fc32.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-comps-guest-agents--fedora-empty-base--repository-fedora-rawhide--x86_64.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

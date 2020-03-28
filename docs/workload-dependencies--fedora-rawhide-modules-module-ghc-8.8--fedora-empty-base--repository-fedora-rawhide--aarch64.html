@@ -1,0 +1,5599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-modules-module-ghc-8.8--repository-fedora-rawhide.html">
+                    Module ghc:8.8 for fedora-rawhide-modules
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Module ghc:8.8 for fedora-rawhide-modules in Empty from Fedora rawhide aarch64
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Module ghc:8.8 for fedora-rawhide-modules <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora rawhide</small>
+        <small class="text-muted"> for </small>
+        <small> aarch64</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--fedora-rawhide-modules-module-ghc-8.8--fedora-empty-base--repository-fedora-rawhide--aarch64.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--fedora-rawhide-modules-module-ghc-8.8--fedora-empty-base--repository-fedora-rawhide--aarch64.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alternatives
+                </td>
+                <td>1.11-6.fc32</td>
+                <td>aarch64</td>
+                <td data-order="92438">90.3 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    basesystem
+                </td>
+                <td>11-9.fc32</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bash
+                </td>
+                <td>5.0.11-2.fc32</td>
+                <td>aarch64</td>
+                <td data-order="7666492">7.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.aarch64</li>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>filesystem-3.14-2.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>glibc-common-2.31-1.fc32.aarch64</li>
+    
+    <li>glibc-headers-2.31-1.fc32.aarch64</li>
+    
+    <li>libsepol-3.0-3.fc32.aarch64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    binutils
+                </td>
+                <td>2.34-2.fc32</td>
+                <td>aarch64</td>
+                <td data-order="30274317">28.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-gold-2.34-2.fc32.aarch64</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    binutils-gold
+                </td>
+                <td>2.34-2.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3395856">3.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ca-certificates
+                </td>
+                <td>2020.2.40-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils
+                </td>
+                <td>8.31-10.fc32</td>
+                <td>aarch64</td>
+                <td data-order="9462888">9.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.aarch64</li>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    <li>glibc-headers-2.31-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils-common
+                </td>
+                <td>8.31-10.fc32</td>
+                <td>aarch64</td>
+                <td data-order="10349258">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cpp
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="24078062">23.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    crypto-policies
+                </td>
+                <td>20191128-5.gitcd267a5.fc32</td>
+                <td>noarch</td>
+                <td data-order="79664">77.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-gpg-keys
+                </td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="105452">103.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-repos-32-0.7.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release
+                </td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    <li>fedora-repos-32-0.7.noarch</li>
+    
+    <li>setup-2.13.6-2.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release-common
+                </td>
+                <td>32-0.8</td>
+                <td>noarch</td>
+                <td data-order="14712">14.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-32-0.8.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-repos
+                </td>
+                <td>32-0.7</td>
+                <td>noarch</td>
+                <td data-order="8594">8.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-32-0.8.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    filesystem
+                </td>
+                <td>3.14-2.fc32</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-9.fc32.noarch</li>
+    
+    <li>bash-5.0.11-2.fc32.aarch64</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gcc
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="70044721">66.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdbm-libs
+                </td>
+                <td>1:1.18.1-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="175480">171.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    ghc
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-Cabal
+                </td>
+                <td>2.4.0.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="35616437">34.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-Cabal-devel
+                </td>
+                <td>2.4.0.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="233925758">223.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-array
+                </td>
+                <td>0.5.3.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="813505">794.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-array-devel-0.5.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-bytestring-0.10.8.2-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-containers-0.6.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-deepseq-1.4.4.0-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-compact-0.1.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-pretty-1.1.3.6-102.fc32.aarch64</li>
+    
+    <li>ghc-process-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-stm-2.5.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-2.14.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-text-1.2.3.1-102.fc32.aarch64</li>
+    
+    <li>ghc-time-1.8.0.2-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-2.7.2.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-array-devel
+                </td>
+                <td>0.5.3.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="5534322">5.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-devel-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-containers-devel-0.6.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-deepseq-devel-1.4.4.0-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-stm-devel-2.5.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-text-devel-1.2.3.1-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-base
+                </td>
+                <td>4.12.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="23356270">22.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-array-0.5.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-base-devel-4.12.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-bytestring-0.10.8.2-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-containers-0.6.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-deepseq-1.4.4.0-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-filepath-1.4.2.1-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-th-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-compact-0.1.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-heap-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-mtl-2.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-pretty-1.1.3.6-102.fc32.aarch64</li>
+    
+    <li>ghc-process-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-stm-2.5.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-2.14.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-terminfo-0.4.1.2-102.fc32.aarch64</li>
+    
+    <li>ghc-text-1.2.3.1-102.fc32.aarch64</li>
+    
+    <li>ghc-time-1.8.0.2-102.fc32.aarch64</li>
+    
+    <li>ghc-transformers-0.5.6.2-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-2.7.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-xhtml-3000.2.2.1-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-base-devel
+                </td>
+                <td>4.12.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="124555706">118.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-array-devel-0.5.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-devel-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-bytestring-devel-0.10.8.2-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-containers-devel-0.6.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-deepseq-devel-1.4.4.0-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-devel-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-filepath-devel-1.4.2.1-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-th-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-compact-devel-0.1.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-heap-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-devel-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-devel-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-mtl-devel-2.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-devel-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-pretty-devel-1.1.3.6-102.fc32.aarch64</li>
+    
+    <li>ghc-process-devel-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-stm-devel-2.5.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-devel-2.14.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-terminfo-devel-0.4.1.2-102.fc32.aarch64</li>
+    
+    <li>ghc-text-devel-1.2.3.1-102.fc32.aarch64</li>
+    
+    <li>ghc-time-devel-1.8.0.2-102.fc32.aarch64</li>
+    
+    <li>ghc-transformers-devel-0.5.6.2-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-devel-2.7.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-xhtml-devel-3000.2.2.1-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-binary
+                </td>
+                <td>0.8.6.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="947675">925.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-devel-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-text-1.2.3.1-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-binary-devel
+                </td>
+                <td>0.8.6.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="5505600">5.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-devel-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-text-devel-1.2.3.1-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-bytestring
+                </td>
+                <td>0.10.8.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1362472">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-bytestring-devel-0.10.8.2-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-compact-0.1.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-process-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-text-1.2.3.1-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-2.7.2.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-bytestring-devel
+                </td>
+                <td>0.10.8.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="8252570">7.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-devel-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-compact-devel-0.1.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-devel-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-devel-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-text-devel-1.2.3.1-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-devel-2.7.2.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-compiler
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="82301106">78.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-array-devel-0.5.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-base-devel-4.12.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-devel-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-bytestring-devel-0.10.8.2-102.fc32.aarch64</li>
+    
+    <li>ghc-containers-devel-0.6.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-deepseq-devel-1.4.4.0-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-devel-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-filepath-devel-1.4.2.1-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-th-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-compact-devel-0.1.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-heap-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-devel-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-devel-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-mtl-devel-2.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-devel-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-pretty-devel-1.1.3.6-102.fc32.aarch64</li>
+    
+    <li>ghc-process-devel-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-stm-devel-2.5.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-devel-2.14.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-terminfo-devel-0.4.1.2-102.fc32.aarch64</li>
+    
+    <li>ghc-text-devel-1.2.3.1-102.fc32.aarch64</li>
+    
+    <li>ghc-time-devel-1.8.0.2-102.fc32.aarch64</li>
+    
+    <li>ghc-transformers-devel-0.5.6.2-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-devel-2.7.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-xhtml-devel-3000.2.2.1-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-containers
+                </td>
+                <td>0.6.0.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="4632143">4.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-containers-devel-0.6.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-text-1.2.3.1-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-containers-devel
+                </td>
+                <td>0.6.0.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="27906114">26.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-devel-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-devel-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-devel-8.6.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-deepseq
+                </td>
+                <td>1.4.4.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="204913">200.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-bytestring-0.10.8.2-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-containers-0.6.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-deepseq-devel-1.4.4.0-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-compact-0.1.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-pretty-1.1.3.6-102.fc32.aarch64</li>
+    
+    <li>ghc-process-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-2.14.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-text-1.2.3.1-102.fc32.aarch64</li>
+    
+    <li>ghc-time-1.8.0.2-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-2.7.2.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-deepseq-devel
+                </td>
+                <td>1.4.4.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="939368">917.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-bytestring-devel-0.10.8.2-102.fc32.aarch64</li>
+    
+    <li>ghc-containers-devel-0.6.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-devel-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-pretty-devel-1.1.3.6-102.fc32.aarch64</li>
+    
+    <li>ghc-process-devel-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-text-devel-1.2.3.1-102.fc32.aarch64</li>
+    
+    <li>ghc-time-devel-1.8.0.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-devel
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-directory
+                </td>
+                <td>1.3.3.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="620270">605.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-devel-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-process-1.6.5.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-directory-devel
+                </td>
+                <td>1.3.3.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3265849">3.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-devel-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-process-devel-1.6.5.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-filepath
+                </td>
+                <td>1.4.2.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="272852">266.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-filepath-devel-1.4.2.1-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-process-1.6.5.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-filepath-devel
+                </td>
+                <td>1.4.2.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1336908">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-devel-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-devel-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-process-devel-1.6.5.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghc
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="94632667">90.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghc-boot
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="745123">727.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghc-boot-devel
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="5441162">5.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghc-boot-th
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="309475">302.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-th-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-2.14.0.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghc-boot-th-devel
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1677219">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-devel-2.14.0.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghc-compact
+                </td>
+                <td>0.1.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="71866">70.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-ghc-compact-devel-0.1.0.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghc-compact-devel
+                </td>
+                <td>0.1.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="329801">322.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghc-devel
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="274573680">261.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghc-heap
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="487079">475.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-heap-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghc-heap-devel
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2450727">2.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghci
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3067535">2.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-ghci-devel
+                </td>
+                <td>8.6.5-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="23025035">22.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-devel-8.6.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-haskeline
+                </td>
+                <td>0.7.4.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2318946">2.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-haskeline-devel
+                </td>
+                <td>0.7.4.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="13867301">13.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-hpc
+                </td>
+                <td>0.6.0.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="347549">339.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-devel-0.6.0.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-hpc-devel
+                </td>
+                <td>0.6.0.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1573662">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-libiserv
+                </td>
+                <td>8.6.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="72119">70.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-devel-8.6.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-libiserv-devel
+                </td>
+                <td>8.6.3-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="151615">148.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-mtl
+                </td>
+                <td>2.2.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="338607">330.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-mtl-devel-2.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-mtl-devel
+                </td>
+                <td>2.2.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2147007">2.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-devel-3.1.13.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-parsec
+                </td>
+                <td>3.1.13.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1021868">997.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-devel-3.1.13.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-parsec-devel
+                </td>
+                <td>3.1.13.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="6098357">5.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-pretty
+                </td>
+                <td>1.1.3.6-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="625389">610.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-pretty-devel-1.1.3.6-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-2.14.0.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-pretty-devel
+                </td>
+                <td>1.1.3.6-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3738838">3.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-devel-2.14.0.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-process
+                </td>
+                <td>1.6.5.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="346561">338.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-process-devel-1.6.5.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-process-devel
+                </td>
+                <td>1.6.5.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2014565">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-stm
+                </td>
+                <td>2.5.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="209139">204.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-stm-devel-2.5.0.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-stm-devel
+                </td>
+                <td>2.5.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1077895">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-template-haskell
+                </td>
+                <td>2.14.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="4814918">4.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-devel-2.14.0.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-template-haskell-devel
+                </td>
+                <td>2.14.0.0-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="30258647">28.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-terminfo
+                </td>
+                <td>0.4.1.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="347403">339.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-terminfo-devel-0.4.1.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-terminfo-devel
+                </td>
+                <td>0.4.1.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1851015">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-text
+                </td>
+                <td>1.2.3.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2907435">2.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-text-devel-1.2.3.1-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-text-devel
+                </td>
+                <td>1.2.3.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="18393628">17.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-devel-3.1.13.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-time
+                </td>
+                <td>1.8.0.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1314278">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-process-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-time-devel-1.8.0.2-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-2.7.2.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-time-devel
+                </td>
+                <td>1.8.0.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="7854630">7.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-devel-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-devel-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-devel-2.7.2.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-transformers
+                </td>
+                <td>0.5.6.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1954159">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-mtl-2.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-transformers-devel-0.5.6.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-transformers-devel
+                </td>
+                <td>0.5.6.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="12823052">12.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-mtl-devel-2.2.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-unix
+                </td>
+                <td>2.7.2.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1253619">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-process-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-devel-2.7.2.2-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-unix-devel
+                </td>
+                <td>2.7.2.2-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="7607388">7.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-Cabal-devel-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-devel-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-devel-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-devel-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-devel-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-process-devel-1.6.5.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-xhtml
+                </td>
+                <td>3000.2.2.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="622953">608.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-xhtml-devel-3000.2.2.1-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ghc-xhtml-devel
+                </td>
+                <td>3000.2.2.1-102.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3059549">2.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-devel-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="28637424">27.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>alternatives-1.11-6.fc32.aarch64</li>
+    
+    <li>bash-5.0.11-2.fc32.aarch64</li>
+    
+    <li>binutils-2.34-2.fc32.aarch64</li>
+    
+    <li>binutils-gold-2.34-2.fc32.aarch64</li>
+    
+    <li>coreutils-8.31-10.fc32.aarch64</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>gdbm-libs-1:1.18.1-3.fc32.aarch64</li>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-array-0.5.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-base-4.12.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-bytestring-0.10.8.2-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-containers-0.6.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-deepseq-1.4.4.0-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-filepath-1.4.2.1-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-th-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-compact-0.1.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-heap-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-mtl-2.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-pretty-1.1.3.6-102.fc32.aarch64</li>
+    
+    <li>ghc-process-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-stm-2.5.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-2.14.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-terminfo-0.4.1.2-102.fc32.aarch64</li>
+    
+    <li>ghc-text-1.2.3.1-102.fc32.aarch64</li>
+    
+    <li>ghc-time-1.8.0.2-102.fc32.aarch64</li>
+    
+    <li>ghc-transformers-0.5.6.2-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-2.7.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-xhtml-3000.2.2.1-102.fc32.aarch64</li>
+    
+    <li>glibc-all-langpacks-2.31-1.fc32.aarch64</li>
+    
+    <li>glibc-common-2.31-1.fc32.aarch64</li>
+    
+    <li>glibc-devel-2.31-1.fc32.aarch64</li>
+    
+    <li>glibc-headers-2.31-1.fc32.aarch64</li>
+    
+    <li>gmp-1:6.1.2-13.fc32.aarch64</li>
+    
+    <li>gmp-c++-1:6.1.2-13.fc32.aarch64</li>
+    
+    <li>grep-3.3-4.fc32.aarch64</li>
+    
+    <li>isl-0.16.1-10.fc32.aarch64</li>
+    
+    <li>libacl-2.2.53-5.fc32.aarch64</li>
+    
+    <li>libasan-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>libatomic-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>libattr-2.4.48-8.fc32.aarch64</li>
+    
+    <li>libcap-2.26-7.fc32.aarch64</li>
+    
+    <li>libedit-3.1-32.20191231cvs.fc32.aarch64</li>
+    
+    <li>libffi-3.1-24.fc32.aarch64</li>
+    
+    <li>libgomp-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>libmpc-1.1.0-8.fc32.aarch64</li>
+    
+    <li>libpkgconf-1.6.3-3.fc32.aarch64</li>
+    
+    <li>libselinux-3.0-3.fc32.aarch64</li>
+    
+    <li>libsepol-3.0-3.fc32.aarch64</li>
+    
+    <li>libstdc++-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>libtasn1-4.16.0-1.fc32.aarch64</li>
+    
+    <li>libubsan-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>libxcrypt-4.4.15-1.fc32.aarch64</li>
+    
+    <li>llvm6.0-6.0.1-10.fc32.aarch64</li>
+    
+    <li>llvm6.0-libs-6.0.1-10.fc32.aarch64</li>
+    
+    <li>mpfr-4.0.2-3.fc32.aarch64</li>
+    
+    <li>ncurses-6.1-15.20191109.fc32.aarch64</li>
+    
+    <li>ncurses-c++-libs-6.1-15.20191109.fc32.aarch64</li>
+    
+    <li>ncurses-libs-6.1-15.20191109.fc32.aarch64</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.aarch64</li>
+    
+    <li>p11-kit-0.23.20-1.fc32.aarch64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.aarch64</li>
+    
+    <li>pcre-8.44-1.fc32.aarch64</li>
+    
+    <li>pcre2-10.34-7.fc32.aarch64</li>
+    
+    <li>perl-IO-1.40-451.fc32.aarch64</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.aarch64</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.54-440.fc32.aarch64</li>
+    
+    <li>perl-Socket-4:2.029-5.fc32.aarch64</li>
+    
+    <li>perl-Unicode-Normalize-1.26-440.fc32.aarch64</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-libs-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-threads-1:2.22-442.fc32.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.aarch64</li>
+    
+    <li>pkgconf-1.6.3-3.fc32.aarch64</li>
+    
+    <li>sed-4.5-5.fc32.aarch64</li>
+    
+    <li>zlib-1.2.11-21.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-all-langpacks
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="222208346">211.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.aarch64</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-common
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="8421835">8.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.31-1.fc32.aarch64</li>
+    
+    <li>glibc-all-langpacks-2.31-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-devel
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1184528">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>libxcrypt-devel-4.4.15-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-headers
+                </td>
+                <td>2.31-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2026635">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-devel-2.31-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp
+                </td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>aarch64</td>
+                <td data-order="605396">591.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.aarch64</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>ghc-Cabal-2.4.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-array-0.5.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-base-4.12.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-binary-0.8.6.0-102.fc32.aarch64</li>
+    
+    <li>ghc-bytestring-0.10.8.2-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-containers-0.6.0.1-102.fc32.aarch64</li>
+    
+    <li>ghc-deepseq-1.4.4.0-102.fc32.aarch64</li>
+    
+    <li>ghc-directory-1.3.3.0-102.fc32.aarch64</li>
+    
+    <li>ghc-filepath-1.4.2.1-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-boot-th-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-compact-0.1.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-heap-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghci-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-hpc-0.6.0.3-102.fc32.aarch64</li>
+    
+    <li>ghc-libiserv-8.6.3-102.fc32.aarch64</li>
+    
+    <li>ghc-mtl-2.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-parsec-3.1.13.0-102.fc32.aarch64</li>
+    
+    <li>ghc-pretty-1.1.3.6-102.fc32.aarch64</li>
+    
+    <li>ghc-process-1.6.5.0-102.fc32.aarch64</li>
+    
+    <li>ghc-stm-2.5.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-template-haskell-2.14.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-terminfo-0.4.1.2-102.fc32.aarch64</li>
+    
+    <li>ghc-text-1.2.3.1-102.fc32.aarch64</li>
+    
+    <li>ghc-time-1.8.0.2-102.fc32.aarch64</li>
+    
+    <li>ghc-transformers-0.5.6.2-102.fc32.aarch64</li>
+    
+    <li>ghc-unix-2.7.2.2-102.fc32.aarch64</li>
+    
+    <li>ghc-xhtml-3000.2.2.1-102.fc32.aarch64</li>
+    
+    <li>gmp-c++-1:6.1.2-13.fc32.aarch64</li>
+    
+    <li>gmp-devel-1:6.1.2-13.fc32.aarch64</li>
+    
+    <li>isl-0.16.1-10.fc32.aarch64</li>
+    
+    <li>libmpc-1.1.0-8.fc32.aarch64</li>
+    
+    <li>mpfr-4.0.2-3.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp-c++
+                </td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>aarch64</td>
+                <td data-order="70184">68.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gmp-devel-1:6.1.2-13.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp-devel
+                </td>
+                <td>1:6.1.2-13.fc32</td>
+                <td>aarch64</td>
+                <td data-order="354049">345.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-base-devel-4.12.0.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    grep
+                </td>
+                <td>3.3-4.fc32</td>
+                <td>aarch64</td>
+                <td data-order="836402">816.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    isl
+                </td>
+                <td>0.16.1-10.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3283073">3.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kernel-headers
+                </td>
+                <td>5.6.0-0.rc7.git0.1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="5048828">4.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-headers-2.31-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libacl
+                </td>
+                <td>2.2.53-5.fc32</td>
+                <td>aarch64</td>
+                <td data-order="70440">68.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.aarch64</li>
+    
+    <li>sed-4.5-5.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libasan
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1219064">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libatomic
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="70384">68.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libattr
+                </td>
+                <td>2.4.48-8.fc32</td>
+                <td>aarch64</td>
+                <td data-order="70730">69.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.aarch64</li>
+    
+    <li>libacl-2.2.53-5.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap
+                </td>
+                <td>2.26-7.fc32</td>
+                <td>aarch64</td>
+                <td data-order="442922">432.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libedit
+                </td>
+                <td>3.1-32.20191231cvs.fc32</td>
+                <td>aarch64</td>
+                <td data-order="285933">279.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>llvm6.0-libs-6.0.1-10.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi
+                </td>
+                <td>3.1-24.fc32</td>
+                <td>aarch64</td>
+                <td data-order="86564">84.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-base-4.12.0.0-102.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>libffi-devel-3.1-24.fc32.aarch64</li>
+    
+    <li>llvm6.0-libs-6.0.1-10.fc32.aarch64</li>
+    
+    <li>p11-kit-0.23.20-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi-devel
+                </td>
+                <td>3.1-24.fc32</td>
+                <td>aarch64</td>
+                <td data-order="24196">23.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-base-devel-4.12.0.0-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcc
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="226888">221.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.aarch64</li>
+    
+    <li>binutils-gold-2.34-2.fc32.aarch64</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>glibc-2.31-1.fc32.aarch64</li>
+    
+    <li>gmp-c++-1:6.1.2-13.fc32.aarch64</li>
+    
+    <li>libasan-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>libstdc++-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>libubsan-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>llvm6.0-6.0.1-10.fc32.aarch64</li>
+    
+    <li>llvm6.0-libs-6.0.1-10.fc32.aarch64</li>
+    
+    <li>ncurses-c++-libs-6.1-15.20191109.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgomp
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="389766">380.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmpc
+                </td>
+                <td>1.1.0-8.fc32</td>
+                <td>aarch64</td>
+                <td data-order="151605">148.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cpp-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpkgconf
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="71933">70.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-1.6.3-3.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="206216">201.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.aarch64</li>
+    
+    <li>sed-4.5-5.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsepol
+                </td>
+                <td>3.0-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="769032">751.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-3.0-3.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libstdc++
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="2199085">2.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.aarch64</li>
+    
+    <li>binutils-gold-2.34-2.fc32.aarch64</li>
+    
+    <li>gmp-c++-1:6.1.2-13.fc32.aarch64</li>
+    
+    <li>libasan-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>libubsan-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>llvm6.0-6.0.1-10.fc32.aarch64</li>
+    
+    <li>llvm6.0-libs-6.0.1-10.fc32.aarch64</li>
+    
+    <li>ncurses-c++-libs-6.1-15.20191109.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtasn1
+                </td>
+                <td>4.16.0-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="225292">220.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libubsan
+                </td>
+                <td>10.0.1-0.9.fc32</td>
+                <td>aarch64</td>
+                <td data-order="419880">410.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt
+                </td>
+                <td>4.4.15-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="269659">263.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libxcrypt-devel-4.4.15-1.fc32.aarch64</li>
+    
+    <li>perl-libs-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt-devel
+                </td>
+                <td>4.4.15-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="30986">30.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-devel-2.31-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    llvm6.0
+                </td>
+                <td>6.0.1-10.fc32</td>
+                <td>aarch64</td>
+                <td data-order="11019855">10.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    llvm6.0-libs
+                </td>
+                <td>6.0.1-10.fc32</td>
+                <td>aarch64</td>
+                <td data-order="52393167">50.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>llvm6.0-6.0.1-10.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mpfr
+                </td>
+                <td>4.0.2-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="606787">592.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cpp-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>libmpc-1.1.0-8.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>aarch64</td>
+                <td data-order="930845">909.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-base
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>noarch</td>
+                <td data-order="285229">278.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-libs-6.1-15.20191109.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-c++-libs
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>aarch64</td>
+                <td data-order="272664">266.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-devel-6.1-15.20191109.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-devel
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>aarch64</td>
+                <td data-order="844644">824.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ghc-terminfo-devel-0.4.1.2-102.fc32.aarch64</li>
+    
+    <li>ncurses-devel-6.1-15.20191109.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-libs
+                </td>
+                <td>6.1-15.20191109.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1240280">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>bash-5.0.11-2.fc32.aarch64</li>
+    
+    <li>ghc-compiler-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-ghc-8.6.5-102.fc32.aarch64</li>
+    
+    <li>ghc-haskeline-0.7.4.3-102.fc32.aarch64</li>
+    
+    <li>ghc-terminfo-0.4.1.2-102.fc32.aarch64</li>
+    
+    <li>libedit-3.1-32.20191231cvs.fc32.aarch64</li>
+    
+    <li>llvm6.0-6.0.1-10.fc32.aarch64</li>
+    
+    <li>llvm6.0-libs-6.0.1-10.fc32.aarch64</li>
+    
+    <li>ncurses-6.1-15.20191109.fc32.aarch64</li>
+    
+    <li>ncurses-c++-libs-6.1-15.20191109.fc32.aarch64</li>
+    
+    <li>ncurses-devel-6.1-15.20191109.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl-libs
+                </td>
+                <td>1:1.1.1d-7.fc32</td>
+                <td>aarch64</td>
+                <td data-order="3656794">3.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-10.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit
+                </td>
+                <td>0.23.20-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="1772572">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit-trust
+                </td>
+                <td>0.23.20-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="544689">531.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre
+                </td>
+                <td>8.44-1.fc32</td>
+                <td>aarch64</td>
+                <td data-order="567256">554.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>grep-3.3-4.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre2
+                </td>
+                <td>10.34-7.fc32</td>
+                <td>aarch64</td>
+                <td data-order="720181">703.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-3.0-3.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Carp
+                </td>
+                <td>1.50-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="47889">46.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Carp-1.50-440.fc32.noarch</li>
+    
+    <li>perl-Errno-1.30-451.fc32.aarch64</li>
+    
+    <li>perl-Exporter-5.74-2.fc32.noarch</li>
+    
+    <li>perl-File-Path-2.16-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.aarch64</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.aarch64</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.54-440.fc32.aarch64</li>
+    
+    <li>perl-Socket-4:2.029-5.fc32.aarch64</li>
+    
+    <li>perl-Unicode-Normalize-1.26-440.fc32.aarch64</li>
+    
+    <li>perl-constant-1.33-441.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-libs-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-threads-1:2.22-442.fc32.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Errno
+                </td>
+                <td>1.30-451.fc32</td>
+                <td>aarch64</td>
+                <td data-order="9524">9.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-IO-1.40-451.fc32.aarch64</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Exporter
+                </td>
+                <td>5.74-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="55358">54.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Carp-1.50-440.fc32.noarch</li>
+    
+    <li>perl-Errno-1.30-451.fc32.aarch64</li>
+    
+    <li>perl-Exporter-5.74-2.fc32.noarch</li>
+    
+    <li>perl-File-Path-2.16-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.aarch64</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.aarch64</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.54-440.fc32.aarch64</li>
+    
+    <li>perl-Socket-4:2.029-5.fc32.aarch64</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-440.fc32.noarch</li>
+    
+    <li>perl-Unicode-Normalize-1.26-440.fc32.aarch64</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-libs-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-File-Path
+                </td>
+                <td>2.16-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="65104">63.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-IO
+                </td>
+                <td>1.40-451.fc32</td>
+                <td>aarch64</td>
+                <td data-order="190792">186.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-IO-1.40-451.fc32.aarch64</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-PathTools
+                </td>
+                <td>3.78-441.fc32</td>
+                <td>aarch64</td>
+                <td data-order="231509">226.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-File-Path-2.16-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.aarch64</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.aarch64</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Scalar-List-Utils
+                </td>
+                <td>3:1.54-440.fc32</td>
+                <td>aarch64</td>
+                <td data-order="146470">143.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-PathTools-3.78-441.fc32.aarch64</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.54-440.fc32.aarch64</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Socket
+                </td>
+                <td>4:2.029-5.fc32</td>
+                <td>aarch64</td>
+                <td data-order="144520">141.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-IO-1.40-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Text-Tabs+Wrap
+                </td>
+                <td>2013.0523-440.fc32</td>
+                <td>noarch</td>
+                <td data-order="24827">24.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-440.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-Unicode-Normalize
+                </td>
+                <td>1.26-440.fc32</td>
+                <td>aarch64</td>
+                <td data-order="699127">682.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-constant
+                </td>
+                <td>1.33-441.fc32</td>
+                <td>noarch</td>
+                <td data-order="27104">26.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-PathTools-3.78-441.fc32.aarch64</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-interpreter
+                </td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>aarch64</td>
+                <td data-order="15821963">15.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Errno-1.30-451.fc32.aarch64</li>
+    
+    <li>perl-File-Path-2.16-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.aarch64</li>
+    
+    <li>perl-Socket-4:2.029-5.fc32.aarch64</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-440.fc32.noarch</li>
+    
+    <li>perl-constant-1.33-441.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-macros-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-threads-1:2.22-442.fc32.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-libs
+                </td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>aarch64</td>
+                <td data-order="7643823">7.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-Carp-1.50-440.fc32.noarch</li>
+    
+    <li>perl-Errno-1.30-451.fc32.aarch64</li>
+    
+    <li>perl-Exporter-5.74-2.fc32.noarch</li>
+    
+    <li>perl-File-Path-2.16-440.fc32.noarch</li>
+    
+    <li>perl-IO-1.40-451.fc32.aarch64</li>
+    
+    <li>perl-PathTools-3.78-441.fc32.aarch64</li>
+    
+    <li>perl-Scalar-List-Utils-3:1.54-440.fc32.aarch64</li>
+    
+    <li>perl-Socket-4:2.029-5.fc32.aarch64</li>
+    
+    <li>perl-Text-Tabs+Wrap-2013.0523-440.fc32.noarch</li>
+    
+    <li>perl-Unicode-Normalize-1.26-440.fc32.aarch64</li>
+    
+    <li>perl-constant-1.33-441.fc32.noarch</li>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-libs-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-macros-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-parent-1:0.238-1.fc32.noarch</li>
+    
+    <li>perl-threads-1:2.22-442.fc32.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>perl-PathTools-3.78-441.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-macros
+                </td>
+                <td>4:5.30.2-451.fc32</td>
+                <td>aarch64</td>
+                <td data-order="5643">5.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-parent
+                </td>
+                <td>1:0.238-1.fc32</td>
+                <td>noarch</td>
+                <td data-order="9535">9.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-threads
+                </td>
+                <td>1:2.22-442.fc32</td>
+                <td>aarch64</td>
+                <td data-order="138940">135.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    <li>perl-threads-shared-1.60-441.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    perl-threads-shared
+                </td>
+                <td>1.60-441.fc32</td>
+                <td>aarch64</td>
+                <td data-order="106671">104.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>perl-interpreter-4:5.30.2-451.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="101381">99.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-3.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-m4
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-3.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-pkg-config
+                </td>
+                <td>1.6.3-3.fc32</td>
+                <td>aarch64</td>
+                <td data-order="464">464.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libffi-devel-3.1-24.fc32.aarch64</li>
+    
+    <li>ncurses-devel-6.1-15.20191109.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sed
+                </td>
+                <td>4.5-5.fc32</td>
+                <td>aarch64</td>
+                <td data-order="784926">766.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-3.fc32.noarch</li>
+    
+    <li>crypto-policies-20191128-5.gitcd267a5.fc32.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    setup
+                </td>
+                <td>2.13.6-2.fc32</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-9.fc32.noarch</li>
+    
+    <li>filesystem-3.14-2.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata
+                </td>
+                <td>2019c-3.fc32</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-common-2.31-1.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zlib
+                </td>
+                <td>1.2.11-21.fc32</td>
+                <td>aarch64</td>
+                <td data-order="236591">231.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>binutils-2.34-2.fc32.aarch64</li>
+    
+    <li>cpp-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>gcc-10.0.1-0.9.fc32.aarch64</li>
+    
+    <li>llvm6.0-libs-6.0.1-10.fc32.aarch64</li>
+    
+    <li>openssl-libs-1:1.1.1d-7.fc32.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-modules-module-ghc-8.8--fedora-empty-base--repository-fedora-rawhide--aarch64.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

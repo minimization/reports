@@ -1,0 +1,7048 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--rhel-8-appstream-module-gimp-2.8--repository-fedora-31.html">
+                    Module gimp:2.8 for rhel-8-appstream
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Module gimp:2.8 for rhel-8-appstream in Empty from Fedora 31 ppc64le
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Module gimp:2.8 for rhel-8-appstream <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora 31</small>
+        <small class="text-muted"> for </small>
+        <small> ppc64le</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--rhel-8-appstream-module-gimp-2.8--fedora-empty-base--repository-fedora-31--ppc64le.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--rhel-8-appstream-module-gimp-2.8--fedora-empty-base--repository-fedora-31--ppc64le.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    LibRaw
+                </td>
+                <td>0.19.5-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2277766">2.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    OpenEXR-libs
+                </td>
+                <td>2.3.0-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="3797312">3.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    SDL2
+                </td>
+                <td>2.0.12-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1761532">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    aalib-libs
+                </td>
+                <td>1.4.0-0.37.rc5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="295874">288.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    adobe-mappings-cmap
+                </td>
+                <td>20171205-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="13746679">13.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>adobe-mappings-cmap-deprecated-20171205-6.fc31.noarch</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    adobe-mappings-cmap-deprecated
+                </td>
+                <td>20171205-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="596942">583.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    adobe-mappings-pdf
+                </td>
+                <td>20180407-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="4398414">4.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alsa-lib
+                </td>
+                <td>1.2.2-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1927607">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alternatives
+                </td>
+                <td>1.11-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="93710">91.5 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    atk
+                </td>
+                <td>2.34.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1429110">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    avahi-libs
+                </td>
+                <td>0.7-20.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="254944">249.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cups-libs-1:2.2.12-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    babl
+                </td>
+                <td>0.1.74-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2446254">2.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    basesystem
+                </td>
+                <td>11-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bash
+                </td>
+                <td>5.0.11-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="7995143">7.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>desktop-file-utils-0.24-1.fc31.ppc64le</li>
+    
+    <li>filesystem-3.12-2.fc31.ppc64le</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>freetype-2.10.0-3.fc31.ppc64le</li>
+    
+    <li>gdk-pixbuf2-2.40.0-1.fc31.ppc64le</li>
+    
+    <li>glib2-2.62.5-1.fc31.ppc64le</li>
+    
+    <li>glibc-common-2.30-10.fc31.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>hicolor-icon-theme-0.17-7.fc31.noarch</li>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    <li>libblkid-2.34-4.fc31.ppc64le</li>
+    
+    <li>libsepol-2.9-2.fc31.ppc64le</li>
+    
+    <li>nss-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.ppc64le</li>
+    
+    <li>shared-mime-info-1.15-1.fc31.ppc64le</li>
+    
+    <li>systemd-libs-243.7-1.fc31.ppc64le</li>
+    
+    <li>urw-base35-bookman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-c059-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-d050000l-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-gothic-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-mono-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-roman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-sans-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-p052-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-standard-symbols-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-z003-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bzip2-libs
+                </td>
+                <td>1.0.8-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="147280">143.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>freetype-2.10.0-3.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ca-certificates
+                </td>
+                <td>2020.2.40-1.1.fc31</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.ppc64le</li>
+    
+    <li>python-pip-wheel-19.1.1-7.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cairo
+                </td>
+                <td>1.16.0-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2453391">2.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    <li>python2-cairo-1.18.1-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cairo-gobject
+                </td>
+                <td>1.16.0-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="70608">69.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils
+                </td>
+                <td>8.31-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="14051360">13.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    <li>libblkid-2.34-4.fc31.ppc64le</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>systemd-libs-243.7-1.fc31.ppc64le</li>
+    
+    <li>xdg-utils-1.1.3-5.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils-common
+                </td>
+                <td>8.31-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="10348911">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    crypto-policies
+                </td>
+                <td>20191128-2.gitcd267a5.fc31</td>
+                <td>noarch</td>
+                <td data-order="195446">190.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.ppc64le</li>
+    
+    <li>nss-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cups-libs
+                </td>
+                <td>1:2.2.12-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="979916">956.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-libs
+                </td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="553016">540.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>avahi-libs-0.7-20.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    desktop-file-utils
+                </td>
+                <td>0.24-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="399037">389.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xdg-utils-1.1.3-5.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    emacs-filesystem
+                </td>
+                <td>1:26.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>desktop-file-utils-0.24-1.fc31.ppc64le</li>
+    
+    <li>libidn-1.35-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    exiv2-libs
+                </td>
+                <td>0.27.2-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="3809032">3.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgexiv2-0.12.0-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    expat
+                </td>
+                <td>2.2.8-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="389459">380.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>exiv2-libs-0.27.2-1.fc31.ppc64le</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-gpg-keys
+                </td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="103813">101.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-repos-31-1.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release
+                </td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    <li>fedora-repos-31-1.noarch</li>
+    
+    <li>setup-2.13.6-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release-common
+                </td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="14359">14.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-31-2.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-repos
+                </td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="8785">8.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    filesystem
+                </td>
+                <td>3.12-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-8.fc31.noarch</li>
+    
+    <li>bash-5.0.11-1.fc31.ppc64le</li>
+    
+    <li>gawk-5.0.1-5.fc31.ppc64le</li>
+    
+    <li>urw-base35-fonts-common-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fontconfig
+                </td>
+                <td>2.13.92-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1417886">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>libXft-2.3.3-2.fc31.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    <li>urw-base35-bookman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-c059-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-d050000l-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-gothic-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-mono-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-roman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-sans-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-p052-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-standard-symbols-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-z003-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fonts-filesystem
+                </td>
+                <td>2.0.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>google-droid-sans-fonts-20120715-16.fc31.noarch</li>
+    
+    <li>urw-base35-fonts-common-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    freetype
+                </td>
+                <td>2.10.0-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1078035">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>harfbuzz-2.6.1-2.fc31.ppc64le</li>
+    
+    <li>libXft-2.3.3-2.fc31.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    <li>xorg-x11-font-utils-1:7.5-43.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fribidi
+                </td>
+                <td>1.0.5-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="390461">381.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gawk
+                </td>
+                <td>5.0.1-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="3969630">3.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdbm
+                </td>
+                <td>1:1.18.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="540513">527.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdbm-libs
+                </td>
+                <td>1:1.18.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="290528">283.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdbm-1:1.18.1-1.fc31.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdk-pixbuf2
+                </td>
+                <td>2.40.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2833802">2.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk-update-icon-cache-3.24.13-1.fc31.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdk-pixbuf2-modules
+                </td>
+                <td>2.40.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="909688">888.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gegl04
+                </td>
+                <td>0.4.22-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="9485404">9.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    gimp
+                </td>
+                <td>2:2.10.14-1.module_f31+6993+669d73be</td>
+                <td>ppc64le</td>
+                <td data-order="120809034">115.2 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gimp-libs
+                </td>
+                <td>2:2.10.14-1.module_f31+6993+669d73be</td>
+                <td>ppc64le</td>
+                <td data-order="13006216">12.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glib2
+                </td>
+                <td>2.62.5-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="14437520">13.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>atk-2.34.1-1.fc31.ppc64le</li>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>desktop-file-utils-0.24-1.fc31.ppc64le</li>
+    
+    <li>gdk-pixbuf2-2.40.0-1.fc31.ppc64le</li>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk-update-icon-cache-3.24.13-1.fc31.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>harfbuzz-2.6.1-2.fc31.ppc64le</li>
+    
+    <li>json-glib-1.4.4-3.fc31.ppc64le</li>
+    
+    <li>libcroco-0.6.13-2.fc31.ppc64le</li>
+    
+    <li>libgexiv2-0.12.0-2.fc31.ppc64le</li>
+    
+    <li>libgudev-232-6.fc31.ppc64le</li>
+    
+    <li>libmypaint-1.4.0-1.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>pygobject2-2.28.7-6.fc31.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    <li>shared-mime-info-1.15-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="29487717">28.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.ppc64le</li>
+    
+    <li>OpenEXR-libs-2.3.0-4.fc31.ppc64le</li>
+    
+    <li>SDL2-2.0.12-1.fc31.ppc64le</li>
+    
+    <li>aalib-libs-1.4.0-0.37.rc5.fc31.ppc64le</li>
+    
+    <li>alsa-lib-1.2.2-1.fc31.ppc64le</li>
+    
+    <li>alternatives-1.11-5.fc31.ppc64le</li>
+    
+    <li>atk-2.34.1-1.fc31.ppc64le</li>
+    
+    <li>avahi-libs-0.7-20.fc31.ppc64le</li>
+    
+    <li>babl-0.1.74-1.fc31.ppc64le</li>
+    
+    <li>bash-5.0.11-1.fc31.ppc64le</li>
+    
+    <li>bzip2-libs-1.0.8-1.fc31.ppc64le</li>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>coreutils-8.31-6.fc31.ppc64le</li>
+    
+    <li>cups-libs-1:2.2.12-6.fc31.ppc64le</li>
+    
+    <li>dbus-libs-1:1.12.16-3.fc31.ppc64le</li>
+    
+    <li>desktop-file-utils-0.24-1.fc31.ppc64le</li>
+    
+    <li>exiv2-libs-0.27.2-1.fc31.ppc64le</li>
+    
+    <li>expat-2.2.8-1.fc31.ppc64le</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>freetype-2.10.0-3.fc31.ppc64le</li>
+    
+    <li>fribidi-1.0.5-5.fc31.ppc64le</li>
+    
+    <li>gawk-5.0.1-5.fc31.ppc64le</li>
+    
+    <li>gdbm-1:1.18.1-1.fc31.ppc64le</li>
+    
+    <li>gdbm-libs-1:1.18.1-1.fc31.ppc64le</li>
+    
+    <li>gdk-pixbuf2-2.40.0-1.fc31.ppc64le</li>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>glib2-2.62.5-1.fc31.ppc64le</li>
+    
+    <li>glibc-all-langpacks-2.30-10.fc31.ppc64le</li>
+    
+    <li>glibc-common-2.30-10.fc31.ppc64le</li>
+    
+    <li>gmp-1:6.1.2-10.fc31.ppc64le</li>
+    
+    <li>gnutls-3.6.11-1.fc31.ppc64le</li>
+    
+    <li>gpm-libs-1.20.7-21.fc31.ppc64le</li>
+    
+    <li>graphite2-1.3.13-1.fc31.ppc64le</li>
+    
+    <li>grep-3.3-3.fc31.ppc64le</li>
+    
+    <li>gtk-update-icon-cache-3.24.13-1.fc31.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>harfbuzz-2.6.1-2.fc31.ppc64le</li>
+    
+    <li>ilmbase-2.3.0-3.fc31.ppc64le</li>
+    
+    <li>jasper-libs-2.0.14-9.fc31.ppc64le</li>
+    
+    <li>jbig2dec-libs-0.16-1.fc31.ppc64le</li>
+    
+    <li>jbigkit-libs-2.1-17.fc31.ppc64le</li>
+    
+    <li>json-c-0.13.1-8.fc31.ppc64le</li>
+    
+    <li>json-glib-1.4.4-3.fc31.ppc64le</li>
+    
+    <li>keyutils-libs-1.6-3.fc31.ppc64le</li>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    <li>lcms2-2.9-6.fc31.ppc64le</li>
+    
+    <li>libICE-1.0.10-2.fc31.ppc64le</li>
+    
+    <li>libSM-1.2.3-4.fc31.ppc64le</li>
+    
+    <li>libX11-1.6.9-2.fc31.ppc64le</li>
+    
+    <li>libXau-1.0.9-2.fc31.ppc64le</li>
+    
+    <li>libXcomposite-0.4.4-17.fc31.ppc64le</li>
+    
+    <li>libXcursor-1.1.15-6.fc31.ppc64le</li>
+    
+    <li>libXdamage-1.1.4-17.fc31.ppc64le</li>
+    
+    <li>libXext-1.3.4-2.fc31.ppc64le</li>
+    
+    <li>libXfixes-5.0.3-10.fc31.ppc64le</li>
+    
+    <li>libXft-2.3.3-2.fc31.ppc64le</li>
+    
+    <li>libXi-1.7.10-2.fc31.ppc64le</li>
+    
+    <li>libXinerama-1.1.4-4.fc31.ppc64le</li>
+    
+    <li>libXmu-1.1.3-2.fc31.ppc64le</li>
+    
+    <li>libXpm-3.5.12-10.fc31.ppc64le</li>
+    
+    <li>libXrandr-1.5.2-2.fc31.ppc64le</li>
+    
+    <li>libXrender-0.9.10-10.fc31.ppc64le</li>
+    
+    <li>libXt-1.1.5-12.20190424gitba4ec9376.fc31.ppc64le</li>
+    
+    <li>libXxf86vm-1.1.4-12.fc31.ppc64le</li>
+    
+    <li>libacl-2.2.53-4.fc31.ppc64le</li>
+    
+    <li>libattr-2.4.48-7.fc31.ppc64le</li>
+    
+    <li>libblkid-2.34-4.fc31.ppc64le</li>
+    
+    <li>libcap-2.26-6.fc31.ppc64le</li>
+    
+    <li>libcom_err-1.45.5-1.fc31.ppc64le</li>
+    
+    <li>libcroco-0.6.13-2.fc31.ppc64le</li>
+    
+    <li>libdatrie-0.2.9-10.fc31.ppc64le</li>
+    
+    <li>libdb-5.3.28-38.fc31.ppc64le</li>
+    
+    <li>libffi-3.1-23.fc31.ppc64le</li>
+    
+    <li>libfontenc-1.1.3-11.fc31.ppc64le</li>
+    
+    <li>libgcrypt-1.8.5-1.fc31.ppc64le</li>
+    
+    <li>libgexiv2-0.12.0-2.fc31.ppc64le</li>
+    
+    <li>libgfortran-9.2.1-1.fc31.ppc64le</li>
+    
+    <li>libgomp-9.2.1-1.fc31.ppc64le</li>
+    
+    <li>libgpg-error-1.36-2.fc31.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    <li>libgudev-232-6.fc31.ppc64le</li>
+    
+    <li>libidn-1.35-6.fc31.ppc64le</li>
+    
+    <li>libidn2-2.3.0-1.fc31.ppc64le</li>
+    
+    <li>libijs-0.35-10.fc31.ppc64le</li>
+    
+    <li>libjpeg-turbo-2.0.2-5.fc31.ppc64le</li>
+    
+    <li>libmcpp-2.7.2-24.fc31.ppc64le</li>
+    
+    <li>libmng-2.0.3-10.fc31.ppc64le</li>
+    
+    <li>libmount-2.34-4.fc31.ppc64le</li>
+    
+    <li>libmypaint-1.4.0-1.fc31.ppc64le</li>
+    
+    <li>libnsl2-1.2.0-5.20180605git4a062cf.fc31.ppc64le</li>
+    
+    <li>libpaper-1.1.24-25.fc31.ppc64le</li>
+    
+    <li>libpkgconf-1.6.3-2.fc31.ppc64le</li>
+    
+    <li>libpng-2:1.6.37-2.fc31.ppc64le</li>
+    
+    <li>libquadmath-9.2.1-1.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>libselinux-2.9-5.fc31.ppc64le</li>
+    
+    <li>libsepol-2.9-2.fc31.ppc64le</li>
+    
+    <li>libsigsegv-2.11-8.fc31.ppc64le</li>
+    
+    <li>libstdc++-9.2.1-1.fc31.ppc64le</li>
+    
+    <li>libtasn1-4.14-2.fc31.ppc64le</li>
+    
+    <li>libthai-0.1.28-3.fc31.ppc64le</li>
+    
+    <li>libtiff-4.0.10-8.fc31.ppc64le</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.ppc64le</li>
+    
+    <li>libunistring-0.9.10-6.fc31.ppc64le</li>
+    
+    <li>libunwind-1.3.1-5.fc31.ppc64le</li>
+    
+    <li>libuuid-2.34-4.fc31.ppc64le</li>
+    
+    <li>libverto-0.3.0-8.fc31.ppc64le</li>
+    
+    <li>libwebp-1.0.3-2.fc31.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>libwmf-lite-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>libxcb-1.13.1-3.fc31.ppc64le</li>
+    
+    <li>libxcrypt-4.4.15-1.fc31.ppc64le</li>
+    
+    <li>libxml2-2.9.10-3.fc31.ppc64le</li>
+    
+    <li>lz4-libs-1.9.1-1.fc31.ppc64le</li>
+    
+    <li>mcpp-2.7.2-24.fc31.ppc64le</li>
+    
+    <li>mpfr-3.1.6-5.fc31.ppc64le</li>
+    
+    <li>ncurses-6.1-12.20190803.fc31.ppc64le</li>
+    
+    <li>ncurses-libs-6.1-12.20190803.fc31.ppc64le</li>
+    
+    <li>nettle-3.5.1-3.fc31.ppc64le</li>
+    
+    <li>nspr-4.25.0-1.fc31.ppc64le</li>
+    
+    <li>nss-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-softokn-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-softokn-freebl-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-util-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>openblas-serial-0.3.9-1.fc31.ppc64le</li>
+    
+    <li>openjpeg2-2.3.1-6.fc31.ppc64le</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.ppc64le</li>
+    
+    <li>p11-kit-0.23.20-1.fc31.ppc64le</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.ppc64le</li>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    <li>pcre-8.44-1.fc31.ppc64le</li>
+    
+    <li>pcre2-10.34-7.fc31.ppc64le</li>
+    
+    <li>pixman-0.38.4-1.fc31.ppc64le</li>
+    
+    <li>pkgconf-1.6.3-2.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>pygobject2-2.28.7-6.fc31.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    <li>python2-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python2-cairo-1.18.1-2.fc31.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-3.7.6-2.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    <li>readline-8.0-3.fc31.ppc64le</li>
+    
+    <li>sed-4.5-4.fc31.ppc64le</li>
+    
+    <li>shared-mime-info-1.15-1.fc31.ppc64le</li>
+    
+    <li>slang-2.3.2-6.fc31.ppc64le</li>
+    
+    <li>sqlite-libs-3.30.0-1.fc31.ppc64le</li>
+    
+    <li>suitesparse-4.4.6-20.fc31.ppc64le</li>
+    
+    <li>systemd-libs-243.7-1.fc31.ppc64le</li>
+    
+    <li>tbb-2020.1-1.fc31.ppc64le</li>
+    
+    <li>which-2.21-15.fc31.ppc64le</li>
+    
+    <li>xorg-x11-font-utils-1:7.5-43.fc31.ppc64le</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    <li>xz-libs-5.2.4-6.fc31.ppc64le</li>
+    
+    <li>zlib-1.2.11-20.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-all-langpacks
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="217990208">207.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.ppc64le</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-common
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="3125546">3.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.ppc64le</li>
+    
+    <li>glibc-all-langpacks-2.30-10.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp
+                </td>
+                <td>1:6.1.2-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1535132">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.ppc64le</li>
+    
+    <li>gawk-5.0.1-5.fc31.ppc64le</li>
+    
+    <li>gnutls-3.6.11-1.fc31.ppc64le</li>
+    
+    <li>mpfr-3.1.6-5.fc31.ppc64le</li>
+    
+    <li>nettle-3.5.1-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gnutls
+                </td>
+                <td>3.6.11-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="3870879">3.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cups-libs-1:2.2.12-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    google-droid-sans-fonts
+                </td>
+                <td>20120715-16.fc31</td>
+                <td>noarch</td>
+                <td data-order="6229278">5.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gpm-libs
+                </td>
+                <td>1.20.7-21.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="69272">67.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>aalib-libs-1.4.0-0.37.rc5.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    graphite2
+                </td>
+                <td>1.3.13-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="346785">338.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>harfbuzz-2.6.1-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    grep
+                </td>
+                <td>3.3-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="882274">861.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    <li>systemd-libs-243.7-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gtk-update-icon-cache
+                </td>
+                <td>3.24.13-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="99925">97.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gtk2
+                </td>
+                <td>2.24.32-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="16399693">15.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    harfbuzz
+                </td>
+                <td>2.6.1-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2457756">2.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    hicolor-icon-theme
+                </td>
+                <td>0.17-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="73932">72.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ilmbase
+                </td>
+                <td>2.3.0-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="858295">838.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>OpenEXR-libs-2.3.0-4.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    jasper-libs
+                </td>
+                <td>2.0.14-9.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="548546">535.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.ppc64le</li>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    jbig2dec-libs
+                </td>
+                <td>0.16-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="259187">253.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    jbigkit-libs
+                </td>
+                <td>2.1-17.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="189693">185.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtiff-4.0.10-8.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    json-c
+                </td>
+                <td>0.13.1-8.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="169986">166.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libmypaint-1.4.0-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    json-glib
+                </td>
+                <td>1.4.4-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="640507">625.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    keyutils-libs
+                </td>
+                <td>1.6-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="100575">98.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    krb5-libs
+                </td>
+                <td>1.17-46.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2920189">2.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cups-libs-1:2.2.12-6.fc31.ppc64le</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lcms2
+                </td>
+                <td>2.9-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="512809">500.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.ppc64le</li>
+    
+    <li>babl-0.1.74-1.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    <li>libmng-2.0.3-10.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libICE
+                </td>
+                <td>1.0.10-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="224558">219.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libSM-1.2.3-4.fc31.ppc64le</li>
+    
+    <li>libXt-1.1.5-12.20190424gitba4ec9376.fc31.ppc64le</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libSM
+                </td>
+                <td>1.2.3-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="130387">127.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libXt-1.1.5-12.20190424gitba4ec9376.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libX11
+                </td>
+                <td>1.6.9-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1604728">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>aalib-libs-1.4.0-0.37.rc5.fc31.ppc64le</li>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>libXcomposite-0.4.4-17.fc31.ppc64le</li>
+    
+    <li>libXcursor-1.1.15-6.fc31.ppc64le</li>
+    
+    <li>libXdamage-1.1.4-17.fc31.ppc64le</li>
+    
+    <li>libXext-1.3.4-2.fc31.ppc64le</li>
+    
+    <li>libXfixes-5.0.3-10.fc31.ppc64le</li>
+    
+    <li>libXft-2.3.3-2.fc31.ppc64le</li>
+    
+    <li>libXi-1.7.10-2.fc31.ppc64le</li>
+    
+    <li>libXinerama-1.1.4-4.fc31.ppc64le</li>
+    
+    <li>libXmu-1.1.3-2.fc31.ppc64le</li>
+    
+    <li>libXpm-3.5.12-10.fc31.ppc64le</li>
+    
+    <li>libXrandr-1.5.2-2.fc31.ppc64le</li>
+    
+    <li>libXrender-0.9.10-10.fc31.ppc64le</li>
+    
+    <li>libXt-1.1.5-12.20190424gitba4ec9376.fc31.ppc64le</li>
+    
+    <li>libXxf86vm-1.1.4-12.fc31.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libX11-common
+                </td>
+                <td>1.6.9-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1339608">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libX11-1.6.9-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXau
+                </td>
+                <td>1.0.9-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="122612">119.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libxcb-1.13.1-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXcomposite
+                </td>
+                <td>0.4.4-17.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="93088">90.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXcursor
+                </td>
+                <td>1.1.15-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="76119">74.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXdamage
+                </td>
+                <td>1.1.4-17.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="87552">85.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXext
+                </td>
+                <td>1.3.4-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="165758">161.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>libXi-1.7.10-2.fc31.ppc64le</li>
+    
+    <li>libXinerama-1.1.4-4.fc31.ppc64le</li>
+    
+    <li>libXmu-1.1.3-2.fc31.ppc64le</li>
+    
+    <li>libXrandr-1.5.2-2.fc31.ppc64le</li>
+    
+    <li>libXxf86vm-1.1.4-12.fc31.ppc64le</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXfixes
+                </td>
+                <td>5.0.3-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="77247">75.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>libXcursor-1.1.15-6.fc31.ppc64le</li>
+    
+    <li>libXdamage-1.1.4-17.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXft
+                </td>
+                <td>2.3.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="191256">186.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXi
+                </td>
+                <td>1.7.10-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="205867">201.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXinerama
+                </td>
+                <td>1.1.4-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="72991">71.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXmu
+                </td>
+                <td>1.1.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="375032">366.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXpm
+                </td>
+                <td>3.5.12-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="210103">205.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXrandr
+                </td>
+                <td>1.5.2-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="84762">82.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXrender
+                </td>
+                <td>0.9.10-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="86107">84.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>libXcursor-1.1.15-6.fc31.ppc64le</li>
+    
+    <li>libXft-2.3.3-2.fc31.ppc64le</li>
+    
+    <li>libXrandr-1.5.2-2.fc31.ppc64le</li>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXt
+                </td>
+                <td>1.1.5-12.20190424gitba4ec9376.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="616887">602.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libXmu-1.1.3-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXxf86vm
+                </td>
+                <td>1.1.4-12.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="71368">69.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libacl
+                </td>
+                <td>2.2.53-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="131096">128.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.ppc64le</li>
+    
+    <li>sed-4.5-4.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libattr
+                </td>
+                <td>2.4.48-7.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="76570">74.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.ppc64le</li>
+    
+    <li>libacl-2.2.53-4.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libblkid
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="470793">459.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libmount-2.34-4.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap
+                </td>
+                <td>2.26-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="454634">444.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcom_err
+                </td>
+                <td>1.45.5-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="114825">112.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcroco
+                </td>
+                <td>0.6.13-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="492300">480.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdatrie
+                </td>
+                <td>0.2.9-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="103743">101.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libthai-0.1.28-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdb
+                </td>
+                <td>5.3.28-38.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2578792">2.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi
+                </td>
+                <td>3.1-23.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="93580">91.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.ppc64le</li>
+    
+    <li>p11-kit-0.23.20-1.fc31.ppc64le</li>
+    
+    <li>pygobject2-2.28.7-6.fc31.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libfontenc
+                </td>
+                <td>1.1.3-11.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="102085">99.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-font-utils-1:7.5-43.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcc
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="227072">221.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.ppc64le</li>
+    
+    <li>OpenEXR-libs-2.3.0-4.fc31.ppc64le</li>
+    
+    <li>exiv2-libs-0.27.2-1.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>glibc-2.30-10.fc31.ppc64le</li>
+    
+    <li>graphite2-1.3.13-1.fc31.ppc64le</li>
+    
+    <li>harfbuzz-2.6.1-2.fc31.ppc64le</li>
+    
+    <li>ilmbase-2.3.0-3.fc31.ppc64le</li>
+    
+    <li>libgexiv2-0.12.0-2.fc31.ppc64le</li>
+    
+    <li>libgfortran-9.2.1-1.fc31.ppc64le</li>
+    
+    <li>libquadmath-9.2.1-1.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>libstdc++-9.2.1-1.fc31.ppc64le</li>
+    
+    <li>libtiff-4.0.10-8.fc31.ppc64le</li>
+    
+    <li>libunwind-1.3.1-5.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>suitesparse-4.4.6-20.fc31.ppc64le</li>
+    
+    <li>systemd-libs-243.7-1.fc31.ppc64le</li>
+    
+    <li>tbb-2020.1-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcrypt
+                </td>
+                <td>1.8.5-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1257486">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-libs-243.7-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgexiv2
+                </td>
+                <td>0.12.0-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="248220">242.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgfortran
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2048104">2.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openblas-serial-0.3.9-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgomp
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="441958">431.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgpg-error
+                </td>
+                <td>1.36-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="884677">863.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgcrypt-1.8.5-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgs
+                </td>
+                <td>9.27-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="20303114">19.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgudev
+                </td>
+                <td>232-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="108349">105.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libidn
+                </td>
+                <td>1.35-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="820073">800.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libidn2
+                </td>
+                <td>2.3.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="346502">338.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libijs
+                </td>
+                <td>0.35-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="108432">105.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libjpeg-turbo
+                </td>
+                <td>2.0.2-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="711106">694.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.ppc64le</li>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>jasper-libs-2.0.14-9.fc31.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    <li>libmng-2.0.3-10.fc31.ppc64le</li>
+    
+    <li>libtiff-4.0.10-8.fc31.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmcpp
+                </td>
+                <td>2.7.2-24.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="219588">214.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mcpp-2.7.2-24.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmng
+                </td>
+                <td>2.0.3-10.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="702488">686.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmount
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="627733">613.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmypaint
+                </td>
+                <td>1.4.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="768491">750.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnsl2
+                </td>
+                <td>1.2.0-5.20180605git4a062cf.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="221202">216.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpaper
+                </td>
+                <td>1.1.24-25.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="202846">198.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpkgconf
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="153013">149.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-1.6.3-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpng
+                </td>
+                <td>2:1.6.37-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="361699">353.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>freetype-2.10.0-3.fc31.ppc64le</li>
+    
+    <li>gdk-pixbuf2-2.40.0-1.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libquadmath
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="437675">427.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgfortran-9.2.1-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    librsvg2
+                </td>
+                <td>2.46.4-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="4234622">4.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="330528">322.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.ppc64le</li>
+    
+    <li>glib2-2.62.5-1.fc31.ppc64le</li>
+    
+    <li>glibc-common-2.30-10.fc31.ppc64le</li>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    <li>libmount-2.34-4.fc31.ppc64le</li>
+    
+    <li>sed-4.5-4.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsepol
+                </td>
+                <td>2.9-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1108456">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-2.9-5.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsigsegv
+                </td>
+                <td>2.11-8.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="103242">100.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libstdc++
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2849681">2.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.ppc64le</li>
+    
+    <li>OpenEXR-libs-2.3.0-4.fc31.ppc64le</li>
+    
+    <li>exiv2-libs-0.27.2-1.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>graphite2-1.3.13-1.fc31.ppc64le</li>
+    
+    <li>harfbuzz-2.6.1-2.fc31.ppc64le</li>
+    
+    <li>ilmbase-2.3.0-3.fc31.ppc64le</li>
+    
+    <li>libgexiv2-0.12.0-2.fc31.ppc64le</li>
+    
+    <li>libtiff-4.0.10-8.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.ppc64le</li>
+    
+    <li>suitesparse-4.4.6-20.fc31.ppc64le</li>
+    
+    <li>tbb-2020.1-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtasn1
+                </td>
+                <td>4.14-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="234895">229.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.ppc64le</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libthai
+                </td>
+                <td>0.1.28-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="824084">804.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtiff
+                </td>
+                <td>4.0.10-8.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="672744">657.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.ppc64le</li>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtirpc
+                </td>
+                <td>1.2.5-1.rc2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="281022">274.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnsl2-1.2.0-5.20180605git4a062cf.fc31.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libunistring
+                </td>
+                <td>0.9.10-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2303627">2.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.ppc64le</li>
+    
+    <li>libidn2-2.3.0-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libunwind
+                </td>
+                <td>1.3.1-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="220928">215.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libuuid
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="70911">69.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libSM-1.2.3-4.fc31.ppc64le</li>
+    
+    <li>libblkid-2.34-4.fc31.ppc64le</li>
+    
+    <li>libmount-2.34-4.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libverto
+                </td>
+                <td>0.3.0-8.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="74316">72.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libwebp
+                </td>
+                <td>1.0.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1058519">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libwmf
+                </td>
+                <td>0.2.12-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="938606">916.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libwmf-lite
+                </td>
+                <td>0.2.12-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="233874">228.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcb
+                </td>
+                <td>1.13.1-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2206104">2.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>libX11-1.6.9-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt
+                </td>
+                <td>4.4.15-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="334699">326.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxml2
+                </td>
+                <td>2.9.10-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2326428">2.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libcroco-0.6.13-2.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>shared-mime-info-1.15-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lz4-libs
+                </td>
+                <td>1.9.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="206575">201.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-libs-243.7-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mcpp
+                </td>
+                <td>2.7.2-24.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="115298">112.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mpfr
+                </td>
+                <td>3.1.6-5.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="892465">871.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1018295">994.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-base
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>noarch</td>
+                <td data-order="281668">275.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-libs-6.1-12.20190803.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-libs
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2047696">2.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>aalib-libs-1.4.0-0.37.rc5.fc31.ppc64le</li>
+    
+    <li>bash-5.0.11-1.fc31.ppc64le</li>
+    
+    <li>ncurses-6.1-12.20190803.fc31.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    <li>readline-8.0-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nettle
+                </td>
+                <td>3.5.1-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2015401">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nspr
+                </td>
+                <td>4.25.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="496166">484.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-softokn-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-softokn-freebl-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-util-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nss
+                </td>
+                <td>3.50.0-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2563616">2.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nss-softokn
+                </td>
+                <td>3.50.0-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2455294">2.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-3.50.0-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nss-softokn-freebl
+                </td>
+                <td>3.50.0-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="691810">675.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-softokn-3.50.0-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nss-sysinit
+                </td>
+                <td>3.50.0-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="72764">71.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-3.50.0-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nss-util
+                </td>
+                <td>3.50.0-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="287996">281.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-softokn-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-softokn-freebl-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openblas
+                </td>
+                <td>0.3.9-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="58263">56.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openblas-serial-0.3.9-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openblas-serial
+                </td>
+                <td>0.3.9-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="14294984">13.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>suitesparse-4.4.6-20.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openjpeg2
+                </td>
+                <td>2.3.1-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="482910">471.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl-libs
+                </td>
+                <td>1:1.1.1d-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="5222546">5.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.ppc64le</li>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit
+                </td>
+                <td>0.23.20-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2100148">2.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>gnutls-3.6.11-1.fc31.ppc64le</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit-trust
+                </td>
+                <td>0.23.20-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="609993">595.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>gnutls-3.6.11-1.fc31.ppc64le</li>
+    
+    <li>nss-3.50.0-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pango
+                </td>
+                <td>1.44.7-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1182698">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>gtk2-2.24.32-6.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre
+                </td>
+                <td>8.44-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="631696">616.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.ppc64le</li>
+    
+    <li>grep-3.3-3.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre2
+                </td>
+                <td>10.34-7.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="850157">830.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-2.9-5.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pixman
+                </td>
+                <td>0.38.4-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="633415">618.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="104285">101.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-m4
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-pkg-config
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="464">464.0 B</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    poppler
+                </td>
+                <td>0.73.0-16.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="3923816">3.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>poppler-glib-0.73.0-16.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    poppler-data
+                </td>
+                <td>0.4.9-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="12058151">11.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>poppler-0.73.0-16.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    poppler-glib
+                </td>
+                <td>0.73.0-16.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="600836">586.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    pygobject2
+                </td>
+                <td>2.28.7-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1273995">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    pygtk2
+                </td>
+                <td>2.24.0-27.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="5681070">5.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-pip-wheel
+                </td>
+                <td>19.1.1-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1241316">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-setuptools-wheel
+                </td>
+                <td>41.6.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="360617">352.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python2
+                </td>
+                <td>2.7.17-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="131773">128.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pygobject2-2.28.7-6.fc31.ppc64le</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    <li>python2-cairo-1.18.1-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python2-cairo
+                </td>
+                <td>1.18.1-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="429457">419.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pygtk2-2.24.0-27.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python2-libs
+                </td>
+                <td>2.7.17-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="30119580">28.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python2-cairo-1.18.1-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3
+                </td>
+                <td>3.7.6-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="85765">83.8 kB</td>
+                <td>
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libs
+                </td>
+                <td>3.7.6-2.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="36405368">34.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    readline
+                </td>
+                <td>8.0-3.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="687251">671.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.ppc64le</li>
+    
+    <li>gdbm-1:1.18.1-1.fc31.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sed
+                </td>
+                <td>4.5-4.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="888598">867.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>krb5-libs-1.17-46.fc31.ppc64le</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>systemd-libs-243.7-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    setup
+                </td>
+                <td>2.13.6-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-8.fc31.noarch</li>
+    
+    <li>filesystem-3.12-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    shared-mime-info
+                </td>
+                <td>1.15-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2581384">2.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdk-pixbuf2-2.40.0-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    slang
+                </td>
+                <td>2.3.2-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1681866">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>aalib-libs-1.4.0-0.37.rc5.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sqlite-libs
+                </td>
+                <td>3.30.0-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1491860">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-softokn-3.50.0-2.fc31.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    suitesparse
+                </td>
+                <td>4.4.6-20.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="4848462">4.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-libs
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="2240462">2.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-libs-1:1.12.16-3.fc31.ppc64le</li>
+    
+    <li>libgudev-232-6.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tbb
+                </td>
+                <td>2020.1-1.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="786981">768.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>suitesparse-4.4.6-20.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata
+                </td>
+                <td>2019c-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-common-2.30-10.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-bookman-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1428518">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-c059-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1460348">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-d050000l-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="86572">84.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="5478">5.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-fonts-common
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="38217">37.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>urw-base35-bookman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-c059-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-d050000l-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-gothic-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-mono-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-roman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-sans-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-p052-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-standard-symbols-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-z003-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-gothic-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1216672">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-nimbus-mono-ps-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1099749">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-nimbus-roman-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1429675">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-nimbus-sans-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="2469317">2.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-p052-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1557171">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-standard-symbols-ps-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="45184">44.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-z003-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="400088">390.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.ppc64le</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    which
+                </td>
+                <td>2.21-15.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="128022">125.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xdg-utils-1.1.3-5.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xdg-utils
+                </td>
+                <td>1.1.3-5.fc31</td>
+                <td>noarch</td>
+                <td data-order="319995">312.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xorg-x11-font-utils
+                </td>
+                <td>1:7.5-43.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="496690">485.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>urw-base35-bookman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-c059-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-d050000l-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-gothic-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-mono-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-roman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-sans-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-p052-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-standard-symbols-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-z003-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xorg-x11-server-utils
+                </td>
+                <td>7.7-32.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="1275575">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>urw-base35-bookman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-c059-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-d050000l-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-gothic-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-mono-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-roman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-sans-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-p052-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-standard-symbols-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-z003-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz-libs
+                </td>
+                <td>5.2.4-6.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="355127">346.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>libxml2-2.9.10-3.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    <li>systemd-libs-243.7-1.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zlib
+                </td>
+                <td>1.2.11-20.fc31</td>
+                <td>ppc64le</td>
+                <td data-order="254719">248.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>OpenEXR-libs-2.3.0-4.fc31.ppc64le</li>
+    
+    <li>cairo-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.ppc64le</li>
+    
+    <li>cups-libs-1:2.2.12-6.fc31.ppc64le</li>
+    
+    <li>exiv2-libs-0.27.2-1.fc31.ppc64le</li>
+    
+    <li>freetype-2.10.0-3.fc31.ppc64le</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.ppc64le</li>
+    
+    <li>glib2-2.62.5-1.fc31.ppc64le</li>
+    
+    <li>libfontenc-1.1.3-11.fc31.ppc64le</li>
+    
+    <li>libgs-9.27-3.fc31.ppc64le</li>
+    
+    <li>libmng-2.0.3-10.fc31.ppc64le</li>
+    
+    <li>libpng-2:1.6.37-2.fc31.ppc64le</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.ppc64le</li>
+    
+    <li>libtiff-4.0.10-8.fc31.ppc64le</li>
+    
+    <li>libwmf-0.2.12-2.fc31.ppc64le</li>
+    
+    <li>libxml2-2.9.10-3.fc31.ppc64le</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.ppc64le</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.ppc64le</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.ppc64le</li>
+    
+    <li>sqlite-libs-3.30.0-1.fc31.ppc64le</li>
+    
+    <li>xorg-x11-font-utils-1:7.5-43.fc31.ppc64le</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--rhel-8-appstream-module-gimp-2.8--fedora-empty-base--repository-fedora-31--ppc64le.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

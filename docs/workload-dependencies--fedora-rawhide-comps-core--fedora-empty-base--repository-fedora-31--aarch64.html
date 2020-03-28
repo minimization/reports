@@ -1,0 +1,8870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-comps-core--repository-fedora-31.html">
+                    Comps group core for fedora-rawhide
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group core for fedora-rawhide in Empty from Fedora 31 aarch64
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group core for fedora-rawhide <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora 31</small>
+        <small class="text-muted"> for </small>
+        <small> aarch64</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--fedora-rawhide-comps-core--fedora-empty-base--repository-fedora-31--aarch64.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--fedora-rawhide-comps-core--fedora-empty-base--repository-fedora-31--aarch64.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    NetworkManager
+                </td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="6452974">6.2 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    NetworkManager-libnm
+                </td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="9261515">8.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    acl
+                </td>
+                <td>2.2.53-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="334772">326.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alternatives
+                </td>
+                <td>1.11-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="94582">92.4 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    audit
+                </td>
+                <td>3.0-0.15.20191104git1c2f876.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1095121">1.0 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    audit-libs
+                </td>
+                <td>3.0-0.15.20191104git1c2f876.fc31</td>
+                <td>aarch64</td>
+                <td data-order="334596">326.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    <li>libsemanage-2.9-3.fc31.aarch64</li>
+    
+    <li>openssh-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>pam-1.3.1-21.fc31.aarch64</li>
+    
+    <li>passwd-0.80-7.fc31.aarch64</li>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    <li>sudo-1.9.0-0.1.b1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    basesystem
+                </td>
+                <td>11-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    bash
+                </td>
+                <td>5.0.11-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="7601167">7.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    <li>dbus-common-1:1.12.16-3.fc31.noarch</li>
+    
+    <li>dnf-4.2.18-1.fc31.noarch</li>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>ebtables-legacy-2.0.10-37.fc31.aarch64</li>
+    
+    <li>elfutils-default-yama-scope-0.178-7.fc31.noarch</li>
+    
+    <li>filesystem-3.12-2.fc31.aarch64</li>
+    
+    <li>firewalld-0.7.3-1.fc31.noarch</li>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>glibc-common-2.30-10.fc31.aarch64</li>
+    
+    <li>hostname-3.20-9.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>ipset-7.5-1.fc31.aarch64</li>
+    
+    <li>iptables-1.8.3-7.fc31.aarch64</li>
+    
+    <li>iputils-20190515-5.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libblkid-2.34-4.fc31.aarch64</li>
+    
+    <li>libsepol-2.9-2.fc31.aarch64</li>
+    
+    <li>libutempter-1.1.6-17.fc31.aarch64</li>
+    
+    <li>man-db-2.8.4-5.fc31.aarch64</li>
+    
+    <li>nftables-1:0.9.1-3.fc31.aarch64</li>
+    
+    <li>openssh-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.aarch64</li>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>rootfiles-8.1-25.fc31.noarch</li>
+    
+    <li>selinux-policy-3.14.4-49.fc31.noarch</li>
+    
+    <li>selinux-policy-targeted-3.14.4-49.fc31.noarch</li>
+    
+    <li>sssd-client-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sudo-1.9.0-0.1.b1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    brotli
+                </td>
+                <td>1.0.7-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1513732">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bzip2-libs
+                </td>
+                <td>1.0.8-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="79368">77.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    <li>libarchive-3.4.2-1.fc31.aarch64</li>
+    
+    <li>libsemanage-2.9-3.fc31.aarch64</li>
+    
+    <li>libsolv-0.7.11-1.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    c-ares
+                </td>
+                <td>1.15.0-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="295146">288.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ca-certificates
+                </td>
+                <td>2020.2.40-1.1.fc31</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.aarch64</li>
+    
+    <li>python-pip-wheel-19.1.1-7.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    coreutils
+                </td>
+                <td>8.31-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="10759472">10.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>gzip-1.10-1.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libblkid-2.34-4.fc31.aarch64</li>
+    
+    <li>man-db-2.8.4-5.fc31.aarch64</li>
+    
+    <li>openssl-1:1.1.1d-2.fc31.aarch64</li>
+    
+    <li>plymouth-scripts-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>selinux-policy-targeted-3.14.4-49.fc31.noarch</li>
+    
+    <li>sudo-1.9.0-0.1.b1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils-common
+                </td>
+                <td>8.31-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="10348911">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cpio
+                </td>
+                <td>2.12-12.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1048371">1023.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>plymouth-scripts-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cracklib
+                </td>
+                <td>2.9.6-21.fc31</td>
+                <td>aarch64</td>
+                <td data-order="437943">427.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libpwquality-1.4.2-1.fc31.aarch64</li>
+    
+    <li>pam-1.3.1-21.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    crypto-policies
+                </td>
+                <td>20191128-2.gitcd267a5.fc31</td>
+                <td>noarch</td>
+                <td data-order="195446">190.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.aarch64</li>
+    
+    <li>openssh-clients-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>libssh-0.9.3-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cryptsetup-libs
+                </td>
+                <td>2.3.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1905711">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    curl
+                </td>
+                <td>7.66.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="732538">715.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>rpm-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cyrus-sasl-lib
+                </td>
+                <td>2.1.27-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="961626">939.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openldap-2.4.47-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus
+                </td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-broker
+                </td>
+                <td>21-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="515816">503.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-1:1.12.16-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-common
+                </td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="11481">11.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-libs
+                </td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="557344">544.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dbus-1.2.8-6.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    device-mapper
+                </td>
+                <td>1.02.165-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="463919">453.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>device-mapper-libs-1.02.165-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    device-mapper-libs
+                </td>
+                <td>1.02.165-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="535087">522.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.aarch64</li>
+    
+    <li>device-mapper-1.02.165-1.fc31.aarch64</li>
+    
+    <li>parted-3.2.153-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    dhcp-client
+                </td>
+                <td>12:4.4.1-19.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3438958">3.3 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dhcp-common
+                </td>
+                <td>12:4.4.1-19.fc31</td>
+                <td>noarch</td>
+                <td data-order="335250">327.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    diffutils
+                </td>
+                <td>3.7-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1680477">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    dnf
+                </td>
+                <td>4.2.18-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="1776779">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>yum-4.2.18-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dnf-data
+                </td>
+                <td>4.2.18-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="36289">35.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dnf-4.2.18-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    dnf-plugins-core
+                </td>
+                <td>4.0.13-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="16886">16.5 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dracut
+                </td>
+                <td>050-26.git20200316.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1196975">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-config-rescue-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>plymouth-scripts-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    dracut-config-rescue
+                </td>
+                <td>050-26.git20200316.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4794">4.7 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    e2fsprogs
+                </td>
+                <td>1.45.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4985658">4.8 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    e2fsprogs-libs
+                </td>
+                <td>1.45.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="585705">572.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>e2fsprogs-1.45.5-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ebtables-legacy
+                </td>
+                <td>2.0.10-37.fc31</td>
+                <td>aarch64</td>
+                <td data-order="421980">412.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>firewalld-0.7.3-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-default-yama-scope
+                </td>
+                <td>0.178-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libelf
+                </td>
+                <td>0.178-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="953451">931.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    <li>iproute-5.4.0-1.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libs
+                </td>
+                <td>0.178-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="766303">748.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    expat
+                </td>
+                <td>2.2.8-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="356315">348.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    <li>libcomps-0.1.14-1.fc31.aarch64</li>
+    
+    <li>libmetalink-0.1.3-9.fc31.aarch64</li>
+    
+    <li>polkit-libs-0.116-4.fc31.1.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-gpg-keys
+                </td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="103813">101.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-repos-31-1.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release
+                </td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    <li>fedora-repos-31-1.noarch</li>
+    
+    <li>setup-2.13.6-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release-common
+                </td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="14359">14.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-31-2.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-repos
+                </td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="8785">8.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    file-libs
+                </td>
+                <td>5.37-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="6970250">6.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    filesystem
+                </td>
+                <td>3.12-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-8.fc31.noarch</li>
+    
+    <li>bash-5.0.11-1.fc31.aarch64</li>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    findutils
+                </td>
+                <td>1:4.6.0-24.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1882697">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>plymouth-scripts-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fipscheck
+                </td>
+                <td>1.5.0-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="153067">149.5 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fipscheck-lib
+                </td>
+                <td>1.5.0-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="70321">68.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fipscheck-1.5.0-7.fc31.aarch64</li>
+    
+    <li>openssh-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-clients-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    firewalld
+                </td>
+                <td>0.7.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="1983027">1.9 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    firewalld-filesystem
+                </td>
+                <td>0.7.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="239">239.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>firewalld-0.7.3-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fuse-libs
+                </td>
+                <td>2.9.9-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="422490">412.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>e2fsprogs-1.45.5-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gawk
+                </td>
+                <td>5.0.1-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3841894">3.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>selinux-policy-3.14.4-49.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdbm-libs
+                </td>
+                <td>1:1.18.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="189616">185.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>man-db-2.8.4-5.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glib2
+                </td>
+                <td>2.62.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="13450336">12.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>gobject-introspection-1.62.0-1.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>libmodulemd1-1.8.16-1.fc31.aarch64</li>
+    
+    <li>librepo-1.11.1-1.fc31.aarch64</li>
+    
+    <li>libuser-0.62-21.fc31.aarch64</li>
+    
+    <li>passwd-0.80-7.fc31.aarch64</li>
+    
+    <li>polkit-libs-0.116-4.fc31.1.aarch64</li>
+    
+    <li>python3-dbus-1.2.8-6.fc31.aarch64</li>
+    
+    <li>python3-gobject-base-3.34.0-3.fc31.aarch64</li>
+    
+    <li>python3-hawkey-0.43.1-5.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    glibc
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="28878565">27.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>acl-2.2.53-4.fc31.aarch64</li>
+    
+    <li>alternatives-1.11-5.fc31.aarch64</li>
+    
+    <li>audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    <li>audit-libs-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    <li>bash-5.0.11-1.fc31.aarch64</li>
+    
+    <li>brotli-1.0.7-6.fc31.aarch64</li>
+    
+    <li>bzip2-libs-1.0.8-1.fc31.aarch64</li>
+    
+    <li>c-ares-1.15.0-4.fc31.aarch64</li>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>cpio-2.12-12.fc31.aarch64</li>
+    
+    <li>cracklib-2.9.6-21.fc31.aarch64</li>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.aarch64</li>
+    
+    <li>curl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>cyrus-sasl-lib-2.1.27-2.fc31.aarch64</li>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    <li>dbus-libs-1:1.12.16-3.fc31.aarch64</li>
+    
+    <li>device-mapper-1.02.165-1.fc31.aarch64</li>
+    
+    <li>device-mapper-libs-1.02.165-1.fc31.aarch64</li>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    <li>diffutils-3.7-3.fc31.aarch64</li>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>e2fsprogs-1.45.5-1.fc31.aarch64</li>
+    
+    <li>e2fsprogs-libs-1.45.5-1.fc31.aarch64</li>
+    
+    <li>ebtables-legacy-2.0.10-37.fc31.aarch64</li>
+    
+    <li>elfutils-libelf-0.178-7.fc31.aarch64</li>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    <li>expat-2.2.8-1.fc31.aarch64</li>
+    
+    <li>file-libs-5.37-8.fc31.aarch64</li>
+    
+    <li>findutils-1:4.6.0-24.fc31.aarch64</li>
+    
+    <li>fipscheck-1.5.0-7.fc31.aarch64</li>
+    
+    <li>fipscheck-lib-1.5.0-7.fc31.aarch64</li>
+    
+    <li>fuse-libs-2.9.9-8.fc31.aarch64</li>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    <li>gdbm-libs-1:1.18.1-1.fc31.aarch64</li>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>glibc-all-langpacks-2.30-10.fc31.aarch64</li>
+    
+    <li>glibc-common-2.30-10.fc31.aarch64</li>
+    
+    <li>gmp-1:6.1.2-10.fc31.aarch64</li>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    <li>gnutls-3.6.11-1.fc31.aarch64</li>
+    
+    <li>gobject-introspection-1.62.0-1.fc31.aarch64</li>
+    
+    <li>gpgme-1.13.1-3.fc31.aarch64</li>
+    
+    <li>grep-3.3-3.fc31.aarch64</li>
+    
+    <li>groff-base-1.22.3-20.fc31.aarch64</li>
+    
+    <li>gzip-1.10-1.fc31.aarch64</li>
+    
+    <li>hostname-3.20-9.fc31.aarch64</li>
+    
+    <li>ima-evm-utils-1.2.1-2.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>ipcalc-0.3.0-1.fc31.aarch64</li>
+    
+    <li>iproute-5.4.0-1.fc31.aarch64</li>
+    
+    <li>ipset-7.5-1.fc31.aarch64</li>
+    
+    <li>ipset-libs-7.5-1.fc31.aarch64</li>
+    
+    <li>iptables-1.8.3-7.fc31.aarch64</li>
+    
+    <li>iptables-libs-1.8.3-7.fc31.aarch64</li>
+    
+    <li>iputils-20190515-5.fc31.aarch64</li>
+    
+    <li>jansson-2.12-4.fc31.aarch64</li>
+    
+    <li>json-c-0.13.1-8.fc31.aarch64</li>
+    
+    <li>kbd-2.0.4-14.fc31.aarch64</li>
+    
+    <li>keyutils-libs-1.6-3.fc31.aarch64</li>
+    
+    <li>kmod-26-4.fc31.aarch64</li>
+    
+    <li>kmod-libs-26-4.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>less-551-2.fc31.aarch64</li>
+    
+    <li>libacl-2.2.53-4.fc31.aarch64</li>
+    
+    <li>libarchive-3.4.2-1.fc31.aarch64</li>
+    
+    <li>libargon2-20171227-3.fc31.aarch64</li>
+    
+    <li>libassuan-2.5.3-2.fc31.aarch64</li>
+    
+    <li>libattr-2.4.48-7.fc31.aarch64</li>
+    
+    <li>libbasicobjects-0.1.1-43.fc31.aarch64</li>
+    
+    <li>libblkid-2.34-4.fc31.aarch64</li>
+    
+    <li>libcap-2.26-6.fc31.aarch64</li>
+    
+    <li>libcap-ng-0.7.10-1.fc31.aarch64</li>
+    
+    <li>libcollection-0.7.0-43.fc31.aarch64</li>
+    
+    <li>libcom_err-1.45.5-1.fc31.aarch64</li>
+    
+    <li>libcomps-0.1.14-1.fc31.aarch64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>libdb-5.3.28-38.fc31.aarch64</li>
+    
+    <li>libdb-utils-5.3.28-38.fc31.aarch64</li>
+    
+    <li>libdhash-0.5.0-43.fc31.aarch64</li>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>libedit-3.1-30.20191211cvs.fc31.aarch64</li>
+    
+    <li>libfdisk-2.34-4.fc31.aarch64</li>
+    
+    <li>libffi-3.1-23.fc31.aarch64</li>
+    
+    <li>libgcrypt-1.8.5-1.fc31.aarch64</li>
+    
+    <li>libgomp-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libgpg-error-1.36-2.fc31.aarch64</li>
+    
+    <li>libidn2-2.3.0-1.fc31.aarch64</li>
+    
+    <li>libini_config-1.3.1-43.fc31.aarch64</li>
+    
+    <li>libkcapi-1.1.5-1.fc31.aarch64</li>
+    
+    <li>libkcapi-hmaccalc-1.1.5-1.fc31.aarch64</li>
+    
+    <li>libksba-1.3.5-10.fc31.aarch64</li>
+    
+    <li>libldb-2.0.9-1.fc31.aarch64</li>
+    
+    <li>libmetalink-0.1.3-9.fc31.aarch64</li>
+    
+    <li>libmnl-1.0.4-10.fc31.aarch64</li>
+    
+    <li>libmodulemd1-1.8.16-1.fc31.aarch64</li>
+    
+    <li>libmount-2.34-4.fc31.aarch64</li>
+    
+    <li>libndp-1.7-4.fc31.aarch64</li>
+    
+    <li>libnetfilter_conntrack-1.0.7-3.fc31.aarch64</li>
+    
+    <li>libnfnetlink-1.0.1-16.fc31.aarch64</li>
+    
+    <li>libnftnl-1.1.3-2.fc31.aarch64</li>
+    
+    <li>libnghttp2-1.40.0-1.fc31.aarch64</li>
+    
+    <li>libnl3-3.5.0-1.fc31.aarch64</li>
+    
+    <li>libnsl2-1.2.0-5.20180605git4a062cf.fc31.aarch64</li>
+    
+    <li>libpath_utils-0.2.1-43.fc31.aarch64</li>
+    
+    <li>libpcap-14:1.9.1-2.fc31.aarch64</li>
+    
+    <li>libpipeline-1.5.1-3.fc31.aarch64</li>
+    
+    <li>libpsl-0.21.0-2.fc31.aarch64</li>
+    
+    <li>libpwquality-1.4.2-1.fc31.aarch64</li>
+    
+    <li>libref_array-0.1.5-43.fc31.aarch64</li>
+    
+    <li>librepo-1.11.1-1.fc31.aarch64</li>
+    
+    <li>libseccomp-2.4.2-2.fc31.aarch64</li>
+    
+    <li>libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>libselinux-utils-2.9-5.fc31.aarch64</li>
+    
+    <li>libsemanage-2.9-3.fc31.aarch64</li>
+    
+    <li>libsepol-2.9-2.fc31.aarch64</li>
+    
+    <li>libsigsegv-2.11-8.fc31.aarch64</li>
+    
+    <li>libsmartcols-2.34-4.fc31.aarch64</li>
+    
+    <li>libsolv-0.7.11-1.fc31.aarch64</li>
+    
+    <li>libss-1.45.5-1.fc31.aarch64</li>
+    
+    <li>libssh-0.9.3-1.fc31.aarch64</li>
+    
+    <li>libsss_certmap-2.2.3-13.fc31.aarch64</li>
+    
+    <li>libsss_idmap-2.2.3-13.fc31.aarch64</li>
+    
+    <li>libsss_nss_idmap-2.2.3-13.fc31.aarch64</li>
+    
+    <li>libstdc++-9.2.1-1.fc31.aarch64</li>
+    
+    <li>libtalloc-2.3.0-1.fc31.aarch64</li>
+    
+    <li>libtasn1-4.14-2.fc31.aarch64</li>
+    
+    <li>libtdb-1.4.2-1.fc31.aarch64</li>
+    
+    <li>libtevent-0.10.1-1.fc31.aarch64</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.aarch64</li>
+    
+    <li>libunistring-0.9.10-6.fc31.aarch64</li>
+    
+    <li>libusbx-1.0.22-4.fc31.aarch64</li>
+    
+    <li>libuser-0.62-21.fc31.aarch64</li>
+    
+    <li>libutempter-1.1.6-17.fc31.aarch64</li>
+    
+    <li>libuuid-2.34-4.fc31.aarch64</li>
+    
+    <li>libverto-0.3.0-8.fc31.aarch64</li>
+    
+    <li>libxcrypt-4.4.15-1.fc31.aarch64</li>
+    
+    <li>libxml2-2.9.10-3.fc31.aarch64</li>
+    
+    <li>libyaml-0.2.2-2.fc31.aarch64</li>
+    
+    <li>libzstd-1.4.4-1.fc31.aarch64</li>
+    
+    <li>lmdb-libs-0.9.23-3.fc31.aarch64</li>
+    
+    <li>lua-libs-5.3.5-6.fc31.aarch64</li>
+    
+    <li>lz4-libs-1.9.1-1.fc31.aarch64</li>
+    
+    <li>man-db-2.8.4-5.fc31.aarch64</li>
+    
+    <li>mpfr-3.1.6-5.fc31.aarch64</li>
+    
+    <li>ncurses-6.1-12.20190803.fc31.aarch64</li>
+    
+    <li>ncurses-libs-6.1-12.20190803.fc31.aarch64</li>
+    
+    <li>nettle-3.5.1-3.fc31.aarch64</li>
+    
+    <li>nftables-1:0.9.1-3.fc31.aarch64</li>
+    
+    <li>npth-1.6-3.fc31.aarch64</li>
+    
+    <li>openldap-2.4.47-3.fc31.aarch64</li>
+    
+    <li>openssh-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-clients-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssl-1:1.1.1d-2.fc31.aarch64</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.aarch64</li>
+    
+    <li>p11-kit-0.23.20-1.fc31.aarch64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.aarch64</li>
+    
+    <li>pam-1.3.1-21.fc31.aarch64</li>
+    
+    <li>parted-3.2.153-1.fc31.aarch64</li>
+    
+    <li>passwd-0.80-7.fc31.aarch64</li>
+    
+    <li>pcre-8.44-1.fc31.aarch64</li>
+    
+    <li>pcre2-10.34-7.fc31.aarch64</li>
+    
+    <li>plymouth-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    <li>plymouth-core-libs-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>polkit-libs-0.116-4.fc31.1.aarch64</li>
+    
+    <li>popt-1.16-18.fc31.aarch64</li>
+    
+    <li>procps-ng-3.3.15-6.fc31.aarch64</li>
+    
+    <li>psmisc-23.3-2.fc31.aarch64</li>
+    
+    <li>python3-3.7.6-2.fc31.aarch64</li>
+    
+    <li>python3-dbus-1.2.8-6.fc31.aarch64</li>
+    
+    <li>python3-gobject-base-3.34.0-3.fc31.aarch64</li>
+    
+    <li>python3-gpg-1.13.1-3.fc31.aarch64</li>
+    
+    <li>python3-hawkey-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libcomps-0.1.14-1.fc31.aarch64</li>
+    
+    <li>python3-libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>python3-libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>qrencode-libs-4.0.2-4.fc31.aarch64</li>
+    
+    <li>readline-8.0-3.fc31.aarch64</li>
+    
+    <li>rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>sed-4.5-4.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    <li>sqlite-libs-3.30.0-1.fc31.aarch64</li>
+    
+    <li>sssd-client-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sudo-1.9.0-0.1.b1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-pam-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    <li>tss2-1331-2.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    <li>vim-minimal-2:8.2.348-1.fc31.aarch64</li>
+    
+    <li>xz-5.2.4-6.fc31.aarch64</li>
+    
+    <li>xz-libs-5.2.4-6.fc31.aarch64</li>
+    
+    <li>zchunk-libs-1.1.5-1.fc31.aarch64</li>
+    
+    <li>zlib-1.2.11-20.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-all-langpacks
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="217990208">207.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-common
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3063946">2.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.aarch64</li>
+    
+    <li>glibc-all-langpacks-2.30-10.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp
+                </td>
+                <td>1:6.1.2-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1448564">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    <li>gnutls-3.6.11-1.fc31.aarch64</li>
+    
+    <li>mpfr-3.1.6-5.fc31.aarch64</li>
+    
+    <li>nettle-3.5.1-3.fc31.aarch64</li>
+    
+    <li>nftables-1:0.9.1-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gnupg2
+                </td>
+                <td>2.2.18-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="10458202">10.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gpgme-1.13.1-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gnutls
+                </td>
+                <td>3.6.11-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3690615">3.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gobject-introspection
+                </td>
+                <td>1.62.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1045964">1021.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-gobject-base-3.34.0-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gpgme
+                </td>
+                <td>1.13.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="702783">686.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>librepo-1.11.1-1.fc31.aarch64</li>
+    
+    <li>python3-gpg-1.13.1-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    grep
+                </td>
+                <td>3.3-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="871258">850.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>man-db-2.8.4-5.fc31.aarch64</li>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    <li>xz-5.2.4-6.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    groff-base
+                </td>
+                <td>1.22.3-20.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4905339">4.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>man-db-2.8.4-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gzip
+                </td>
+                <td>1.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="412802">403.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cracklib-2.9.6-21.fc31.aarch64</li>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>man-db-2.8.4-5.fc31.aarch64</li>
+    
+    <li>plymouth-scripts-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    hostname
+                </td>
+                <td>3.20-9.fc31</td>
+                <td>aarch64</td>
+                <td data-order="92899">90.7 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ima-evm-utils
+                </td>
+                <td>1.2.1-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="188671">184.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    initscripts
+                </td>
+                <td>10.02-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1310826">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ipcalc
+                </td>
+                <td>0.3.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="106520">104.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    iproute
+                </td>
+                <td>5.4.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2440844">2.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ipset
+                </td>
+                <td>7.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="124899">122.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>firewalld-0.7.3-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ipset-libs
+                </td>
+                <td>7.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="264778">258.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ipset-7.5-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    iptables
+                </td>
+                <td>1.8.3-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="8743390">8.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>firewalld-0.7.3-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    iptables-libs
+                </td>
+                <td>1.8.3-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="278240">271.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iptables-1.8.3-7.fc31.aarch64</li>
+    
+    <li>nftables-1:0.9.1-3.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    iputils
+                </td>
+                <td>20190515-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="652957">637.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    jansson
+                </td>
+                <td>2.12-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="110830">108.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nftables-1:0.9.1-3.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    json-c
+                </td>
+                <td>0.13.1-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="112490">109.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.aarch64</li>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    kbd
+                </td>
+                <td>2.0.4-14.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2709077">2.6 MB</td>
+                <td>
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kbd-legacy
+                </td>
+                <td>2.0.4-14.fc31</td>
+                <td>noarch</td>
+                <td data-order="511139">499.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>kbd-2.0.4-14.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kbd-misc
+                </td>
+                <td>2.0.4-14.fc31</td>
+                <td>noarch</td>
+                <td data-order="2536273">2.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>kbd-2.0.4-14.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    keyutils-libs
+                </td>
+                <td>1.6-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="105311">102.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ima-evm-utils-1.2.1-2.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kmod
+                </td>
+                <td>26-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="479840">468.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kmod-libs
+                </td>
+                <td>26-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="223920">218.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    krb5-libs
+                </td>
+                <td>1.17-46.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2463205">2.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    <li>cyrus-sasl-lib-2.1.27-2.fc31.aarch64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>libssh-0.9.3-1.fc31.aarch64</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.aarch64</li>
+    
+    <li>openssh-clients-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>sssd-client-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    less
+                </td>
+                <td>551-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="529261">516.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>man-db-2.8.4-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libacl
+                </td>
+                <td>2.2.53-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="76424">74.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>acl-2.2.53-4.fc31.aarch64</li>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>libarchive-3.4.2-1.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>sed-4.5-4.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    <li>vim-minimal-2:8.2.348-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libarchive
+                </td>
+                <td>3.4.2-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="864313">844.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>rpm-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libargon2
+                </td>
+                <td>20171227-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="95159">92.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libassuan
+                </td>
+                <td>2.5.3-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="242904">237.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    <li>gpgme-1.13.1-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libattr
+                </td>
+                <td>2.4.48-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="73458">71.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>libacl-2.2.53-4.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libbasicobjects
+                </td>
+                <td>0.1.1-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="112830">110.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libini_config-1.3.1-43.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libblkid
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="405945">396.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.aarch64</li>
+    
+    <li>e2fsprogs-1.45.5-1.fc31.aarch64</li>
+    
+    <li>libfdisk-2.34-4.fc31.aarch64</li>
+    
+    <li>libmount-2.34-4.fc31.aarch64</li>
+    
+    <li>parted-3.2.153-1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap
+                </td>
+                <td>2.26-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="448666">438.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>iproute-5.4.0-1.fc31.aarch64</li>
+    
+    <li>iputils-20190515-5.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap-ng
+                </td>
+                <td>0.7.10-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="98742">96.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>audit-libs-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcollection
+                </td>
+                <td>0.7.0-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="130390">127.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libini_config-1.3.1-43.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcom_err
+                </td>
+                <td>1.45.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="114537">111.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cyrus-sasl-lib-2.1.27-2.fc31.aarch64</li>
+    
+    <li>e2fsprogs-1.45.5-1.fc31.aarch64</li>
+    
+    <li>e2fsprogs-libs-1.45.5-1.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>libss-1.45.5-1.fc31.aarch64</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>sssd-client-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcomps
+                </td>
+                <td>0.1.14-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="331389">323.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libcomps-0.1.14-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcurl
+                </td>
+                <td>7.66.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="723360">706.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>curl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>librepo-1.11.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdb
+                </td>
+                <td>5.3.28-38.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2028344">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cyrus-sasl-lib-2.1.27-2.fc31.aarch64</li>
+    
+    <li>iproute-5.4.0-1.fc31.aarch64</li>
+    
+    <li>libdb-utils-5.3.28-38.fc31.aarch64</li>
+    
+    <li>pam-1.3.1-21.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdb-utils
+                </td>
+                <td>5.3.28-38.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1119679">1.1 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdhash
+                </td>
+                <td>0.5.0-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="114742">112.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdnf
+                </td>
+                <td>0.43.1-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1888627">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-hawkey-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libedit
+                </td>
+                <td>3.1-30.20191211cvs.fc31</td>
+                <td>aarch64</td>
+                <td data-order="285779">279.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssh-clients-8.1p1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libfdisk
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="504467">492.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi
+                </td>
+                <td>3.1-23.fc31</td>
+                <td>aarch64</td>
+                <td data-order="91428">89.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>gobject-introspection-1.62.0-1.fc31.aarch64</li>
+    
+    <li>p11-kit-0.23.20-1.fc31.aarch64</li>
+    
+    <li>python3-gobject-base-3.34.0-3.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcc
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="226992">221.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>glibc-2.30-10.fc31.aarch64</li>
+    
+    <li>groff-base-1.22.3-20.fc31.aarch64</li>
+    
+    <li>kmod-26-4.fc31.aarch64</li>
+    
+    <li>kmod-libs-26-4.fc31.aarch64</li>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>libmodulemd1-1.8.16-1.fc31.aarch64</li>
+    
+    <li>libnl3-3.5.0-1.fc31.aarch64</li>
+    
+    <li>librepo-1.11.1-1.fc31.aarch64</li>
+    
+    <li>libstdc++-9.2.1-1.fc31.aarch64</li>
+    
+    <li>python3-hawkey-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-pam-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcrypt
+                </td>
+                <td>1.8.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="957774">935.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgomp
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="376246">367.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgpg-error
+                </td>
+                <td>1.36-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="845133">825.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    <li>gpgme-1.13.1-3.fc31.aarch64</li>
+    
+    <li>libassuan-2.5.3-2.fc31.aarch64</li>
+    
+    <li>libgcrypt-1.8.5-1.fc31.aarch64</li>
+    
+    <li>libksba-1.3.5-10.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libidn2
+                </td>
+                <td>2.3.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="264262">258.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.aarch64</li>
+    
+    <li>iputils-20190515-5.fc31.aarch64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>libpsl-0.21.0-2.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libini_config
+                </td>
+                <td>1.3.1-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="205934">201.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libkcapi
+                </td>
+                <td>1.1.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="112755">110.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libkcapi-hmaccalc-1.1.5-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libkcapi-hmaccalc
+                </td>
+                <td>1.1.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="72565">70.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libksba
+                </td>
+                <td>1.3.5-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="421807">411.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libldb
+                </td>
+                <td>2.0.9-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1304352">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmetalink
+                </td>
+                <td>0.1.3-9.fc31</td>
+                <td>aarch64</td>
+                <td data-order="103168">100.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>curl-7.66.0-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmnl
+                </td>
+                <td>1.0.4-10.fc31</td>
+                <td>aarch64</td>
+                <td data-order="105919">103.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iproute-5.4.0-1.fc31.aarch64</li>
+    
+    <li>ipset-libs-7.5-1.fc31.aarch64</li>
+    
+    <li>libnetfilter_conntrack-1.0.7-3.fc31.aarch64</li>
+    
+    <li>libnftnl-1.1.3-2.fc31.aarch64</li>
+    
+    <li>nftables-1:0.9.1-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmodulemd1
+                </td>
+                <td>1.8.16-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="661543">646.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-dnf-4.2.18-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmount
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="431373">421.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libndp
+                </td>
+                <td>1.7-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="188572">184.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnetfilter_conntrack
+                </td>
+                <td>1.0.7-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="216678">211.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iptables-1.8.3-7.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnfnetlink
+                </td>
+                <td>1.0.1-16.fc31</td>
+                <td>aarch64</td>
+                <td data-order="95659">93.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnetfilter_conntrack-1.0.7-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnftnl
+                </td>
+                <td>1.1.3-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="304280">297.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nftables-1:0.9.1-3.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnghttp2
+                </td>
+                <td>1.40.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="205140">200.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnl3
+                </td>
+                <td>3.5.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1588264">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnsl2
+                </td>
+                <td>1.2.0-5.20180605git4a062cf.fc31</td>
+                <td>aarch64</td>
+                <td data-order="183546">179.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-21.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpath_utils
+                </td>
+                <td>0.2.1-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="113750">111.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libini_config-1.3.1-43.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpcap
+                </td>
+                <td>14:1.9.1-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="408714">399.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iptables-libs-1.8.3-7.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpipeline
+                </td>
+                <td>1.5.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="142421">139.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>man-db-2.8.4-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpsl
+                </td>
+                <td>0.21.0-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="73932">72.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpwquality
+                </td>
+                <td>1.4.2-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="606133">591.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-21.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libref_array
+                </td>
+                <td>0.1.5-43.fc31</td>
+                <td>aarch64</td>
+                <td data-order="113478">110.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libini_config-1.3.1-43.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    librepo
+                </td>
+                <td>1.11.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="233312">227.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libreport-filesystem
+                </td>
+                <td>2.12.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dnf-data-4.2.18-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libseccomp
+                </td>
+                <td>2.4.2-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="375835">367.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="250808">244.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    <li>device-mapper-libs-1.02.165-1.fc31.aarch64</li>
+    
+    <li>findutils-1:4.6.0-24.fc31.aarch64</li>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>glibc-common-2.30-10.fc31.aarch64</li>
+    
+    <li>iproute-5.4.0-1.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libmount-2.34-4.fc31.aarch64</li>
+    
+    <li>libselinux-utils-2.9-5.fc31.aarch64</li>
+    
+    <li>libsemanage-2.9-3.fc31.aarch64</li>
+    
+    <li>libuser-0.62-21.fc31.aarch64</li>
+    
+    <li>openssh-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-clients-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>pam-1.3.1-21.fc31.aarch64</li>
+    
+    <li>parted-3.2.153-1.fc31.aarch64</li>
+    
+    <li>passwd-0.80-7.fc31.aarch64</li>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>psmisc-23.3-2.fc31.aarch64</li>
+    
+    <li>python3-libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>sed-4.5-4.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sudo-1.9.0-0.1.b1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    <li>vim-minimal-2:8.2.348-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux-utils
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1125300">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsemanage
+                </td>
+                <td>2.9-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="393370">384.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsepol
+                </td>
+                <td>2.9-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="968104">945.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>libselinux-utils-2.9-5.fc31.aarch64</li>
+    
+    <li>libsemanage-2.9-3.fc31.aarch64</li>
+    
+    <li>parted-3.2.153-1.fc31.aarch64</li>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsigsegv
+                </td>
+                <td>2.11-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="100762">98.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsmartcols
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="298163">291.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsolv
+                </td>
+                <td>0.7.11-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="878643">858.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-hawkey-0.43.1-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libss
+                </td>
+                <td>1.45.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="114337">111.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>e2fsprogs-1.45.5-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libssh
+                </td>
+                <td>0.9.3-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="528219">515.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libssh-config
+                </td>
+                <td>0.9.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="357">357.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libssh-0.9.3-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsss_certmap
+                </td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="129714">126.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsss_idmap
+                </td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="112406">109.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>sssd-client-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsss_nss_idmap
+                </td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="113518">110.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>sssd-client-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libstdc++
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2193137">2.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>groff-base-1.22.3-20.fc31.aarch64</li>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-hawkey-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtalloc
+                </td>
+                <td>2.3.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="81048">79.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libldb-2.0.9-1.fc31.aarch64</li>
+    
+    <li>libsss_certmap-2.2.3-13.fc31.aarch64</li>
+    
+    <li>libtevent-0.10.1-1.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtasn1
+                </td>
+                <td>4.14-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="233791">228.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.aarch64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtdb
+                </td>
+                <td>1.4.2-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="160624">156.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libldb-2.0.9-1.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtevent
+                </td>
+                <td>0.10.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="162280">158.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libldb-2.0.9-1.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtirpc
+                </td>
+                <td>1.2.5-1.rc2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="215974">210.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnsl2-1.2.0-5.20180605git4a062cf.fc31.aarch64</li>
+    
+    <li>pam-1.3.1-21.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libunistring
+                </td>
+                <td>0.9.10-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1681075">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.aarch64</li>
+    
+    <li>libidn2-2.3.0-1.fc31.aarch64</li>
+    
+    <li>libpsl-0.21.0-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libusbx
+                </td>
+                <td>1.0.22-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="199401">194.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libuser
+                </td>
+                <td>0.62-21.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2654654">2.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>passwd-0.80-7.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libutempter
+                </td>
+                <td>1.1.6-17.fc31</td>
+                <td>aarch64</td>
+                <td data-order="166549">162.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libuuid
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="71759">70.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.aarch64</li>
+    
+    <li>e2fsprogs-1.45.5-1.fc31.aarch64</li>
+    
+    <li>libblkid-2.34-4.fc31.aarch64</li>
+    
+    <li>libfdisk-2.34-4.fc31.aarch64</li>
+    
+    <li>libmount-2.34-4.fc31.aarch64</li>
+    
+    <li>parted-3.2.153-1.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libverto
+                </td>
+                <td>0.3.0-8.fc31</td>
+                <td>aarch64</td>
+                <td data-order="77908">76.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt
+                </td>
+                <td>4.4.15-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="269651">263.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cyrus-sasl-lib-2.1.27-2.fc31.aarch64</li>
+    
+    <li>libldb-2.0.9-1.fc31.aarch64</li>
+    
+    <li>libtalloc-2.3.0-1.fc31.aarch64</li>
+    
+    <li>libtdb-1.4.2-1.fc31.aarch64</li>
+    
+    <li>libtevent-0.10.1-1.fc31.aarch64</li>
+    
+    <li>libuser-0.62-21.fc31.aarch64</li>
+    
+    <li>openssh-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-clients-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>pam-1.3.1-21.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxml2
+                </td>
+                <td>2.9.10-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1800108">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libarchive-3.4.2-1.fc31.aarch64</li>
+    
+    <li>libcomps-0.1.14-1.fc31.aarch64</li>
+    
+    <li>librepo-1.11.1-1.fc31.aarch64</li>
+    
+    <li>libsolv-0.7.11-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libyaml
+                </td>
+                <td>0.2.2-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="151587">148.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libmodulemd1-1.8.16-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libzstd
+                </td>
+                <td>1.4.4-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="685437">669.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libarchive-3.4.2-1.fc31.aarch64</li>
+    
+    <li>libsolv-0.7.11-1.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>zchunk-libs-1.1.5-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lmdb-libs
+                </td>
+                <td>0.9.23-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="169779">165.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libldb-2.0.9-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lua-libs
+                </td>
+                <td>5.3.5-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="351440">343.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lz4-libs
+                </td>
+                <td>1.9.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="154751">151.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libarchive-3.4.2-1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    man-db
+                </td>
+                <td>2.8.4-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2697790">2.6 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mpfr
+                </td>
+                <td>3.1.6-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="617257">602.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    ncurses
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>aarch64</td>
+                <td data-order="947183">925.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-base
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>noarch</td>
+                <td data-order="281668">275.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-libs-6.1-12.20190803.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-libs
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1482664">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>bash-5.0.11-1.fc31.aarch64</li>
+    
+    <li>less-551-2.fc31.aarch64</li>
+    
+    <li>libedit-3.1-30.20191211cvs.fc31.aarch64</li>
+    
+    <li>ncurses-6.1-12.20190803.fc31.aarch64</li>
+    
+    <li>parted-3.2.153-1.fc31.aarch64</li>
+    
+    <li>procps-ng-3.3.15-6.fc31.aarch64</li>
+    
+    <li>psmisc-23.3-2.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>readline-8.0-3.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    <li>vim-minimal-2:8.2.348-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nettle
+                </td>
+                <td>3.5.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1249441">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nftables
+                </td>
+                <td>1:0.9.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1017684">993.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>firewalld-0.7.3-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    npth
+                </td>
+                <td>1.6-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="100701">98.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openldap
+                </td>
+                <td>2.4.47-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1261534">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>libldb-2.0.9-1.fc31.aarch64</li>
+    
+    <li>libuser-0.62-21.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sudo-1.9.0-0.1.b1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssh
+                </td>
+                <td>8.1p1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2140403">2.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssh-clients-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    openssh-clients
+                </td>
+                <td>8.1p1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3235384">3.1 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    openssh-server
+                </td>
+                <td>8.1p1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1254820">1.2 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl
+                </td>
+                <td>1:1.1.1d-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1205807">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>tss2-1331-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl-libs
+                </td>
+                <td>1:1.1.1d-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4501394">4.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.aarch64</li>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.aarch64</li>
+    
+    <li>curl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>fipscheck-1.5.0-7.fc31.aarch64</li>
+    
+    <li>ima-evm-utils-1.2.1-2.fc31.aarch64</li>
+    
+    <li>iputils-20190515-5.fc31.aarch64</li>
+    
+    <li>kmod-26-4.fc31.aarch64</li>
+    
+    <li>kmod-libs-26-4.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>libarchive-3.4.2-1.fc31.aarch64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>librepo-1.11.1-1.fc31.aarch64</li>
+    
+    <li>libssh-0.9.3-1.fc31.aarch64</li>
+    
+    <li>libsss_certmap-2.2.3-13.fc31.aarch64</li>
+    
+    <li>openldap-2.4.47-3.fc31.aarch64</li>
+    
+    <li>openssh-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-clients-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssl-1:1.1.1d-2.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>tss2-1331-2.fc31.aarch64</li>
+    
+    <li>zchunk-libs-1.1.5-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit
+                </td>
+                <td>0.23.20-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1771388">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>gnutls-3.6.11-1.fc31.aarch64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>openssh-8.1p1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit-trust
+                </td>
+                <td>0.23.20-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="544089">531.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>gnutls-3.6.11-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pam
+                </td>
+                <td>1.3.1-21.fc31</td>
+                <td>aarch64</td>
+                <td data-order="5504436">5.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>kbd-2.0.4-14.fc31.aarch64</li>
+    
+    <li>libpwquality-1.4.2-1.fc31.aarch64</li>
+    
+    <li>libuser-0.62-21.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>passwd-0.80-7.fc31.aarch64</li>
+    
+    <li>sssd-client-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sudo-1.9.0-0.1.b1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-pam-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    parted
+                </td>
+                <td>3.2.153-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2701978">2.6 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    passwd
+                </td>
+                <td>0.80-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="485677">474.3 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre
+                </td>
+                <td>8.44-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="567168">553.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>grep-3.3-3.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre2
+                </td>
+                <td>10.34-7.fc31</td>
+                <td>aarch64</td>
+                <td data-order="720045">703.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>libselinux-utils-2.9-5.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    plymouth
+                </td>
+                <td>0.9.4-11.20191022git32c097c.fc31</td>
+                <td>aarch64</td>
+                <td data-order="482491">471.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-scripts-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    plymouth-core-libs
+                </td>
+                <td>0.9.4-11.20191022git32c097c.fc31</td>
+                <td>aarch64</td>
+                <td data-order="398736">389.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    plymouth-scripts
+                </td>
+                <td>0.9.4-11.20191022git32c097c.fc31</td>
+                <td>aarch64</td>
+                <td data-order="22539">22.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>plymouth-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    policycoreutils
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1300578">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>selinux-policy-3.14.4-49.fc31.noarch</li>
+    
+    <li>selinux-policy-targeted-3.14.4-49.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    polkit-libs
+                </td>
+                <td>0.116-4.fc31.1</td>
+                <td>aarch64</td>
+                <td data-order="268460">262.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    popt
+                </td>
+                <td>1.16-18.fc31</td>
+                <td>aarch64</td>
+                <td data-order="151654">148.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>libuser-0.62-21.fc31.aarch64</li>
+    
+    <li>passwd-0.80-7.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    procps-ng
+                </td>
+                <td>3.3.15-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1784732">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    psmisc
+                </td>
+                <td>23.3-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="908073">886.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iproute-5.4.0-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    publicsuffix-list-dafsa
+                </td>
+                <td>20190417-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="64992">63.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libpsl-0.21.0-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-pip-wheel
+                </td>
+                <td>19.1.1-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1241316">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-setuptools-wheel
+                </td>
+                <td>41.6.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="360617">352.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3
+                </td>
+                <td>3.7.6-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="85285">83.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dateutil-1:2.8.0-3.fc31.noarch</li>
+    
+    <li>python3-dbus-1.2.8-6.fc31.aarch64</li>
+    
+    <li>python3-decorator-4.4.0-2.fc31.noarch</li>
+    
+    <li>python3-distro-1.4.0-2.fc31.noarch</li>
+    
+    <li>python3-dnf-4.2.18-1.fc31.noarch</li>
+    
+    <li>python3-dnf-plugins-core-4.0.13-1.fc31.noarch</li>
+    
+    <li>python3-firewall-0.7.3-1.fc31.noarch</li>
+    
+    <li>python3-gobject-base-3.34.0-3.fc31.aarch64</li>
+    
+    <li>python3-gpg-1.13.1-3.fc31.aarch64</li>
+    
+    <li>python3-hawkey-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libcomps-0.1.14-1.fc31.aarch64</li>
+    
+    <li>python3-libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>python3-setuptools-41.6.0-1.fc31.noarch</li>
+    
+    <li>python3-six-1.12.0-2.fc31.noarch</li>
+    
+    <li>python3-slip-0.6.4-16.fc31.noarch</li>
+    
+    <li>python3-slip-dbus-0.6.4-16.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-dateutil
+                </td>
+                <td>1:2.8.0-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="776046">757.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dnf-plugins-core-4.0.13-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-dbus
+                </td>
+                <td>1.2.8-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="583990">570.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-firewall-0.7.3-1.fc31.noarch</li>
+    
+    <li>python3-slip-dbus-0.6.4-16.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>dnf-4.2.18-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-decorator
+                </td>
+                <td>4.4.0-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="60968">59.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-firewall-0.7.3-1.fc31.noarch</li>
+    
+    <li>python3-slip-dbus-0.6.4-16.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-distro
+                </td>
+                <td>1.4.0-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="153468">149.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dnf-plugins-core-4.0.13-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-dnf
+                </td>
+                <td>4.2.18-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="1826357">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dnf-4.2.18-1.fc31.noarch</li>
+    
+    <li>python3-dnf-plugins-core-4.0.13-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-dnf-plugins-core
+                </td>
+                <td>4.0.13-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="646904">631.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dnf-plugins-core-4.0.13-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-firewall
+                </td>
+                <td>0.7.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="1810137">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>firewalld-0.7.3-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-gobject-base
+                </td>
+                <td>3.34.0-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1325700">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-firewall-0.7.3-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-gpg
+                </td>
+                <td>1.13.1-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1492153">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dnf-4.2.18-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-hawkey
+                </td>
+                <td>0.43.1-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="316124">308.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dnf-4.2.18-1.fc31.noarch</li>
+    
+    <li>python3-dnf-plugins-core-4.0.13-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libcomps
+                </td>
+                <td>0.1.14-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="205595">200.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dnf-4.2.18-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libdnf
+                </td>
+                <td>0.43.1-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3874181">3.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dnf-4.2.18-1.fc31.noarch</li>
+    
+    <li>python3-hawkey-0.43.1-5.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libs
+                </td>
+                <td>3.7.6-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="35173896">33.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-3.7.6-2.fc31.aarch64</li>
+    
+    <li>python3-gpg-1.13.1-3.fc31.aarch64</li>
+    
+    <li>python3-hawkey-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libcomps-0.1.14-1.fc31.aarch64</li>
+    
+    <li>python3-libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libselinux
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="750175">732.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-slip-0.6.4-16.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-rpm
+                </td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="467534">456.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dnf-4.2.18-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-setuptools
+                </td>
+                <td>41.6.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="3037838">2.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-distro-1.4.0-2.fc31.noarch</li>
+    
+    <li>python3-setuptools-41.6.0-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>python3-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-six
+                </td>
+                <td>1.12.0-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="103441">101.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-dateutil-1:2.8.0-3.fc31.noarch</li>
+    
+    <li>python3-slip-dbus-0.6.4-16.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-slip
+                </td>
+                <td>0.6.4-16.fc31</td>
+                <td>noarch</td>
+                <td data-order="61304">59.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-slip-dbus-0.6.4-16.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-slip-dbus
+                </td>
+                <td>0.6.4-16.fc31</td>
+                <td>noarch</td>
+                <td data-order="71233">69.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-firewall-0.7.3-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    qrencode-libs
+                </td>
+                <td>4.0.2-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="185129">180.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    readline
+                </td>
+                <td>8.0-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="586267">572.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>gawk-5.0.1-5.fc31.aarch64</li>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    <li>nftables-1:0.9.1-3.fc31.aarch64</li>
+    
+    <li>parted-3.2.153-1.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    rootfiles
+                </td>
+                <td>8.1-25.fc31</td>
+                <td>noarch</td>
+                <td data-order="599">599.0 B</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    rpm
+                </td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="3189005">3.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    rpm-build-libs
+                </td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="204088">199.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    rpm-libs
+                </td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="820752">801.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>libsolv-0.7.11-1.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    rpm-plugin-selinux
+                </td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="69152">67.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>selinux-policy-3.14.4-49.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    rpm-sign-libs
+                </td>
+                <td>4.15.1-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="69432">67.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sed
+                </td>
+                <td>4.5-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="810158">791.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.aarch64</li>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    selinux-policy
+                </td>
+                <td>3.14.4-49.fc31</td>
+                <td>noarch</td>
+                <td data-order="25207">24.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>selinux-policy-targeted-3.14.4-49.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    selinux-policy-targeted
+                </td>
+                <td>3.14.4-49.fc31</td>
+                <td>noarch</td>
+                <td data-order="53089924">50.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    setup
+                </td>
+                <td>2.13.6-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-8.fc31.noarch</li>
+    
+    <li>filesystem-3.12-2.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    shadow-utils
+                </td>
+                <td>2:4.6-17.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4589696">4.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>libutempter-1.1.6-17.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sqlite-libs
+                </td>
+                <td>3.30.0-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1393596">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    <li>libdnf-0.43.1-5.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sssd-client
+                </td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="477427">466.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    sssd-common
+                </td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="6211557">5.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    sssd-kcm
+                </td>
+                <td>2.2.3-13.fc31</td>
+                <td>aarch64</td>
+                <td data-order="482129">470.8 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    sudo
+                </td>
+                <td>1.9.0-0.1.b1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="4470626">4.3 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    systemd
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="15593816">14.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    <li>dbus-common-1:1.12.16-3.fc31.noarch</li>
+    
+    <li>device-mapper-1.02.165-1.fc31.aarch64</li>
+    
+    <li>dhcp-client-12:4.4.1-19.fc31.aarch64</li>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>firewalld-0.7.3-1.fc31.noarch</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>libkcapi-1.1.5-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    <li>systemd-pam-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-udev-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>elfutils-default-yama-scope-0.178-7.fc31.noarch</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-libs
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1781294">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.aarch64</li>
+    
+    <li>dbus-broker-21-6.fc31.aarch64</li>
+    
+    <li>dbus-libs-1:1.12.16-3.fc31.aarch64</li>
+    
+    <li>device-mapper-libs-1.02.165-1.fc31.aarch64</li>
+    
+    <li>libusbx-1.0.22-4.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>plymouth-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    <li>plymouth-core-libs-0.9.4-11.20191022git32c097c.fc31.aarch64</li>
+    
+    <li>polkit-libs-0.116-4.fc31.1.aarch64</li>
+    
+    <li>procps-ng-3.3.15-6.fc31.aarch64</li>
+    
+    <li>sssd-common-2.2.3-13.fc31.aarch64</li>
+    
+    <li>sssd-kcm-2.2.3-13.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-pam
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="339224">331.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-rpm-macros
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="5043">4.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-udev
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="9629192">9.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tss2
+                </td>
+                <td>1331-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="8686089">8.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ima-evm-utils-1.2.1-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata
+                </td>
+                <td>2019c-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-common-2.30-10.fc31.aarch64</li>
+    
+    <li>python3-dateutil-1:2.8.0-3.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    util-linux
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>aarch64</td>
+                <td data-order="16225179">15.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>device-mapper-1.02.165-1.fc31.aarch64</li>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    <li>initscripts-10.02-2.fc31.aarch64</li>
+    
+    <li>openssh-8.1p1-1.fc31.aarch64</li>
+    
+    <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    vim-minimal
+                </td>
+                <td>2:8.2.348-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1404403">1.3 MB</td>
+                <td>
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>sudo-1.9.0-0.1.b1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz
+                </td>
+                <td>5.2.4-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="544408">531.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dracut-050-26.git20200316.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz-libs
+                </td>
+                <td>5.2.4-6.fc31</td>
+                <td>aarch64</td>
+                <td data-order="241695">236.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    <li>kmod-26-4.fc31.aarch64</li>
+    
+    <li>kmod-libs-26-4.fc31.aarch64</li>
+    
+    <li>libarchive-3.4.2-1.fc31.aarch64</li>
+    
+    <li>libsolv-0.7.11-1.fc31.aarch64</li>
+    
+    <li>libxml2-2.9.10-3.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.aarch64</li>
+    
+    <li>xz-5.2.4-6.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    yum
+                </td>
+                <td>4.2.18-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="20410">19.9 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zchunk-libs
+                </td>
+                <td>1.1.5-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="139082">135.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>librepo-1.11.1-1.fc31.aarch64</li>
+    
+    <li>libsolv-0.7.11-1.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zlib
+                </td>
+                <td>1.2.11-20.fc31</td>
+                <td>aarch64</td>
+                <td data-order="251183">245.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cracklib-2.9.6-21.fc31.aarch64</li>
+    
+    <li>curl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>elfutils-libelf-0.178-7.fc31.aarch64</li>
+    
+    <li>elfutils-libs-0.178-7.fc31.aarch64</li>
+    
+    <li>file-libs-5.37-8.fc31.aarch64</li>
+    
+    <li>glib2-2.62.5-1.fc31.aarch64</li>
+    
+    <li>gnupg2-2.2.18-2.fc31.aarch64</li>
+    
+    <li>kmod-26-4.fc31.aarch64</li>
+    
+    <li>kmod-libs-26-4.fc31.aarch64</li>
+    
+    <li>libarchive-3.4.2-1.fc31.aarch64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.aarch64</li>
+    
+    <li>libsolv-0.7.11-1.fc31.aarch64</li>
+    
+    <li>libssh-0.9.3-1.fc31.aarch64</li>
+    
+    <li>libxml2-2.9.10-3.fc31.aarch64</li>
+    
+    <li>man-db-2.8.4-5.fc31.aarch64</li>
+    
+    <li>openssh-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-clients-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssh-server-8.1p1-1.fc31.aarch64</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.aarch64</li>
+    
+    <li>python3-libcomps-0.1.14-1.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    
+    <li>python3-rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-build-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
+    
+    <li>rpm-sign-libs-4.15.1-1.fc31.aarch64</li>
+    
+    <li>sqlite-libs-3.30.0-1.fc31.aarch64</li>
+    
+    <li>sudo-1.9.0-0.1.b1.fc31.aarch64</li>
+    
+    <li>systemd-243.7-1.fc31.aarch64</li>
+    
+    <li>util-linux-2.34-4.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-comps-core--fedora-empty-base--repository-fedora-31--aarch64.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

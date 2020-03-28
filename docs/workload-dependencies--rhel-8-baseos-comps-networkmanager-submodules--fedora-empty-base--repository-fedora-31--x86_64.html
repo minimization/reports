@@ -1,0 +1,4689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--rhel-8-baseos-comps-networkmanager-submodules--repository-fedora-31.html">
+                    Comps group networkmanager-submodules for rhel-8-baseos
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group networkmanager-submodules for rhel-8-baseos in Empty from Fedora 31 x86_64
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group networkmanager-submodules for rhel-8-baseos <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora 31</small>
+        <small class="text-muted"> for </small>
+        <small> x86_64</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--rhel-8-baseos-comps-networkmanager-submodules--fedora-empty-base--repository-fedora-31--x86_64.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--rhel-8-baseos-comps-networkmanager-submodules--fedora-empty-base--repository-fedora-31--x86_64.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ModemManager
+                </td>
+                <td>1.10.6-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="3589440">3.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-wwan-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ModemManager-glib
+                </td>
+                <td>1.10.6-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1206448">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    <li>NetworkManager-bluetooth-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-wwan-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    NetworkManager
+                </td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="6439614">6.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-bluetooth-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-wifi-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-wwan-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    NetworkManager-bluetooth
+                </td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="100192">97.8 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    NetworkManager-libnm
+                </td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="9213211">8.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    NetworkManager-wifi
+                </td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="233864">228.4 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    NetworkManager-wwan
+                </td>
+                <td>1:1.20.10-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="132752">129.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-bluetooth-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    acl
+                </td>
+                <td>2.2.53-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="217116">212.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alternatives
+                </td>
+                <td>1.11-5.fc31</td>
+                <td>x86_64</td>
+                <td data-order="64350">62.8 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    audit-libs
+                </td>
+                <td>3.0-0.15.20191104git1c2f876.fc31</td>
+                <td>x86_64</td>
+                <td data-order="294748">287.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    <li>libsemanage-2.9-3.fc31.x86_64</li>
+    
+    <li>pam-1.3.1-21.fc31.x86_64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    basesystem
+                </td>
+                <td>11-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bash
+                </td>
+                <td>5.0.11-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="7569377">7.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>bluez-5.54-1.fc31.x86_64</li>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    <li>dbus-common-1:1.12.16-3.fc31.noarch</li>
+    
+    <li>elfutils-default-yama-scope-0.178-7.fc31.noarch</li>
+    
+    <li>filesystem-3.12-2.fc31.x86_64</li>
+    
+    <li>glib2-2.62.5-1.fc31.x86_64</li>
+    
+    <li>glibc-common-2.30-10.fc31.x86_64</li>
+    
+    <li>iptables-1.8.3-7.fc31.x86_64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    <li>libblkid-2.34-4.fc31.x86_64</li>
+    
+    <li>libsepol-2.9-2.fc31.x86_64</li>
+    
+    <li>libutempter-1.1.6-17.fc31.x86_64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    <li>wpa_supplicant-1:2.9-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bluez
+                </td>
+                <td>5.54-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="5154230">4.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-bluetooth-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bluez-libs
+                </td>
+                <td>5.54-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="174518">170.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-bluetooth-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    brotli
+                </td>
+                <td>1.0.7-6.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1534364">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bzip2-libs
+                </td>
+                <td>1.0.8-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="83480">81.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-7.fc31.x86_64</li>
+    
+    <li>libsemanage-2.9-3.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ca-certificates
+                </td>
+                <td>2020.2.40-1.1.fc31</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.x86_64</li>
+    
+    <li>python-pip-wheel-19.1.1-7.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils
+                </td>
+                <td>8.31-6.fc31</td>
+                <td>x86_64</td>
+                <td data-order="7654928">7.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>gzip-1.10-1.fc31.x86_64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    <li>libblkid-2.34-4.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils-common
+                </td>
+                <td>8.31-6.fc31</td>
+                <td>x86_64</td>
+                <td data-order="10348911">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cracklib
+                </td>
+                <td>2.9.6-21.fc31</td>
+                <td>x86_64</td>
+                <td data-order="255359">249.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libpwquality-1.4.2-1.fc31.x86_64</li>
+    
+    <li>pam-1.3.1-21.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    crypto-policies
+                </td>
+                <td>20191128-2.gitcd267a5.fc31</td>
+                <td>noarch</td>
+                <td data-order="195446">190.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.x86_64</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>libssh-0.9.3-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cryptsetup-libs
+                </td>
+                <td>2.3.0-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1926151">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cyrus-sasl-lib
+                </td>
+                <td>2.1.27-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="740346">723.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openldap-2.4.47-3.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus
+                </td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>x86_64</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>bluez-5.54-1.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-broker
+                </td>
+                <td>21-6.fc31</td>
+                <td>x86_64</td>
+                <td data-order="433360">423.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-1:1.12.16-3.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-common
+                </td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>noarch</td>
+                <td data-order="11481">11.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-libs
+                </td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>x86_64</td>
+                <td data-order="390968">381.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>bluez-5.54-1.fc31.x86_64</li>
+    
+    <li>wpa_supplicant-1:2.9-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    device-mapper
+                </td>
+                <td>1.02.165-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="358679">350.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>device-mapper-libs-1.02.165-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    device-mapper-libs
+                </td>
+                <td>1.02.165-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="427559">417.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.x86_64</li>
+    
+    <li>device-mapper-1.02.165-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-default-yama-scope
+                </td>
+                <td>0.178-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1810">1.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-7.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libelf
+                </td>
+                <td>0.178-7.fc31</td>
+                <td>x86_64</td>
+                <td data-order="924683">903.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-7.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    elfutils-libs
+                </td>
+                <td>0.178-7.fc31</td>
+                <td>x86_64</td>
+                <td data-order="720951">704.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    expat
+                </td>
+                <td>2.2.8-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="268027">261.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    <li>polkit-libs-0.116-4.fc31.1.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-gpg-keys
+                </td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="103813">101.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-repos-31-1.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release
+                </td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    <li>fedora-repos-31-1.noarch</li>
+    
+    <li>setup-2.13.6-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release-common
+                </td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="14359">14.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-31-2.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-repos
+                </td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="8785">8.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    filesystem
+                </td>
+                <td>3.12-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-8.fc31.noarch</li>
+    
+    <li>bash-5.0.11-1.fc31.x86_64</li>
+    
+    <li>gawk-5.0.1-5.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gawk
+                </td>
+                <td>5.0.1-5.fc31</td>
+                <td>x86_64</td>
+                <td data-order="3002926">2.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdbm-libs
+                </td>
+                <td>1:1.18.1-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="123344">120.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glib2
+                </td>
+                <td>2.62.5-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="12913368">12.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    <li>ModemManager-glib-1.10.6-2.fc31.x86_64</li>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-bluetooth-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-wifi-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-wwan-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>bluez-5.54-1.fc31.x86_64</li>
+    
+    <li>libgudev-232-6.fc31.x86_64</li>
+    
+    <li>libmbim-1.20.0-1.fc31.x86_64</li>
+    
+    <li>libmbim-utils-1.20.0-1.fc31.x86_64</li>
+    
+    <li>libqmi-1.24.0-1.fc31.x86_64</li>
+    
+    <li>libqmi-utils-1.24.0-1.fc31.x86_64</li>
+    
+    <li>polkit-libs-0.116-4.fc31.1.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>x86_64</td>
+                <td data-order="17281629">16.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    <li>ModemManager-glib-1.10.6-2.fc31.x86_64</li>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-bluetooth-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-wifi-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-wwan-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>acl-2.2.53-4.fc31.x86_64</li>
+    
+    <li>alternatives-1.11-5.fc31.x86_64</li>
+    
+    <li>audit-libs-3.0-0.15.20191104git1c2f876.fc31.x86_64</li>
+    
+    <li>bash-5.0.11-1.fc31.x86_64</li>
+    
+    <li>bluez-5.54-1.fc31.x86_64</li>
+    
+    <li>bluez-libs-5.54-1.fc31.x86_64</li>
+    
+    <li>brotli-1.0.7-6.fc31.x86_64</li>
+    
+    <li>bzip2-libs-1.0.8-1.fc31.x86_64</li>
+    
+    <li>coreutils-8.31-6.fc31.x86_64</li>
+    
+    <li>cracklib-2.9.6-21.fc31.x86_64</li>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.x86_64</li>
+    
+    <li>cyrus-sasl-lib-2.1.27-2.fc31.x86_64</li>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    <li>dbus-libs-1:1.12.16-3.fc31.x86_64</li>
+    
+    <li>device-mapper-1.02.165-1.fc31.x86_64</li>
+    
+    <li>device-mapper-libs-1.02.165-1.fc31.x86_64</li>
+    
+    <li>elfutils-libelf-0.178-7.fc31.x86_64</li>
+    
+    <li>elfutils-libs-0.178-7.fc31.x86_64</li>
+    
+    <li>expat-2.2.8-1.fc31.x86_64</li>
+    
+    <li>gawk-5.0.1-5.fc31.x86_64</li>
+    
+    <li>gdbm-libs-1:1.18.1-1.fc31.x86_64</li>
+    
+    <li>glib2-2.62.5-1.fc31.x86_64</li>
+    
+    <li>glibc-all-langpacks-2.30-10.fc31.x86_64</li>
+    
+    <li>glibc-common-2.30-10.fc31.x86_64</li>
+    
+    <li>gmp-1:6.1.2-10.fc31.x86_64</li>
+    
+    <li>gnutls-3.6.11-1.fc31.x86_64</li>
+    
+    <li>grep-3.3-3.fc31.x86_64</li>
+    
+    <li>gzip-1.10-1.fc31.x86_64</li>
+    
+    <li>iptables-1.8.3-7.fc31.x86_64</li>
+    
+    <li>iptables-libs-1.8.3-7.fc31.x86_64</li>
+    
+    <li>json-c-0.13.1-8.fc31.x86_64</li>
+    
+    <li>keyutils-libs-1.6-3.fc31.x86_64</li>
+    
+    <li>kmod-libs-26-4.fc31.x86_64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    <li>libacl-2.2.53-4.fc31.x86_64</li>
+    
+    <li>libargon2-20171227-3.fc31.x86_64</li>
+    
+    <li>libattr-2.4.48-7.fc31.x86_64</li>
+    
+    <li>libblkid-2.34-4.fc31.x86_64</li>
+    
+    <li>libcap-2.26-6.fc31.x86_64</li>
+    
+    <li>libcap-ng-0.7.10-1.fc31.x86_64</li>
+    
+    <li>libcom_err-1.45.5-1.fc31.x86_64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    <li>libdb-5.3.28-38.fc31.x86_64</li>
+    
+    <li>libfdisk-2.34-4.fc31.x86_64</li>
+    
+    <li>libffi-3.1-23.fc31.x86_64</li>
+    
+    <li>libgcrypt-1.8.5-1.fc31.x86_64</li>
+    
+    <li>libgpg-error-1.36-2.fc31.x86_64</li>
+    
+    <li>libgudev-232-6.fc31.x86_64</li>
+    
+    <li>libidn2-2.3.0-1.fc31.x86_64</li>
+    
+    <li>libmbim-1.20.0-1.fc31.x86_64</li>
+    
+    <li>libmbim-utils-1.20.0-1.fc31.x86_64</li>
+    
+    <li>libmnl-1.0.4-10.fc31.x86_64</li>
+    
+    <li>libmount-2.34-4.fc31.x86_64</li>
+    
+    <li>libndp-1.7-4.fc31.x86_64</li>
+    
+    <li>libnetfilter_conntrack-1.0.7-3.fc31.x86_64</li>
+    
+    <li>libnfnetlink-1.0.1-16.fc31.x86_64</li>
+    
+    <li>libnghttp2-1.40.0-1.fc31.x86_64</li>
+    
+    <li>libnl3-3.5.0-1.fc31.x86_64</li>
+    
+    <li>libnsl2-1.2.0-5.20180605git4a062cf.fc31.x86_64</li>
+    
+    <li>libpcap-14:1.9.1-2.fc31.x86_64</li>
+    
+    <li>libpsl-0.21.0-2.fc31.x86_64</li>
+    
+    <li>libpwquality-1.4.2-1.fc31.x86_64</li>
+    
+    <li>libqmi-1.24.0-1.fc31.x86_64</li>
+    
+    <li>libqmi-utils-1.24.0-1.fc31.x86_64</li>
+    
+    <li>libseccomp-2.4.2-2.fc31.x86_64</li>
+    
+    <li>libselinux-2.9-5.fc31.x86_64</li>
+    
+    <li>libsemanage-2.9-3.fc31.x86_64</li>
+    
+    <li>libsepol-2.9-2.fc31.x86_64</li>
+    
+    <li>libsigsegv-2.11-8.fc31.x86_64</li>
+    
+    <li>libsmartcols-2.34-4.fc31.x86_64</li>
+    
+    <li>libssh-0.9.3-1.fc31.x86_64</li>
+    
+    <li>libtasn1-4.14-2.fc31.x86_64</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.x86_64</li>
+    
+    <li>libunistring-0.9.10-6.fc31.x86_64</li>
+    
+    <li>libutempter-1.1.6-17.fc31.x86_64</li>
+    
+    <li>libuuid-2.34-4.fc31.x86_64</li>
+    
+    <li>libverto-0.3.0-8.fc31.x86_64</li>
+    
+    <li>libxcrypt-4.4.15-1.fc31.x86_64</li>
+    
+    <li>lz4-libs-1.9.1-1.fc31.x86_64</li>
+    
+    <li>mpfr-3.1.6-5.fc31.x86_64</li>
+    
+    <li>ncurses-6.1-12.20190803.fc31.x86_64</li>
+    
+    <li>ncurses-libs-6.1-12.20190803.fc31.x86_64</li>
+    
+    <li>nettle-3.5.1-3.fc31.x86_64</li>
+    
+    <li>openldap-2.4.47-3.fc31.x86_64</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.x86_64</li>
+    
+    <li>p11-kit-0.23.20-1.fc31.x86_64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.x86_64</li>
+    
+    <li>pam-1.3.1-21.fc31.x86_64</li>
+    
+    <li>pcre-8.44-1.fc31.x86_64</li>
+    
+    <li>pcre2-10.34-7.fc31.x86_64</li>
+    
+    <li>polkit-libs-0.116-4.fc31.1.x86_64</li>
+    
+    <li>python3-3.7.6-2.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    <li>qrencode-libs-4.0.2-4.fc31.x86_64</li>
+    
+    <li>readline-8.0-3.fc31.x86_64</li>
+    
+    <li>sed-4.5-4.fc31.x86_64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.x86_64</li>
+    
+    <li>sqlite-libs-3.30.0-1.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-pam-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    <li>wpa_supplicant-1:2.9-2.fc31.x86_64</li>
+    
+    <li>xz-libs-5.2.4-6.fc31.x86_64</li>
+    
+    <li>zlib-1.2.11-20.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-all-langpacks
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>x86_64</td>
+                <td data-order="217990208">207.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.x86_64</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-common
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>x86_64</td>
+                <td data-order="2769565">2.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.x86_64</li>
+    
+    <li>glibc-all-langpacks-2.30-10.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp
+                </td>
+                <td>1:6.1.2-10.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1502516">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.x86_64</li>
+    
+    <li>gawk-5.0.1-5.fc31.x86_64</li>
+    
+    <li>gnutls-3.6.11-1.fc31.x86_64</li>
+    
+    <li>mpfr-3.1.6-5.fc31.x86_64</li>
+    
+    <li>nettle-3.5.1-3.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gnutls
+                </td>
+                <td>3.6.11-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="3565887">3.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    grep
+                </td>
+                <td>3.3-3.fc31</td>
+                <td>x86_64</td>
+                <td data-order="805874">787.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gzip
+                </td>
+                <td>1.10-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="369282">360.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cracklib-2.9.6-21.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    iptables
+                </td>
+                <td>1.8.3-7.fc31</td>
+                <td>x86_64</td>
+                <td data-order="2281902">2.2 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    iptables-libs
+                </td>
+                <td>1.8.3-7.fc31</td>
+                <td>x86_64</td>
+                <td data-order="159600">155.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iptables-1.8.3-7.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    json-c
+                </td>
+                <td>0.13.1-8.fc31</td>
+                <td>x86_64</td>
+                <td data-order="106938">104.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    keyutils-libs
+                </td>
+                <td>1.6-3.fc31</td>
+                <td>x86_64</td>
+                <td data-order="55631">54.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    kmod-libs
+                </td>
+                <td>26-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="202160">197.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    krb5-libs
+                </td>
+                <td>1.17-46.fc31</td>
+                <td>x86_64</td>
+                <td data-order="2260333">2.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cyrus-sasl-lib-2.1.27-2.fc31.x86_64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    <li>libssh-0.9.3-1.fc31.x86_64</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libacl
+                </td>
+                <td>2.2.53-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="48624">47.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>acl-2.2.53-4.fc31.x86_64</li>
+    
+    <li>coreutils-8.31-6.fc31.x86_64</li>
+    
+    <li>sed-4.5-4.fc31.x86_64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libargon2
+                </td>
+                <td>20171227-3.fc31</td>
+                <td>x86_64</td>
+                <td data-order="56175">54.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libattr
+                </td>
+                <td>2.4.48-7.fc31</td>
+                <td>x86_64</td>
+                <td data-order="30186">29.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.x86_64</li>
+    
+    <li>libacl-2.2.53-4.fc31.x86_64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libblkid
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="360569">352.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.x86_64</li>
+    
+    <li>libfdisk-2.34-4.fc31.x86_64</li>
+    
+    <li>libmount-2.34-4.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap
+                </td>
+                <td>2.26-6.fc31</td>
+                <td>x86_64</td>
+                <td data-order="150562">147.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap-ng
+                </td>
+                <td>0.7.10-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="55702">54.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>audit-libs-3.0-0.15.20191104git1c2f876.fc31.x86_64</li>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcom_err
+                </td>
+                <td>1.45.5-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="69345">67.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cyrus-sasl-lib-2.1.27-2.fc31.x86_64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcurl
+                </td>
+                <td>7.66.0-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="615352">600.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdb
+                </td>
+                <td>5.3.28-38.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1962032">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cyrus-sasl-lib-2.1.27-2.fc31.x86_64</li>
+    
+    <li>pam-1.3.1-21.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libfdisk
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="500507">488.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi
+                </td>
+                <td>3.1-23.fc31</td>
+                <td>x86_64</td>
+                <td data-order="58548">57.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.x86_64</li>
+    
+    <li>p11-kit-0.23.20-1.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcc
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="194880">190.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-bluetooth-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-wifi-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-wwan-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    <li>glibc-2.30-10.fc31.x86_64</li>
+    
+    <li>kmod-libs-26-4.fc31.x86_64</li>
+    
+    <li>libnl3-3.5.0-1.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-pam-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcrypt
+                </td>
+                <td>1.8.5-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1285422">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgpg-error
+                </td>
+                <td>1.36-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="774893">756.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgcrypt-1.8.5-1.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgudev
+                </td>
+                <td>232-6.fc31</td>
+                <td>x86_64</td>
+                <td data-order="88573">86.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    <li>libmbim-1.20.0-1.fc31.x86_64</li>
+    
+    <li>libqmi-utils-1.24.0-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libidn2
+                </td>
+                <td>2.3.0-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="260422">254.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.x86_64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    <li>libpsl-0.21.0-2.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmbim
+                </td>
+                <td>1.20.0-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="379328">370.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    <li>libmbim-utils-1.20.0-1.fc31.x86_64</li>
+    
+    <li>libqmi-1.24.0-1.fc31.x86_64</li>
+    
+    <li>libqmi-utils-1.24.0-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmbim-utils
+                </td>
+                <td>1.20.0-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="132127">129.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmnl
+                </td>
+                <td>1.0.4-10.fc31</td>
+                <td>x86_64</td>
+                <td data-order="56951">55.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnetfilter_conntrack-1.0.7-3.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmount
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="435485">425.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libndp
+                </td>
+                <td>1.7-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="109212">106.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnetfilter_conntrack
+                </td>
+                <td>1.0.7-3.fc31</td>
+                <td>x86_64</td>
+                <td data-order="155822">152.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iptables-1.8.3-7.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnfnetlink
+                </td>
+                <td>1.0.1-16.fc31</td>
+                <td>x86_64</td>
+                <td data-order="56003">54.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnetfilter_conntrack-1.0.7-3.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnghttp2
+                </td>
+                <td>1.40.0-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="172460">168.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnl3
+                </td>
+                <td>3.5.0-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1099552">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>wpa_supplicant-1:2.9-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnsl2
+                </td>
+                <td>1.2.0-5.20180605git4a062cf.fc31</td>
+                <td>x86_64</td>
+                <td data-order="137730">134.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-21.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpcap
+                </td>
+                <td>14:1.9.1-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="384458">375.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>iptables-libs-1.8.3-7.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpsl
+                </td>
+                <td>0.21.0-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="74788">73.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpwquality
+                </td>
+                <td>1.4.2-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="408245">398.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pam-1.3.1-21.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libqmi
+                </td>
+                <td>1.24.0-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="2816401">2.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    <li>libqmi-utils-1.24.0-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libqmi-utils
+                </td>
+                <td>1.24.0-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="693163">676.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libseccomp
+                </td>
+                <td>2.4.2-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="355363">347.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>x86_64</td>
+                <td data-order="189728">185.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>coreutils-8.31-6.fc31.x86_64</li>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    <li>device-mapper-libs-1.02.165-1.fc31.x86_64</li>
+    
+    <li>glib2-2.62.5-1.fc31.x86_64</li>
+    
+    <li>glibc-common-2.30-10.fc31.x86_64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    <li>libmount-2.34-4.fc31.x86_64</li>
+    
+    <li>libsemanage-2.9-3.fc31.x86_64</li>
+    
+    <li>pam-1.3.1-21.fc31.x86_64</li>
+    
+    <li>sed-4.5-4.fc31.x86_64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsemanage
+                </td>
+                <td>2.9-3.fc31</td>
+                <td>x86_64</td>
+                <td data-order="320642">313.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>shadow-utils-2:4.6-17.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsepol
+                </td>
+                <td>2.9-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="774144">756.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-2.9-5.fc31.x86_64</li>
+    
+    <li>libsemanage-2.9-3.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsigsegv
+                </td>
+                <td>2.11-8.fc31</td>
+                <td>x86_64</td>
+                <td data-order="50042">48.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsmartcols
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="290059">283.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libssh
+                </td>
+                <td>0.9.3-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="520083">507.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libssh-config
+                </td>
+                <td>0.9.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="357">357.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libssh-0.9.3-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtasn1
+                </td>
+                <td>4.14-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="175983">171.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.x86_64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtirpc
+                </td>
+                <td>1.2.5-1.rc2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="211766">206.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnsl2-1.2.0-5.20180605git4a062cf.fc31.x86_64</li>
+    
+    <li>pam-1.3.1-21.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libunistring
+                </td>
+                <td>0.9.10-6.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1713307">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.x86_64</li>
+    
+    <li>libidn2-2.3.0-1.fc31.x86_64</li>
+    
+    <li>libpsl-0.21.0-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libutempter
+                </td>
+                <td>1.1.6-17.fc31</td>
+                <td>x86_64</td>
+                <td data-order="59645">58.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libuuid
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="38839">37.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.x86_64</li>
+    
+    <li>libblkid-2.34-4.fc31.x86_64</li>
+    
+    <li>libfdisk-2.34-4.fc31.x86_64</li>
+    
+    <li>libmount-2.34-4.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libverto
+                </td>
+                <td>0.3.0-8.fc31</td>
+                <td>x86_64</td>
+                <td data-order="32076">31.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt
+                </td>
+                <td>4.4.15-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="273771">267.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cyrus-sasl-lib-2.1.27-2.fc31.x86_64</li>
+    
+    <li>pam-1.3.1-21.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lz4-libs
+                </td>
+                <td>1.9.1-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="133631">130.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mpfr
+                </td>
+                <td>3.1.6-5.fc31</td>
+                <td>x86_64</td>
+                <td data-order="558113">545.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>x86_64</td>
+                <td data-order="662903">647.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-base
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>noarch</td>
+                <td data-order="281668">275.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-libs-6.1-12.20190803.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-libs
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1057296">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>bash-5.0.11-1.fc31.x86_64</li>
+    
+    <li>ncurses-6.1-12.20190803.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    <li>readline-8.0-3.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nettle
+                </td>
+                <td>3.5.1-3.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1109785">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openldap
+                </td>
+                <td>2.4.47-3.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1031518">1007.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl-libs
+                </td>
+                <td>1:1.1.1d-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="3862858">3.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.x86_64</li>
+    
+    <li>cryptsetup-libs-2.3.0-1.fc31.x86_64</li>
+    
+    <li>kmod-libs-26-4.fc31.x86_64</li>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    <li>libssh-0.9.3-1.fc31.x86_64</li>
+    
+    <li>openldap-2.4.47-3.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>wpa_supplicant-1:2.9-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit
+                </td>
+                <td>0.23.20-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1640244">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>gnutls-3.6.11-1.fc31.x86_64</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit-trust
+                </td>
+                <td>0.23.20-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="486729">475.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>gnutls-3.6.11-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pam
+                </td>
+                <td>1.3.1-21.fc31</td>
+                <td>x86_64</td>
+                <td data-order="2828604">2.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libpwquality-1.4.2-1.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-pam-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre
+                </td>
+                <td>8.44-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="522152">509.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.x86_64</li>
+    
+    <li>grep-3.3-3.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre2
+                </td>
+                <td>10.34-7.fc31</td>
+                <td>x86_64</td>
+                <td data-order="732413">715.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-2.9-5.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    polkit-libs
+                </td>
+                <td>0.116-4.fc31.1</td>
+                <td>x86_64</td>
+                <td data-order="211532">206.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    publicsuffix-list-dafsa
+                </td>
+                <td>20190417-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="64992">63.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libpsl-0.21.0-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-pip-wheel
+                </td>
+                <td>19.1.1-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1241316">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-setuptools-wheel
+                </td>
+                <td>41.6.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="360617">352.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3
+                </td>
+                <td>3.7.6-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="32029">31.3 kB</td>
+                <td>
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libs
+                </td>
+                <td>3.7.6-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="33012716">31.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    qrencode-libs
+                </td>
+                <td>4.0.2-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="163153">159.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    readline
+                </td>
+                <td>8.0-3.fc31</td>
+                <td>x86_64</td>
+                <td data-order="485139">473.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>bluez-5.54-1.fc31.x86_64</li>
+    
+    <li>gawk-5.0.1-5.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sed
+                </td>
+                <td>4.5-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="774118">756.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>krb5-libs-1.17-46.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    setup
+                </td>
+                <td>2.13.6-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-8.fc31.noarch</li>
+    
+    <li>filesystem-3.12-2.fc31.x86_64</li>
+    
+    <li>shadow-utils-2:4.6-17.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    shadow-utils
+                </td>
+                <td>2:4.6-17.fc31</td>
+                <td>x86_64</td>
+                <td data-order="4097376">3.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    <li>libutempter-1.1.6-17.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sqlite-libs
+                </td>
+                <td>3.30.0-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1187636">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="12885712">12.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>bluez-5.54-1.fc31.x86_64</li>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    <li>dbus-common-1:1.12.16-3.fc31.noarch</li>
+    
+    <li>device-mapper-1.02.165-1.fc31.x86_64</li>
+    
+    <li>systemd-pam-243.7-1.fc31.x86_64</li>
+    
+    <li>wpa_supplicant-1:2.9-2.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>elfutils-default-yama-scope-0.178-7.fc31.noarch</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-libs
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="1727382">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ModemManager-1.10.6-2.fc31.x86_64</li>
+    
+    <li>NetworkManager-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-bluetooth-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-libnm-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>NetworkManager-wwan-1:1.20.10-1.fc31.x86_64</li>
+    
+    <li>bluez-5.54-1.fc31.x86_64</li>
+    
+    <li>dbus-broker-21-6.fc31.x86_64</li>
+    
+    <li>dbus-libs-1:1.12.16-3.fc31.x86_64</li>
+    
+    <li>device-mapper-libs-1.02.165-1.fc31.x86_64</li>
+    
+    <li>libgudev-232-6.fc31.x86_64</li>
+    
+    <li>polkit-libs-0.116-4.fc31.1.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-pam
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>x86_64</td>
+                <td data-order="343704">335.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-rpm-macros
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="5043">4.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata
+                </td>
+                <td>2019c-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-common-2.30-10.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    util-linux
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>x86_64</td>
+                <td data-order="13318009">12.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>device-mapper-1.02.165-1.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    wpa_supplicant
+                </td>
+                <td>1:2.9-2.fc31</td>
+                <td>x86_64</td>
+                <td data-order="5498440">5.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>NetworkManager-wifi-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>NetworkManager-wifi-1:1.20.10-1.fc31.x86_64</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz-libs
+                </td>
+                <td>5.2.4-6.fc31</td>
+                <td>x86_64</td>
+                <td data-order="179959">175.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>elfutils-libs-0.178-7.fc31.x86_64</li>
+    
+    <li>kmod-libs-26-4.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>systemd-libs-243.7-1.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zlib
+                </td>
+                <td>1.2.11-20.fc31</td>
+                <td>x86_64</td>
+                <td data-order="205655">200.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cracklib-2.9.6-21.fc31.x86_64</li>
+    
+    <li>elfutils-libelf-0.178-7.fc31.x86_64</li>
+    
+    <li>elfutils-libs-0.178-7.fc31.x86_64</li>
+    
+    <li>glib2-2.62.5-1.fc31.x86_64</li>
+    
+    <li>kmod-libs-26-4.fc31.x86_64</li>
+    
+    <li>libcurl-7.66.0-1.fc31.x86_64</li>
+    
+    <li>libssh-0.9.3-1.fc31.x86_64</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.x86_64</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.x86_64</li>
+    
+    <li>sqlite-libs-3.30.0-1.fc31.x86_64</li>
+    
+    <li>systemd-243.7-1.fc31.x86_64</li>
+    
+    <li>util-linux-2.34-4.fc31.x86_64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--rhel-8-baseos-comps-networkmanager-submodules--fedora-empty-base--repository-fedora-31--x86_64.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

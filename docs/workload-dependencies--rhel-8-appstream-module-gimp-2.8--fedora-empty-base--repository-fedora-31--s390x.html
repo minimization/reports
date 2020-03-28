@@ -1,0 +1,6984 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--rhel-8-appstream-module-gimp-2.8--repository-fedora-31.html">
+                    Module gimp:2.8 for rhel-8-appstream
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Module gimp:2.8 for rhel-8-appstream in Empty from Fedora 31 s390x
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Module gimp:2.8 for rhel-8-appstream <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora 31</small>
+        <small class="text-muted"> for </small>
+        <small> s390x</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--rhel-8-appstream-module-gimp-2.8--fedora-empty-base--repository-fedora-31--s390x.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--rhel-8-appstream-module-gimp-2.8--fedora-empty-base--repository-fedora-31--s390x.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    LibRaw
+                </td>
+                <td>0.19.5-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="2065630">2.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    OpenEXR-libs
+                </td>
+                <td>2.3.0-4.fc31</td>
+                <td>s390x</td>
+                <td data-order="3486000">3.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    SDL2
+                </td>
+                <td>2.0.12-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="1564364">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    aalib-libs
+                </td>
+                <td>1.4.0-0.37.rc5.fc31</td>
+                <td>s390x</td>
+                <td data-order="170378">166.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    adobe-mappings-cmap
+                </td>
+                <td>20171205-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="13746679">13.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>adobe-mappings-cmap-deprecated-20171205-6.fc31.noarch</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    adobe-mappings-cmap-deprecated
+                </td>
+                <td>20171205-6.fc31</td>
+                <td>noarch</td>
+                <td data-order="596942">583.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    adobe-mappings-pdf
+                </td>
+                <td>20180407-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="4398414">4.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alsa-lib
+                </td>
+                <td>1.2.2-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="1452439">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    alternatives
+                </td>
+                <td>1.11-5.fc31</td>
+                <td>s390x</td>
+                <td data-order="59734">58.3 kB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    atk
+                </td>
+                <td>2.34.1-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="1297918">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    avahi-libs
+                </td>
+                <td>0.7-20.fc31</td>
+                <td>s390x</td>
+                <td data-order="155856">152.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cups-libs-1:2.2.12-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    babl
+                </td>
+                <td>0.1.74-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="787638">769.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    basesystem
+                </td>
+                <td>11-8.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bash
+                </td>
+                <td>5.0.11-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="7679501">7.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>desktop-file-utils-0.24-1.fc31.s390x</li>
+    
+    <li>filesystem-3.12-2.fc31.s390x</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>freetype-2.10.0-3.fc31.s390x</li>
+    
+    <li>gdk-pixbuf2-2.40.0-1.fc31.s390x</li>
+    
+    <li>glib2-2.62.5-1.fc31.s390x</li>
+    
+    <li>glibc-common-2.30-10.fc31.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>hicolor-icon-theme-0.17-7.fc31.noarch</li>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    <li>libblkid-2.34-4.fc31.s390x</li>
+    
+    <li>libsepol-2.9-2.fc31.s390x</li>
+    
+    <li>nss-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.s390x</li>
+    
+    <li>shared-mime-info-1.15-1.fc31.s390x</li>
+    
+    <li>systemd-libs-243.7-1.fc31.s390x</li>
+    
+    <li>urw-base35-bookman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-c059-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-d050000l-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-gothic-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-mono-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-roman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-sans-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-p052-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-standard-symbols-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-z003-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    bzip2-libs
+                </td>
+                <td>1.0.8-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="82872">80.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>freetype-2.10.0-3.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ca-certificates
+                </td>
+                <td>2020.2.40-1.1.fc31</td>
+                <td>noarch</td>
+                <td data-order="978568">955.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.s390x</li>
+    
+    <li>python-pip-wheel-19.1.1-7.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cairo
+                </td>
+                <td>1.16.0-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="1857703">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    <li>python2-cairo-1.18.1-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cairo-gobject
+                </td>
+                <td>1.16.0-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="36048">35.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils
+                </td>
+                <td>8.31-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="7616480">7.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    <li>libblkid-2.34-4.fc31.s390x</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.s390x</li>
+    
+    <li>systemd-libs-243.7-1.fc31.s390x</li>
+    
+    <li>xdg-utils-1.1.3-5.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    coreutils-common
+                </td>
+                <td>8.31-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="10348911">9.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    crypto-policies
+                </td>
+                <td>20191128-2.gitcd267a5.fc31</td>
+                <td>noarch</td>
+                <td data-order="195446">190.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.s390x</li>
+    
+    <li>nss-3.50.0-2.fc31.s390x</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cups-libs
+                </td>
+                <td>1:2.2.12-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="734636">717.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    dbus-libs
+                </td>
+                <td>1:1.12.16-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="407968">398.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>avahi-libs-0.7-20.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    desktop-file-utils
+                </td>
+                <td>0.24-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="249773">243.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xdg-utils-1.1.3-5.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    emacs-filesystem
+                </td>
+                <td>1:26.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>desktop-file-utils-0.24-1.fc31.s390x</li>
+    
+    <li>libidn-1.35-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    exiv2-libs
+                </td>
+                <td>0.27.2-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="3399320">3.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgexiv2-0.12.0-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    expat
+                </td>
+                <td>2.2.8-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="279395">272.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>exiv2-libs-0.27.2-1.fc31.s390x</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-gpg-keys
+                </td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="103813">101.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-repos-31-1.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release
+                </td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="691">691.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    <li>fedora-repos-31-1.noarch</li>
+    
+    <li>setup-2.13.6-1.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-release-common
+                </td>
+                <td>31-2</td>
+                <td>noarch</td>
+                <td data-order="14359">14.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-31-2.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fedora-repos
+                </td>
+                <td>31-1</td>
+                <td>noarch</td>
+                <td data-order="8785">8.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fedora-release-common-31-2.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    filesystem
+                </td>
+                <td>3.12-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-8.fc31.noarch</li>
+    
+    <li>bash-5.0.11-1.fc31.s390x</li>
+    
+    <li>gawk-5.0.1-5.fc31.s390x</li>
+    
+    <li>urw-base35-fonts-common-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fontconfig
+                </td>
+                <td>2.13.92-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="789830">771.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>libXft-2.3.3-2.fc31.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    <li>urw-base35-bookman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-c059-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-d050000l-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-gothic-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-mono-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-roman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-sans-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-p052-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-standard-symbols-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-z003-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fonts-filesystem
+                </td>
+                <td>2.0.3-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="0">0.0 B</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>google-droid-sans-fonts-20120715-16.fc31.noarch</li>
+    
+    <li>urw-base35-fonts-common-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    freetype
+                </td>
+                <td>2.10.0-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="847843">828.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>harfbuzz-2.6.1-2.fc31.s390x</li>
+    
+    <li>libXft-2.3.3-2.fc31.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    <li>xorg-x11-font-utils-1:7.5-43.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    fribidi
+                </td>
+                <td>1.0.5-5.fc31</td>
+                <td>s390x</td>
+                <td data-order="324869">317.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gawk
+                </td>
+                <td>5.0.1-5.fc31</td>
+                <td>s390x</td>
+                <td data-order="2986622">2.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdbm
+                </td>
+                <td>1:1.18.1-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="404713">395.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdbm-libs
+                </td>
+                <td>1:1.18.1-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="124304">121.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdbm-1:1.18.1-1.fc31.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdk-pixbuf2
+                </td>
+                <td>2.40.0-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="2623162">2.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk-update-icon-cache-3.24.13-1.fc31.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gdk-pixbuf2-modules
+                </td>
+                <td>2.40.0-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="268544">262.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gegl04
+                </td>
+                <td>0.4.22-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="7170380">6.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    gimp
+                </td>
+                <td>2:2.10.14-1.module_f31+6993+669d73be</td>
+                <td>s390x</td>
+                <td data-order="110562082">105.4 MB</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gimp-libs
+                </td>
+                <td>2:2.10.14-1.module_f31+6993+669d73be</td>
+                <td>s390x</td>
+                <td data-order="12235512">11.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glib2
+                </td>
+                <td>2.62.5-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="13081288">12.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>atk-2.34.1-1.fc31.s390x</li>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>desktop-file-utils-0.24-1.fc31.s390x</li>
+    
+    <li>gdk-pixbuf2-2.40.0-1.fc31.s390x</li>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk-update-icon-cache-3.24.13-1.fc31.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>harfbuzz-2.6.1-2.fc31.s390x</li>
+    
+    <li>json-glib-1.4.4-3.fc31.s390x</li>
+    
+    <li>libcroco-0.6.13-2.fc31.s390x</li>
+    
+    <li>libgexiv2-0.12.0-2.fc31.s390x</li>
+    
+    <li>libgudev-232-6.fc31.s390x</li>
+    
+    <li>libmypaint-1.4.0-1.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.s390x</li>
+    
+    <li>pygobject2-2.28.7-6.fc31.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    <li>shared-mime-info-1.15-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>s390x</td>
+                <td data-order="14796134">14.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.s390x</li>
+    
+    <li>OpenEXR-libs-2.3.0-4.fc31.s390x</li>
+    
+    <li>SDL2-2.0.12-1.fc31.s390x</li>
+    
+    <li>aalib-libs-1.4.0-0.37.rc5.fc31.s390x</li>
+    
+    <li>alsa-lib-1.2.2-1.fc31.s390x</li>
+    
+    <li>alternatives-1.11-5.fc31.s390x</li>
+    
+    <li>atk-2.34.1-1.fc31.s390x</li>
+    
+    <li>avahi-libs-0.7-20.fc31.s390x</li>
+    
+    <li>babl-0.1.74-1.fc31.s390x</li>
+    
+    <li>bash-5.0.11-1.fc31.s390x</li>
+    
+    <li>bzip2-libs-1.0.8-1.fc31.s390x</li>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>coreutils-8.31-6.fc31.s390x</li>
+    
+    <li>cups-libs-1:2.2.12-6.fc31.s390x</li>
+    
+    <li>dbus-libs-1:1.12.16-3.fc31.s390x</li>
+    
+    <li>desktop-file-utils-0.24-1.fc31.s390x</li>
+    
+    <li>exiv2-libs-0.27.2-1.fc31.s390x</li>
+    
+    <li>expat-2.2.8-1.fc31.s390x</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>freetype-2.10.0-3.fc31.s390x</li>
+    
+    <li>fribidi-1.0.5-5.fc31.s390x</li>
+    
+    <li>gawk-5.0.1-5.fc31.s390x</li>
+    
+    <li>gdbm-1:1.18.1-1.fc31.s390x</li>
+    
+    <li>gdbm-libs-1:1.18.1-1.fc31.s390x</li>
+    
+    <li>gdk-pixbuf2-2.40.0-1.fc31.s390x</li>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>glib2-2.62.5-1.fc31.s390x</li>
+    
+    <li>glibc-all-langpacks-2.30-10.fc31.s390x</li>
+    
+    <li>glibc-common-2.30-10.fc31.s390x</li>
+    
+    <li>gmp-1:6.1.2-10.fc31.s390x</li>
+    
+    <li>gnutls-3.6.11-1.fc31.s390x</li>
+    
+    <li>gpm-libs-1.20.7-21.fc31.s390x</li>
+    
+    <li>graphite2-1.3.13-1.fc31.s390x</li>
+    
+    <li>grep-3.3-3.fc31.s390x</li>
+    
+    <li>gtk-update-icon-cache-3.24.13-1.fc31.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>harfbuzz-2.6.1-2.fc31.s390x</li>
+    
+    <li>ilmbase-2.3.0-3.fc31.s390x</li>
+    
+    <li>jasper-libs-2.0.14-9.fc31.s390x</li>
+    
+    <li>jbig2dec-libs-0.16-1.fc31.s390x</li>
+    
+    <li>jbigkit-libs-2.1-17.fc31.s390x</li>
+    
+    <li>json-c-0.13.1-8.fc31.s390x</li>
+    
+    <li>json-glib-1.4.4-3.fc31.s390x</li>
+    
+    <li>keyutils-libs-1.6-3.fc31.s390x</li>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    <li>lcms2-2.9-6.fc31.s390x</li>
+    
+    <li>libICE-1.0.10-2.fc31.s390x</li>
+    
+    <li>libSM-1.2.3-4.fc31.s390x</li>
+    
+    <li>libX11-1.6.9-2.fc31.s390x</li>
+    
+    <li>libXau-1.0.9-2.fc31.s390x</li>
+    
+    <li>libXcomposite-0.4.4-17.fc31.s390x</li>
+    
+    <li>libXcursor-1.1.15-6.fc31.s390x</li>
+    
+    <li>libXdamage-1.1.4-17.fc31.s390x</li>
+    
+    <li>libXext-1.3.4-2.fc31.s390x</li>
+    
+    <li>libXfixes-5.0.3-10.fc31.s390x</li>
+    
+    <li>libXft-2.3.3-2.fc31.s390x</li>
+    
+    <li>libXi-1.7.10-2.fc31.s390x</li>
+    
+    <li>libXinerama-1.1.4-4.fc31.s390x</li>
+    
+    <li>libXmu-1.1.3-2.fc31.s390x</li>
+    
+    <li>libXpm-3.5.12-10.fc31.s390x</li>
+    
+    <li>libXrandr-1.5.2-2.fc31.s390x</li>
+    
+    <li>libXrender-0.9.10-10.fc31.s390x</li>
+    
+    <li>libXt-1.1.5-12.20190424gitba4ec9376.fc31.s390x</li>
+    
+    <li>libXxf86vm-1.1.4-12.fc31.s390x</li>
+    
+    <li>libacl-2.2.53-4.fc31.s390x</li>
+    
+    <li>libattr-2.4.48-7.fc31.s390x</li>
+    
+    <li>libblkid-2.34-4.fc31.s390x</li>
+    
+    <li>libcap-2.26-6.fc31.s390x</li>
+    
+    <li>libcom_err-1.45.5-1.fc31.s390x</li>
+    
+    <li>libcroco-0.6.13-2.fc31.s390x</li>
+    
+    <li>libdatrie-0.2.9-10.fc31.s390x</li>
+    
+    <li>libdb-5.3.28-38.fc31.s390x</li>
+    
+    <li>libffi-3.1-23.fc31.s390x</li>
+    
+    <li>libfontenc-1.1.3-11.fc31.s390x</li>
+    
+    <li>libgcrypt-1.8.5-1.fc31.s390x</li>
+    
+    <li>libgexiv2-0.12.0-2.fc31.s390x</li>
+    
+    <li>libgfortran-9.2.1-1.fc31.s390x</li>
+    
+    <li>libgomp-9.2.1-1.fc31.s390x</li>
+    
+    <li>libgpg-error-1.36-2.fc31.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    <li>libgudev-232-6.fc31.s390x</li>
+    
+    <li>libidn-1.35-6.fc31.s390x</li>
+    
+    <li>libidn2-2.3.0-1.fc31.s390x</li>
+    
+    <li>libijs-0.35-10.fc31.s390x</li>
+    
+    <li>libjpeg-turbo-2.0.2-5.fc31.s390x</li>
+    
+    <li>libmcpp-2.7.2-24.fc31.s390x</li>
+    
+    <li>libmng-2.0.3-10.fc31.s390x</li>
+    
+    <li>libmount-2.34-4.fc31.s390x</li>
+    
+    <li>libmypaint-1.4.0-1.fc31.s390x</li>
+    
+    <li>libnsl2-1.2.0-5.20180605git4a062cf.fc31.s390x</li>
+    
+    <li>libpaper-1.1.24-25.fc31.s390x</li>
+    
+    <li>libpkgconf-1.6.3-2.fc31.s390x</li>
+    
+    <li>libpng-2:1.6.37-2.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>libselinux-2.9-5.fc31.s390x</li>
+    
+    <li>libsepol-2.9-2.fc31.s390x</li>
+    
+    <li>libsigsegv-2.11-8.fc31.s390x</li>
+    
+    <li>libstdc++-9.2.1-1.fc31.s390x</li>
+    
+    <li>libtasn1-4.14-2.fc31.s390x</li>
+    
+    <li>libthai-0.1.28-3.fc31.s390x</li>
+    
+    <li>libtiff-4.0.10-8.fc31.s390x</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.s390x</li>
+    
+    <li>libunistring-0.9.10-6.fc31.s390x</li>
+    
+    <li>libuuid-2.34-4.fc31.s390x</li>
+    
+    <li>libverto-0.3.0-8.fc31.s390x</li>
+    
+    <li>libwebp-1.0.3-2.fc31.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    <li>libwmf-lite-0.2.12-2.fc31.s390x</li>
+    
+    <li>libxcb-1.13.1-3.fc31.s390x</li>
+    
+    <li>libxcrypt-4.4.15-1.fc31.s390x</li>
+    
+    <li>libxml2-2.9.10-3.fc31.s390x</li>
+    
+    <li>lz4-libs-1.9.1-1.fc31.s390x</li>
+    
+    <li>mcpp-2.7.2-24.fc31.s390x</li>
+    
+    <li>mpfr-3.1.6-5.fc31.s390x</li>
+    
+    <li>ncurses-6.1-12.20190803.fc31.s390x</li>
+    
+    <li>ncurses-libs-6.1-12.20190803.fc31.s390x</li>
+    
+    <li>nettle-3.5.1-3.fc31.s390x</li>
+    
+    <li>nspr-4.25.0-1.fc31.s390x</li>
+    
+    <li>nss-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-softokn-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-softokn-freebl-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-util-3.50.0-2.fc31.s390x</li>
+    
+    <li>openblas-serial-0.3.9-1.fc31.s390x</li>
+    
+    <li>openjpeg2-2.3.1-6.fc31.s390x</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.s390x</li>
+    
+    <li>p11-kit-0.23.20-1.fc31.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.s390x</li>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    <li>pcre-8.44-1.fc31.s390x</li>
+    
+    <li>pcre2-10.34-7.fc31.s390x</li>
+    
+    <li>pixman-0.38.4-1.fc31.s390x</li>
+    
+    <li>pkgconf-1.6.3-2.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.s390x</li>
+    
+    <li>pygobject2-2.28.7-6.fc31.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    <li>python2-2.7.17-1.fc31.s390x</li>
+    
+    <li>python2-cairo-1.18.1-2.fc31.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-3.7.6-2.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    <li>readline-8.0-3.fc31.s390x</li>
+    
+    <li>sed-4.5-4.fc31.s390x</li>
+    
+    <li>shared-mime-info-1.15-1.fc31.s390x</li>
+    
+    <li>slang-2.3.2-6.fc31.s390x</li>
+    
+    <li>sqlite-libs-3.30.0-1.fc31.s390x</li>
+    
+    <li>suitesparse-4.4.6-20.fc31.s390x</li>
+    
+    <li>systemd-libs-243.7-1.fc31.s390x</li>
+    
+    <li>tbb-2020.1-1.fc31.s390x</li>
+    
+    <li>which-2.21-15.fc31.s390x</li>
+    
+    <li>xorg-x11-font-utils-1:7.5-43.fc31.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    <li>xz-libs-5.2.4-6.fc31.s390x</li>
+    
+    <li>zlib-1.2.11-20.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-all-langpacks
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>s390x</td>
+                <td data-order="217990208">207.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    
+    Suggested by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.s390x</li>
+    
+    </ul>
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    glibc-common
+                </td>
+                <td>2.30-10.fc31</td>
+                <td>s390x</td>
+                <td data-order="2683184">2.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-2.30-10.fc31.s390x</li>
+    
+    <li>glibc-all-langpacks-2.30-10.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gmp
+                </td>
+                <td>1:6.1.2-10.fc31</td>
+                <td>s390x</td>
+                <td data-order="1464348">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.s390x</li>
+    
+    <li>gawk-5.0.1-5.fc31.s390x</li>
+    
+    <li>gnutls-3.6.11-1.fc31.s390x</li>
+    
+    <li>mpfr-3.1.6-5.fc31.s390x</li>
+    
+    <li>nettle-3.5.1-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gnutls
+                </td>
+                <td>3.6.11-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="3285239">3.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cups-libs-1:2.2.12-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    google-droid-sans-fonts
+                </td>
+                <td>20120715-16.fc31</td>
+                <td>noarch</td>
+                <td data-order="6229278">5.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gpm-libs
+                </td>
+                <td>1.20.7-21.fc31</td>
+                <td>s390x</td>
+                <td data-order="28432">27.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>aalib-libs-1.4.0-0.37.rc5.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    graphite2
+                </td>
+                <td>1.3.13-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="218929">213.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>harfbuzz-2.6.1-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    grep
+                </td>
+                <td>3.3-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="809298">790.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    <li>systemd-libs-243.7-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gtk-update-icon-cache
+                </td>
+                <td>3.24.13-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="62813">61.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    gtk2
+                </td>
+                <td>2.24.32-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="14044965">13.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    harfbuzz
+                </td>
+                <td>2.6.1-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="2028484">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    hicolor-icon-theme
+                </td>
+                <td>0.17-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="73932">72.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ilmbase
+                </td>
+                <td>2.3.0-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="624375">609.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>OpenEXR-libs-2.3.0-4.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    jasper-libs
+                </td>
+                <td>2.0.14-9.fc31</td>
+                <td>s390x</td>
+                <td data-order="398434">389.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.s390x</li>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    jbig2dec-libs
+                </td>
+                <td>0.16-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="164163">160.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    jbigkit-libs
+                </td>
+                <td>2.1-17.fc31</td>
+                <td>s390x</td>
+                <td data-order="112381">109.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libtiff-4.0.10-8.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    json-c
+                </td>
+                <td>0.13.1-8.fc31</td>
+                <td>s390x</td>
+                <td data-order="103066">100.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libmypaint-1.4.0-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    json-glib
+                </td>
+                <td>1.4.4-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="536811">524.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    keyutils-libs
+                </td>
+                <td>1.6-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="51239">50.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    krb5-libs
+                </td>
+                <td>1.17-46.fc31</td>
+                <td>s390x</td>
+                <td data-order="2282965">2.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cups-libs-1:2.2.12-6.fc31.s390x</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lcms2
+                </td>
+                <td>2.9-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="402649">393.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.s390x</li>
+    
+    <li>babl-0.1.74-1.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    <li>libmng-2.0.3-10.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libICE
+                </td>
+                <td>1.0.10-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="171734">167.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libSM-1.2.3-4.fc31.s390x</li>
+    
+    <li>libXt-1.1.5-12.20190424gitba4ec9376.fc31.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libSM
+                </td>
+                <td>1.2.3-4.fc31</td>
+                <td>s390x</td>
+                <td data-order="91355">89.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libXt-1.1.5-12.20190424gitba4ec9376.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libX11
+                </td>
+                <td>1.6.9-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="1375288">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>aalib-libs-1.4.0-0.37.rc5.fc31.s390x</li>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>libXcomposite-0.4.4-17.fc31.s390x</li>
+    
+    <li>libXcursor-1.1.15-6.fc31.s390x</li>
+    
+    <li>libXdamage-1.1.4-17.fc31.s390x</li>
+    
+    <li>libXext-1.3.4-2.fc31.s390x</li>
+    
+    <li>libXfixes-5.0.3-10.fc31.s390x</li>
+    
+    <li>libXft-2.3.3-2.fc31.s390x</li>
+    
+    <li>libXi-1.7.10-2.fc31.s390x</li>
+    
+    <li>libXinerama-1.1.4-4.fc31.s390x</li>
+    
+    <li>libXmu-1.1.3-2.fc31.s390x</li>
+    
+    <li>libXpm-3.5.12-10.fc31.s390x</li>
+    
+    <li>libXrandr-1.5.2-2.fc31.s390x</li>
+    
+    <li>libXrender-0.9.10-10.fc31.s390x</li>
+    
+    <li>libXt-1.1.5-12.20190424gitba4ec9376.fc31.s390x</li>
+    
+    <li>libXxf86vm-1.1.4-12.fc31.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libX11-common
+                </td>
+                <td>1.6.9-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1339608">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libX11-1.6.9-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXau
+                </td>
+                <td>1.0.9-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="61148">59.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libxcb-1.13.1-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXcomposite
+                </td>
+                <td>0.4.4-17.fc31</td>
+                <td>s390x</td>
+                <td data-order="35520">34.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXcursor
+                </td>
+                <td>1.1.15-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="51143">49.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXdamage
+                </td>
+                <td>1.1.4-17.fc31</td>
+                <td>s390x</td>
+                <td data-order="29992">29.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXext
+                </td>
+                <td>1.3.4-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="96398">94.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>libXi-1.7.10-2.fc31.s390x</li>
+    
+    <li>libXinerama-1.1.4-4.fc31.s390x</li>
+    
+    <li>libXmu-1.1.3-2.fc31.s390x</li>
+    
+    <li>libXrandr-1.5.2-2.fc31.s390x</li>
+    
+    <li>libXxf86vm-1.1.4-12.fc31.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXfixes
+                </td>
+                <td>5.0.3-10.fc31</td>
+                <td>s390x</td>
+                <td data-order="27527">26.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>libXcursor-1.1.15-6.fc31.s390x</li>
+    
+    <li>libXdamage-1.1.4-17.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXft
+                </td>
+                <td>2.3.3-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="141224">137.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXi
+                </td>
+                <td>1.7.10-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="78611">76.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXinerama
+                </td>
+                <td>1.1.4-4.fc31</td>
+                <td>s390x</td>
+                <td data-order="15247">14.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXmu
+                </td>
+                <td>1.1.3-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="187496">183.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXpm
+                </td>
+                <td>3.5.12-10.fc31</td>
+                <td>s390x</td>
+                <td data-order="126471">123.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXrandr
+                </td>
+                <td>1.5.2-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="49546">48.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXrender
+                </td>
+                <td>0.9.10-10.fc31</td>
+                <td>s390x</td>
+                <td data-order="48091">47.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>libXcursor-1.1.15-6.fc31.s390x</li>
+    
+    <li>libXft-2.3.3-2.fc31.s390x</li>
+    
+    <li>libXrandr-1.5.2-2.fc31.s390x</li>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXt
+                </td>
+                <td>1.1.5-12.20190424gitba4ec9376.fc31</td>
+                <td>s390x</td>
+                <td data-order="460263">449.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libXmu-1.1.3-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libXxf86vm
+                </td>
+                <td>1.1.4-12.fc31</td>
+                <td>s390x</td>
+                <td data-order="25920">25.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libacl
+                </td>
+                <td>2.2.53-4.fc31</td>
+                <td>s390x</td>
+                <td data-order="45136">44.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.s390x</li>
+    
+    <li>sed-4.5-4.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libattr
+                </td>
+                <td>2.4.48-7.fc31</td>
+                <td>s390x</td>
+                <td data-order="25442">24.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.s390x</li>
+    
+    <li>libacl-2.2.53-4.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libblkid
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>s390x</td>
+                <td data-order="368481">359.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libmount-2.34-4.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcap
+                </td>
+                <td>2.26-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="123770">120.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcom_err
+                </td>
+                <td>1.45.5-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="61769">60.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    <li>libtirpc-1.2.5-1.rc2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libcroco
+                </td>
+                <td>0.6.13-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="339980">332.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdatrie
+                </td>
+                <td>0.2.9-10.fc31</td>
+                <td>s390x</td>
+                <td data-order="60175">58.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libthai-0.1.28-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libdb
+                </td>
+                <td>5.3.28-38.fc31</td>
+                <td>s390x</td>
+                <td data-order="1954072">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libffi
+                </td>
+                <td>3.1-23.fc31</td>
+                <td>s390x</td>
+                <td data-order="53740">52.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.s390x</li>
+    
+    <li>p11-kit-0.23.20-1.fc31.s390x</li>
+    
+    <li>pygobject2-2.28.7-6.fc31.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libfontenc
+                </td>
+                <td>1.1.3-11.fc31</td>
+                <td>s390x</td>
+                <td data-order="60157">58.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-font-utils-1:7.5-43.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcc
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="156896">153.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.s390x</li>
+    
+    <li>OpenEXR-libs-2.3.0-4.fc31.s390x</li>
+    
+    <li>exiv2-libs-0.27.2-1.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>glibc-2.30-10.fc31.s390x</li>
+    
+    <li>graphite2-1.3.13-1.fc31.s390x</li>
+    
+    <li>harfbuzz-2.6.1-2.fc31.s390x</li>
+    
+    <li>ilmbase-2.3.0-3.fc31.s390x</li>
+    
+    <li>libgexiv2-0.12.0-2.fc31.s390x</li>
+    
+    <li>libgfortran-9.2.1-1.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>libstdc++-9.2.1-1.fc31.s390x</li>
+    
+    <li>libtiff-4.0.10-8.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.s390x</li>
+    
+    <li>suitesparse-4.4.6-20.fc31.s390x</li>
+    
+    <li>systemd-libs-243.7-1.fc31.s390x</li>
+    
+    <li>tbb-2020.1-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgcrypt
+                </td>
+                <td>1.8.5-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="909102">887.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-libs-243.7-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgexiv2
+                </td>
+                <td>0.12.0-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="202356">197.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgfortran
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="1699824">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openblas-serial-0.3.9-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgomp
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="355830">347.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgpg-error
+                </td>
+                <td>1.36-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="768205">750.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgcrypt-1.8.5-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgs
+                </td>
+                <td>9.27-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="19292802">18.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libgudev
+                </td>
+                <td>232-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="83957">82.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libidn
+                </td>
+                <td>1.35-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="703849">687.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libidn2
+                </td>
+                <td>2.3.0-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="258982">252.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libijs
+                </td>
+                <td>0.35-10.fc31</td>
+                <td>s390x</td>
+                <td data-order="59280">57.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libjpeg-turbo
+                </td>
+                <td>2.0.2-5.fc31</td>
+                <td>s390x</td>
+                <td data-order="526738">514.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.s390x</li>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>jasper-libs-2.0.14-9.fc31.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    <li>libmng-2.0.3-10.fc31.s390x</li>
+    
+    <li>libtiff-4.0.10-8.fc31.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmcpp
+                </td>
+                <td>2.7.2-24.fc31</td>
+                <td>s390x</td>
+                <td data-order="163532">159.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>mcpp-2.7.2-24.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmng
+                </td>
+                <td>2.0.3-10.fc31</td>
+                <td>s390x</td>
+                <td data-order="564016">550.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmount
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>s390x</td>
+                <td data-order="443429">433.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libmypaint
+                </td>
+                <td>1.4.0-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="622435">607.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libnsl2
+                </td>
+                <td>1.2.0-5.20180605git4a062cf.fc31</td>
+                <td>s390x</td>
+                <td data-order="134066">130.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpaper
+                </td>
+                <td>1.1.24-25.fc31</td>
+                <td>s390x</td>
+                <td data-order="93198">91.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpkgconf
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="72445">70.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-1.6.3-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libpng
+                </td>
+                <td>2:1.6.37-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="232051">226.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>freetype-2.10.0-3.fc31.s390x</li>
+    
+    <li>gdk-pixbuf2-2.40.0-1.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    librsvg2
+                </td>
+                <td>2.46.4-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="4827070">4.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libselinux
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>s390x</td>
+                <td data-order="189200">184.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.s390x</li>
+    
+    <li>glib2-2.62.5-1.fc31.s390x</li>
+    
+    <li>glibc-common-2.30-10.fc31.s390x</li>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    <li>libmount-2.34-4.fc31.s390x</li>
+    
+    <li>sed-4.5-4.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsepol
+                </td>
+                <td>2.9-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="810936">791.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-2.9-5.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libsigsegv
+                </td>
+                <td>2.11-8.fc31</td>
+                <td>s390x</td>
+                <td data-order="45242">44.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libstdc++
+                </td>
+                <td>9.2.1-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="2530097">2.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>LibRaw-0.19.5-1.fc31.s390x</li>
+    
+    <li>OpenEXR-libs-2.3.0-4.fc31.s390x</li>
+    
+    <li>exiv2-libs-0.27.2-1.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>graphite2-1.3.13-1.fc31.s390x</li>
+    
+    <li>harfbuzz-2.6.1-2.fc31.s390x</li>
+    
+    <li>ilmbase-2.3.0-3.fc31.s390x</li>
+    
+    <li>libgexiv2-0.12.0-2.fc31.s390x</li>
+    
+    <li>libtiff-4.0.10-8.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    <li>poppler-glib-0.73.0-16.fc31.s390x</li>
+    
+    <li>suitesparse-4.4.6-20.fc31.s390x</li>
+    
+    <li>tbb-2020.1-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtasn1
+                </td>
+                <td>4.14-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="175071">171.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libthai
+                </td>
+                <td>0.1.28-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="785340">766.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pango-1.44.7-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtiff
+                </td>
+                <td>4.0.10-8.fc31</td>
+                <td>s390x</td>
+                <td data-order="537528">524.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdk-pixbuf2-modules-2.40.0-1.fc31.s390x</li>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libtirpc
+                </td>
+                <td>1.2.5-1.rc2.fc31</td>
+                <td>s390x</td>
+                <td data-order="215550">210.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libnsl2-1.2.0-5.20180605git4a062cf.fc31.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libunistring
+                </td>
+                <td>0.9.10-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="1684603">1.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.s390x</li>
+    
+    <li>libidn2-2.3.0-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libuuid
+                </td>
+                <td>2.34-4.fc31</td>
+                <td>s390x</td>
+                <td data-order="34391">33.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libSM-1.2.3-4.fc31.s390x</li>
+    
+    <li>libblkid-2.34-4.fc31.s390x</li>
+    
+    <li>libmount-2.34-4.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libverto
+                </td>
+                <td>0.3.0-8.fc31</td>
+                <td>s390x</td>
+                <td data-order="27564">26.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libwebp
+                </td>
+                <td>1.0.3-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="657007">641.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libwmf
+                </td>
+                <td>0.2.12-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="462430">451.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libwmf-lite
+                </td>
+                <td>0.2.12-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="155538">151.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcb
+                </td>
+                <td>1.13.1-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="1103880">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>libX11-1.6.9-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxcrypt
+                </td>
+                <td>4.4.15-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="281603">275.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    libxml2
+                </td>
+                <td>2.9.10-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="1849668">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libcroco-0.6.13-2.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    <li>shared-mime-info-1.15-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    lz4-libs
+                </td>
+                <td>1.9.1-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="133103">130.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>systemd-libs-243.7-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mcpp
+                </td>
+                <td>2.7.2-24.fc31</td>
+                <td>s390x</td>
+                <td data-order="52514">51.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xorg-x11-server-utils-7.7-32.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    mpfr
+                </td>
+                <td>3.1.6-5.fc31</td>
+                <td>s390x</td>
+                <td data-order="610593">596.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>s390x</td>
+                <td data-order="634775">619.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-base
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>noarch</td>
+                <td data-order="281668">275.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ncurses-libs-6.1-12.20190803.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    ncurses-libs
+                </td>
+                <td>6.1-12.20190803.fc31</td>
+                <td>s390x</td>
+                <td data-order="1008936">985.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>aalib-libs-1.4.0-0.37.rc5.fc31.s390x</li>
+    
+    <li>bash-5.0.11-1.fc31.s390x</li>
+    
+    <li>ncurses-6.1-12.20190803.fc31.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    <li>readline-8.0-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nettle
+                </td>
+                <td>3.5.1-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="1098369">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gnutls-3.6.11-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nspr
+                </td>
+                <td>4.25.0-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="336846">329.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-softokn-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-softokn-freebl-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-util-3.50.0-2.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nss
+                </td>
+                <td>3.50.0-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="1999416">1.9 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nss-softokn
+                </td>
+                <td>3.50.0-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="1918894">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-3.50.0-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nss-softokn-freebl
+                </td>
+                <td>3.50.0-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="514306">502.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-softokn-3.50.0-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nss-sysinit
+                </td>
+                <td>3.50.0-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="14684">14.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-3.50.0-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    nss-util
+                </td>
+                <td>3.50.0-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="229788">224.4 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-softokn-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-softokn-freebl-3.50.0-2.fc31.s390x</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openblas
+                </td>
+                <td>0.3.9-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="58263">56.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>openblas-serial-0.3.9-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openblas-serial
+                </td>
+                <td>0.3.9-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="12712528">12.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>suitesparse-4.4.6-20.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openjpeg2
+                </td>
+                <td>2.3.1-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="376502">367.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    openssl-libs
+                </td>
+                <td>1:1.1.1d-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="3394034">3.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>coreutils-8.31-6.fc31.s390x</li>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit
+                </td>
+                <td>0.23.20-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="1768556">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>gnutls-3.6.11-1.fc31.s390x</li>
+    
+    <li>p11-kit-trust-0.23.20-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    p11-kit-trust
+                </td>
+                <td>0.23.20-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="483521">472.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>gnutls-3.6.11-1.fc31.s390x</li>
+    
+    <li>nss-3.50.0-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pango
+                </td>
+                <td>1.44.7-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="849746">829.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gimp-libs-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>gtk2-2.24.32-6.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre
+                </td>
+                <td>8.44-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="335864">328.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.s390x</li>
+    
+    <li>grep-3.3-3.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pcre2
+                </td>
+                <td>10.34-7.fc31</td>
+                <td>s390x</td>
+                <td data-order="513253">501.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libselinux-2.9-5.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pixman
+                </td>
+                <td>0.38.4-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="486959">475.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="72725">71.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-m4
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="14186">13.9 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pkgconf-pkg-config-1.6.3-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    pkgconf-pkg-config
+                </td>
+                <td>1.6.3-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="462">462.0 B</td>
+                <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    poppler
+                </td>
+                <td>0.73.0-16.fc31</td>
+                <td>s390x</td>
+                <td data-order="3405032">3.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>poppler-glib-0.73.0-16.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    poppler-data
+                </td>
+                <td>0.4.9-4.fc31</td>
+                <td>noarch</td>
+                <td data-order="12058151">11.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>poppler-0.73.0-16.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    poppler-glib
+                </td>
+                <td>0.73.0-16.fc31</td>
+                <td>s390x</td>
+                <td data-order="478172">467.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    pygobject2
+                </td>
+                <td>2.28.7-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="955411">933.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    required
+    ">
+                <td data-order="
+    0
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span>(required)</span>
+    </td>
+                <td>
+                    pygtk2
+                </td>
+                <td>2.24.0-27.fc31</td>
+                <td>s390x</td>
+                <td data-order="4848678">4.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-pip-wheel
+                </td>
+                <td>19.1.1-7.fc31</td>
+                <td>noarch</td>
+                <td data-order="1241316">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python-setuptools-wheel
+                </td>
+                <td>41.6.0-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="360617">352.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python2
+                </td>
+                <td>2.7.17-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="68917">67.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pygobject2-2.28.7-6.fc31.s390x</li>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    <li>python2-cairo-1.18.1-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python2-cairo
+                </td>
+                <td>1.18.1-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="341985">334.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>pygtk2-2.24.0-27.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python2-libs
+                </td>
+                <td>2.7.17-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="26313130">25.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python2-2.7.17-1.fc31.s390x</li>
+    
+    <li>python2-cairo-1.18.1-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3
+                </td>
+                <td>3.7.6-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="23813">23.3 kB</td>
+                <td>
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libs
+                </td>
+                <td>3.7.6-2.fc31</td>
+                <td>s390x</td>
+                <td data-order="32503190">31.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    readline
+                </td>
+                <td>8.0-3.fc31</td>
+                <td>s390x</td>
+                <td data-order="490283">478.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gawk-5.0.1-5.fc31.s390x</li>
+    
+    <li>gdbm-1:1.18.1-1.fc31.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sed
+                </td>
+                <td>4.5-4.fc31</td>
+                <td>s390x</td>
+                <td data-order="779598">761.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
+    
+    <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
+    
+    <li>krb5-libs-1.17-46.fc31.s390x</li>
+    
+    <li>nss-sysinit-3.50.0-2.fc31.s390x</li>
+    
+    <li>systemd-libs-243.7-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    setup
+                </td>
+                <td>2.13.6-1.fc31</td>
+                <td>noarch</td>
+                <td data-order="726694">709.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>basesystem-11-8.fc31.noarch</li>
+    
+    <li>filesystem-3.12-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    shared-mime-info
+                </td>
+                <td>1.15-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="2502256">2.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gdk-pixbuf2-2.40.0-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>glib2-2.62.5-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    slang
+                </td>
+                <td>2.3.2-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="1395930">1.3 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>aalib-libs-1.4.0-0.37.rc5.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    sqlite-libs
+                </td>
+                <td>3.30.0-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="1282388">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>nss-softokn-3.50.0-2.fc31.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    suitesparse
+                </td>
+                <td>4.4.6-20.fc31</td>
+                <td>s390x</td>
+                <td data-order="3372622">3.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gegl04-0.4.22-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    systemd-libs
+                </td>
+                <td>243.7-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="1740662">1.7 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>dbus-libs-1:1.12.16-3.fc31.s390x</li>
+    
+    <li>libgudev-232-6.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tbb
+                </td>
+                <td>2020.1-1.fc31</td>
+                <td>s390x</td>
+                <td data-order="549165">536.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>suitesparse-4.4.6-20.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    tzdata
+                </td>
+                <td>2019c-2.fc31</td>
+                <td>noarch</td>
+                <td data-order="1892615">1.8 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>glibc-common-2.30-10.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-bookman-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1428518">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-c059-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1460348">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-d050000l-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="86572">84.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="5478">5.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-fonts-common
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="38217">37.3 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>urw-base35-bookman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-c059-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-d050000l-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-gothic-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-mono-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-roman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-sans-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-p052-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-standard-symbols-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-z003-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-gothic-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1216672">1.2 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-nimbus-mono-ps-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1099749">1.0 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-nimbus-roman-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1429675">1.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-nimbus-sans-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="2469317">2.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-p052-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="1557171">1.5 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-standard-symbols-ps-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="45184">44.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    urw-base35-z003-fonts
+                </td>
+                <td>20170801-13.fc31</td>
+                <td>noarch</td>
+                <td data-order="400088">390.7 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>fontconfig-2.13.92-3.fc31.s390x</li>
+    
+    <li>urw-base35-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    which
+                </td>
+                <td>2.21-15.fc31</td>
+                <td>s390x</td>
+                <td data-order="82774">80.8 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>xdg-utils-1.1.3-5.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xdg-utils
+                </td>
+                <td>1.1.3-5.fc31</td>
+                <td>noarch</td>
+                <td data-order="319995">312.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xorg-x11-font-utils
+                </td>
+                <td>1:7.5-43.fc31</td>
+                <td>s390x</td>
+                <td data-order="377962">369.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>urw-base35-bookman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-c059-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-d050000l-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-gothic-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-mono-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-roman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-sans-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-p052-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-standard-symbols-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-z003-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xorg-x11-server-utils
+                </td>
+                <td>7.7-32.fc31</td>
+                <td>s390x</td>
+                <td data-order="476303">465.1 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>urw-base35-bookman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-c059-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-d050000l-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-gothic-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-mono-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-roman-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-nimbus-sans-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-p052-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-standard-symbols-ps-fonts-20170801-13.fc31.noarch</li>
+    
+    <li>urw-base35-z003-fonts-20170801-13.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    xz-libs
+                </td>
+                <td>5.2.4-6.fc31</td>
+                <td>s390x</td>
+                <td data-order="181727">177.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    <li>libxml2-2.9.10-3.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    <li>systemd-libs-243.7-1.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    zlib
+                </td>
+                <td>1.2.11-20.fc31</td>
+                <td>s390x</td>
+                <td data-order="212967">208.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>OpenEXR-libs-2.3.0-4.fc31.s390x</li>
+    
+    <li>cairo-1.16.0-6.fc31.s390x</li>
+    
+    <li>cairo-gobject-1.16.0-6.fc31.s390x</li>
+    
+    <li>cups-libs-1:2.2.12-6.fc31.s390x</li>
+    
+    <li>exiv2-libs-0.27.2-1.fc31.s390x</li>
+    
+    <li>freetype-2.10.0-3.fc31.s390x</li>
+    
+    <li>gimp-2:2.10.14-1.module_f31+6993+669d73be.s390x</li>
+    
+    <li>glib2-2.62.5-1.fc31.s390x</li>
+    
+    <li>libfontenc-1.1.3-11.fc31.s390x</li>
+    
+    <li>libgs-9.27-3.fc31.s390x</li>
+    
+    <li>libmng-2.0.3-10.fc31.s390x</li>
+    
+    <li>libpng-2:1.6.37-2.fc31.s390x</li>
+    
+    <li>librsvg2-2.46.4-1.fc31.s390x</li>
+    
+    <li>libtiff-4.0.10-8.fc31.s390x</li>
+    
+    <li>libwmf-0.2.12-2.fc31.s390x</li>
+    
+    <li>libxml2-2.9.10-3.fc31.s390x</li>
+    
+    <li>openssl-libs-1:1.1.1d-2.fc31.s390x</li>
+    
+    <li>python2-libs-2.7.17-1.fc31.s390x</li>
+    
+    <li>python3-libs-3.7.6-2.fc31.s390x</li>
+    
+    <li>sqlite-libs-3.30.0-1.fc31.s390x</li>
+    
+    <li>xorg-x11-font-utils-1:7.5-43.fc31.s390x</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--rhel-8-appstream-module-gimp-2.8--fedora-empty-base--repository-fedora-31--s390x.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

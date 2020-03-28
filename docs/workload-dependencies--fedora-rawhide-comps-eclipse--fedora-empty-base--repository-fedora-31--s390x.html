@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--fedora-rawhide-comps-eclipse--repository-fedora-31.html">
+                    Comps group eclipse for fedora-rawhide
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Comps group eclipse for fedora-rawhide in Empty from Fedora 31 s390x
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        Comps group eclipse for fedora-rawhide <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora 31</small>
+        <small class="text-muted"> for </small>
+        <small> s390x</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="workload--fedora-rawhide-comps-eclipse--fedora-empty-base--repository-fedora-31--s390x.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="workload-dependencies--fedora-rawhide-comps-eclipse--fedora-empty-base--repository-fedora-31--s390x.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    <div class="card border-danger">
+        <h5 class="card-header bg-danger text-white">Dependency errors!</h5>
+        <div class="card-body">
+            <pre class="pre-scrollable">
+                
+ Problem 1: package eclipse-linuxtools-docker-7.2.0-4.fc31.noarch requires osgi(org.glassfish.jersey.core.jersey-client), but none of the providers can be installed
+  - package eclipse-linuxtools-docker-7.2.0-4.fc31.noarch requires osgi(org.glassfish.jersey.core.jersey-common), but none of the providers can be installed
+  - package eclipse-linuxtools-docker-7.2.0-4.fc31.noarch requires osgi(org.glassfish.jersey.media.jersey-media-json-jackson), but none of the providers can be installed
+  - package eclipse-linuxtools-docker-7.2.0-4.fc31.noarch requires jersey >= 2.28-3, but none of the providers can be installed
+  - conflicting requests
+  - package jersey-2.28-4.module_f31+6165+9b01e00c.noarch is excluded
+  - package jersey-2.28-4.module_f31+6519+12cd0b27.noarch is excluded
+  - package jersey-2.28-4.module_f31+6793+1c93c38e.noarch is excluded
+  - nothing provides mvn(org.hibernate:hibernate-validator) needed by jersey-2.28-5.fc31.noarch
+  - nothing provides mvn(org.jboss.weld.se:weld-se-core) needed by jersey-2.28-5.fc31.noarch
+ Problem 2: package eclipse-pydev-1:7.1.0-2.fc31.s390x requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 3: package eclipse-packagekit-0.2.0-11.fc31.noarch requires eclipse-platform >= 3.4.0, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 4: package eclipse-egit-github-5.3.0-1.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 5: package eclipse-subclipse-4.3.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.core), but none of the providers can be installed
+  - package eclipse-subclipse-4.3.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.ui), but none of the providers can be installed
+  - package eclipse-subclipse-4.3.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.team.ui), but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.6.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-mylyn-3.25.0-0.11.module_f31+6165+9b01e00c.noarch is excluded
+  - package eclipse-mylyn-3.25.0-2.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-mylyn-3.25.0-2.module_f31+6793+1c93c38e.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 6: package eclipse-pydev-mylyn-1:7.1.0-2.fc31.noarch requires osgi(org.eclipse.mylyn.context.core), but none of the providers can be installed
+  - package eclipse-pydev-mylyn-1:7.1.0-2.fc31.noarch requires osgi(org.eclipse.mylyn.resources.ui), but none of the providers can be installed
+  - package eclipse-pydev-mylyn-1:7.1.0-2.fc31.noarch requires osgi(org.eclipse.mylyn.context.ui), but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.6.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-mylyn-3.25.0-0.11.module_f31+6165+9b01e00c.noarch is excluded
+  - package eclipse-mylyn-3.25.0-2.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-mylyn-3.25.0-2.module_f31+6793+1c93c38e.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 7: package eclipse-dltk-mylyn-5.11.0-1.fc31.noarch requires eclipse-mylyn >= 3.21.0-4, but none of the providers can be installed
+  - package eclipse-dltk-mylyn-5.11.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.ui), but none of the providers can be installed
+  - package eclipse-dltk-mylyn-5.11.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.commons.ui), but none of the providers can be installed
+  - package eclipse-dltk-mylyn-5.11.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.context.core), but none of the providers can be installed
+  - package eclipse-dltk-mylyn-5.11.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.resources.ui), but none of the providers can be installed
+  - package eclipse-dltk-mylyn-5.11.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.commons.core), but none of the providers can be installed
+  - package eclipse-dltk-mylyn-5.11.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.context.ui), but none of the providers can be installed
+  - package eclipse-dltk-mylyn-5.11.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.monitor.core), but none of the providers can be installed
+  - package eclipse-dltk-mylyn-5.11.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.ide.ui), but none of the providers can be installed
+  - package eclipse-dltk-mylyn-5.11.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.monitor.ui), but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.6.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-mylyn-3.25.0-0.11.module_f31+6165+9b01e00c.noarch is excluded
+  - package eclipse-mylyn-3.25.0-2.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-mylyn-3.25.0-2.module_f31+6793+1c93c38e.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 8: package eclipse-cdt-docker-2:9.7.0-1.fc31.s390x requires osgi(org.eclipse.linuxtools.docker.core), but none of the providers can be installed
+  - package eclipse-cdt-docker-2:9.7.0-1.fc31.s390x requires osgi(org.eclipse.linuxtools.docker.ui), but none of the providers can be installed
+  - package eclipse-cdt-docker-2:9.7.0-1.fc31.s390x requires eclipse-linuxtools-docker >= 5.3.0, but none of the providers can be installed
+  - package eclipse-linuxtools-docker-7.2.0-4.fc31.noarch requires osgi(org.glassfish.jersey.core.jersey-client), but none of the providers can be installed
+  - package eclipse-linuxtools-docker-7.2.0-4.fc31.noarch requires osgi(org.glassfish.jersey.core.jersey-common), but none of the providers can be installed
+  - package eclipse-linuxtools-docker-7.2.0-4.fc31.noarch requires osgi(org.glassfish.jersey.media.jersey-media-json-jackson), but none of the providers can be installed
+  - package eclipse-linuxtools-docker-7.2.0-4.fc31.noarch requires jersey >= 2.28-3, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-linuxtools-docker-7.4.0-2.module_f31+6519+12cd0b27.noarch is excluded
+  - package jersey-2.28-4.module_f31+6165+9b01e00c.noarch is excluded
+  - package jersey-2.28-4.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-linuxtools-docker-7.4.0-3.module_f31+6793+1c93c38e.noarch is excluded
+  - package jersey-2.28-4.module_f31+6793+1c93c38e.noarch is excluded
+  - nothing provides mvn(org.hibernate:hibernate-validator) needed by jersey-2.28-5.fc31.noarch
+  - nothing provides mvn(org.jboss.weld.se:weld-se-core) needed by jersey-2.28-5.fc31.noarch
+ Problem 9: package eclipse-cdt-2:9.7.0-1.fc31.s390x requires eclipse-launchbar >= 1:2.2.2, but none of the providers can be installed
+  - package eclipse-cdt-2:9.7.0-1.fc31.s390x requires osgi(org.eclipse.launchbar.core), but none of the providers can be installed
+  - package eclipse-cdt-2:9.7.0-1.fc31.s390x requires osgi(org.eclipse.launchbar.ui), but none of the providers can be installed
+  - package eclipse-launchbar-1:2.2.3-1.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-launchbar-1:2.4.0-1.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-launchbar-1:2.4.0-1.module_f31+6793+1c93c38e.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 10: package eclipse-linuxtools-systemtap-7.2.0-4.fc31.noarch requires osgi(org.eclipse.draw2d), but none of the providers can be installed
+  - package eclipse-linuxtools-systemtap-7.2.0-4.fc31.noarch requires osgi(org.eclipse.zest.core), but none of the providers can be installed
+  - package eclipse-linuxtools-systemtap-7.2.0-4.fc31.noarch requires osgi(org.eclipse.zest.layouts), but none of the providers can be installed
+  - package eclipse-gef-3.11.0-9.fc31.noarch requires eclipse-platform >= 1:4.4.0, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-gef-3.11.0-11.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-gef-3.11.0-9.module_f31+6165+9b01e00c.noarch is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-gef-3.11.0-11.module_f31+6793+1c93c38e.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 11: package eclipse-usage-4.11.0-1.fc31.noarch requires osgi(org.eclipse.epp.logging.aeri.core), but none of the providers can be installed
+  - package eclipse-usage-4.11.0-1.fc31.noarch requires osgi(org.eclipse.epp.logging.aeri.ide), but none of the providers can be installed
+  - package eclipse-epp-logging-2.0.7-8.fc31.noarch requires eclipse-platform >= 1:4.6.0, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-epp-logging-2.0.8-1.module_f31+6165+9b01e00c.noarch is excluded
+  - package eclipse-epp-logging-2.0.8-2.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 12: package eclipse-mylyn-versions-git-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.egit.ui), but none of the providers can be installed
+  - package eclipse-mylyn-versions-git-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.egit.core), but none of the providers can be installed
+  - package eclipse-egit-5.6.0-2.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-egit-5.3.0-2.fc31.noarch requires eclipse-platform >= 1:4.6.0, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-egit-5.5.0-1.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-egit-5.5.0-1.module_f31+6793+1c93c38e.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 13: package eclipse-mylyn-context-cdt-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.cdt.core), but none of the providers can be installed
+  - package eclipse-cdt-native-2:9.7.0-1.fc31.s390x requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6519+12cd0b27.s390x is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6793+1c93c38e.s390x is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 14: package eclipse-linuxtools-valgrind-7.2.0-4.fc31.noarch requires osgi(org.eclipse.cdt.core), but none of the providers can be installed
+  - package eclipse-linuxtools-valgrind-7.2.0-4.fc31.noarch requires osgi(org.eclipse.cdt.core.native), but none of the providers can be installed
+  - package eclipse-cdt-native-2:9.7.0-1.fc31.s390x requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6519+12cd0b27.s390x is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6793+1c93c38e.s390x is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 15: package eclipse-linuxtools-perf-7.2.0-4.fc31.noarch requires osgi(org.eclipse.cdt.core), but none of the providers can be installed
+  - package eclipse-cdt-native-2:9.7.0-1.fc31.s390x requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6519+12cd0b27.s390x is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6793+1c93c38e.s390x is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 16: package eclipse-linuxtools-libhover-7.2.0-4.fc31.noarch requires osgi(org.eclipse.cdt.core), but none of the providers can be installed
+  - package eclipse-cdt-native-2:9.7.0-1.fc31.s390x requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6519+12cd0b27.s390x is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6793+1c93c38e.s390x is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 17: package eclipse-linuxtools-gprof-7.2.0-4.fc31.noarch requires osgi(org.eclipse.cdt.core), but none of the providers can be installed
+  - package eclipse-cdt-native-2:9.7.0-1.fc31.s390x requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6519+12cd0b27.s390x is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6793+1c93c38e.s390x is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 18: package eclipse-linuxtools-gcov-7.2.0-4.fc31.noarch requires osgi(org.eclipse.cdt.core), but none of the providers can be installed
+  - package eclipse-cdt-native-2:9.7.0-1.fc31.s390x requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6519+12cd0b27.s390x is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6793+1c93c38e.s390x is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 19: package eclipse-linuxtools-changelog-2:7.2.0-4.fc31.noarch requires osgi(org.eclipse.cdt.core), but none of the providers can be installed
+  - package eclipse-cdt-native-2:9.7.0-1.fc31.s390x requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6519+12cd0b27.s390x is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6793+1c93c38e.s390x is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 20: package eclipse-dltk-sh-5.11.0-1.fc31.noarch requires osgi(org.eclipse.dltk.core) = 5.11.0.201903141314, but none of the providers can be installed
+  - package eclipse-dltk-sh-5.11.0-1.fc31.noarch requires osgi(org.eclipse.dltk.launching) = 5.11.0.201903141314, but none of the providers can be installed
+  - package eclipse-dltk-sh-5.11.0-1.fc31.noarch requires osgi(org.eclipse.dltk.ui) = 5.11.0.201903141314, but none of the providers can be installed
+  - package eclipse-dltk-sh-5.11.0-1.fc31.noarch requires osgi(org.eclipse.dltk.debug.ui) = 5.11.0.201903141314, but none of the providers can be installed
+  - package eclipse-dltk-5.11.0-1.fc31.noarch requires eclipse-platform >= 1:4.6.0, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 21: package eclipse-linuxtools-rpm-editor-7.2.0-4.fc31.noarch requires osgi(org.eclipse.linuxtools.profiling.launch) = 3.3.0.201903161739, but none of the providers can be installed
+  - package eclipse-linuxtools-rpm-editor-7.2.0-4.fc31.noarch requires osgi(org.eclipse.linuxtools.tools.launch.core) = 3.3.0.201903161739, but none of the providers can be installed
+  - package eclipse-linuxtools-7.2.0-4.fc31.noarch requires osgi(org.eclipse.cdt.core), but none of the providers can be installed
+  - package eclipse-linuxtools-7.2.0-4.fc31.noarch requires osgi(org.eclipse.cdt.core.native), but none of the providers can be installed
+  - package eclipse-cdt-native-2:9.7.0-1.fc31.s390x requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6519+12cd0b27.s390x is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-cdt-native-2:9.9.0-1.module_f31+6793+1c93c38e.s390x is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 22: package eclipse-linuxtools-vagrant-7.2.0-4.fc31.noarch requires osgi(org.eclipse.tm.terminal.view.core), but none of the providers can be installed
+  - package eclipse-linuxtools-vagrant-7.2.0-4.fc31.noarch requires osgi(org.eclipse.tm.terminal.view.ui), but none of the providers can be installed
+  - package eclipse-linuxtools-vagrant-7.2.0-4.fc31.noarch requires osgi(org.eclipse.tm.terminal.connector.ssh), but none of the providers can be installed
+  - package eclipse-tm-terminal-4.5.100-1.fc31.noarch requires osgi(org.eclipse.egit.ui), but none of the providers can be installed
+  - package eclipse-egit-5.6.0-2.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-egit-5.3.0-2.fc31.noarch requires eclipse-platform >= 1:4.6.0, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-egit-5.5.0-1.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package eclipse-tm-terminal-4.5.102-1.module_f31+6519+12cd0b27.noarch is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-egit-5.5.0-1.module_f31+6793+1c93c38e.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package eclipse-tm-terminal-4.5.102-1.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 23: package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.workbench) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.context.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.context.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.monitor.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.monitor.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.ide.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-java-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.resources.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.6.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 24: package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.context.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.context.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.monitor.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.monitor.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.ide.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.resources.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-context-pde-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.team.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.6.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 25: package eclipse-mylyn-tasks-bugzilla-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-bugzilla-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-bugzilla-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-bugzilla-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-bugzilla-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.workbench) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-bugzilla-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.net) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-bugzilla-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.repositories.core) = 1.17.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-bugzilla-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.repositories.http.core) = 1.17.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-bugzilla-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.xmlrpc) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.6.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 26: package eclipse-mylyn-tasks-trac-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-trac-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-trac-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-trac-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.ui) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-trac-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.workbench) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-trac-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.net) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-tasks-trac-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.xmlrpc) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.6.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 27: package eclipse-mylyn-versions-subclipse-3.25.0-0.6.fc31.noarch requires osgi(org.tigris.subversion.subclipse.core), but none of the providers can be installed
+  - package eclipse-subclipse-4.3.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.core), but none of the providers can be installed
+  - package eclipse-subclipse-4.3.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.ui), but none of the providers can be installed
+  - package eclipse-subclipse-4.3.0-1.fc31.noarch requires osgi(org.eclipse.mylyn.team.ui), but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.6.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-mylyn-3.25.0-0.11.module_f31+6165+9b01e00c.noarch is excluded
+  - package eclipse-mylyn-3.25.0-2.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package eclipse-subclipse-4.3.0-1.module_f31+6519+12cd0b27.noarch is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-mylyn-3.25.0-2.module_f31+6793+1c93c38e.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package eclipse-subclipse-4.3.0-1.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 28: package eclipse-mylyn-versions-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.commons.core) = 3.25.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-versions-cvs-3.25.0-0.6.fc31.noarch requires osgi(org.eclipse.mylyn.versions.core) = 1.17.0.v20190316.2128, but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.6.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - conflicting requests
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 29: conflicting requests
+  - package eclipse-mpc-1.8.1-1.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-mpc-1.7.5-2.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 30: conflicting requests
+  - package eclipse-egit-5.6.0-2.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-egit-5.3.0-2.fc31.noarch requires eclipse-platform >= 1:4.6.0, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 31: conflicting requests
+  - package eclipse-egit-mylyn-5.3.0-2.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.core), but none of the providers can be installed
+  - package eclipse-egit-mylyn-5.3.0-2.fc31.noarch requires osgi(org.eclipse.mylyn.tasks.ui), but none of the providers can be installed
+  - package eclipse-egit-mylyn-5.3.0-2.fc31.noarch requires osgi(org.eclipse.mylyn.context.core), but none of the providers can be installed
+  - package eclipse-egit-mylyn-5.3.0-2.fc31.noarch requires osgi(org.eclipse.mylyn.team.ui), but none of the providers can be installed
+  - package eclipse-egit-5.6.0-2.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.6.fc31.noarch requires eclipse-platform, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-mylyn-3.25.0-0.11.module_f31+6165+9b01e00c.noarch is excluded
+  - package eclipse-mylyn-3.25.0-2.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-platform-1:4.12-6.module_f31+6165+9b01e00c.s390x is excluded
+  - package eclipse-platform-1:4.13-2.module_f31+6519+12cd0b27.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package eclipse-mylyn-3.25.0-2.module_f31+6793+1c93c38e.noarch is excluded
+  - package eclipse-platform-1:4.13-6.module_f31+7243+50fb5b11.s390x is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 32: conflicting requests
+  - package eclipse-pde-1:4.14-5.fc31.s390x requires eclipse-platform = 1:4.14-5.fc31, but none of the providers can be installed
+  - package eclipse-pde-1:4.11-3.fc31.s390x requires eclipse-platform = 1:4.11-3.fc31, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+ Problem 33: conflicting requests
+  - package eclipse-jdt-1:4.14-5.fc31.noarch requires eclipse-platform = 1:4.14-5.fc31, but none of the providers can be installed
+  - package eclipse-jdt-1:4.11-3.fc31.noarch requires eclipse-platform = 1:4.11-3.fc31, but none of the providers can be installed
+  - package eclipse-platform-1:4.14-5.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package eclipse-platform-1:4.11-3.fc31.s390x requires glassfish-el >= 3.0.1, but none of the providers can be installed
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6519+12cd0b27.noarch is excluded
+  - package glassfish-el-3.0.1-0.12.b08.module_f31+6793+1c93c38e.noarch is excluded
+  - package glassfish-el-3.0.1-0.11.b08.fc31.noarch is excluded
+            </pre>
+        </div>
+    </div>
+    <br>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Reasons of Presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--fedora-rawhide-comps-eclipse--fedora-empty-base--repository-fedora-31--s390x.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>
