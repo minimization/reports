@@ -103,14 +103,42 @@
         kojibuildsystem groups: livemedia-build <small class="text-muted"> workload</small>
         <br>
         <small class="text-muted"> in </small>
-        <small> <a href="">ELN bootable base</a> </small>
+        <small> ELN bootable base </small>
         <small class="text-muted"> from </small>
-        <small> <a href="">Fedora rawhide</a> </small>
+        <small> Fedora rawhide</small>
         <small class="text-muted"> for </small>
         <small> aarch64</small>
     </h1>
 
     <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="workload--koji-group-livemedia-build--eln-base--repository-fedora-rawhide--aarch64.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="workload-dependencies--koji-group-livemedia-build--eln-base--repository-fedora-rawhide--aarch64.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    <div class="card border-danger">
+        <h5 class="card-header bg-danger text-white">Dependency errors!</h5>
+        <div class="card-body">
+            <pre class="pre-scrollable">
+                
+ Problem: problem with installed package coreutils-single-8.31-10.fc32.aarch64
+  - package coreutils-8.31-10.fc32.aarch64 conflicts with coreutils-single provided by coreutils-single-8.31-10.fc32.aarch64
+  - conflicting requests
+            </pre>
+        </div>
+    </div>
+    <br>
+    
 
     <div class="row">
         <div class="col-sm-9 d-flex align-items-stretch">
@@ -125,17 +153,22 @@
             <div class="card w-100">
                 <h5 class="card-header"> Relations </h5>
                 <div class="card-body">
-                    <br>
-                    <br>
-                    <p class="lead text-muted"> TBD</p>
-                    <br>
-                    <br>
+                    <dl>
+                        <dt>Configuration</dt>
+                        <dd><a href="config-workload--koji-group-livemedia-build.html">koji-group-livemedia-build.yaml</a></dd>
+                    </dl>
                 </div>
             </div>
         </div>
     </div>
 
     <br>
+
+    
+
+    
+
+    
 
     <table id="table_packages" class="table-packages">
         <thead>
@@ -181,7 +214,8 @@
                         legend: {
                             display: false
                         },
-                        spanGaps: true
+                        spanGaps: true,
+                        maintainAspectRatio: false
                     }
                 });
             }
