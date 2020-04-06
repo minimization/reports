@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Pipeline</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datatables test begin -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <!-- Datatables test end -->
+
+  <!-- Chart stuff start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+  <!-- Chart stuff end -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="_static/feedback_pipeline.css">
+
+  <style>
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: 8px;
+    }
+
+    table.dataTable thead .sorting {
+      background-image: url("_static/images/sort_both.png");
+    }
+
+    table.dataTable thead .sorting_asc {
+      background-image: url("_static/images/sort_asc.png");
+    }
+
+    table.dataTable thead .sorting_desc {
+      background-image: url("_static/images/sort_desc.png");
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("_static/images/sort_asc_disabled.png");
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("_static/images/sort_desc_disabled.png");
+    }
+
+    table.dataTable thead .sort_control_row {
+      font-weight: bold !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><a style="color:white" href="./">Feedback Pipeline</a></span>
+    </div>
+  </nav>
+  <br>
+  
+
+
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./results.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Results</a></li>
+            <li class="breadcrumb-item"><a href="./workloads.html">Workloads</a></li>
+            <li class="breadcrumb-item">
+                <a
+                    href="./workload-overview--eln-buildroot-workload--repository-fedora-31.html">
+                    ELN Buildroot Workload
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                ELN Buildroot Workload in Empty from Fedora 31 x86_64
+            </li>
+        </ol>
+    </nav>
+
+
+    <h1>
+        ELN Buildroot Workload <small class="text-muted"> workload</small>
+        <br>
+        <small class="text-muted"> in </small>
+        <small> Empty </small>
+        <small class="text-muted"> from </small>
+        <small> Fedora 31</small>
+        <small class="text-muted"> for </small>
+        <small> x86_64</small>
+    </h1>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="workload--eln-buildroot-workload--fedora-empty-base--repository-fedora-31--x86_64.html">Packages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="workload-dependencies--eln-buildroot-workload--fedora-empty-base--repository-fedora-31--x86_64.html">Reasons of Presence</a>
+        </li>
+    </ul>
+
+
+    <br>
+
+    
+
+    <div class="card border-danger">
+        <h5 class="card-header bg-danger text-white">Dependency errors!</h5>
+        <div class="card-body">
+            <pre class="pre-scrollable">
+                
+ Problem 1: conflicting requests
+  - nothing provides (npm(dreamopt) >= 0.8.0 with npm(dreamopt) < 0.9) needed by nodejs-json-diff-0.5.2-5.fc31.noarch
+ Problem 2: conflicting requests
+  - nothing provides (npm(arrify) >= 1.0.0 with npm(arrify) < 2) needed by nodejs-load-grunt-tasks-3.5.0-7.fc30.noarch
+ Problem 3: package maven-wagon-http-lightweight-3.3.3-4.fc31.noarch requires mvn(org.apache.maven.wagon:wagon-provider-api) = 3.3.3, but none of the providers can be installed
+  - conflicting requests
+  - package maven-wagon-provider-api-3.3.3-4.fc31.noarch is excluded
+ Problem 4: package maven-hawtjni-plugin-1.16-5.fc31.noarch requires mvn(org.fusesource.hawtjni:hawtjni-generator) = 1.16, but none of the providers can be installed
+  - conflicting requests
+  - package hawtjni-1.16-5.fc31.noarch is excluded
+ Problem 5: package plexus-components-pom-4.0-1.fc31.noarch requires mvn(org.codehaus.plexus:plexus-component-metadata), but none of the providers can be installed
+  - package plexus-containers-component-metadata-2.0.0-1.fc31.noarch requires mvn(org.codehaus.plexus:plexus-component-annotations) = 2.0.0, but none of the providers can be installed
+  - conflicting requests
+  - package plexus-containers-component-annotations-2.0.0-1.fc31.noarch is excluded
+ Problem 6: conflicting requests
+  - package ocaml-sexplib-devel-7.0.5-33.fc30.i686 requires ocaml-sexplib = 7.0.5-33.fc30, but none of the providers can be installed
+  - package ocaml-sexplib-devel-7.0.5-33.fc30.x86_64 requires ocaml-sexplib = 7.0.5-33.fc30, but none of the providers can be installed
+  - nothing provides ocaml(CamlinternalFormatBasics) = 7ea79e608e46b41c80c3251773e6fdf3 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib) = 2812fae09b173a42800ce3b48328b9cb needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__array) = 8289b1b8bcdd29cc6a859bfa35d44a2e needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__buffer) = 10853d28756c7121334e6b9e3e83e1ba needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__format) = 28a664c1f420f636bf646c962e89e74a needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__int32) = 78bd846191e02a88baa4e9a80ecf1cd6 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__list) = 0c0f6e8daa075e845d18d212dd78098f needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__obj) = a596d23956eb4b50fd382185fb87478a needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__printf) = be9ae8643b5511d51db9c754b5ee4f74 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__seq) = 5c66a1fd18f6126043d7af46d32b4b53 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__stream) = 4dac5a24ac9b37b27ef4ca0acf5d283c needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__string) = da1db0058f6dfb66ed4d85c353dc9306 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__uchar) = 786699188e2f8c1fe32eb8363cd7655a needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(runtime) = 4.07.0 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__hashtbl) = 682884027fa100c01983d89cfc4eaf69 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__lazy) = e6d072b84e6160ffef0b04b417bf1f72 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__lexing) = 4ca35ee6f83c87fbf3d6a22e3555e3ce needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__printexc) = f94eb57f9995c6f95133374b31a2db08 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__char) = dfbf7b404aa65639c2ae48823aae4141 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__set) = ee3121b3672ab195758de1ce2e925022 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Location) = 705032c6695d914779e95b026950eabc needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Longident) = 73d0d379de5875c200c15bacd0029c6a needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__arg) = 427a32ba894b2729b4053bd61ec3bc12 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Warnings) = ddd1dc71e43d5ace909daa139b2f79c4 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__int64) = a454ce987e87f19475aaffc6390cdac3 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__nativeint) = b902bb985d2fe122694f9825a3a50cf5 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Camlp4) = f225e91e8321f5aef43602e59eb6ea53 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Camlp4_config) = 2e1b491a1191ba415451040448426bb1 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__queue) = 7f7ceceae7e32ae22ed869d3d416da67 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__sys) = 173c21e20f3d44e9b4f52694fd5addb3 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__map) = c1f5b25c1463fcd9b8448c396d451c2e needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__bigarray) = fde4e26503108d041547c9eef855a5fa needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__complex) = d4688bd6236fccf33550a083ea8e768f needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Unix) = e5f3d189d40891229c2283728e203e8a needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__filename) = 59d4f5dc5b39cf14e1644b77a94ace28 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(CamlinternalLazy) = 3adca82482059421053701381ab2103c needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Bigarray) = 0c47051b3cf2ad550a5c848dbb88e6c4 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__digest) = 016281ffc9d31386ea657032ace7c0b6 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__stack) = c2ffc5230781926be0a7955883c5115e needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__parsing) = c277400343f616546ed67ff4e1646996 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Cmi_format) = 71105ea80a3e63b0e9bfb5b9f1d3bec6 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Consistbl) = 65f68174537fc69de6ef989a891b8e4c needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Env) = 491eeae2221ce82e9d5ec852e1231cb7 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Ident) = c0591ee56cc538533036b71d69eeeb52 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Identifiable) = 10e6c72b8ce17dc71d502d9460fc5799 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Misc) = 618beefc645161b6d016d700c94574b5 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Path) = 1471f6b8ab022f56847470baeb26f5cb needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Primitive) = a1939fa70a881b707ee1dbf42fcc3077 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Subst) = 2b2222b9f7e2f334937859f2b7be123c needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Toploop) = 3bdef1e74d6cc3d07f051945f725d328 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Types) = e416e53de5615db338691b3f897e0742 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Big_int) = 7ab70fdf2234af7e5d1793b40a898af6 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Nat) = 3e5c7e92d8f19e0449504a0dd9300d69 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__stringLabels) = 1b37a2841d959f2fbd62c0c5407e4c1a needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__scanf) = ee5bb5cd64716063deceb22e04cc7760 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Num) = 97b207b799136b1688ba97415bc14725 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Ratio) = 0aa8995f029dfcaea858378de4c074af needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__gc) = 121da7976d740f3d8c647f7734cb9e5b needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__listLabels) = 5b0312a24ce2f5b2cd78197e346c9fcf needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__moreLabels) = 03200a985741860b00e83b44bfbf9832 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__stdLabels) = af498fdcb9a34be3325d79c590955d51 needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+  - nothing provides ocaml(Stdlib__weak) = 0007b990f6fe2b9a0c07c3b3603e4a6f needed by ocaml-sexplib-7.0.5-33.fc30.x86_64
+ Problem 7: conflicting requests
+  - package fedora-release-xfce-31-2.noarch conflicts with system-release provided by generic-release-31-2.noarch
+  - package generic-release-31-2.noarch conflicts with fedora-release provided by fedora-release-xfce-31-2.noarch
+  - package generic-release-31-2.noarch conflicts with system-release provided by fedora-release-xfce-31-2.noarch
+  - package generic-release-31-2.noarch conflicts with fedora-release provided by fedora-release-xfce-31-1.noarch
+  - package generic-release-31-2.noarch conflicts with system-release provided by fedora-release-xfce-31-1.noarch
+  - package fedora-release-xfce-31-1.noarch conflicts with system-release provided by generic-release-31-2.noarch
+  - package generic-release-30-0.3.noarch requires generic-release-common = 30-0.3, but none of the providers can be installed
+  - nothing provides fedora-repos(30) needed by generic-release-common-30-0.3.noarch
+ Problem 8: conflicting requests
+  - package php-devel-7.3.16-1.fc31.x86_64 requires openssl-devel(x86-64), but none of the providers can be installed
+  - package php-devel-7.3.10-1.fc31.x86_64 requires openssl-devel(x86-64), but none of the providers can be installed
+  - package compat-openssl10-devel-1:1.0.2o-8.fc31.i686 conflicts with openssl-devel provided by openssl-devel-1:1.1.1d-2.fc31.x86_64
+  - package compat-openssl10-devel-1:1.0.2o-8.fc31.x86_64 conflicts with openssl-devel provided by openssl-devel-1:1.1.1d-2.fc31.x86_64
+ Problem 9: conflicting requests
+  - package fedora-release-workstation-31-2.noarch conflicts with system-release provided by fedora-release-cinnamon-31-1.noarch
+  - package fedora-release-cinnamon-31-1.noarch conflicts with system-release provided by fedora-release-workstation-31-2.noarch
+  - package fedora-release-cinnamon-31-1.noarch conflicts with system-release provided by fedora-release-workstation-31-1.noarch
+  - package fedora-release-workstation-31-1.noarch conflicts with system-release provided by fedora-release-cinnamon-31-1.noarch
+  - package fedora-release-cinnamon-31-2.noarch conflicts with system-release provided by fedora-release-workstation-31-2.noarch
+  - package fedora-release-workstation-31-2.noarch conflicts with system-release provided by fedora-release-cinnamon-31-2.noarch
+  - package fedora-release-cinnamon-31-2.noarch conflicts with system-release provided by fedora-release-workstation-31-1.noarch
+  - package fedora-release-workstation-31-1.noarch conflicts with system-release provided by fedora-release-cinnamon-31-2.noarch
+ Problem 10: conflicting requests
+  - package fedora-release-soas-31-2.noarch conflicts with system-release provided by fedora-release-cloud-31-1.noarch
+  - package fedora-release-cloud-31-1.noarch conflicts with system-release provided by fedora-release-soas-31-2.noarch
+  - package fedora-release-cloud-31-1.noarch conflicts with system-release provided by fedora-release-soas-31-1.noarch
+  - package fedora-release-soas-31-1.noarch conflicts with system-release provided by fedora-release-cloud-31-1.noarch
+  - package fedora-release-cloud-31-2.noarch conflicts with system-release provided by fedora-release-soas-31-2.noarch
+  - package fedora-release-soas-31-2.noarch conflicts with system-release provided by fedora-release-cloud-31-2.noarch
+  - package fedora-release-cloud-31-2.noarch conflicts with system-release provided by fedora-release-soas-31-1.noarch
+  - package fedora-release-soas-31-1.noarch conflicts with system-release provided by fedora-release-cloud-31-2.noarch
+ Problem 11: conflicting requests
+  - package fedora-release-snappy-31-2.noarch conflicts with system-release provided by fedora-release-container-31-1.noarch
+  - package fedora-release-container-31-1.noarch conflicts with system-release provided by fedora-release-snappy-31-2.noarch
+  - package fedora-release-container-31-1.noarch conflicts with system-release provided by fedora-release-snappy-31-1.noarch
+  - package fedora-release-snappy-31-1.noarch conflicts with system-release provided by fedora-release-container-31-1.noarch
+  - package fedora-release-container-31-2.noarch conflicts with system-release provided by fedora-release-snappy-31-2.noarch
+  - package fedora-release-snappy-31-2.noarch conflicts with system-release provided by fedora-release-container-31-2.noarch
+  - package fedora-release-container-31-2.noarch conflicts with system-release provided by fedora-release-snappy-31-1.noarch
+  - package fedora-release-snappy-31-1.noarch conflicts with system-release provided by fedora-release-container-31-2.noarch
+ Problem 12: conflicting requests
+  - package fedora-release-silverblue-31-2.noarch conflicts with system-release provided by fedora-release-coreos-31-1.noarch
+  - package fedora-release-coreos-31-1.noarch conflicts with system-release provided by fedora-release-silverblue-31-2.noarch
+  - package fedora-release-coreos-31-1.noarch conflicts with system-release provided by fedora-release-silverblue-31-1.noarch
+  - package fedora-release-silverblue-31-1.noarch conflicts with system-release provided by fedora-release-coreos-31-1.noarch
+  - package fedora-release-coreos-31-2.noarch conflicts with system-release provided by fedora-release-silverblue-31-2.noarch
+  - package fedora-release-silverblue-31-2.noarch conflicts with system-release provided by fedora-release-coreos-31-2.noarch
+  - package fedora-release-coreos-31-2.noarch conflicts with system-release provided by fedora-release-silverblue-31-1.noarch
+  - package fedora-release-silverblue-31-1.noarch conflicts with system-release provided by fedora-release-coreos-31-2.noarch
+ Problem 13: conflicting requests
+  - package fedora-release-server-31-2.noarch conflicts with system-release provided by fedora-release-iot-31-1.noarch
+  - package fedora-release-iot-31-1.noarch conflicts with system-release provided by fedora-release-server-31-2.noarch
+  - package fedora-release-iot-31-1.noarch conflicts with system-release provided by fedora-release-server-31-1.noarch
+  - package fedora-release-server-31-1.noarch conflicts with system-release provided by fedora-release-iot-31-1.noarch
+  - package fedora-release-iot-31-2.noarch conflicts with system-release provided by fedora-release-server-31-2.noarch
+  - package fedora-release-server-31-2.noarch conflicts with system-release provided by fedora-release-iot-31-2.noarch
+  - package fedora-release-iot-31-2.noarch conflicts with system-release provided by fedora-release-server-31-1.noarch
+  - package fedora-release-server-31-1.noarch conflicts with system-release provided by fedora-release-iot-31-2.noarch
+ Problem 14: conflicting requests
+  - package fedora-release-matecompiz-31-2.noarch conflicts with system-release provided by fedora-release-kde-31-1.noarch
+  - package fedora-release-kde-31-1.noarch conflicts with system-release provided by fedora-release-matecompiz-31-2.noarch
+  - package fedora-release-kde-31-1.noarch conflicts with system-release provided by fedora-release-matecompiz-31-1.noarch
+  - package fedora-release-matecompiz-31-1.noarch conflicts with system-release provided by fedora-release-kde-31-1.noarch
+  - package fedora-release-kde-31-2.noarch conflicts with system-release provided by fedora-release-matecompiz-31-2.noarch
+  - package fedora-release-matecompiz-31-2.noarch conflicts with system-release provided by fedora-release-kde-31-2.noarch
+  - package fedora-release-kde-31-2.noarch conflicts with system-release provided by fedora-release-matecompiz-31-1.noarch
+  - package fedora-release-matecompiz-31-1.noarch conflicts with system-release provided by fedora-release-kde-31-2.noarch
+            </pre>
+        </div>
+    </div>
+    <br>
+    
+
+    <div class="row">
+        <div class="col-sm-9 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Size History </h5>
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="card w-100">
+                <h5 class="card-header"> Relations </h5>
+                <div class="card-body">
+                    <dl>
+                        <dt>Configuration</dt>
+                        <dd><a href="config-workload--eln-buildroot-workload.html">eln-buildroot-workload.yaml</a></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    
+
+    
+
+    
+
+    <table id="table_packages" class="table-packages">
+        <thead>
+            <tr class="sort_control_row">
+                <th>Why</th>
+                <th>Name</th>
+                <th>Epoch:Version-Release</th>
+                <th>Arch</th>
+                <th>Size</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_packages').DataTable({
+            paging: false,
+            info: false
+        });
+
+        function plot_graph(chartData) {
+            var chLine = document.getElementById("chLine");
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value, index, values) {
+                                        return value + " MB";
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        spanGaps: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        axios.get(`chartjs-data--workload--eln-buildroot-workload--fedora-empty-base--repository-fedora-31--x86_64.json`)
+            .then(response => {
+                plot_graph(response.data)
+            })
+    });
+</script>
+
+  <br><br>
+
+  <div class="footer">
+    <div class="container">
+      <footer class="pt-4 my-md-5 pt-md-5">
+        <div class="row">
+
+
+          <div class="col-6 col-md">
+            <h5>Feedback Pipeline</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline">Code repository</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://github.com/minimization/feedback-pipeline-config">Configuration</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Fedora Minimization</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://docs.fedoraproject.org/en-US/minimization/">Fedora Minimization
+                  Docs</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://pagure.io/minimization/issues">Minimization Tracker</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md">
+            <h5>Fedora Project</h5>
+            <ul class="list-unstyled text-small">
+              <li>
+                <a class="text-muted" href="https://fedoraproject.org/wiki/Overview">About Fedora</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://getfedora.org/">Get Fedora</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="_static/images/redhat.png">
+            <small class="d-block mb-3 text-muted">Fedora is sponsored by Red Hat. <a
+                href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn
+                more about the relationship between Red Hat and Fedora »</a></small>
+            <small class="d-block mb-3 text-muted">Copyright © 2020 Red Hat, Inc.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>
