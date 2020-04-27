@@ -222,6 +222,8 @@
     
     <li>policycoreutils-2.9-5.fc31.aarch64</li>
     
+    <li>python3-audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
     <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
     
     <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
@@ -288,7 +290,7 @@
     
     <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
     
-    <li>container-selinux-2:2.124.0-3.fc31.noarch</li>
+    <li>container-selinux-2:2.132.0-1.fc31.noarch</li>
     
     <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
     
@@ -325,6 +327,8 @@
     <li>policycoreutils-2.9-5.fc31.aarch64</li>
     
     <li>selinux-policy-3.14.4-50.fc31.noarch</li>
+    
+    <li>selinux-policy-minimum-3.14.4-50.fc31.noarch</li>
     
     <li>selinux-policy-targeted-3.14.4-50.fc31.noarch</li>
     
@@ -417,7 +421,7 @@
     
     <li>libsemanage-2.9-3.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
     
@@ -474,18 +478,46 @@
     <span class="text-muted">(dependency)</span>
     </td>
                 <td>
-                    cockpit-bridge
+                    checkpolicy
                 </td>
-                <td>216-1.fc31</td>
+                <td>2.9-2.fc31</td>
                 <td>aarch64</td>
-                <td data-order="1131038">1.1 MB</td>
+                <td data-order="1608312">1.5 MB</td>
                 <td>
     Required by:
     <ul>
     
-    <li>cockpit-podman-14-1.fc31.noarch</li>
+    <li>python3-policycoreutils-2.9-5.fc31.noarch</li>
     
-    <li>cockpit-system-216-1.fc31.noarch</li>
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    cockpit-bridge
+                </td>
+                <td>217-1.fc31</td>
+                <td>aarch64</td>
+                <td data-order="1131271">1.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>cockpit-podman-15-1.fc31.noarch</li>
+    
+    <li>cockpit-system-217-1.fc31.noarch</li>
     
     </ul>
     
@@ -506,9 +538,9 @@
                 <td>
                     cockpit-podman
                 </td>
-                <td>14-1.fc31</td>
+                <td>15-1.fc31</td>
                 <td>noarch</td>
-                <td data-order="4295503">4.1 MB</td>
+                <td data-order="4174731">4.0 MB</td>
                 <td>
 
     
@@ -527,14 +559,14 @@
                 <td>
                     cockpit-system
                 </td>
-                <td>216-1.fc31</td>
+                <td>217-1.fc31</td>
                 <td>noarch</td>
-                <td data-order="1916536">1.8 MB</td>
+                <td data-order="1956464">1.9 MB</td>
                 <td>
     Required by:
     <ul>
     
-    <li>cockpit-podman-14-1.fc31.noarch</li>
+    <li>cockpit-podman-15-1.fc31.noarch</li>
     
     </ul>
     
@@ -583,9 +615,9 @@
                 <td>
                     container-selinux
                 </td>
-                <td>2:2.124.0-3.fc31</td>
+                <td>2:2.132.0-1.fc31</td>
                 <td>noarch</td>
-                <td data-order="44882">43.8 kB</td>
+                <td data-order="46568">45.5 kB</td>
                 <td>
 
     
@@ -695,6 +727,8 @@
     <li>policycoreutils-2.9-5.fc31.aarch64</li>
     
     <li>rpm-4.15.1-1.fc31.aarch64</li>
+    
+    <li>selinux-policy-minimum-3.14.4-50.fc31.noarch</li>
     
     <li>selinux-policy-targeted-3.14.4-50.fc31.noarch</li>
     
@@ -1212,7 +1246,7 @@
     
     <li>polkit-libs-0.116-4.fc31.1.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     </ul>
     
@@ -1564,7 +1598,7 @@
     Required by:
     <ul>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     </ul>
     
@@ -1592,7 +1626,7 @@
     Required by:
     <ul>
     
-    <li>cockpit-bridge-216-1.fc31.aarch64</li>
+    <li>cockpit-bridge-217-1.fc31.aarch64</li>
     
     </ul>
     
@@ -1620,7 +1654,7 @@
     Required by:
     <ul>
     
-    <li>cockpit-bridge-216-1.fc31.aarch64</li>
+    <li>cockpit-bridge-217-1.fc31.aarch64</li>
     
     <li>conmon-2:2.0.15-1.fc31.aarch64</li>
     
@@ -1678,7 +1712,9 @@
     
     <li>bzip2-libs-1.0.8-1.fc31.aarch64</li>
     
-    <li>cockpit-bridge-216-1.fc31.aarch64</li>
+    <li>checkpolicy-2.9-2.fc31.aarch64</li>
+    
+    <li>cockpit-bridge-217-1.fc31.aarch64</li>
     
     <li>conmon-2:2.0.15-1.fc31.aarch64</li>
     
@@ -1748,7 +1784,7 @@
     
     <li>jansson-2.12-4.fc31.aarch64</li>
     
-    <li>json-c-0.13.1-8.fc31.aarch64</li>
+    <li>json-c-0.13.1-11.fc31.aarch64</li>
     
     <li>json-glib-1.4.4-3.fc31.aarch64</li>
     
@@ -1906,11 +1942,19 @@
     
     <li>popt-1.16-18.fc31.aarch64</li>
     
-    <li>python3-3.7.6-2.fc31.aarch64</li>
+    <li>python3-3.7.7-1.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
+    
+    <li>python3-libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>python3-libsemanage-2.9-3.fc31.aarch64</li>
     
     <li>python3-psutil-5.6.7-1.fc31.aarch64</li>
+    
+    <li>python3-setools-4.2.2-2.fc31.aarch64</li>
     
     <li>qrencode-libs-4.0.2-4.fc31.aarch64</li>
     
@@ -2171,7 +2215,7 @@
     
     <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
     
-    <li>cockpit-system-216-1.fc31.noarch</li>
+    <li>cockpit-system-217-1.fc31.noarch</li>
     
     <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
     
@@ -2346,9 +2390,9 @@
                 <td>
                     json-c
                 </td>
-                <td>0.13.1-8.fc31</td>
+                <td>0.13.1-11.fc31</td>
                 <td>aarch64</td>
-                <td data-order="112490">109.9 kB</td>
+                <td data-order="73178">71.5 kB</td>
                 <td>
     Required by:
     <ul>
@@ -2381,7 +2425,7 @@
     Required by:
     <ul>
     
-    <li>cockpit-bridge-216-1.fc31.aarch64</li>
+    <li>cockpit-bridge-217-1.fc31.aarch64</li>
     
     </ul>
     
@@ -2769,6 +2813,8 @@
     
     <li>dbus-broker-21-6.fc31.aarch64</li>
     
+    <li>python3-audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
     <li>util-linux-2.34-4.fc31.aarch64</li>
     
     </ul>
@@ -2948,7 +2994,7 @@
     
     <li>p11-kit-0.23.20-1.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     </ul>
     
@@ -2976,7 +3022,7 @@
     Required by:
     <ul>
     
-    <li>cockpit-bridge-216-1.fc31.aarch64</li>
+    <li>cockpit-bridge-217-1.fc31.aarch64</li>
     
     <li>crun-0.13-2.fc31.aarch64</li>
     
@@ -3404,7 +3450,7 @@
     
     <li>pam-1.3.1-21.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     </ul>
     
@@ -3516,8 +3562,6 @@
     Required by:
     <ul>
     
-    <li>cockpit-system-216-1.fc31.noarch</li>
-    
     <li>pam-1.3.1-21.fc31.aarch64</li>
     
     </ul>
@@ -3608,6 +3652,10 @@
     
     <li>policycoreutils-2.9-5.fc31.aarch64</li>
     
+    <li>python3-libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>python3-setools-4.2.2-2.fc31.aarch64</li>
+    
     <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
     
     <li>sed-4.5-4.fc31.aarch64</li>
@@ -3644,7 +3692,7 @@
     Required by:
     <ul>
     
-    <li>container-selinux-2:2.124.0-3.fc31.noarch</li>
+    <li>container-selinux-2:2.132.0-1.fc31.noarch</li>
     
     <li>policycoreutils-2.9-5.fc31.aarch64</li>
     
@@ -3675,6 +3723,8 @@
     <ul>
     
     <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>python3-libsemanage-2.9-3.fc31.aarch64</li>
     
     <li>shadow-utils-2:4.6-18.fc31.aarch64</li>
     
@@ -3711,6 +3761,8 @@
     <li>libsemanage-2.9-3.fc31.aarch64</li>
     
     <li>policycoreutils-2.9-5.fc31.aarch64</li>
+    
+    <li>python3-setools-4.2.2-2.fc31.aarch64</li>
     
     </ul>
     
@@ -3822,7 +3874,7 @@
     Required by:
     <ul>
     
-    <li>cockpit-bridge-216-1.fc31.aarch64</li>
+    <li>cockpit-bridge-217-1.fc31.aarch64</li>
     
     <li>libcurl-7.66.0-1.fc31.aarch64</li>
     
@@ -3944,7 +3996,7 @@
     
     <li>pam-1.3.1-21.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     </ul>
     
@@ -4068,7 +4120,7 @@
     
     <li>libmount-2.34-4.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     <li>util-linux-2.34-4.fc31.aarch64</li>
     
@@ -4130,7 +4182,7 @@
     
     <li>pam-1.3.1-21.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     <li>shadow-utils-2:4.6-18.fc31.aarch64</li>
     
@@ -4374,7 +4426,7 @@
     
     <li>ncurses-6.1-12.20190803.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     <li>readline-8.0-3.fc31.aarch64</li>
     
@@ -4582,7 +4634,7 @@
     
     <li>openldap-2.4.47-3.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
     
@@ -4804,7 +4856,7 @@
     Required by:
     <ul>
     
-    <li>cockpit-podman-14-1.fc31.noarch</li>
+    <li>cockpit-podman-15-1.fc31.noarch</li>
     
     <li>toolbox-0.0.18-1.fc31.noarch</li>
     
@@ -4862,11 +4914,41 @@
     Required by:
     <ul>
     
-    <li>container-selinux-2:2.124.0-3.fc31.noarch</li>
+    <li>container-selinux-2:2.132.0-1.fc31.noarch</li>
+    
+    <li>python3-policycoreutils-2.9-5.fc31.noarch</li>
     
     <li>selinux-policy-3.14.4-50.fc31.noarch</li>
     
     <li>selinux-policy-targeted-3.14.4-50.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    policycoreutils-python-utils
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>noarch</td>
+                <td data-order="139741">136.5 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>selinux-policy-minimum-3.14.4-50.fc31.noarch</li>
     
     </ul>
     
@@ -4894,7 +4976,7 @@
     Required by:
     <ul>
     
-    <li>cockpit-bridge-216-1.fc31.aarch64</li>
+    <li>cockpit-bridge-217-1.fc31.aarch64</li>
     
     </ul>
     
@@ -4982,7 +5064,7 @@
     Required by:
     <ul>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     </ul>
     
@@ -5010,7 +5092,7 @@
     Required by:
     <ul>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     </ul>
     
@@ -5031,18 +5113,28 @@
                 <td>
                     python3
                 </td>
-                <td>3.7.6-2.fc31</td>
+                <td>3.7.7-1.fc31</td>
                 <td>aarch64</td>
-                <td data-order="85285">83.3 kB</td>
+                <td data-order="85775">83.8 kB</td>
                 <td>
     Required by:
     <ul>
     
+    <li>python3-audit-3.0-0.15.20191104git1c2f876.fc31.aarch64</li>
+    
     <li>python3-dateutil-1:2.8.0-3.fc31.noarch</li>
+    
+    <li>python3-libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>python3-libsemanage-2.9-3.fc31.aarch64</li>
     
     <li>python3-podman-api-0.0.0-0.2.20190613gitd0a45fe.fc31.noarch</li>
     
+    <li>python3-policycoreutils-2.9-5.fc31.noarch</li>
+    
     <li>python3-psutil-5.6.7-1.fc31.aarch64</li>
+    
+    <li>python3-setools-4.2.2-2.fc31.aarch64</li>
     
     <li>python3-setuptools-41.6.0-1.fc31.noarch</li>
     
@@ -5057,9 +5149,37 @@
     Recommended by:
     <ul>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-audit
+                </td>
+                <td>3.0-0.15.20191104git1c2f876.fc31</td>
+                <td>aarch64</td>
+                <td data-order="416789">407.0 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-policycoreutils-2.9-5.fc31.noarch</li>
+    
+    </ul>
+    
+
     
 
     </td>
@@ -5104,16 +5224,87 @@
                 <td>
                     python3-libs
                 </td>
-                <td>3.7.6-2.fc31</td>
+                <td>3.7.7-1.fc31</td>
                 <td>aarch64</td>
-                <td data-order="35173896">33.5 MB</td>
+                <td data-order="35225040">33.6 MB</td>
                 <td>
     Required by:
     <ul>
     
-    <li>python3-3.7.6-2.fc31.aarch64</li>
+    <li>python3-3.7.7-1.fc31.aarch64</li>
+    
+    <li>python3-libselinux-2.9-5.fc31.aarch64</li>
+    
+    <li>python3-libsemanage-2.9-3.fc31.aarch64</li>
     
     <li>python3-psutil-5.6.7-1.fc31.aarch64</li>
+    
+    <li>python3-setools-4.2.2-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libselinux
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>aarch64</td>
+                <td data-order="750175">732.6 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-libsemanage-2.9-3.fc31.aarch64</li>
+    
+    <li>python3-policycoreutils-2.9-5.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+    Recommended by:
+    <ul>
+    
+    <li>python3-setools-4.2.2-2.fc31.aarch64</li>
+    
+    </ul>
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-libsemanage
+                </td>
+                <td>2.9-3.fc31</td>
+                <td>aarch64</td>
+                <td data-order="499963">488.2 kB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-policycoreutils-2.9-5.fc31.noarch</li>
     
     </ul>
     
@@ -5138,6 +5329,34 @@
                 <td>noarch</td>
                 <td data-order="125880">122.9 kB</td>
                 <td>
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    python3-policycoreutils
+                </td>
+                <td>2.9-5.fc31</td>
+                <td>noarch</td>
+                <td data-order="5630522">5.4 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>policycoreutils-python-utils-2.9-5.fc31.noarch</li>
+    
+    </ul>
+    
 
     
 
@@ -5181,6 +5400,34 @@
     <span class="text-muted">(dependency)</span>
     </td>
                 <td>
+                    python3-setools
+                </td>
+                <td>4.2.2-2.fc31</td>
+                <td>aarch64</td>
+                <td data-order="2683438">2.6 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>python3-policycoreutils-2.9-5.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
                     python3-setuptools
                 </td>
                 <td>41.6.0-1.fc31</td>
@@ -5192,6 +5439,8 @@
     
     <li>python3-podman-api-0.0.0-0.2.20190613gitd0a45fe.fc31.noarch</li>
     
+    <li>python3-setools-4.2.2-2.fc31.aarch64</li>
+    
     <li>python3-setuptools-41.6.0-1.fc31.noarch</li>
     
     </ul>
@@ -5201,7 +5450,7 @@
     Recommended by:
     <ul>
     
-    <li>python3-3.7.6-2.fc31.aarch64</li>
+    <li>python3-3.7.7-1.fc31.aarch64</li>
     
     </ul>
     
@@ -5317,7 +5566,7 @@
     
     <li>nftables-1:0.9.1-3.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     </ul>
     
@@ -5463,7 +5712,7 @@
     
     <li>ca-certificates-2020.2.40-1.1.fc31.noarch</li>
     
-    <li>container-selinux-2:2.124.0-3.fc31.noarch</li>
+    <li>container-selinux-2:2.132.0-1.fc31.noarch</li>
     
     <li>crypto-policies-20191128-2.gitcd267a5.fc31.noarch</li>
     
@@ -5501,9 +5750,41 @@
     Required by:
     <ul>
     
-    <li>container-selinux-2:2.124.0-3.fc31.noarch</li>
+    <li>container-selinux-2:2.132.0-1.fc31.noarch</li>
+    
+    <li>selinux-policy-minimum-3.14.4-50.fc31.noarch</li>
     
     <li>selinux-policy-targeted-3.14.4-50.fc31.noarch</li>
+    
+    </ul>
+    
+
+    
+
+    </td>
+            </tr>
+            
+            <tr class="
+    dependency
+    ">
+                <td data-order="
+    3
+    " style="padding-top: 16px; padding-bottom: 16px">
+    <span class="text-muted">(dependency)</span>
+    </td>
+                <td>
+                    selinux-policy-minimum
+                </td>
+                <td>3.14.4-50.fc31</td>
+                <td>noarch</td>
+                <td data-order="35748408">34.1 MB</td>
+                <td>
+    Required by:
+    <ul>
+    
+    <li>container-selinux-2:2.132.0-1.fc31.noarch</li>
+    
+    <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
     
     </ul>
     
@@ -5531,7 +5812,7 @@
     Required by:
     <ul>
     
-    <li>container-selinux-2:2.124.0-3.fc31.noarch</li>
+    <li>container-selinux-2:2.132.0-1.fc31.noarch</li>
     
     <li>rpm-plugin-selinux-4.15.1-1.fc31.aarch64</li>
     
@@ -5593,7 +5874,7 @@
     Required by:
     <ul>
     
-    <li>cockpit-system-216-1.fc31.noarch</li>
+    <li>cockpit-system-217-1.fc31.noarch</li>
     
     <li>dbus-broker-21-6.fc31.aarch64</li>
     
@@ -5678,7 +5959,7 @@
     
     <li>gnupg2-2.2.18-2.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     </ul>
     
@@ -5749,7 +6030,7 @@
     Required by:
     <ul>
     
-    <li>cockpit-bridge-216-1.fc31.aarch64</li>
+    <li>cockpit-bridge-217-1.fc31.aarch64</li>
     
     <li>conmon-2:2.0.15-1.fc31.aarch64</li>
     
@@ -5942,7 +6223,7 @@
     
     <li>libxml2-2.9.10-3.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
     
@@ -6036,7 +6317,7 @@
     
     <li>openssl-libs-1:1.1.1d-2.fc31.aarch64</li>
     
-    <li>python3-libs-3.7.6-2.fc31.aarch64</li>
+    <li>python3-libs-3.7.7-1.fc31.aarch64</li>
     
     <li>rpm-libs-4.15.1-1.fc31.aarch64</li>
     
