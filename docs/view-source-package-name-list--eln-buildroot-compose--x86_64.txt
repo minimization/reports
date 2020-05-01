@@ -397,7 +397,11 @@ fedora-repos
 felix-bundlerepository
 felix-framework
 felix-gogo-parent
+felix-gogo-runtime
+felix-osgi-obr
+felix-osgi-obr-resolver
 felix-parent
+felix-shell
 felix-utils
 ffcall
 fftw
@@ -2733,6 +2737,7 @@ php-doctrine-common
 php-doctrine-datafixtures
 php-doctrine-dbal
 php-doctrine-doctrine-bundle
+php-doctrine-doctrine-bundle2
 php-doctrine-doctrine-cache-bundle
 php-doctrine-event-manager
 php-doctrine-inflector
@@ -2744,6 +2749,7 @@ php-doctrine-reflection
 php-egulias-email-validator
 php-egulias-email-validator2
 php-fedora-autoloader
+php-fig-link-util
 php-guzzlehttp-guzzle
 php-guzzlehttp-guzzle6
 php-guzzlehttp-promises
@@ -2752,6 +2758,7 @@ php-guzzlehttp-ringphp
 php-guzzlehttp-streams
 php-hamcrest
 php-hamcrest2
+php-http-message-factory
 php-jdorn-sql-formatter
 php-jsonlint
 php-justinrainbow-json-schema5
@@ -2788,6 +2795,7 @@ php-laminas-uri
 php-laminas-validator
 php-laminas-view
 php-laminas-zendframework-bridge
+php-masterminds-html5
 php-mikey179-vfsstream
 php-mock-integration2
 php-mock-phpunit2
@@ -2798,6 +2806,7 @@ php-mtdowling-jmespath-php
 php-myclabs-deep-copy
 php-nikic-php-parser3
 php-nikic-php-parser4
+php-nyholm-psr7
 php-ocramius-code-generator-utils
 php-ocramius-generated-hydrator
 php-ocramius-proxy-manager
@@ -2856,6 +2865,7 @@ php-psr-container
 php-psr-http-client
 php-psr-http-factory
 php-psr-http-message
+php-psr-link
 php-psr-simple-cache
 php-ralouphie-getallheaders
 php-react-promise
@@ -2906,6 +2916,7 @@ php-theseer-tokenizer
 php-true-punycode
 php-twig
 php-twig2
+php-twig3
 php-webmozart-assert
 php-zetacomponents-base
 php-zetacomponents-console-tools
@@ -3113,6 +3124,7 @@ python-pygments
 python-pymongo
 python-pynacl
 python-pysocks
+python-pytest-runner
 python-pyudev
 python-qt5
 python-rdflib
@@ -3357,10 +3369,12 @@ rubygem-json_pure
 rubygem-kramdown
 rubygem-launchy
 rubygem-linked-list
+rubygem-liquid
 rubygem-listen
 rubygem-loofah
 rubygem-mail
 rubygem-marcel
+rubygem-maruku
 rubygem-memcache-client
 rubygem-metaclass
 rubygem-method_source
@@ -3370,6 +3384,7 @@ rubygem-mimemagic
 rubygem-mini_magick
 rubygem-mini_mime
 rubygem-minitest
+rubygem-minitest-around
 rubygem-minitest4
 rubygem-mocha
 rubygem-mongo
@@ -3391,6 +3406,7 @@ rubygem-pdf-reader
 rubygem-pg
 rubygem-pkg-config
 rubygem-power_assert
+rubygem-prawn
 rubygem-pry
 rubygem-public_suffix
 rubygem-puma
@@ -3431,6 +3447,7 @@ rubygem-rubyzip
 rubygem-safe_yaml
 rubygem-sass
 rubygem-sass-rails
+rubygem-sassc
 rubygem-selenium-webdriver
 rubygem-session
 rubygem-shindo
@@ -3447,6 +3464,7 @@ rubygem-sprockets-rails
 rubygem-sqlite3
 rubygem-temple
 rubygem-test-unit
+rubygem-test_construct
 rubygem-test_declarative
 rubygem-thin
 rubygem-thor
